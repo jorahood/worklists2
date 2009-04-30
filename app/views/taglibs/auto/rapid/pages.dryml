@@ -1,0 +1,1610 @@
+<!-- AUTOMATICALLY GENERATED FILE - DO NOT EDIT -->
+
+<!-- ====== Main Navigation ====== -->
+
+<def tag="main-nav">
+  <navigation class="main-nav" merge-attrs param="default">
+    <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Audience">Audiences</nav-item>
+    <nav-item with="&Doc">Docs</nav-item>
+    <nav-item with="&Domain">Domains</nav-item>
+    <nav-item with="&Expiration">Expirations</nav-item>
+    <nav-item with="&Hotitem">Hotitems</nav-item>
+  </navigation>
+</def>
+
+
+
+  
+<!-- ====== Audience Pages ====== -->
+
+
+<def tag="index-page" for="Audience">
+  <page merge title="Audiences">
+    <body: class="index-page audience" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Audiences</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Audience">
+  <page merge title="New Audience">
+    <body: class="new-page audience" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Audience</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Audience"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Audience">
+  <page merge title="Audience">
+
+    <body: class="show-page audience" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Audience</a>
+          </header>
+    
+          <section param="content-body">
+            <view:description param="description"/>
+            <section param="collection-section">
+              <h3 param="collection-heading">Titles</h3>
+              
+              <collection:titles param/>
+            </section>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Audience">
+  <page merge title="Edit Audience">
+
+    <body: class="edit-page audience" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Audience" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Doc Pages ====== -->
+
+
+<def tag="index-page" for="Doc">
+  <page merge title="Docs">
+    <body: class="index-page doc" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Docs</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Doc">
+  <page merge title="New Doc">
+    <body: class="new-page doc" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Doc</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Doc"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Doc">
+  <page merge title="Doc">
+
+    <body: class="show-page doc" param/>
+
+    <content: param>
+      <section-group>
+        <section param="main-content">
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Doc</a>
+          </header>
+    
+          <section param="content-body" with-flash-messages>
+            <field-list fields="birthdate, modifieddate, approveddate, author, importance, owner, status, visibility, volatility" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">Titles</h3>
+              
+              <collection:titles param/>
+            </section>
+          </section>
+        </section>
+        
+        <aside param>
+          <section param="domains-collection-section">
+            <h3 param="domains-collection">Domains</h3>
+            <collection:domains/>
+          </section>
+          <section param="hotitems-collection-section">
+            <h3 param="hotitems-collection">Hotitems</h3>
+            <collection:hotitems/>
+          </section>
+          <section param="expirations-collection-section">
+            <h3 param="expirations-collection">Expirations</h3>
+            <collection:expirations/>
+          </section>
+          <section param="resources-collection-section">
+            <h3 param="resources-collection">Resources</h3>
+            <collection:resources/>
+          </section>
+        </aside>
+      </section-group>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Doc">
+  <page merge title="Edit Doc">
+
+    <body: class="edit-page doc" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Doc" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Domain Pages ====== -->
+
+
+<def tag="index-page" for="Domain">
+  <page merge title="Domains">
+    <body: class="index-page domain" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Domains</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Domain">
+  <page merge title="New Domain">
+    <body: class="new-page domain" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Domain</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Domain"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Domain">
+  <page merge title="Domain">
+
+    <body: class="show-page domain" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Domain</a>
+          </header>
+    
+          <section param="content-body">
+            <view:description param="description"/>
+            <field-list fields="domain_class, domain_type, visible, accessible, audience" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">Docs</h3>
+              
+              <collection:docs param/>
+            </section>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Domain">
+  <page merge title="Edit Domain">
+
+    <body: class="edit-page domain" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Domain" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Expiration Pages ====== -->
+
+
+<def tag="index-page" for="Expiration">
+  <page merge title="Expirations">
+    <body: class="index-page expiration" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Expirations</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Expiration">
+  <page merge title="New Expiration">
+    <body: class="new-page expiration" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Expiration</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Expiration"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Expiration">
+  <page merge title="Expiration">
+
+    <body: class="show-page expiration" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Expiration</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="date, reason, doc" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Expiration">
+  <page merge title="Edit Expiration">
+
+    <body: class="edit-page expiration" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Expiration" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Hotitem Pages ====== -->
+
+
+<def tag="index-page" for="Hotitem">
+  <page merge title="Hotitems">
+    <body: class="index-page hotitem" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Hotitems</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Hotitem">
+  <page merge title="New Hotitem">
+    <body: class="new-page hotitem" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Hotitem</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Hotitem"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Hotitem">
+  <page merge title="Hotitem">
+
+    <body: class="show-page hotitem" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Hotitem</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="doc" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Hotitem">
+  <page merge title="Edit Hotitem">
+
+    <body: class="edit-page hotitem" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Hotitem" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Importance Pages ====== -->
+
+
+<def tag="index-page" for="Importance">
+  <page merge title="Importances">
+    <body: class="index-page importance" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Importances</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Importance">
+  <page merge title="New Importance">
+    <body: class="new-page importance" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Importance</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Importance"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Importance">
+  <page merge title="Importance">
+
+    <body: class="show-page importance" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Importance</a>
+          </header>
+    
+          <section param="content-body">
+            <section param="collection-section">
+              <h3 param="collection-heading">Docs</h3>
+              
+              <collection:docs param/>
+            </section>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Importance">
+  <page merge title="Edit Importance">
+
+    <body: class="edit-page importance" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Importance" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Kbuser Pages ====== -->
+
+
+<def tag="index-page" for="Kbuser">
+  <page merge title="Kbusers">
+    <body: class="index-page kbuser" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Kbusers</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Kbuser">
+  <page merge title="New Kbuser">
+    <body: class="new-page kbuser" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Kbuser</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Kbuser"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Kbuser">
+  <page merge title="Kbuser">
+
+    <body: class="show-page kbuser" param/>
+
+    <content: param>
+      <section-group>
+        <section param="main-content">
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Kbuser</a>
+          </header>
+    
+          <section param="content-body" with-flash-messages>
+            <field-list fields="lastname, firstname, email, status" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">Authored Docs</h3>
+              
+              <collection:authored_docs param/>
+            </section>
+          </section>
+        </section>
+        
+        <aside param>
+          <section param="owned_docs-collection-section">
+            <h3 param="owned_docs-collection">Owned Docs</h3>
+            <collection:owned_docs/>
+          </section>
+          <section param="resourced_docs-collection-section">
+            <h3 param="resourced_docs-collection">Resourced Docs</h3>
+            <collection:resourced_docs/>
+          </section>
+        </aside>
+      </section-group>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Kbuser">
+  <page merge title="Edit Kbuser">
+
+    <body: class="edit-page kbuser" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Kbuser" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== ListedDoc Pages ====== -->
+
+
+<def tag="index-page" for="ListedDoc">
+  <page merge title="Listed Docs">
+    <body: class="index-page listed-doc" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Listed Docs</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="ListedDoc">
+  <page merge title="New Listed Doc">
+    <body: class="new-page listed-doc" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Listed Doc</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Listed Doc"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="ListedDoc">
+  <page merge title="Listed Doc">
+
+    <body: class="show-page listed-doc" param/>
+
+    <content: param>
+          <header param="content-header">
+            <a:doc param="parent-link">&laquo; <name/></a:doc>
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Listed Doc</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="status, tag, list" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">Notes</h3>
+              
+              <collection:notes param/>
+
+              <section param="add-to-collection" if="&can_create?(@listed_doc.notes)">
+                <h3 param="add-form-heading">Add a Note</h3>
+                <form with="&@note || new_for_current_user(@listed_doc.notes)" owner="listed_doc" without-cancel param>
+                  <field-list: skip="listed_doc"/>
+                  <submit: label="Add"/>
+                </form>
+              </section>
+            </section>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="ListedDoc">
+  <page merge title="Edit Listed Doc">
+
+    <body: class="edit-page listed-doc" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Listed Doc" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== List Pages ====== -->
+
+
+<def tag="index-page" for="List">
+  <page merge title="Lists">
+    <body: class="index-page list" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Lists</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="List">
+  <page merge title="New List">
+    <body: class="new-page list" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New List</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create List"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="List">
+  <page merge title="List">
+
+    <body: class="show-page list" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a:owner param="creator-link"/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit List</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="comment, audience" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">Listed Docs</h3>
+              
+              <collection:listed_docs param/>
+            </section>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="List">
+  <page merge title="Edit List">
+
+    <body: class="edit-page list" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This List" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Note Pages ====== -->
+
+
+<def tag="index-page" for="Note">
+  <page merge title="Notes">
+    <body: class="index-page note" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Notes</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Note">
+  <page merge title="New Note">
+    <body: class="new-page note" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Note</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Note"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Note">
+  <page merge title="Note">
+
+    <body: class="show-page note" param/>
+
+    <content: param>
+          <header param="content-header">
+            <a:listed_doc param="parent-link">&laquo; <name/></a:listed_doc>
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a:owner param="creator-link"/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Note</a>
+          </header>
+    
+          <section param="content-body">
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Note">
+  <page merge title="Edit Note">
+
+    <body: class="edit-page note" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Note" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+
+
+
+  
+<!-- ====== Status Pages ====== -->
+
+
+<def tag="index-page" for="Status">
+  <page merge title="Statuses">
+    <body: class="index-page status" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Statuses</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Status">
+  <page merge title="New Status">
+    <body: class="new-page status" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Status</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Status"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Status">
+  <page merge title="Status">
+
+    <body: class="show-page status" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Status</a>
+          </header>
+    
+          <section param="content-body">
+            <section param="collection-section">
+              <h3 param="collection-heading">Docs</h3>
+              
+              <collection:docs param/>
+            </section>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Status">
+  <page merge title="Edit Status">
+
+    <body: class="edit-page status" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Status" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Title Pages ====== -->
+
+
+<def tag="index-page" for="Title">
+  <page merge title="Titles">
+    <body: class="index-page title" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Titles</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Title">
+  <page merge title="New Title">
+    <body: class="new-page title" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Title</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Title"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Title">
+  <page merge title="Title">
+
+    <body: class="show-page title" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Title</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="audience, doc" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Title">
+  <page merge title="Edit Title">
+
+    <body: class="edit-page title" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Title" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== User Pages ====== -->
+
+
+<def tag="index-page" for="User">
+  <page merge title="Users">
+    <body: class="index-page user" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Users</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="User">
+  <page merge title="New User">
+    <body: class="new-page user" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New User</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create User"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="User">
+  <page merge title="User">
+
+    <body: class="show-page user" param/>
+
+    <content: param>
+      <section-group>
+        <section param="main-content">
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="administrator" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit User</a>
+          </header>
+    
+          <section param="content-body" with-flash-messages>
+            <field-list fields="email_address" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading"><Your/>Lists</h3>
+              
+              <collection:lists param/>
+            </section>
+          </section>
+        </section>
+        
+        <aside param>
+          <section param="notes-collection-section">
+            <h3 param="notes-collection">Notes</h3>
+            <collection:notes/>
+          </section>
+        </aside>
+      </section-group>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="User">
+  <page merge title="Edit User">
+
+    <body: class="edit-page user" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This User" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="signup-page" polymorphic/>
+<def tag="signup-page" for="User">
+
+  <page title="Signup" merge>
+
+    <body: class="lifecycle-start-page signup-page" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Signup</h2>
+      </header>
+
+      <section param="content-body">
+        <signup-form param="form"/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
+<def tag="reset-password-page" polymorphic/>
+<def tag="reset-password-page" for="User">
+  <page title="Reset Password" merge>
+    
+    <body: class="lifecycle-transition-page reset-password-page" param/>
+    
+    <content:>
+      <header param="content-header">
+        <h2 param="heading">Reset Password</h2>
+      </header>
+      
+      <section param="content-body">
+        <reset-password-form param="form"/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+  
+<!-- ====== Visibility Pages ====== -->
+
+
+<def tag="index-page" for="Visibility">
+  <page merge title="Visibilities">
+    <body: class="index-page visibility" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Visibilities</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Visibility">
+  <page merge title="New Visibility">
+    <body: class="new-page visibility" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Visibility</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Visibility"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Visibility">
+  <page merge title="Visibility">
+
+    <body: class="show-page visibility" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Visibility</a>
+          </header>
+    
+          <section param="content-body">
+            <section param="collection-section">
+              <h3 param="collection-heading">Docs</h3>
+              
+              <collection:docs param/>
+            </section>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Visibility">
+  <page merge title="Edit Visibility">
+
+    <body: class="edit-page visibility" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Visibility" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Volatility Pages ====== -->
+
+
+<def tag="index-page" for="Volatility">
+  <page merge title="Volatilities">
+    <body: class="index-page volatility" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Volatilities</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Volatility">
+  <page merge title="New Volatility">
+    <body: class="new-page volatility" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Volatility</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Volatility"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Volatility">
+  <page merge title="Volatility">
+
+    <body: class="show-page volatility" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Volatility</a>
+          </header>
+    
+          <section param="content-body">
+            <section param="collection-section">
+              <h3 param="collection-heading">Docs</h3>
+              
+              <collection:docs param/>
+            </section>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Volatility">
+  <page merge title="Edit Volatility">
+
+    <body: class="edit-page volatility" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Volatility" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+

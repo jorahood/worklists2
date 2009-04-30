@@ -1,0 +1,8 @@
+<!-- Kbuser -->
+
+<index-page>
+    <collection: replace>
+        <table-plus without-search-form fields="this, lastname, firstname, email, status,
+                    owned_docs.count, authored_docs.count, resourced_docs.count"/>
+    </collection:>
+</index-page>

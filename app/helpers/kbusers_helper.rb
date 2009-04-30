@@ -1,0 +1,2 @@
+module KbusersHelper
+end

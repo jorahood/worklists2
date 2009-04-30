@@ -1,0 +1,11 @@
+<!-- Importance -->
+
+<show-page>
+<collection: replace>
+    <do with="&@paginated_docs">
+      <page-nav/>
+      <collection/>
+      <page-nav/>
+    </do>
+  </collection:>
+</show-page>

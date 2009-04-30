@@ -1,0 +1,37 @@
+# use loopback address 127.0.0.1 to allow ssh tunnelling to mysql dev server on chan
+development:
+  adapter: mysql
+  database: worklists2_development
+  username:
+  password:
+  host: 127.0.0.1
+  timeout: 5000
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  adapter: mysql
+  database: worklists2_test
+  username:
+  password:
+  host: 127.0.0.1
+  timeout: 5000
+
+production:
+  adapter: mysql
+  database: worklists2_production
+  username:
+  password:
+  host: localhost
+  timeout: 5000
+
+# this is a separate connection for the oracle db on bell to get doc metadata.
+# See Recipe 15 in Rails Recipes. Requires an ssh tunnel to bell on port 1521:
+# ssh -f -N -L1521:bell.ucs.indiana.edu:1521 bell.ucs.indiana.edu
+
+oracle_on_bell:
+  adapter: oracle
+  database: localhost/kb
+  username:
+  password:

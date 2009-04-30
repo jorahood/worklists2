@@ -1,0 +1,25 @@
+<!-- Kbuser -->
+
+<!-- kbusers_controller.rb will pass the larger of authored_docs or owned_docs
+as @paginated_docs, and the smaller as @first_aside_docs, so that the page will
+render appropriately for both authors and owner groups-->
+<show-page>
+    <collection-heading: replace>
+        <h3><count with="&@paginated_docs"/></h3>
+    </collection-heading:>
+
+    <collection: replace>
+        <do with="&@paginated_docs">
+            <page-nav/>
+            <collection/>
+            <page-nav/>
+        </do>
+    </collection:>
+
+    <owned_docs-collection-section: replace>
+        <do with="&@first_aside_docs">
+            <h3><name/></h3>
+            <collection/>
+        </do>
+    </owned_docs-collection-section:>
+</show-page>

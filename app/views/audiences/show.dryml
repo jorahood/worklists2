@@ -1,0 +1,16 @@
+<!-- Audience -->
+
+<show-page>
+    <collection-heading: replace>
+        <h3><count:titles/></h3>
+    </collection-heading:>
+    <collection: replace>
+        <do with="&@paginated_titles">
+            <page-nav/>
+            <collection>
+              <card: without-audience-link/>
+            </collection>
+            <page-nav/>
+        </do>
+    </collection:>
+</show-page>

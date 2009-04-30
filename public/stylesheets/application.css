@@ -1,0 +1,16 @@
+/* moar room! */
+body {width:98%}
+
+/* the notes column needs to be more compact */
+/* shrink the notes cards */
+table .card {
+margin:4px 0;
+overflow:hidden;
+padding:4px;
+}
+
+/* shrink the size of the textarea and reduce padding about the submit */
+table textarea { height: 50px; }
+table form .actions {
+margin:3px 0;
+}

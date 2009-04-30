@@ -1,0 +1,35 @@
+class Expiration < ActiveRecord::Base
+
+  hobo_model # Don't put anything above this
+
+  fields do
+    date   :date
+    reason :string
+  end
+
+  set_primary_key :doc_id
+
+  belongs_to :doc
+
+  # --- Permissions --- #
+
+  def create_permitted?
+    acting_user.administrator?
+  end
+
+  def update_permitted?
+    acting_user.administrator?
+  end
+
+  def destroy_permitted?
+    acting_user.administrator?
+  end
+
+  def view_permitted?(field)
+    true
+  end
+
+  def name
+    "#{date.to_s(:long)}: #{reason}"
+  end
+end

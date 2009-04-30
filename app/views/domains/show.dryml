@@ -1,0 +1,14 @@
+<!-- Domain -->
+
+<show-page>
+  <collection-heading: replace>
+    <h3>There <count:docs prefix="are"/> in this Domain</h3>
+  </collection-heading:>
+  <collection: replace>
+    <do with="&@paginated_docs">
+      <page-nav/>
+      <collection/>
+      <page-nav/>
+    </do>
+  </collection:>
+</show-page>

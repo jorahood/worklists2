@@ -1,0 +1,175 @@
+<!-- AUTOMATICALLY GENERATED FILE - DO NOT EDIT -->
+
+<def tag="card" for="Audience">
+  <card class="audience" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:titles param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Doc">
+  <card class="doc" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:titles param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Domain">
+  <card class="domain" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:docs param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="DomainedDoc">
+  <card class="domained-doc" param="default" merge>
+    <header: param>
+      <h4 param="heading"><name/></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="Expiration">
+  <card class="expiration" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="Hotitem">
+  <card class="hotitem" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="Importance">
+  <card class="importance" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:docs param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Kbresource">
+  <card class="kbresource" param="default" merge>
+    <header: param>
+      <h4 param="heading"><name/></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="Kbuser">
+  <card class="kbuser" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:authored_docs param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="List">
+  <card class="list" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <a:owner param="creator-link"/>
+      <count:listed_docs param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="ListedDoc">
+  <card class="listed-doc" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:notes param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Note">
+  <card class="note" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <a:owner param="creator-link"/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Status">
+  <card class="status" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:docs param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Title">
+  <card class="title" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="User">
+  <card class="user" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:lists param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Visibility">
+  <card class="visibility" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:docs param/>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Volatility">
+  <card class="volatility" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <count:docs param/>
+    </body:>
+  </card>
+</def>
+

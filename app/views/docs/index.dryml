@@ -1,0 +1,9 @@
+<!-- Doc -->
+
+<index-page>
+    <collection: replace>
+        <table-plus without-search-form fields="this, titles, birthdate, modifieddate,
+                    approveddate, importance, visibility, volatility,
+                    author, owner, expirations, hotitems, resources"/>
+    </collection:>
+</index-page>

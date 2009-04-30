@@ -1,0 +1,47 @@
+<include src="rapid" plugin="hobo"/>
+
+<include src="taglibs/auto/rapid/cards"/>
+<include src="taglibs/auto/rapid/pages"/>
+<include src="taglibs/auto/rapid/forms"/>
+
+<set-theme name="clean"/>
+
+<def tag="app-name">WerkLists</def>
+
+<extend tag="page">
+  <old-page merge without-live-search>
+  </old-page>
+</extend>
+
+<extend tag="card" for="List">
+  <old-card merge>
+    <append-body:>
+      <div class="docs">
+        <repeat:docs join=", "><a/></repeat:docs>
+      </div>
+    </append-body:>
+  </old-card>
+</extend>
+
+<def tag="card" for="Doc">
+  <h4>
+    <a><name/></a>:
+    <!-- FIXME: HOBO - the 'inline' attribute doesn't work when I call the <view> tag directly-->
+    <!-- FIXME: HOBO - field="titles.find_by_audience('default')" doesn't work: field returns
+    'titles' as an array not an AR association so there are no find_by_* methods on it -->
+    <name with="&this.titles.find_by_audience_id('default')" inline />
+  </h4>
+</def>
+
+<!-- add links to the title's audience & doc (and paramitize them so I can filter one or the 
+other out depending on where the card is appearing) and keep titles inline (type :html
+defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
+<def tag="card" for="Title">
+  <h4>
+    <a:audience param="audience-link"/>
+    <a:doc param="doc-link"/>:
+    <name inline/>
+  </h4>
+</def>
+
+<def tag="empty-collection-message"></def>
