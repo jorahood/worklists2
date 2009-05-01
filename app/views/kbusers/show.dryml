@@ -1,15 +1,20 @@
 <!-- Kbuser -->
 
-<!-- kbusers_controller.rb will pass the larger of authored_docs or owned_docs
-as @paginated_docs, and the smaller as @first_aside_docs, so that the page will
-render appropriately for both authors and owner groups-->
+<!-- kbusers_controller.rb will sort authored_docs, owned_docs, and resourced_docs
+by size into @paginated_docs, @first_aside_docs, and @second_aside_docs, respectively
+Hobo defines the default layout for this page based on the 'children' method in 
+viewhints/kbuser_hints.rb which has the order as authored, owned, resourced. -->
+<!--FIXME: can/should kbuser_hints.rb do this sorting rather than the controller so we don't have
+this two-step process of using hints to define the <show-page> and then using replace to
+put the docs collections where I want them. -->
+
 <show-page>
     <collection-heading: replace>
         <h3><count with="&@paginated_docs"/></h3>
     </collection-heading:>
 
     <collection: replace>
-        <do with="&@paginated_docs">
+        <do with="&@paginated_docs" if="&@paginated_docs">
             <page-nav/>
             <collection/>
             <page-nav/>
@@ -22,4 +27,12 @@ render appropriately for both authors and owner groups-->
             <collection/>
         </do>
     </owned_docs-collection-section:>
+
+    <resourced_docs-collection-section: replace>
+        <do with="&@second_aside_docs">
+            <h3><name/></h3>
+            <collection/>
+        </do>
+    </resourced_docs-collection-section:>
+
 </show-page>

@@ -6,7 +6,7 @@
 
 <set-theme name="clean"/>
 
-<def tag="app-name">WerkLists</def>
+<def tag="app-name">Worklists2</def>
 
 <extend tag="page">
   <old-page merge without-live-search>
