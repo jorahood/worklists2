@@ -4,11 +4,13 @@
 
   <content:>
     <header class="content-header">
-      <h1>Welcome, this is version '<app-revision/>' </h1>
+      <h1>Revision <app-revision/> </h1>
     </header>
 
     <section class="content-body">
+       The "textinfo" release. 
     </section>
   </content:>
-  
+
+
 </page>
