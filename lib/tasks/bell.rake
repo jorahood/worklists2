@@ -32,10 +32,12 @@ namespace :bell do
       puts "\n   ** #{wl2_model_name} **"
       all_records = OracleOnBell.connection.select_all("SELECT * FROM kbadm.#{bell_source_config[:table_name]}")
       columns = all_records[0].keys
-      puts "1. Read #{all_records.length} records from bell:kbadm.#{bell_source_config[:table_name]}:\n\t#{columns.to_sentence}"
+      puts "1. Read #{all_records.length} records from bell:kbadm.#{bell_source_config[:table_name]}:
+      #{columns.to_sentence}"
       if  bell_source_config[:rename_columns]
         columns = columns.map {|bell_column| bell_source_config[:rename_columns][bell_column] || bell_column}
       end
+      raise "#{columns}"
       values = all_records.map { |record| record.values }
       #FIXME: check that the values we got from Oracle are good before truncating and reloading the wl2 table
       #FIXME: check that wl2_table_name exists and is one of the imported tables, not a wl2 list table before truncating

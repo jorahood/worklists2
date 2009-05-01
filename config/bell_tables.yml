@@ -23,6 +23,7 @@ docs:
   :table_name: document
   :rename_columns:
     author: author_id
+    owner: owner_id
     visibility: visibility_id
     volatility: volatility_id
     status: status_id
