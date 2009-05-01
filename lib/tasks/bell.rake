@@ -37,7 +37,6 @@ namespace :bell do
       if  bell_source_config[:rename_columns]
         columns = columns.map {|bell_column| bell_source_config[:rename_columns][bell_column] || bell_column}
       end
-      raise "#{columns}"
       values = all_records.map { |record| record.values }
       #FIXME: check that the values we got from Oracle are good before truncating and reloading the wl2 table
       #FIXME: check that wl2_table_name exists and is one of the imported tables, not a wl2 list table before truncating
