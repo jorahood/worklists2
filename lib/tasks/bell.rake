@@ -27,25 +27,7 @@ namespace :bell do
       # the order the columns are returned by #columns
       puts "\n   ** #{wl2_model_name} **"
       OracleOnBell.establish_connection :oracle_on_bell
-      begin
-        all_records = OracleOnBell.connection.select_all("SELECT * FROM kbadm.#{bell_source_config[:table_name]}")
-      rescue => err
-        if err.message =~ /ORA-12541: TNS:no listener/
-          puts "No connection to Oracle on Bell, restarting ssh tunnel..."
-          # create ssh tunnel in grandchild then kill child to avoid zombies
-          # from http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/147202
-          pid = Process.fork do
-            Process.fork do
-              exec('/usr/bin/ssh -fN -L1521:bell.ucs.indiana.edu:1521 bell.ucs.indiana.edu')
-            end
-            exit
-          end
-          sleep 2
-          retry
-        else
-          raise err
-        end
-      end
+      all_records = OracleOnBell.connection.select_all("SELECT * FROM kbadm.#{bell_source_config[:table_name]}")
       columns = all_records[0].keys
       puts "1. Read #{all_records.length} records from bell:kbadm.#{bell_source_config[:table_name]}:
       #{columns.to_sentence}"
