@@ -1,6 +1,4 @@
-class OracleOnBell < ActiveRecord::Base
-end
-
+# load the configuration file with table names and column name translations
 bell_tables = YAML.load_file("#{RAILS_ROOT}/config/bell_tables.yml")
 
 # rake tasks to import the tables from the kb3 Oracle db on bell. The task names
@@ -9,9 +7,7 @@ bell_tables = YAML.load_file("#{RAILS_ROOT}/config/bell_tables.yml")
 # in bell_tables.yml
 
 namespace :bell do
-
-  task maintain_oracle_connection do
-    OracleOnBell.establish_connection :oracle_on_bell
+  task :maintain_oracle_connection do
     begin
       OracleOnBell.connection.execute('')
     rescue OCIError => ex
