@@ -30,11 +30,20 @@ namespace :bell do
       begin
         all_records = OracleOnBell.connection.select_all("SELECT * FROM kbadm.#{bell_source_config[:table_name]}")
       rescue => err
-        exit
-        puts err
-        if err.message =~ "TNS"
-          puts "TNS error"
-          #`/usr/bin/ssh -fN -L1521:bell.ucs.indiana.edu:1521 bell.ucs.indiana.edu`
+        if err.message =~ /ORA-12541: TNS:no listener/
+          puts "No connection to Oracle on Bell, restarting ssh tunnel..."
+          # create ssh tunnel in grandchild then kill child to avoid zombies
+          # from http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/147202
+          pid = Process.fork do
+            Process.fork do
+              exec('/usr/bin/ssh -fN -L1521:bell.ucs.indiana.edu:1521 bell.ucs.indiana.edu')
+            end
+            exit
+          end
+          sleep 2
+          retry
+        else
+          raise err
         end
       end
       columns = all_records[0].keys
@@ -46,10 +55,14 @@ namespace :bell do
       values = all_records.map { |record| record.values }
       #FIXME: check that the values we got from Oracle are good before truncating and reloading the wl2 table
       #FIXME: check that wl2_table_name exists and is one of the imported tables, not a wl2 list table before truncating
-      ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{wl2_table_name}")
-      puts "2. Truncated worklists2_#{RAILS_ENV}.#{wl2_table_name} table"
-      wl2_model_name.import columns, values, :on_duplicate_key_update => columns, :validate => false
-      puts "3. Imported #{all_records.length} #{wl2_table_name}:\n\t#{columns.to_sentence}"
+      ActiveRecord::Base.establish_connection
+      # wrap the truncation and importing in a transaction so no one sees empty tables
+      ActiveRecord::Base.transaction do
+        ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{wl2_table_name}")
+        puts "2. Truncated worklists2_#{RAILS_ENV}.#{wl2_table_name} table"
+        wl2_model_name.import columns, values, :on_duplicate_key_update => columns, :validate => false
+        puts "3. Imported #{all_records.length} #{wl2_table_name}:\n\t#{columns.to_sentence}"
+      end
     end
   end
 
