@@ -1,0 +1,13 @@
+<!-- Hotitem -->
+
+<index-page>
+    <collection:>
+        <card:>
+            <prepend-heading:>
+                <a:doc>
+                    <name/>
+                </a:doc> --
+            </prepend-heading:>
+        </card:>
+    </collection:>
+</index-page>
