@@ -3,11 +3,16 @@
 <index-page>
     <collection:>
         <card:>
-            <prepend-heading:>
-                <a:doc>
-                    <name/>
-                </a:doc> --
-            </prepend-heading:>
+            <heading: replace>
+              <do:doc>
+                <h4>
+                  <a>
+                    <name/> --
+                    <name with='&this_parent'/>
+                  </a>
+                </h4>
+              </do:doc>
+            </heading:>
         </card:>
     </collection:>
 </index-page>

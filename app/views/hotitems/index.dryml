@@ -5,10 +5,12 @@
         <card:>
             <heading: replace>
               <do:doc>
+                <h4>
                   <a>
-                    <name/>:
+                    <name/> --
                     <name with='&this_parent'/>
                   </a>
+                </h4>
               </do:doc>
             </heading:>
         </card:>
