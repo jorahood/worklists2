@@ -1,16 +1,33 @@
+
 <page title="Home">
 
-  <body: class="front-page"/>
+    <body: class="front-page"/>
 
-  <content:>
-    <header class="content-header">
-      <h1>Revision <app-revision/> </h1>
-    </header>
+    <content:>
+        <header class="content-header">
+            <h1>Revision <app-revision/> </h1>
+        </header>
+        <section class="content-body">
+            <h3>The "kbkw view" release</h3>
+            <p>My goal for this release of Worklist2 is to duplicate the metadata viewing function of the
+                <a href="https://kb.iu.edu/data/anae.html"><code>kbkw</code></a> command line tool on Bell. Some things to note:</p><br/>
+                <ul>
+                    <li>You can go directly to a docid by typing in the url like this:
+                        <br/>
+                        <code>http://chan.uits.indiana.edu/docs/&lt;docid&gt;</code>
+                        <br/>Replace
+                        <code>&lt;docid&gt;</code> with the docid of the document you want to see. (The format of a Firefox <a href="https://kb.iu.edu/data/arjb.html">smart keyword</a> to do this would be: <code>http://chan.uits.indiana.edu/docs/%s</code>)
+                    </li><br/>
+                    <li>You can also search for a document by entering a docid in the "SEARCH" box in the top right corner of every page.
+                        <br/>This is an AJAX search that waits for you to enter at least three characters then returns
+      any documents with those three characters somewhere in the docid.
+                    </li><br/>
+                    <li>Worklists2 tries to refresh document metadata from Bell every ten minutes.</li><br/>
+                    <li>My goal for the next release is to provide a more useful version of <a href="https://bell.ucs.indiana.edu/tools/boilerlist.cgi">boilerlist.cgi</a> for managing boilers.</li>
+                    </ul><br/>
+                    <p>Thanks,<br/>Andy</p>
+            </section>
+        </content:>
 
-    <section class="content-body">
-       The "textinfo" release. 
-    </section>
-  </content:>
 
-
-</page>
+    </page>

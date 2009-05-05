@@ -7,7 +7,9 @@ class Visibility < ActiveRecord::Base
     name  :string
   end
 
-has_many :docs
+  set_search_columns nil
+
+  has_many :docs
 
   # --- Permissions --- #
 

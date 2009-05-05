@@ -11,8 +11,8 @@
 <def tag="app-revision"><%= svn_rev ||= /^Revision: (\d+)$/.match(`svn info`)[1] || 'unknown' %></def>
 
 <extend tag="page">
-  <old-page merge without-live-search />
-  </extend>
+  <old-page merge />
+</extend>
 
 <extend tag="card" for="List">
   <old-card merge>

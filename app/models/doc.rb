@@ -9,6 +9,8 @@ class Doc < ActiveRecord::Base
     approveddate :date
   end
 
+  set_search_columns :id
+
   belongs_to :importance
   belongs_to :visibility
   belongs_to :volatility

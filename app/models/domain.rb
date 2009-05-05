@@ -12,6 +12,8 @@ class Domain < ActiveRecord::Base
     audience :string, :limit => 512
   end
 
+  set_search_columns nil
+
   has_many :domained_docs
   has_many :docs, :through => :domained_docs
 

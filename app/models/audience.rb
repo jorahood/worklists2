@@ -7,6 +7,8 @@ class Audience < ActiveRecord::Base
     description :string
   end
 
+  set_search_columns nil
+
   has_many :titles
   has_many :lists
   

@@ -6,6 +6,8 @@ class Hotitem < ActiveRecord::Base
     name :string
   end
 
+  set_search_columns nil
+
   belongs_to :doc
 
   set_primary_key :name

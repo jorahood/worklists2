@@ -14,6 +14,8 @@ class Kbuser < ActiveRecord::Base
     pagernumber :string
   end
 
+  set_search_columns nil
+
   has_many :kbresource_roles, :class_name => 'Kbresource'
   has_many :resourced_docs, 
     :through => :kbresource_roles,

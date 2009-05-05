@@ -6,6 +6,8 @@ class Title < ActiveRecord::Base
     title :html
   end
 
+  set_search_columns nil
+
   belongs_to :doc
   belongs_to :audience
 #  set_primary_keys :doc_id, :audience_id
