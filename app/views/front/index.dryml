@@ -5,10 +5,9 @@
 
     <content:>
         <header class="content-header">
-            <h1>Revision <app-revision/> </h1>
+            <h3>The "kbkw view" release</h3>
         </header>
         <section class="content-body">
-            <h3>The "kbkw view" release</h3>
             <p>My goal for this release of Worklist2 is to duplicate the metadata viewing function of the
                 <a href="https://kb.iu.edu/data/anae.html"><code>kbkw</code></a> command line tool on Bell. Some things to note:</p><br/>
                 <ul>
