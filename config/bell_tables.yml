@@ -29,6 +29,11 @@ docs:
     status: status_id
     importance: importance_id
 
+boiler_names:
+  :table_name: documentnames
+  :rename_columns:
+    docid: doc_id
+    
 expirations:
     :table_name: expire
     :rename_columns:

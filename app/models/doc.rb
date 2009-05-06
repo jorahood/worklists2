@@ -29,12 +29,13 @@ class Doc < ActiveRecord::Base
   has_many :domained_docs
   has_many :domains, :through => :domained_docs
   has_many :titles
-  has_many :expirations
+  has_many :expirations # FIXME - should be has_one but hobo doesn't support has_one yet
   has_many :hotitems
   has_many :kbusers_as_resources, :class_name => 'Kbresource'
   has_many :resources, 
     :through => :kbusers_as_resources,
     :source => :kbuser
+  has_many :boiler_names # FIXME - should be has_one but hobo doesn't support has_one yet
 
   # --- Permissions --- #
 
