@@ -98,7 +98,7 @@ used_boilers:
   :table_name: boilerusage
   :rename_columns:
     fromid: doc_id
-    boiler: boiler_id
+    boiler: boiler_name
 
 visibilities:
   :table_name: visibility
