@@ -19,6 +19,16 @@
 # key to audience_id, Rails will create the join sql automatically if the column
 # referred to by the fk 'audience_id' in the audiences table is named 'id'.
 
+audiences:
+  :table_name: titleaudience
+  :rename_columns:
+    audience: id
+
+boilers:
+  :table_name: documentnames
+  :rename_columns:
+    docid: doc_id
+
 docs: 
   :table_name: document
   :rename_columns:
@@ -29,11 +39,19 @@ docs:
     status: status_id
     importance: importance_id
 
-boilers:
-  :table_name: documentnames
+domained_docs:
+  :table_name: documentdomain
   :rename_columns:
-    docid: doc_id
-    
+    id: doc_id
+    domain: domain_id
+
+domains:
+  :table_name: domainlist
+  :rename_columns:
+    class: domain_class
+    domain: id
+    type: domain_type
+
 expirations:
     :table_name: expire
     :rename_columns:
@@ -47,6 +65,12 @@ hotitems:
         id: doc_id
         hotitem: name
 
+importances:
+  :table_name: importance
+  :rename_columns:
+    importance: name
+    rank: id
+
 kbresources:
   :table_name: kbresource
   :rename_columns:
@@ -58,35 +82,23 @@ kbusers:
     :rename_columns:
         username: id
         
+statuses:
+  :table_name: status
+  :rename_columns:
+    status: name
+    rank: id
+
 titles:
   :table_name: titlecache
   :rename_columns:
     audience: audience_id
     docid: doc_id
     
-audiences:
-  :table_name: titleaudience
+used_boilers:
+  :table_name: boilerusage
   :rename_columns:
-    audience: id
-    
-domains:
-  :table_name: domainlist
-  :rename_columns:
-    class: domain_class
-    domain: id
-    type: domain_type
-
-domained_docs:
-  :table_name: documentdomain
-  :rename_columns:
-    id: doc_id
-    domain: domain_id
-    
-importances:
-  :table_name: importance
-  :rename_columns:
-    importance: name
-    rank: id
+    fromid: doc_id
+    boiler: boiler_id
 
 visibilities:
   :table_name: visibility
@@ -98,10 +110,4 @@ volatilities:
   :table_name: volatility
   :rename_columns:
     volatility: name
-    rank: id
-
-statuses:
-  :table_name: status
-  :rename_columns:
-    status: name
     rank: id
