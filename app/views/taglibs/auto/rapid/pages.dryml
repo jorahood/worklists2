@@ -210,6 +210,10 @@
             <h3 param="resources-collection">Resources</h3>
             <collection:resources/>
           </section>
+          <section param="boiler_names-collection-section">
+            <h3 param="boiler_names-collection">Boiler Names</h3>
+            <collection:boiler_names/>
+          </section>
         </aside>
       </section-group>
     </content:>

@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20090506202913) do
     t.string "description"
   end
 
-  create_table "boiler_names", :force => true do |t|
+  create_table "boiler_names", :id => false, :force => true do |t|
     t.string "name"
     t.string "doc_id"
   end
