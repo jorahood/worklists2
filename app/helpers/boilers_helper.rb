@@ -1,0 +1,2 @@
+module BoilersHelper
+end

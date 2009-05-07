@@ -35,7 +35,7 @@ class Doc < ActiveRecord::Base
   has_many :resources, 
     :through => :kbusers_as_resources,
     :source => :kbuser
-  has_many :boiler_names # FIXME - should be has_one but hobo doesn't support has_one yet
+  has_many :boilers # FIXME - should be has_one but hobo doesn't support has_one yet
 
   # --- Permissions --- #
 

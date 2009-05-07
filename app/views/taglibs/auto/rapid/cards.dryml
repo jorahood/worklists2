@@ -11,10 +11,10 @@
   </card>
 </def>
 
-<def tag="card" for="BoilerName">
-  <card class="boiler-name" param="default" merge>
+<def tag="card" for="Boiler">
+  <card class="boiler" param="default" merge>
     <header: param>
-      <h4 param="heading"><name/></h4>
+      <h4 param="heading"><a><name/></a></h4>
     </header:>
   </card>
 </def>

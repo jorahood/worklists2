@@ -1,4 +1,4 @@
-class BoilerName < ActiveRecord::Base
+class Boiler < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
@@ -8,9 +8,9 @@ class BoilerName < ActiveRecord::Base
 
   set_search_columns nil
 
-  set_primary_key :doc_id
-
   belongs_to :doc
+
+  set_primary_key :doc_id
 
   # --- Permissions --- #
 

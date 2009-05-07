@@ -9,14 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090506202913) do
+ActiveRecord::Schema.define(:version => 20090507150745) do
 
   create_table "audiences", :id => false, :force => true do |t|
     t.string "id"
     t.string "description"
   end
 
-  create_table "boiler_names", :id => false, :force => true do |t|
+  create_table "boilers", :id => false, :force => true do |t|
     t.string "name"
     t.string "doc_id"
   end

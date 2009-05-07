@@ -6,10 +6,10 @@
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
     <nav-item with="&Audience">Audiences</nav-item>
+    <nav-item with="&Boiler">Boilers</nav-item>
     <nav-item with="&Doc">Docs</nav-item>
     <nav-item with="&Domain">Domains</nav-item>
     <nav-item with="&Expiration">Expirations</nav-item>
-    <nav-item with="&Hotitem">Hotitems</nav-item>
   </navigation>
 </def>
 
@@ -117,6 +117,102 @@
 
 
   
+<!-- ====== Boiler Pages ====== -->
+
+
+<def tag="index-page" for="Boiler">
+  <page merge title="Boilers">
+    <body: class="index-page boiler" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Boilers</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Boiler">
+  <page merge title="New Boiler">
+    <body: class="new-page boiler" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Boiler</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Boiler"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Boiler">
+  <page merge title="Boiler">
+
+    <body: class="show-page boiler" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Boiler</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="doc" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Boiler">
+  <page merge title="Edit Boiler">
+
+    <body: class="edit-page boiler" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Boiler" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
 <!-- ====== Doc Pages ====== -->
 
 
@@ -210,9 +306,9 @@
             <h3 param="resources-collection">Resources</h3>
             <collection:resources/>
           </section>
-          <section param="boiler_names-collection-section">
-            <h3 param="boiler_names-collection">Boiler Names</h3>
-            <collection:boiler_names/>
+          <section param="boilers-collection-section">
+            <h3 param="boilers-collection">Boilers</h3>
+            <collection:boilers/>
           </section>
         </aside>
       </section-group>

@@ -1,0 +1,7 @@
+<!-- Boiler -->
+
+<index-page>
+    <collection: replace>
+        <table-plus without-search-form fields="this, doc"/>
+    </collection:>
+</index-page>
