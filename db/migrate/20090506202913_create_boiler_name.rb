@@ -1,6 +1,6 @@
 class CreateBoilerName < ActiveRecord::Migration
   def self.up
-    create_table :boiler_names do |t|
+    create_table :boiler_names, :id => false do |t|
       t.string  :name
       t.string :doc_id
     end
