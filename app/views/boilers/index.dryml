@@ -2,6 +2,6 @@
 
 <index-page>
     <collection: replace>
-        <table-plus without-search-form fields="this, doc"/>
+        <table-plus without-search-form fields="this, doc, appearances_in_docs.count"/>
     </collection:>
 </index-page>

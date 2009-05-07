@@ -36,7 +36,10 @@ class Doc < ActiveRecord::Base
     :through => :kbusers_as_resources,
     :source => :kbuser
   has_many :boilers # FIXME - should be has_one but hobo doesn't support has_one yet
-
+  has_many :used_boilers
+  has_many :boiler_usages,
+    :through => :used_boilers,
+    :source => :boiler
   # --- Permissions --- #
 
   def create_permitted?

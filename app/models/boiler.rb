@@ -7,7 +7,8 @@ class Boiler < ActiveRecord::Base
   end
 
   set_search_columns nil
-
+  set_primary_key :name
+  
   belongs_to :doc
 
   has_many :usages, :foreign_key => 'boiler_name', :class_name => 'UsedBoiler'

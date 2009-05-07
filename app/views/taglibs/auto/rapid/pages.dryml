@@ -183,6 +183,11 @@
     
           <section param="content-body">
             <field-list fields="doc" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">Appearances In Docs</h3>
+              
+              <collection:appearances_in_docs param/>
+            </section>
           </section>
     </content:>
     
@@ -305,6 +310,10 @@
           <section param="resources-collection-section">
             <h3 param="resources-collection">Resources</h3>
             <collection:resources/>
+          </section>
+          <section param="boiler_usages-collection-section">
+            <h3 param="boiler_usages-collection">Boiler Usages</h3>
+            <collection:boiler_usages/>
           </section>
           <section param="boilers-collection-section">
             <h3 param="boilers-collection">Boilers</h3>
