@@ -7,6 +7,7 @@ class Status < ActiveRecord::Base
     name  :string
   end
 
+  set_table_name :status
   set_search_columns nil
 
   has_many :docs

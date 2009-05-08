@@ -6,6 +6,7 @@ class Boiler < ActiveRecord::Base
     name :string
   end
 
+  set_table_name :documentnames
   set_search_columns nil
   set_primary_key :name
   

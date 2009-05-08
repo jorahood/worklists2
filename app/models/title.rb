@@ -6,6 +6,7 @@ class Title < ActiveRecord::Base
     title :html
   end
 
+  set_table_name :titlecache
   set_search_columns nil
 
   belongs_to :doc

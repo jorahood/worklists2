@@ -5,6 +5,7 @@ class DomainedDoc < ActiveRecord::Base
   fields do
   end
 
+  set_table_name :documentdomain
   belongs_to :doc
   belongs_to :domain
 

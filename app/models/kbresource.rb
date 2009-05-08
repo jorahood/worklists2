@@ -5,6 +5,7 @@ class Kbresource < ActiveRecord::Base
   fields do
   end
 
+  set_table_name :kbresource
   belongs_to :doc
   belongs_to :kbuser
 

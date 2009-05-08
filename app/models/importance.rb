@@ -7,6 +7,7 @@ class Importance < ActiveRecord::Base
     name :string
   end
 
+  set_table_name :importance
   set_search_columns nil
 
   has_many :docs

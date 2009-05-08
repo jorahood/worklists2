@@ -7,6 +7,7 @@ class Visibility < ActiveRecord::Base
     name  :string
   end
 
+  set_table_name :visibility
   set_search_columns nil
 
   has_many :docs

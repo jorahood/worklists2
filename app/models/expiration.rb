@@ -7,6 +7,7 @@ class Expiration < ActiveRecord::Base
     reason :string
   end
 
+  set_table_name :expire
   set_search_columns nil
 
   set_primary_key :doc_id

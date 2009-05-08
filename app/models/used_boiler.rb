@@ -5,6 +5,7 @@ class UsedBoiler < ActiveRecord::Base
   fields do
   end
 
+  set_table_name :boilerusage
   belongs_to :doc
   belongs_to :boiler, :foreign_key => 'boiler_name'
 

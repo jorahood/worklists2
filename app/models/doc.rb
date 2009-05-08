@@ -9,6 +9,7 @@ class Doc < ActiveRecord::Base
     approveddate :date
   end
 
+  set_table_name :document
   set_search_columns :id
 
   belongs_to :importance
