@@ -1,6 +1,16 @@
 <!-- Domain -->
 
 <show-page>
+  <!--sticking the class in manually as a workaround for
+  having a column named 'class'. See models/domain.rb -->
+  <before-field-list:>
+  <table class="field-list">
+    <tr>
+    <th>Class</th>
+    <td><view with="&this[:class]"/></td>
+  </tr>
+  </table>
+  </before-field-list:>
   <collection-heading: replace>
     <h3>There <count:docs prefix="are"/> in this Domain</h3>
   </collection-heading:>

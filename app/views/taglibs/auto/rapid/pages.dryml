@@ -416,7 +416,7 @@
     
           <section param="content-body">
             <view:description param="description"/>
-            <field-list fields="domain_class, type, visible, accessible, audience" param/>
+            <field-list fields="type, visible, accessible, audience" param/>
             <section param="collection-section">
               <h3 param="collection-heading">Docs</h3>
               

@@ -39,7 +39,7 @@
 <def tag="form" for="Domain">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="domain_class, type, description, visible, accessible, audience" param/>
+    <field-list fields="type, description, visible, accessible, audience" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>

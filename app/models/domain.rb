@@ -4,12 +4,21 @@ class Domain < ActiveRecord::Base
 
   fields do
     domain :string, :name => true
-    domain_class :string
+    # can't declare 'class' as a field but Rails will still read the class column from
+    # the db so it will be available as domain[:class] or domain.read_attribute[:class]
     type :string
     description :string
     visible :string, :limit => 512
     accessible :string, :limit => 512
     audience :string, :limit => 512
+  end
+
+  #to allow a column named 'class' : http://www.ruby-forum.com/topic/138433
+  class << self
+    def instance_method_already_implemented?(method_name)
+      return true if method_name == 'class'
+      super
+    end
   end
 
   # 'type' is a column name which Rails looks for when doing STI, and
@@ -40,5 +49,4 @@ class Domain < ActiveRecord::Base
   def view_permitted?(field)
     true
   end
-
 end
