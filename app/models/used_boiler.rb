@@ -6,8 +6,8 @@ class UsedBoiler < ActiveRecord::Base
   end
 
   set_table_name :boilerusage
-  belongs_to :doc
-  belongs_to :boiler, :foreign_key => 'boiler_name'
+  belongs_to :doc, :foreign_key => 'fromid'
+  belongs_to :boiler, :foreign_key => 'boiler'
 
   # --- Permissions --- #
 

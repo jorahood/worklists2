@@ -3,14 +3,16 @@ class Volatility < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    id :integer
-    name  :string
+    rank :integer
+    volatility  :string, :name => true
   end
 
   set_table_name :volatility
   set_search_columns nil
 
-  has_many :docs
+  has_many :docs, :foreign_key => 'volatility'
+
+  set_primary_key :rank
 
   # --- Permissions --- #
 

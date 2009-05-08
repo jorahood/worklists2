@@ -6,8 +6,8 @@ class DomainedDoc < ActiveRecord::Base
   end
 
   set_table_name :documentdomain
-  belongs_to :doc
-  belongs_to :domain
+  belongs_to :doc, :foreign_key => 'id'
+  belongs_to :domain, :foreign_key => 'domain'
 
   # --- Permissions --- #
 

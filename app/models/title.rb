@@ -9,8 +9,8 @@ class Title < ActiveRecord::Base
   set_table_name :titlecache
   set_search_columns nil
 
-  belongs_to :doc
-  belongs_to :audience
+  belongs_to :doc, :foreign_key => 'docid'
+  belongs_to :audience, :foreign_key => 'audience'
 #  set_primary_keys :doc_id, :audience_id
   
   # --- Permissions --- #

@@ -3,15 +3,16 @@ class Visibility < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    id :integer
-    name  :string
+    rank :integer
+    visibility :string, :name => true
   end
 
   set_table_name :visibility
   set_search_columns nil
 
-  has_many :docs
+  has_many :docs, :foreign_key => 'visibility'
 
+  set_primary_key :rank
   # --- Permissions --- #
 
   def create_permitted?

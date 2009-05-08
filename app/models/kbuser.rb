@@ -3,7 +3,7 @@ class Kbuser < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    id    :string, :name => true
+    username    :string, :name => true
     lastname    :string
     firstname   :string
     email       :string
@@ -17,16 +17,20 @@ class Kbuser < ActiveRecord::Base
   set_table_name :kbuser
   set_search_columns nil
 
-  has_many :kbresource_roles, :class_name => 'Kbresource'
+  set_primary_key :username
+  
+  has_many :kbresource_roles, 
+    :class_name => 'Kbresource',
+    :foreign_key => 'username'
   has_many :resourced_docs, 
     :through => :kbresource_roles,
     :source => :doc
   has_many :authored_docs, 
     :class_name => 'Doc',
-    :foreign_key => 'author_id'
+    :foreign_key => 'author'
   has_many :owned_docs,
     :class_name => 'Doc',
-    :foreign_key => 'owner_id'
+    :foreign_key => 'owner'
   
   never_show :worknumber, :homenumber, :pagernumber, :password
 

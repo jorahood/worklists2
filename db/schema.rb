@@ -9,71 +9,71 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090507182653) do
+ActiveRecord::Schema.define(:version => 20090508135844) do
 
-  create_table "audiences", :id => false, :force => true do |t|
-    t.string "id"
-    t.string "description"
+  create_table "boilerusage", :id => false, :force => true do |t|
+    t.string "boiler"
+    t.string "fromid"
   end
 
-  create_table "boilers", :id => false, :force => true do |t|
-    t.string "name"
-    t.string "doc_id"
-  end
-
-  create_table "docs", :id => false, :force => true do |t|
+  create_table "document", :id => false, :force => true do |t|
     t.string   "id"
     t.date     "birthdate"
     t.datetime "modifieddate"
     t.date     "approveddate"
-    t.string   "owner_id"
-    t.string   "author_id"
-    t.integer  "importance_id"
-    t.integer  "visibility_id"
-    t.integer  "volatility_id"
-    t.integer  "status_id"
+    t.string   "owner"
+    t.string   "author"
+    t.integer  "importance"
+    t.integer  "visibility"
+    t.integer  "volatility"
+    t.integer  "status"
   end
 
-  add_index "docs", ["id"], :name => "index_docs_on_id", :unique => true
+  add_index "document", ["id"], :name => "index_docs_on_id", :unique => true
 
-  create_table "domained_docs", :id => false, :force => true do |t|
-    t.string "doc_id"
-    t.string "domain_id"
-  end
-
-  create_table "domains", :id => false, :force => true do |t|
+  create_table "documentdomain", :id => false, :force => true do |t|
     t.string "id"
+    t.string "domain"
+  end
+
+  create_table "documentnames", :id => false, :force => true do |t|
+    t.string "name"
+    t.string "docid"
+  end
+
+  create_table "domainlist", :id => false, :force => true do |t|
+    t.string "domain"
     t.string "domain_class"
-    t.string "domain_type"
+    t.string "type"
     t.string "description"
     t.string "visible",      :limit => 512
     t.string "accessible",   :limit => 512
     t.string "audience",     :limit => 512
   end
 
-  create_table "expirations", :id => false, :force => true do |t|
-    t.string "doc_id"
-    t.date   "date"
-    t.string "reason"
-  end
-
-  create_table "hotitems", :id => false, :force => true do |t|
-    t.string "doc_id"
-    t.string "name"
-  end
-
-  create_table "importances", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name"
-  end
-
-  create_table "kbresources", :id => false, :force => true do |t|
-    t.string "doc_id"
-    t.string "kbuser_id"
-  end
-
-  create_table "kbusers", :id => false, :force => true do |t|
+  create_table "expire", :id => false, :force => true do |t|
     t.string "id"
+    t.date   "expiredate"
+    t.string "explanation"
+  end
+
+  create_table "hotitem", :id => false, :force => true do |t|
+    t.string "id"
+    t.string "hotitem"
+  end
+
+  create_table "importance", :id => false, :force => true do |t|
+    t.integer "rank"
+    t.string  "importance"
+  end
+
+  create_table "kbresource", :id => false, :force => true do |t|
+    t.string "id"
+    t.string "username"
+  end
+
+  create_table "kbuser", :id => false, :force => true do |t|
+    t.string "username"
     t.string "lastname"
     t.string "firstname"
     t.string "email"
@@ -110,20 +110,20 @@ ActiveRecord::Schema.define(:version => 20090507182653) do
     t.integer  "listed_doc_id"
   end
 
-  create_table "statuses", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name"
+  create_table "status", :id => false, :force => true do |t|
+    t.integer "rank"
+    t.string  "status"
   end
 
-  create_table "titles", :id => false, :force => true do |t|
+  create_table "titleaudience", :id => false, :force => true do |t|
+    t.string "audience"
+    t.string "description"
+  end
+
+  create_table "titlecache", :id => false, :force => true do |t|
     t.string "title"
-    t.string "doc_id"
-    t.string "audience_id"
-  end
-
-  create_table "used_boilers", :id => false, :force => true do |t|
-    t.string "boiler_name"
-    t.string "doc_id"
+    t.string "docid"
+    t.string "audience"
   end
 
   create_table "users", :force => true do |t|
@@ -140,14 +140,14 @@ ActiveRecord::Schema.define(:version => 20090507182653) do
     t.datetime "key_timestamp"
   end
 
-  create_table "visibilities", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name"
+  create_table "visibility", :id => false, :force => true do |t|
+    t.integer "rank"
+    t.string  "visibility"
   end
 
-  create_table "volatilities", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name"
+  create_table "volatility", :id => false, :force => true do |t|
+    t.integer "rank"
+    t.string  "volatility"
   end
 
 end

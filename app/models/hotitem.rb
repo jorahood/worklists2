@@ -3,15 +3,15 @@ class Hotitem < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    name :string
+    hotitem :string
   end
 
   set_table_name :hotitem
   set_search_columns nil
 
-  belongs_to :doc
+  belongs_to :doc, :foreign_key => 'id'
 
-  set_primary_key :name
+  set_primary_key :hotitem
 
   # --- Permissions --- #
 

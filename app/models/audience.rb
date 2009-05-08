@@ -3,15 +3,17 @@ class Audience < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    id  :string, :name => true
+    audience  :string, :name => true
     description :string
   end
 
   set_table_name :titleaudience
   set_search_columns nil
 
-  has_many :titles
-  has_many :lists
+  set_primary_key :audience
+  
+  has_many :titles, :foreign_key => 'audience'
+  has_many :lists, :foreign_key => 'audience'
   
   # --- Permissions --- #
 

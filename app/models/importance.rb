@@ -3,15 +3,16 @@ class Importance < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    id :integer
-    name :string
+    rank :integer
+    importance :string, :name => true
   end
 
   set_table_name :importance
   set_search_columns nil
 
-  has_many :docs
+  has_many :docs, :foreign_key => :importance # the fk in the document table
 
+   set_primary_key :rank
   # --- Permissions --- #
 
   def create_permitted?

@@ -6,8 +6,8 @@ class Kbresource < ActiveRecord::Base
   end
 
   set_table_name :kbresource
-  belongs_to :doc
-  belongs_to :kbuser
+  belongs_to :doc, :foreign_key => 'id'
+  belongs_to :kbuser, :foreign_key => 'username'
 
   # --- Permissions --- #
 

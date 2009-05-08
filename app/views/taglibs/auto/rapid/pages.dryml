@@ -182,7 +182,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="doc" param/>
+            <field-list fields="docid, doc" param/>
             <section param="collection-section">
               <h3 param="collection-heading">Appearances In Docs</h3>
               
@@ -285,7 +285,7 @@
           </header>
     
           <section param="content-body" with-flash-messages>
-            <field-list fields="birthdate, modifieddate, approveddate, author, importance, owner, status, visibility, volatility" param/>
+            <field-list fields="birthdate, modifieddate, approveddate, importance, visibility, volatility, status, author, owner, author, importance, owner, status, visibility, volatility" param/>
             <section param="collection-section">
               <h3 param="collection-heading">Titles</h3>
               
@@ -416,7 +416,7 @@
     
           <section param="content-body">
             <view:description param="description"/>
-            <field-list fields="domain_class, domain_type, visible, accessible, audience" param/>
+            <field-list fields="domain_class, type, visible, accessible, audience" param/>
             <section param="collection-section">
               <h3 param="collection-heading">Docs</h3>
               
@@ -517,7 +517,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="date, reason, doc" param/>
+            <field-list fields="expiredate, explanation, doc" param/>
           </section>
     </content:>
     
@@ -613,7 +613,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="doc" param/>
+            <field-list fields="id, doc" param/>
           </section>
     </content:>
     
@@ -1339,7 +1339,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="audience, doc" param/>
+            <field-list fields="docid, audience, audience, doc" param/>
           </section>
     </content:>
     

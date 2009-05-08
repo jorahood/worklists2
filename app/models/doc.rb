@@ -12,32 +12,33 @@ class Doc < ActiveRecord::Base
   set_table_name :document
   set_search_columns :id
 
-  belongs_to :importance
-  belongs_to :visibility
-  belongs_to :volatility
-  belongs_to :status
+  belongs_to :importance, :foreign_key => 'importance'
+  belongs_to :visibility, :foreign_key => 'visibility'
+  belongs_to :volatility, :foreign_key => 'volatility'
+  belongs_to :status, :foreign_key => 'status'
   belongs_to :author,
     :class_name => 'Kbuser',
-    :foreign_key => 'author_id' #FIXME - Hobo should be able to figure out the foreign key on its own
+    :foreign_key => 'author' 
   belongs_to :owner,
     :class_name => 'Kbuser',
-    :foreign_key => 'owner_id'
+    :foreign_key => 'owner'
     
   has_many :listed_docs, :dependent=>:destroy
   has_many :lists, 
     :through => :listed_docs,
     :accessible => true
-  has_many :domained_docs
+  has_many :domained_docs, :foreign_key => 'id'
   has_many :domains, :through => :domained_docs
-  has_many :titles
-  has_many :expirations # FIXME - should be has_one but hobo doesn't support has_one yet
-  has_many :hotitems
-  has_many :kbusers_as_resources, :class_name => 'Kbresource'
+  has_many :titles, :foreign_key => 'docid'
+  has_many :expirations, :foreign_key => 'id' # FIXME - should be has_one but hobo doesn't support has_one yet
+  has_many :hotitems, :foreign_key => 'id'
+  has_many :kbusers_as_resources,
+    :class_name => 'Kbresource', :foreign_key => 'id'
   has_many :resources, 
     :through => :kbusers_as_resources,
     :source => :kbuser
-  has_many :boilers # FIXME - should be has_one but hobo doesn't support has_one yet
-  has_many :used_boilers
+  has_many :boilers, :foreign_key => 'docid' # FIXME - should be has_one but hobo doesn't support has_one yet
+  has_many :used_boilers, :foreign_key => 'fromid'
   has_many :boiler_usages,
     :through => :used_boilers,
     :source => :boiler

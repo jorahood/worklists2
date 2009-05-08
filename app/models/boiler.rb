@@ -7,12 +7,13 @@ class Boiler < ActiveRecord::Base
   end
 
   set_table_name :documentnames
+
   set_search_columns nil
   set_primary_key :name
   
-  belongs_to :doc
+  belongs_to :doc, :foreign_key => 'docid'
 
-  has_many :usages, :foreign_key => 'boiler_name', :class_name => 'UsedBoiler'
+  has_many :usages, :foreign_key => 'boiler', :class_name => 'UsedBoiler'
   has_many :appearances_in_docs,
     :through => :usages,
     :source => :doc 

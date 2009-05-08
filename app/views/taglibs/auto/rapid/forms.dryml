@@ -15,7 +15,7 @@
 <def tag="form" for="Boiler">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="doc" param/>
+    <field-list fields="docid, doc" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -27,7 +27,7 @@
 <def tag="form" for="Doc">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="birthdate, modifieddate, approveddate, author, importance, lists, owner, status, visibility, volatility" param/>
+    <field-list fields="birthdate, modifieddate, approveddate, importance, visibility, volatility, status, author, owner, author, importance, lists, owner, status, visibility, volatility" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -39,7 +39,7 @@
 <def tag="form" for="Domain">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="domain_class, domain_type, description, visible, accessible, audience" param/>
+    <field-list fields="domain_class, type, description, visible, accessible, audience" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -51,7 +51,7 @@
 <def tag="form" for="Expiration">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="date, reason, doc" param/>
+    <field-list fields="expiredate, explanation, doc" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -63,7 +63,7 @@
 <def tag="form" for="Hotitem">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="doc" param/>
+    <field-list fields="id, doc" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -75,7 +75,7 @@
 <def tag="form" for="Importance">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name" param/>
+    <field-list fields="importance" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -135,7 +135,7 @@
 <def tag="form" for="Status">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name" param/>
+    <field-list fields="status" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -147,7 +147,7 @@
 <def tag="form" for="Title">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="title, audience, doc" param/>
+    <field-list fields="title, docid, audience, audience, doc" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -192,7 +192,7 @@
 <def tag="form" for="Visibility">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name" param/>
+    <field-list fields="visibility" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -204,7 +204,7 @@
 <def tag="form" for="Volatility">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name" param/>
+    <field-list fields="volatility" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>

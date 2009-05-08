@@ -11,7 +11,7 @@ class List < ActiveRecord::Base
   validates_presence_of :name, :owner
 
   belongs_to :owner, :class_name => "User", :foreign_key => 'owner_id', :creator => true
-  belongs_to :audience
+  belongs_to :audience, :foreign_key => 'audience'
 
   has_many :listed_docs, :dependent=>:destroy
   has_many :docs, :through =>:listed_docs, :accessible => true

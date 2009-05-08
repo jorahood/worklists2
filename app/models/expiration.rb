@@ -3,16 +3,16 @@ class Expiration < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    date   :date
-    reason :string
+    expiredate   :date
+    explanation :string
   end
 
   set_table_name :expire
   set_search_columns nil
 
-  set_primary_key :doc_id
+  set_primary_key :id # referring to the doc below
 
-  belongs_to :doc
+  belongs_to :doc, :foreign_key => 'id'
 
   # --- Permissions --- #
 
