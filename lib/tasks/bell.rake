@@ -49,7 +49,7 @@ namespace :bell do
         model.import bell_columns, bell_values, :validate => false
         puts "3. Imported #{all_records.length} instances of #{model}."
       end
-      puts "\nImported #{models_from_bell.length} ActiveRecord model classes from bell." if models_from_bell.length > 1
     end
+    puts "\nImported #{models_from_bell.length} ActiveRecord model classes from bell." if models_from_bell.length > 1
   end
 end
