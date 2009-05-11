@@ -33,16 +33,19 @@ namespace :bell do
 
     puts "\n   ** #{model} **"
     OracleOnBell.establish_connection :oracle_on_bell
-    all_records = OracleOnBell.connection.select_rows("SELECT #{column_sql} FROM kbadm.#{table}")
+    all_records = OracleOnBell.connection.select_all("SELECT * FROM kbadm.#{table}")
+    bell_columns = all_records[0].keys
+    bell_values = all_records.map { |record| record.values }
+
     puts "1. Read #{all_records.length} records from bell:kbadm.#{table}:
-      #{column_sql}"
+      #{bell_columns.to_sentence}"
     #FIXME: check that the values we got from Oracle are good before truncating and reloading the wl2 table
     ActiveRecord::Base.establish_connection
     # wrap the truncation and importing in a transaction so no client sees empty tables
     ActiveRecord::Base.transaction do
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table}")
       puts "2. Truncated worklists2_#{RAILS_ENV}.#{table} table"
-      model.import model.column_names, all_records, :validate => false
+      model.import bell_columns, bell_values, :validate => false
       puts "3. Imported #{all_records.length} records into worklists2_#{RAILS_ENV}.#{table}"
     end
     #end
