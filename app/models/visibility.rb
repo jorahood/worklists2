@@ -13,6 +13,11 @@ class Visibility < ActiveRecord::Base
   has_many :docs, :foreign_key => 'visibility'
 
   set_primary_key :rank
+
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

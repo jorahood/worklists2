@@ -9,6 +9,10 @@ class DomainedDoc < ActiveRecord::Base
   belongs_to :doc, :foreign_key => 'id'
   belongs_to :domain, :foreign_key => 'domain'
 
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

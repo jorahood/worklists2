@@ -18,6 +18,10 @@ class Boiler < ActiveRecord::Base
     :through => :usages,
     :source => :doc 
 
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

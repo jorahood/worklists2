@@ -42,6 +42,11 @@ class Doc < ActiveRecord::Base
   has_many :boiler_usages,
     :through => :used_boilers,
     :source => :boiler
+
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

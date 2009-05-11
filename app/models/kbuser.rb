@@ -14,6 +14,10 @@ class Kbuser < ActiveRecord::Base
     pagernumber :string
   end
 
+  def self.import_from_bell
+    true
+  end
+
   set_table_name :kbuser
   set_search_columns nil
 

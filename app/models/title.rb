@@ -13,6 +13,11 @@ class Title < ActiveRecord::Base
   belongs_to :audience, :foreign_key => 'audience'
 #  set_primary_keys :doc_id, :audience_id
   
+
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

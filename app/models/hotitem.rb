@@ -13,6 +13,10 @@ class Hotitem < ActiveRecord::Base
 
   set_primary_key :hotitem
 
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

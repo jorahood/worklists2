@@ -32,6 +32,10 @@ class Domain < ActiveRecord::Base
   has_many :docs, :through => :domained_docs
 
   set_primary_key :domain
+
+  def self.import_from_bell
+    true
+  end
   # --- Permissions --- #
 
   def create_permitted?

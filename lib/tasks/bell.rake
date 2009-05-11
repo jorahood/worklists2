@@ -1,53 +1,50 @@
-# load the configuration file with table names and column name translations
-bell_tables = YAML.load_file("#{RAILS_ROOT}/config/bell_tables.yml")
+#http://blog.internautdesign.com/2008/6/14/array-of-all-activerecord-models-in-a-rails-app
+#all_models = Dir.glob( File.join( RAILS_ROOT, 'app', 'models', '*.rb') ).map{|path| path[/.+\/(.+).rb/,1] }
+#AR_models = all_models.select{|m| m.classify.constantize < ActiveRecord::Base}
+#Dir.glob(RAILS_ROOT + '/app/models/*.rb').each { |file| require file }
 
 # rake tasks to import the tables from the kb3 Oracle db on bell. The task names
-# are generated from the model names listed in config/bell_tables.yml and then
-# an "all" task is generated to run all of the imports in the order they appear
-# in bell_tables.yml
+# are generated from the model names themselves and then
+# an "all" task is generated to run all of the imports 
 
 namespace :bell do
-  bell_tables.each do |wl2_table_name, bell_source_config|
+  desc "Reload data for model_name (default 'all') from bell"
+  # rake tasks with arguments: http://rake.rubyforge.org/files/doc/release_notes/rake-0_8_3_rdoc.html
+  task :load, :model_name, :needs => :environment do |t, args|
+    # args.with_defaults: http://dev.nuclearrooster.com/2009/01/05/rake-task-with-arguments/
+    args.with_defaults(:model_name => Status)
+    model = args.model_name
+    #    models_from_bell = Hobo::Model.all_models.select &:import_from_bell
+    column_sql = model.column_names.join(', ')
+    #    models_from_bell.each do |model|
+    table = model.table_name
+    # ar-extensions allows us to do mass loading of data into tables,
+    # bypassing validations to speed things up by orders of magnitude
+    # see http://www.jobwd.com/article/show/31
+    require 'ar-extensions'
+    require 'ar-extensions/adapters/mysql'
+    require 'ar-extensions/import/mysql'
 
-    #http://api.rubyonrails.org/classes/ActiveSupport/CoreExtensions/String/Inflections.html#M001338
-    desc "Reload '#{wl2_table_name}' from kbadm.#{bell_source_config[:table_name]}"
-    task wl2_table_name => :environment do
-      # ar-extensions allows us to do mass loading of data into tables,
-      # bypassing validations to speed things up by orders of magnitude
-      # see http://www.jobwd.com/article/show/31
-      require 'ar-extensions'
-      require 'ar-extensions/adapters/mysql'
-      require 'ar-extensions/import/mysql'
-      wl2_model_name = wl2_table_name.classify.constantize
+    # all_records is an array of hashes of column => value pairs, returned by
+    # #select_all. Getting the data this way rather than as an array of arrays
+    # of values as #select_values returns it obviates the need to know the exact
+    # order that #select_values returns the data in, which has no relation to
+    # the order the columns are returned by #columns
 
-      # all_records is an array of hashes of column => value pairs, returned by
-      # #select_all. Getting the data this way rather than as an array of arrays
-      # of values as #select_values returns it obviates the need to know the exact
-      # order that #select_values returns the data in, which has no relation to
-      # the order the columns are returned by #columns
-      puts "\n   ** #{wl2_model_name} **"
-      OracleOnBell.establish_connection :oracle_on_bell
-      all_records = OracleOnBell.connection.select_all("SELECT * FROM kbadm.#{bell_source_config[:table_name]}")
-      columns = all_records[0].keys
-      puts "1. Read #{all_records.length} records from bell:kbadm.#{bell_source_config[:table_name]}:
-      #{columns.to_sentence}"
-      if  bell_source_config[:rename_columns]
-        columns = columns.map {|bell_column| bell_source_config[:rename_columns][bell_column] || bell_column}
-      end
-      values = all_records.map { |record| record.values }
-      #FIXME: check that the values we got from Oracle are good before truncating and reloading the wl2 table
-      #FIXME: check that wl2_table_name exists and is one of the imported tables, not a wl2 list table before truncating
-      ActiveRecord::Base.establish_connection
-      # wrap the truncation and importing in a transaction so no one sees empty tables
-      ActiveRecord::Base.transaction do
-        ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{wl2_table_name}")
-        puts "2. Truncated worklists2_#{RAILS_ENV}.#{wl2_table_name} table"
-        wl2_model_name.import columns, values, :on_duplicate_key_update => columns, :validate => false
-        puts "3. Imported #{all_records.length} #{wl2_table_name}:\n\t#{columns.to_sentence}"
-      end
+    puts "\n   ** #{model} **"
+    OracleOnBell.establish_connection :oracle_on_bell
+    all_records = OracleOnBell.connection.select_all("SELECT '#{column_sql}' FROM kbadm.#{table}")
+    puts "1. Read #{all_records.length} records from bell:kbadm.#{table}:
+      #{column_sql}"
+    #FIXME: check that the values we got from Oracle are good before truncating and reloading the wl2 table
+    ActiveRecord::Base.establish_connection
+    # wrap the truncation and importing in a transaction so no client sees empty tables
+    ActiveRecord::Base.transaction do
+      ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table}")
+      puts "2. Truncated worklists2_#{RAILS_ENV}.#{table} table"
+      model.import model.column_names, all_records, :validate => false
+      puts "3. Imported #{all_records.length} #{table} records into worklists2_#{RAILS_ENV}.#{table}"
     end
+    #end
   end
-
-  desc "Reload #{bell_tables.length} tables from bell: \n\t#{bell_tables.keys.to_sentence}"
-  task :all => bell_tables.keys #pass the array of all our autogenerated tasks as dependencies to the bell:all task
 end

@@ -9,6 +9,10 @@ class UsedBoiler < ActiveRecord::Base
   belongs_to :doc, :foreign_key => 'fromid'
   belongs_to :boiler, :foreign_key => 'boiler'
 
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

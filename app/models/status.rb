@@ -13,6 +13,11 @@ class Status < ActiveRecord::Base
   has_many :docs, :foreign_key => 'status'
 
   set_primary_key :rank
+
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

@@ -9,6 +9,10 @@ class Kbresource < ActiveRecord::Base
   belongs_to :doc, :foreign_key => 'id'
   belongs_to :kbuser, :foreign_key => 'username'
 
+  def self.import_from_bell
+    true
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

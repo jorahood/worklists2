@@ -14,6 +14,10 @@ class Audience < ActiveRecord::Base
   
   has_many :titles, :foreign_key => 'audience'
   has_many :lists, :foreign_key => 'audience'
+
+  def self.import_from_bell
+    true
+  end
   
   # --- Permissions --- #
 
