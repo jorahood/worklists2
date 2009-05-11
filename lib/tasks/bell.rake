@@ -48,6 +48,7 @@ namespace :bell do
         puts "2. Truncated 'worklists2_#{RAILS_ENV}.#{table}'."
         model.import bell_columns, bell_values, :validate => false
         puts "3. Imported #{all_records.length} instances of #{model}."
+        puts "\nImported #{models_from_bell.length} ActiveRecord model classes from bell." if models_from_bell.length > 1
       end
     end
   end
