@@ -13,7 +13,7 @@ namespace :bell do
   task :load, :model_name, :needs => :environment do |t, args|
     # args.with_defaults: http://dev.nuclearrooster.com/2009/01/05/rake-task-with-arguments/
     args.with_defaults(:model_name => Status)
-    model = args.model_name
+    model = args.model_name.constantize
     #    models_from_bell = Hobo::Model.all_models.select &:import_from_bell
     column_sql = model.column_names.join(', ')
     #    models_from_bell.each do |model|
@@ -33,7 +33,7 @@ namespace :bell do
 
     puts "\n   ** #{model} **"
     OracleOnBell.establish_connection :oracle_on_bell
-    all_records = OracleOnBell.connection.select_all("SELECT '#{column_sql}' FROM kbadm.#{table}")
+    all_records = OracleOnBell.connection.select_rows("SELECT #{column_sql} FROM kbadm.#{table}")
     puts "1. Read #{all_records.length} records from bell:kbadm.#{table}:
       #{column_sql}"
     #FIXME: check that the values we got from Oracle are good before truncating and reloading the wl2 table
@@ -43,7 +43,7 @@ namespace :bell do
       ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table}")
       puts "2. Truncated worklists2_#{RAILS_ENV}.#{table} table"
       model.import model.column_names, all_records, :validate => false
-      puts "3. Imported #{all_records.length} #{table} records into worklists2_#{RAILS_ENV}.#{table}"
+      puts "3. Imported #{all_records.length} records into worklists2_#{RAILS_ENV}.#{table}"
     end
     #end
   end
