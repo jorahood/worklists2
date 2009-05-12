@@ -22,6 +22,7 @@ class Boiler < ActiveRecord::Base
     true
   end
 
+  named_scope :include_doc, :include => :doc
   # --- Permissions --- #
 
   def create_permitted?

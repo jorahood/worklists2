@@ -1,7 +1,7 @@
 <!-- Boiler -->
 
-<index-page>
-    <collection: replace>
-        <table-plus without-search-form fields="this, doc, appearances_in_docs.count"/>
-    </collection:>
+<index-page without-top-page-nav without-bottom-page-nav>
+  <collection: replace>
+    <table-plus without-search-form without-page-nav fields="this, doc"/>
+   </collection:>
 </index-page>
