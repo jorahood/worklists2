@@ -1,7 +1,12 @@
 <!-- Boiler -->
 
 <index-page without-top-page-nav without-bottom-page-nav>
+  <count: replace>
+    <p><count label="unarchived boilers" /></p>
+  </count:>
   <collection: replace>
-    <table-plus without-search-form without-page-nav fields="this, doc"/>
+    <table-plus without-search-form without-page-nav fields="this, docid, appearances_in_unarchived_docs.count">
+    <appearances-in-unarchived-docs-count-heading:>Used in unarchived docs (not sortable yet)</appearances-in-unarchived-docs-count-heading:>
+      </table-plus>
    </collection:>
 </index-page>

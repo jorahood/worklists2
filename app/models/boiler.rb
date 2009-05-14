@@ -2,6 +2,8 @@ class Boiler < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  include XmlUtilities
+  
   fields do
     name :string
   end
@@ -22,7 +24,12 @@ class Boiler < ActiveRecord::Base
     true
   end
 
-  named_scope :include_doc, :include => :doc
+  def appearances_in_unarchived_docs
+    appearances_in_docs.unarchived
+  end
+  
+  named_scope :unarchived, :include => :doc, :conditions => "#{Doc.table_name}.visibility <> 3"
+
   # --- Permissions --- #
 
   def create_permitted?

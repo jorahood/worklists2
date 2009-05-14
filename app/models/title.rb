@@ -18,6 +18,7 @@ class Title < ActiveRecord::Base
     true
   end
 
+  named_scope :default, :conditions => {:audience => Audience.default}, :limit => 1
   # --- Permissions --- #
 
   def create_permitted?

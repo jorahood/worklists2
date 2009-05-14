@@ -47,6 +47,11 @@ class Doc < ActiveRecord::Base
     true
   end
 
+  named_scope :unarchived, :conditions => 'visibility <> 3'
+
+def default_title
+  titles.default.first
+end
   # --- Permissions --- #
 
   def create_permitted?

@@ -18,7 +18,10 @@ class Audience < ActiveRecord::Base
   def self.import_from_bell
     true
   end
-  
+
+  def self.default
+    'default'
+  end
   # --- Permissions --- #
 
   def create_permitted?

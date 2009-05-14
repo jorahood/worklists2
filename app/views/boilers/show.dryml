@@ -1,14 +1,21 @@
 <!-- Boiler -->
 
 <show-page>
+  <field-list: fields="doc, doc.default_title"/>
   <collection-heading: replace>
-    <h3><count:appearances_in_docs/></h3>
+    <h3><count:appearances_in_docs/> that are not archived</h3>
   </collection-heading:>
   <collection: replace>
-    <do with="&@paginated_appearances_in_docs">
+    <do with="&@paginated_appearances_in_unarchived_docs">
       <page-nav/>
       <collection/>
       <page-nav/>
     </do>
   </collection:>
+  <after-collection:>
+    <section class="raw-xml">
+    <h3>Boiler kbxml</h3>
+    <%= simple_format h this.kbxml_body %>
+  </section>
+  </after-collection:>
 </show-page>

@@ -1,3 +1,8 @@
+div.raw-xml {
+  font-family: monospace;
+  width: 50em;
+  margin-top: 3em
+}
 /* moar room! */
 body {width:98%}
 

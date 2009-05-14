@@ -6,11 +6,11 @@ class BoilersController < ApplicationController
 
   def show
     @boiler = find_instance # Hobo needs @boiler defined
-    @paginated_appearances_in_docs = @boiler.appearances_in_docs.paginate(:page => params[:page])
+    @paginated_appearances_in_unarchived_docs = @boiler.appearances_in_docs.unarchived.paginate(:page => params[:page])
   end
 
   def index
-    sorter = parse_sort_param(:name, :docid) || [:name,'asc']
-    hobo_index Boiler.include_doc.apply_scopes(:order_by => sorter), :paginate => false
+    sorter = parse_sort_param(:name, :docid) || [:docid, 'desc']
+    hobo_index Boiler.unarchived.apply_scopes(:order_by => sorter), :paginate => false
   end
 end
