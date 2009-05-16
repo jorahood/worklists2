@@ -13,9 +13,9 @@
     </do>
   </collection:>
   <after-collection:>
-    <section class="raw-xml">
+    <section>
     <h3>Boiler kbxml</h3>
-    <%= simple_format h this.kbxml_body %>
+    <div class="raw-xml"><%= simple_format h this.kbxml_body %></div>
   </section>
   </after-collection:>
 </show-page>

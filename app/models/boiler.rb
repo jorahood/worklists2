@@ -27,7 +27,18 @@ class Boiler < ActiveRecord::Base
   def appearances_in_unarchived_docs
     appearances_in_docs.unarchived
   end
-  
+
+  #FIXME: Hobo - if I put the #count method in the view, Hobo needlessly 
+  #retrieves the entire doc record as well as the count when checking visibility through the doc model.
+  #Perhaps a :select option on the named_scope could prevent this by preventing it from retrieving any doc attrs.
+  def count_appearances_in_unarchived_docs
+    appearances_in_unarchived_docs.count
+  end
+
+  def count_appearances_in_unarchived_docs_ordered
+
+  end
+
   named_scope :unarchived, :include => :doc, :conditions => "#{Doc.table_name}.visibility <> 3"
 
   # --- Permissions --- #

@@ -1370,6 +1370,102 @@
 
 
   
+<!-- ====== UsedBoiler Pages ====== -->
+
+
+<def tag="index-page" for="UsedBoiler">
+  <page merge title="Used Boilers">
+    <body: class="index-page used-boiler" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Used Boilers</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="UsedBoiler">
+  <page merge title="New Used Boiler">
+    <body: class="new-page used-boiler" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Used Boiler</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Used Boiler"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="UsedBoiler">
+  <page merge title="Used Boiler">
+
+    <body: class="show-page used-boiler" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Used Boiler</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="fromid, boiler, doc, doc_as_boiler" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="UsedBoiler">
+  <page merge title="Edit Used Boiler">
+
+    <body: class="edit-page used-boiler" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Used Boiler" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
 <!-- ====== User Pages ====== -->
 
 

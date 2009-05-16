@@ -41,7 +41,7 @@ class Doc < ActiveRecord::Base
   has_many :used_boilers, :foreign_key => 'fromid'
   has_many :boiler_usages,
     :through => :used_boilers,
-    :source => :boiler
+    :source => :doc_as_boiler
 
   def self.import_from_bell
     true

@@ -1,11 +1,8 @@
-<!-- Boiler -->
+<!-- UsedBoiler -->
 
 <index-page without-top-page-nav without-bottom-page-nav>
-  <count: replace>
-    <p><count label="unarchived boilers" /></p>
-  </count:>
   <collection: replace>
-    <table-plus without-search-form without-page-nav fields="this, docid, count_appearances_in_unarchived_docs">
+    <table-plus fields="fromid, boiler, total_usages">
     <count-appearances-in-unarchived-docs-heading:>Used in unarchived docs (not sortable yet)</count-appearances-in-unarchived-docs-heading:>
       </table-plus>
    </collection:>
