@@ -285,7 +285,7 @@
           </header>
     
           <section param="content-body" with-flash-messages>
-            <field-list fields="birthdate, modifieddate, approveddate, importance, visibility, volatility, status, author, owner, author, importance, owner, status, visibility, volatility" param/>
+            <field-list fields="birthdate, modifieddate, approveddate, author_assoc, importance_assoc, owner_assoc, status_assoc, visibility_assoc, volatility_assoc" param/>
             <section param="collection-section">
               <h3 param="collection-heading">Titles</h3>
               

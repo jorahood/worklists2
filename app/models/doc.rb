@@ -9,17 +9,29 @@ class Doc < ActiveRecord::Base
     approveddate :date
   end
 
+  #don't display the fks
+  never_show :importance, :visibility, :volatility, :status, :author, :owner
   set_table_name :document
   set_search_columns :id
 
-  belongs_to :importance, :foreign_key => 'importance'
-  belongs_to :visibility, :foreign_key => 'visibility'
-  belongs_to :volatility, :foreign_key => 'volatility'
-  belongs_to :status, :foreign_key => 'status'
-  belongs_to :author,
+  #Changing the association names to be different from the foreign
+  # keys to help keep Hobo from getting confused
+  belongs_to :importance_assoc, 
+    :class_name => 'Importance',
+    :foreign_key => 'importance'
+  belongs_to :visibility_assoc,
+    :class_name => 'Visibility',
+    :foreign_key => 'visibility'
+  belongs_to :volatility_assoc,
+    :class_name => 'Volatility',
+    :foreign_key => 'volatility'
+  belongs_to :status_assoc,
+    :class_name => 'Status',
+    :foreign_key => 'status'
+  belongs_to :author_assoc,
     :class_name => 'Kbuser',
     :foreign_key => 'author' 
-  belongs_to :owner,
+  belongs_to :owner_assoc,
     :class_name => 'Kbuser',
     :foreign_key => 'owner'
     

@@ -1,10 +1,5 @@
 <!-- Doc -->
 
 <show-page>
-  <!-- Since reverting to the bell foreign keys (.e.g., audience fk = 'audience')
-  hobo wanted to show all the belongs_to associations as well as their fks, i.e.,
-  author, importance, owner, status, visibility & volatility appeared twice-->
-  <field-list: fields="birthdate, modifieddate, approveddate, author,
-                           importance, owner, status, visibility, volatility"/>
     <collection:><card: without-doc-link /></collection:>
 </show-page>
