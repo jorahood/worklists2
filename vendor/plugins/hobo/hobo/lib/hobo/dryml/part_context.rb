@@ -77,8 +77,10 @@ module Hobo
         
         part_name, this_id, locals, form_field_path = context
 
-        RAILS_DEFAULT_LOGGER.info "Call part: #{part_name}. this-id = #{this_id}, locals = #{locals.inspect}"
-        RAILS_DEFAULT_LOGGER.info "         : form_field_path = #{form_field_path.inspect}" if form_field_path
+        if RAILS_DEFAULT_LOGGER
+          RAILS_DEFAULT_LOGGER.info "Call part: #{part_name}. this-id = #{this_id}, locals = #{locals.inspect}"
+          RAILS_DEFAULT_LOGGER.info "         : form_field_path = #{form_field_path.inspect}" if form_field_path
+        end
         
         self.part_name             = part_name
         self.this_id               = this_id
@@ -91,7 +93,7 @@ module Hobo
 
       # Generate the HMAC keyed message digest. Uses SHA1 by default.
       def generate_digest(data, session)
-        secret = self.class.secret || ActionController::Base.cached_session_options.first[:secret]
+        secret = self.class.secret || ActionController::Base.session_options[:secret] || ActionController::Base.cached_session_options.first[:secret]
         key = secret.respond_to?(:call) ? secret.call(session) : secret
         OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new(self.class.digest), key, data)
       end

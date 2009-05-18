@@ -9,7 +9,7 @@ end
 
 module HoboFields
 
-  VERSION = "0.8.5"
+  VERSION = "0.8.7"
 
   extend self
 
@@ -19,10 +19,14 @@ module HoboFields
     :datetime      => (defined?(ActiveSupport::TimeWithZone) ? ActiveSupport::TimeWithZone : Time),
     :time          => Time,
     :integer       => Integer,
-    :big_integer   => BigDecimal,
     :decimal       => BigDecimal,
     :float         => Float,
     :string        => String
+  }
+
+  ALIAS_TYPES = {
+    Fixnum => "integer",
+    Bignum => "integer"
   }
 
   # Provide a lookup for these rather than loading them all preemptively
@@ -54,7 +58,7 @@ module HoboFields
 
 
   def to_name(type)
-    field_types.index(type)
+    field_types.index(type) || ALIAS_TYPES[type]
   end
 
 

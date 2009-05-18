@@ -73,8 +73,12 @@ module Hobo
           return
         end
 
-        require "#{RAILS_ROOT}/app/controllers/application" unless Object.const_defined? :ApplicationController
-
+        begin
+          require "#{RAILS_ROOT}/app/controllers/application" unless Object.const_defined? :ApplicationController
+        rescue MissingSourceFile => ex
+          # must be on Rails 2.3.  Yay!
+        end
+        
         # Add non-subsite, and all subsite routes
         [nil, *Hobo.subsites].each { |subsite| add_routes_for(map, subsite) }
 
@@ -82,8 +86,10 @@ module Hobo
 
       rescue ActiveRecord::StatementInvalid => e
         # Database problem? Just continue without routes
-        ActiveRecord::Base.logger.warn "!! Database exception during Hobo routing -- continuing without routes"
-        ActiveRecord::Base.logger.warn "!! #{e.to_s}"
+        if ActiveRecord::Base.logger
+          ActiveRecord::Base.logger.warn "!! Database exception during Hobo routing -- continuing without routes"
+          ActiveRecord::Base.logger.warn "!! #{e.to_s}"
+        end
       end
 
 
