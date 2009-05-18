@@ -3,7 +3,7 @@
 <index-page>
     <collection: replace>
         <table-plus without-search-form fields="this, titles, birthdate, modifieddate,
-                    approveddate, importance, visibility, volatility,
-                    author, owner, expirations, hotitems, resources"/>
+                    approveddate, importance-assoc, visibility-assoc, volatility-assoc,
+                    author-assoc, owner-assoc, expirations, hotitems, resources"/>
     </collection:>
 </index-page>
