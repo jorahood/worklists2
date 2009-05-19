@@ -15,9 +15,9 @@ class Boiler < ActiveRecord::Base
   
   belongs_to :doc, :foreign_key => 'docid'
 
-  has_many :usages, :foreign_key => 'boiler', :class_name => 'UsedBoiler'
+  has_many :boiler_usages, :foreign_key => 'boiler'
   has_many :appearances_in_docs,
-    :through => :usages,
+    :through => :boiler_usages,
     :source => :doc 
 
   def self.import_from_bell
@@ -33,10 +33,6 @@ class Boiler < ActiveRecord::Base
   #Perhaps a :select option on the named_scope could prevent this by preventing it from retrieving any doc attrs.
   def count_appearances_in_unarchived_docs
     appearances_in_unarchived_docs.count
-  end
-
-  def count_appearances_in_unarchived_docs_ordered
-
   end
 
   named_scope :unarchived, :joins => :doc, :conditions => "#{Doc.table_name}.visibility > 3"

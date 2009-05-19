@@ -1,12 +1,12 @@
-class UsedBoiler < ActiveRecord::Base
+class BoilerUsage < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
   set_table_name :boilerusage
   belongs_to :doc, :foreign_key => 'fromid'
   belongs_to :doc_as_boiler,
-     :class_name => 'Boiler',
-     :foreign_key => 'boiler'
+    :class_name => 'Boiler',
+    :foreign_key => 'boiler'
 
   def self.import_from_bell
     true
@@ -23,6 +23,8 @@ class UsedBoiler < ActiveRecord::Base
   named_scope :unarchived,
     :joins => {:doc_as_boiler => :doc},
     :conditions => "#{Doc.table_name}.visibility > 3"
+  
+
   # --- Permissions --- #
 
   def create_permitted?

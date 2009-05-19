@@ -7,9 +7,9 @@
     <nav-item href="#{base_url}/">Home</nav-item>
     <nav-item with="&Audience">Audiences</nav-item>
     <nav-item with="&Boiler">Boilers</nav-item>
+    <nav-item with="&BoilerUsage">Boiler Usages</nav-item>
     <nav-item with="&Doc">Docs</nav-item>
     <nav-item with="&Domain">Domains</nav-item>
-    <nav-item with="&Expiration">Expirations</nav-item>
   </navigation>
 </def>
 
@@ -103,6 +103,102 @@
       <section param="content-header">
         <h2 param="heading">Edit <type-name/></h2>
         <delete-button label="Remove This Audience" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== BoilerUsage Pages ====== -->
+
+
+<def tag="index-page" for="BoilerUsage">
+  <page merge title="Boiler Usages">
+    <body: class="index-page boiler-usage" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Boiler Usages</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="BoilerUsage">
+  <page merge title="New Boiler Usage">
+    <body: class="new-page boiler-usage" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Boiler Usage</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Boiler Usage"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="BoilerUsage">
+  <page merge title="Boiler Usage">
+
+    <body: class="show-page boiler-usage" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Boiler Usage</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="fromid, boiler, doc, doc_as_boiler" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="BoilerUsage">
+  <page merge title="Edit Boiler Usage">
+
+    <body: class="edit-page boiler-usage" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Boiler Usage" param/>
       </section>
 
       <section param="content-body">
@@ -311,9 +407,9 @@
             <h3 param="resources-collection">Resources</h3>
             <collection:resources/>
           </section>
-          <section param="boiler_usages-collection-section">
-            <h3 param="boiler_usages-collection">Boiler Usages</h3>
-            <collection:boiler_usages/>
+          <section param="referenced_boilers-collection-section">
+            <h3 param="referenced_boilers-collection">Referenced Boilers</h3>
+            <collection:referenced_boilers/>
           </section>
           <section param="boilers-collection-section">
             <h3 param="boilers-collection">Boilers</h3>
@@ -1356,102 +1452,6 @@
       <section param="content-header">
         <h2 param="heading">Edit <type-name/></h2>
         <delete-button label="Remove This Title" param/>
-      </section>
-
-      <section param="content-body">
-        <form param/>
-      </section>
-    </content:>
-    
-  </page>
-</def>
-
-
-
-
-  
-<!-- ====== UsedBoiler Pages ====== -->
-
-
-<def tag="index-page" for="UsedBoiler">
-  <page merge title="Used Boilers">
-    <body: class="index-page used-boiler" param/>
-    
-    <content: param>
-      <header param="content-header">
-        <h2 param="heading">Used Boilers</h2>
-
-        <p param="count" if>There <count prefix="are"/></p>
-      </header>
-      
-      <section param="content-body">
-
-        <a action="new" to="&model" param="new-link"/>      
-
-        <page-nav param="top-page-nav"/>
-
-        <collection param/>
-
-        <page-nav param="bottom-page-nav"/>
-
-
-      </section>
-    </content:>
-  </page>
-</def>
-
-
-<def tag="new-page" for="UsedBoiler">
-  <page merge title="New Used Boiler">
-    <body: class="new-page used-boiler" param/>
-    
-    <content: param>
-      <section param="content-header">
-        <h2 param="heading">New Used Boiler</h2>
-      </section>
-      
-      <section param="content-body">
-        <form param>
-          <submit: label="Create Used Boiler"/>
-        </form>
-      </section>
-    </content:>
-  </page>
-</def>
-
-
-<def tag="show-page" for="UsedBoiler">
-  <page merge title="Used Boiler">
-
-    <body: class="show-page used-boiler" param/>
-
-    <content: param>
-          <header param="content-header">
-            <h2 param="heading"><name/></h2>
-
-            <record-flags fields="" param/>
-
-            <a action="edit" if="&can_edit?" param="edit-link">Edit Used Boiler</a>
-          </header>
-    
-          <section param="content-body">
-            <field-list fields="fromid, boiler, doc, doc_as_boiler" param/>
-          </section>
-    </content:>
-    
-  </page>
-</def>
-
-
-<def tag="edit-page" for="UsedBoiler">
-  <page merge title="Edit Used Boiler">
-
-    <body: class="edit-page used-boiler" param/>
-
-    <content:>
-      <section param="content-header">
-        <h2 param="heading">Edit <type-name/></h2>
-        <delete-button label="Remove This Used Boiler" param/>
       </section>
 
       <section param="content-body">

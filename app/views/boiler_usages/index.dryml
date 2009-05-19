@@ -1,0 +1,14 @@
+<!-- BoilerUsage -->
+
+<index-page without-top-page-nav without-bottom-page-nav>
+  <collection: replace>
+    <table-plus without-search-form fields="docid, boiler, total_usages">
+      <docid-view:>
+        <%= link_to this, :controller => "docs", :action => "show", :id => this %>
+      </docid-view:>
+      <boiler-view:>
+        <%= link_to this, :controller => "boilers", :action => "show", :id => this %>
+      </boiler-view:>
+    </table-plus>
+   </collection:>
+</index-page>

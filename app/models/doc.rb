@@ -50,9 +50,9 @@ class Doc < ActiveRecord::Base
     :through => :kbusers_as_resources,
     :source => :kbuser
   has_many :boilers, :foreign_key => 'docid' # FIXME - should be has_one but hobo doesn't support has_one yet
-  has_many :used_boilers, :foreign_key => 'fromid'
-  has_many :boiler_usages,
-    :through => :used_boilers,
+  has_many :boiler_usages, :foreign_key => 'fromid'
+  has_many :referenced_boilers,
+    :through => :boiler_usages,
     :source => :doc_as_boiler
 
   def self.import_from_bell

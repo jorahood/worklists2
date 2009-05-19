@@ -22,6 +22,14 @@
   </card>
 </def>
 
+<def tag="card" for="BoilerUsage">
+  <card class="boiler-usage" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
 <def tag="card" for="Doc">
   <card class="doc" param="default" merge>
     <header: param>
@@ -145,14 +153,6 @@
 
 <def tag="card" for="Title">
   <card class="title" param="default" merge>
-    <header: param>
-      <h4 param="heading"><a><name/></a></h4>
-    </header:>
-  </card>
-</def>
-
-<def tag="card" for="UsedBoiler">
-  <card class="used-boiler" param="default" merge>
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>
