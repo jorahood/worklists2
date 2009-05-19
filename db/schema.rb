@@ -43,12 +43,12 @@ ActiveRecord::Schema.define(:version => 20090508135844) do
 
   create_table "domainlist", :id => false, :force => true do |t|
     t.string "domain"
-    t.string "domain_class"
+    t.string "class"
     t.string "type"
     t.string "description"
-    t.string "visible",      :limit => 512
-    t.string "accessible",   :limit => 512
-    t.string "audience",     :limit => 512
+    t.string "visible",     :limit => 512
+    t.string "accessible",  :limit => 512
+    t.string "audience",    :limit => 512
   end
 
   create_table "expire", :id => false, :force => true do |t|
