@@ -6,7 +6,7 @@ class BoilersController < ApplicationController
 
   def show
     @boiler = find_instance # Hobo needs @boiler defined
-    @paginated_appearances_in_unarchived_docs = @boiler.appearances_in_docs.unarchived.paginate(:page => params[:page])
+    @paginated_appearances_in_unarchived_docs = @boiler.appearances.unarchived.paginate(:page => params[:page])
   end
 
   def index

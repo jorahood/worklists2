@@ -1,6 +1,7 @@
 <!-- BoilerUsage -->
 
 <index-page without-top-page-nav without-bottom-page-nav>
+  <append-count:> (counting unarchived boilers referenced in unarchived docs) </append-count:>
   <collection: replace>
     <table-plus without-search-form fields="docid, boiler, total_usages">
       <docid-view:>

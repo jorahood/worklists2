@@ -3,7 +3,7 @@
 <show-page>
   <field-list: fields="doc, doc.default_title"/>
   <collection-heading: replace>
-    <h3><count:appearances_in_docs/> that are not archived</h3>
+    <h3><count:appearances/> in unarchived docs</h3>
   </collection-heading:>
   <collection: replace>
     <do with="&@paginated_appearances_in_unarchived_docs">

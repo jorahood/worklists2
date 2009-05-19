@@ -17,7 +17,7 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:appearances_in_docs param/>
+      <count:appearances param/>
     </body:>
   </card>
 </def>

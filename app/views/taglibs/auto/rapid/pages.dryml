@@ -280,9 +280,9 @@
           <section param="content-body">
             <field-list fields="docid, doc" param/>
             <section param="collection-section">
-              <h3 param="collection-heading">Appearances In Docs</h3>
+              <h3 param="collection-heading">Appearances</h3>
               
-              <collection:appearances_in_docs param/>
+              <collection:appearances param/>
             </section>
           </section>
     </content:>

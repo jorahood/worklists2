@@ -16,7 +16,7 @@ class Boiler < ActiveRecord::Base
   belongs_to :doc, :foreign_key => 'docid'
 
   has_many :boiler_usages, :foreign_key => 'boiler'
-  has_many :appearances_in_docs,
+  has_many :appearances,
     :through => :boiler_usages,
     :source => :doc 
 
@@ -25,7 +25,7 @@ class Boiler < ActiveRecord::Base
   end
 
   def appearances_in_unarchived_docs
-    appearances_in_docs.unarchived
+    appearances.unarchived
   end
 
   #FIXME: Hobo - if I put the #count method in the view, Hobo needlessly 
