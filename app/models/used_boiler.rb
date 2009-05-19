@@ -12,9 +12,9 @@ class UsedBoiler < ActiveRecord::Base
     true
   end
 
-  named_scope :by_total_usages, :select => "*, COUNT(*) AS total_usages", :group => 'boiler'
-  named_scope :by_total_usages_asc, :select => "*, COUNT(*) AS total_usages", :group => 'boiler', :order => 'total_usages ASC'
-  named_scope :by_total_usages_desc, :select => "*, COUNT(*) AS total_usages", :group => 'boiler', :order => 'total_usages DESC'
+  named_scope :by_total_usages, 
+    :select => "*, COUNT(*) AS total_usages",
+    :group => 'boiler'
 
   # --- Permissions --- #
 
