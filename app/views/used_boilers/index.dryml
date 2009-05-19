@@ -2,8 +2,13 @@
 
 <index-page without-top-page-nav without-bottom-page-nav>
   <collection: replace>
-    <table-plus fields="fromid, boiler, total_usages">
-    <count-appearances-in-unarchived-docs-heading:>Used in unarchived docs (not sortable yet)</count-appearances-in-unarchived-docs-heading:>
-      </table-plus>
+    <table-plus fields="docid, boiler, total_usages">
+      <docid-view:>
+        <a with="&this_parent.doc_as_boiler.doc"/>
+      </docid-view:>
+      <boiler-view:>
+        <a with="&this_parent.doc_as_boiler"/>
+      </boiler-view:>
+    </table-plus>
    </collection:>
 </index-page>
