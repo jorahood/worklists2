@@ -5,7 +5,7 @@ class UsedBoilersController < ApplicationController
   auto_actions :all
 
   def index
-    hobo_index UsedBoiler.by_total_usages.apply_scopes(
+    hobo_index UsedBoiler.unarchived.by_total_usages.in_unarchived_docs.apply_scopes(
       :order_by => parse_sort_param(:fromid, :boiler, :total_usages)),
       :paginate => false
   end

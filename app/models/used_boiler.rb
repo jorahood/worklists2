@@ -12,10 +12,17 @@ class UsedBoiler < ActiveRecord::Base
     true
   end
 
-  named_scope :by_total_usages, 
+  named_scope :by_total_usages,
     :select => "*, COUNT(*) AS total_usages",
     :group => 'boiler'
 
+  named_scope :in_unarchived_docs,
+    :joins => :doc,
+    :conditions => "#{Doc.table_name}.visibility <> 3"
+
+  named_scope :unarchived,
+    :joins => {:doc_as_boiler => :doc},
+    :conditions => "#{Doc.table_name}.visibility <> 3"
   # --- Permissions --- #
 
   def create_permitted?
