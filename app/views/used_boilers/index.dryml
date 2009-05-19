@@ -4,10 +4,10 @@
   <collection: replace>
     <table-plus fields="docid, boiler, total_usages">
       <docid-view:>
-        <a with="&this_parent.doc_as_boiler.doc"/>
+        <%= link_to this, :controller => "docs", :action => "show", :id => this %>
       </docid-view:>
       <boiler-view:>
-        <a with="&this_parent.doc_as_boiler"/>
+        <%= link_to this, :controller => "boilers", :action => "show", :id => this %>
       </boiler-view:>
     </table-plus>
    </collection:>
