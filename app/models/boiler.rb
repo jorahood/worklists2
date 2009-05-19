@@ -39,7 +39,7 @@ class Boiler < ActiveRecord::Base
 
   end
 
-  named_scope :unarchived, :joins => :doc, :conditions => "#{Doc.table_name}.visibility <> 3"
+  named_scope :unarchived, :joins => :doc, :conditions => "#{Doc.table_name}.visibility > 3"
 
   # --- Permissions --- #
 

@@ -18,11 +18,11 @@ class UsedBoiler < ActiveRecord::Base
 
   named_scope :in_unarchived_docs,
     :joins => :doc,
-    :conditions => "#{Doc.table_name}.visibility <> 3"
+    :conditions => "#{Doc.table_name}.visibility > 3"
 
   named_scope :unarchived,
     :joins => {:doc_as_boiler => :doc},
-    :conditions => "#{Doc.table_name}.visibility <> 3"
+    :conditions => "#{Doc.table_name}.visibility > 3"
   # --- Permissions --- #
 
   def create_permitted?
