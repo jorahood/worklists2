@@ -2,6 +2,8 @@ class Doc < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  include XmlUtilities
+
   fields do
     id :string, :name => true #unique_index
     birthdate :date
@@ -63,6 +65,10 @@ class Doc < ActiveRecord::Base
 
 def default_title
   titles.default.first
+end
+
+def docid
+  id
 end
   # --- Permissions --- #
 

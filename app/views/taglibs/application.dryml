@@ -28,8 +28,6 @@
   <h4>
     <a><name/> --
     <!-- FIXME: HOBO - the 'inline' attribute doesn't work when I call the <view> tag directly-->
-    <!-- FIXME: HOBO - field="titles.find_by_audience('default')" doesn't work: field returns
-    'titles' as an array not an AR association so there are no find_by_* methods on it -->
     <name:default-title inline />
     </a>
   </h4>
