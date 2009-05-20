@@ -5,6 +5,13 @@
 
     <content:>
         <header class="content-header">
+          <h3>May 21, 2009 - the "boilerlist.cgi" release</h3>
+        </header>
+          <section class="content-body">
+            <p>The goal for this release of Worklists2 is to replace the <a href="https://bell.ucs.indiana.edu/tools/boilerlist.cgi">boilerlist.cgi</a> tool.</p>
+            <p>The page that accomplishes this is the <a with="&BoilerUsage">Boiler Usages</a> index page. It has a sortable, filterable table view of all the unarchived boilers used in unarchived documents.</p>
+          </section>
+        <header class="content-header">
             <h3>The "kbkw view" release</h3>
         </header>
         <section class="content-body">
