@@ -10,7 +10,8 @@ class BoilersController < ApplicationController
   end
 
   def index
-    sorter = parse_sort_param(:name, :docid) || [:docid, 'desc']
-    hobo_index Boiler.unarchived.apply_scopes(:order_by => sorter), :paginate => false
+    hobo_index Boiler.unarchived.apply_scopes(
+      :order_by => parse_sort_param(:name, :docid),
+      :search    => [params[:search], :name, :docid])
   end
 end

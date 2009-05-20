@@ -1,12 +1,17 @@
 <!-- Boiler -->
 
-<index-page without-top-page-nav without-bottom-page-nav>
+<index-page >
   <count: replace>
     <p><count label="unarchived boilers" /></p>
   </count:>
   <collection: replace>
-    <table-plus without-search-form without-page-nav fields="this, docid, count_appearances_in_unarchived_docs">
-    <count-appearances-in-unarchived-docs-heading:>Used in unarchived docs (not sortable yet)</count-appearances-in-unarchived-docs-heading:>
-      </table-plus>
+    <table-plus fields="this, docid, count_appearances_in_unarchived_docs">
+    <count-appearances-in-unarchived-docs-heading:>
+      Total Usages
+    </count-appearances-in-unarchived-docs-heading:>
+    <docid-view:>
+      <%= link_to this, :controller => "docs", :action => "show", :id => this %>
+    </docid-view:>
+    </table-plus>
    </collection:>
 </index-page>
