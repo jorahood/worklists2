@@ -36,12 +36,12 @@ body {
 	font: 12px "Lucida Grande", "Trebuchet MS", Arial, sans-serif; line-height: 18px;
 }
 h1, h2, h3 {font-weight: normal;}
-h1 {margin: 20px 0 10px; font-size: 22px; line-height: 22px;}
-h2 {margin: 15px 0 10px; font-size: 18px; line-height: 18px;}
-h3 {margin: 10px 0 5px;  font-size: 16px; line-height: 16px;}
-h4 {margin: 10px 0 5px;  font-size: 14px; line-height: 14px;}
-h5 {margin: 10px 0 5px;  font-size: 12px; line-height: 12px;}
-h6 {margin: 10px 0 5px;  font-size: 10px; line-height: 10px;}
+h1 {margin: 20px 0 10px; font-size: 22px; line-height: 24px;}
+h2 {margin: 15px 0 10px; font-size: 18px; line-height: 20px;}
+h3 {margin: 10px 0 5px;  font-size: 16px; line-height: 18px;}
+h4 {margin: 10px 0 5px;  font-size: 14px; line-height: 16px;}
+h5 {margin: 10px 0 5px;  font-size: 12px; line-height: 14px;}
+h6 {margin: 10px 0 5px;  font-size: 10px; line-height: 12px;}
 
 li {margin-left: 20px;}
 
@@ -258,7 +258,7 @@ ul.collection > li { margin-left: 0; list-style: none;}
 	padding: 15px 0; margin-bottom: 20px; border-bottom: 1px dotted #888;
 }
 
-.table-plus .header {height: 100%; overflow: hidden;}
+.table-plus .header {overflow: hidden;}
 .table-plus .header a {float: left; margin-right: 20px;}
 .table-plus div.search {float: right;}
 .table-plus div.search span {color: #444;}

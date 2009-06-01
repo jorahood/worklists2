@@ -1,6 +1,14 @@
 <!-- Doc -->
 
 <index-page>
+  <append-content-header:>
+    <h3>Filter results:</h3>
+    <form action='' method='get'>
+      Visibility = <select-menu options="&Visibility.all" name='visibility'/>
+      Volatility = <select-menu options="&Volatility.all" name='volatility'/>
+      <input type="submit"/>
+    </form>
+  </append-content-header:>
     <collection: replace>
         <table-plus without-search-form fields="this, titles, birthdate, modifieddate,
                     approveddate, importance-assoc, visibility-assoc, volatility-assoc,

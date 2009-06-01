@@ -11,7 +11,7 @@
 <def tag="app-release"><%= svn_rev ||= /^URL: .*\/(\S+?\/\S+?)$/.match(`svn info`)[1] || 'unknown' %></def>
 
 <extend tag="page">
-  <old-page merge without-account-nav />
+  <old-page merge />
 </extend>
 
 <extend tag="card" for="List">

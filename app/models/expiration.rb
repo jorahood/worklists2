@@ -37,6 +37,6 @@ class Expiration < ActiveRecord::Base
   end
 
   def name
-    "#{date.to_s(:long)}: #{reason}"
+    "#{expiredate.to_s(:long)}: #{explanation}"
   end
 end
