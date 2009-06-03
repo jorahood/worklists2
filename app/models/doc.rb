@@ -37,22 +37,31 @@ class Doc < ActiveRecord::Base
     :class_name => 'Kbuser',
     :foreign_key => 'owner'
     
-  has_many :listed_docs, :dependent=>:destroy
+  has_many :listed_docs,
+    :dependent=>:destroy
   has_many :lists, 
     :through => :listed_docs,
     :accessible => true
-  has_many :domained_docs, :foreign_key => 'id'
-  has_many :domains, :through => :domained_docs
-  has_many :titles, :foreign_key => 'docid'
-  has_many :expirations, :foreign_key => 'id' # FIXME - should be has_one but hobo doesn't support has_one yet
-  has_many :hotitems, :foreign_key => 'id'
+  has_many :domained_docs,
+    :foreign_key => 'id'
+  has_many :domains,
+    :through => :domained_docs
+  has_many :titles,
+    :foreign_key => 'docid'
+  has_many :expirations,
+    :foreign_key => 'id' # FIXME - should be has_one but hobo doesn't support has_one yet
+  has_many :hotitems,
+    :foreign_key => 'id'
   has_many :kbusers_as_resources,
-    :class_name => 'Kbresource', :foreign_key => 'id'
+    :class_name => 'Kbresource',
+    :foreign_key => 'id'
   has_many :resources, 
     :through => :kbusers_as_resources,
     :source => :kbuser
-  has_many :boilers, :foreign_key => 'docid' # FIXME - should be has_one but hobo doesn't support has_one yet
-  has_many :boiler_usages, :foreign_key => 'fromid'
+  has_many :boilers,
+    :foreign_key => 'docid' # FIXME - should be has_one but hobo doesn't support has_one yet
+  has_many :boiler_usages,
+    :foreign_key => 'fromid'
   has_many :referenced_boilers,
     :through => :boiler_usages,
     :source => :doc_as_boiler
