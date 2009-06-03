@@ -14,7 +14,8 @@ class SearchesController < ApplicationController
       :author_is => @search.author,
       :owner_is => @search.owner,
       :importance_is => @search.importance,
-      :order_by => parse_sort_param(:doc)
-    )
+      :order_by => parse_sort_param(:id)
+    ).paginate(
+      :page => params[:page])
   end
 end
