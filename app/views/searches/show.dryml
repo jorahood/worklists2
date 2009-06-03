@@ -1,0 +1,12 @@
+<!-- Search -->
+
+<show-page>
+  <after-field-list:>
+    <section>
+      <table-plus with='&@result_docs' fields='this, titles, birthdate, modifieddate,
+                approveddate, owner_assoc, author_assoc, importance_assoc,
+                visibility_assoc, volatility_assoc, status_assoc'>
+      </table-plus>
+    </section>
+  </after-field-list:>
+</show-page>
