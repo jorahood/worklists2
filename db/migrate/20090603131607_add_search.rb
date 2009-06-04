@@ -8,8 +8,8 @@ class AddSearch < ActiveRecord::Migration
       t.integer  :visibility_id
       t.integer :volatility_id
       t.integer :status_id
-      t.integer :author_id
-      t.integer :owner_id
+      t.string :author_id
+      t.string :owner_id
     end  end
 
   def self.down

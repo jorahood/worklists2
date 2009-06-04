@@ -4,6 +4,8 @@ class KbusersController < ApplicationController
 
   auto_actions :all
 
+  autocomplete :limit => 20, :query_scope => :username_starts
+
   def show
     #sort docs collections by size
     @kbuser = find_instance # Hobo needs @kbuser defined

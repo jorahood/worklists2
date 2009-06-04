@@ -35,7 +35,7 @@ class Kbuser < ActiveRecord::Base
   has_many :owned_docs,
     :class_name => 'Doc',
     :foreign_key => 'owner'
-  
+
   never_show :worknumber, :homenumber, :pagernumber, :password
 
   # --- Permissions --- #

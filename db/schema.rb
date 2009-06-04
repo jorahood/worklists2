@@ -124,8 +124,8 @@ ActiveRecord::Schema.define(:version => 20090603131607) do
     t.integer  "visibility_id"
     t.integer  "volatility_id"
     t.integer  "status_id"
-    t.integer  "author_id"
-    t.integer  "owner_id"
+    t.string   "author_id"
+    t.string   "owner_id"
   end
 
   create_table "status", :id => false, :force => true do |t|

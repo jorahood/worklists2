@@ -24,6 +24,31 @@
   </old-card>
 </extend>
 
+<extend tag="form" for="Search">
+  <old-form merge>
+    <field-list:>
+      <importance-view:>
+        <select-one  include-none blank-message="Any"/>
+      </importance-view:>
+      <visibility-view:>
+        <select-one  include-none blank-message="Any"/>
+      </visibility-view:>
+      <volatility-view:>
+        <select-one  include-none blank-message="Any"/>
+      </volatility-view:>
+      <status-view:>
+        <select-one  include-none blank-message="Any"/>
+      </status-view:>
+      <author-view:>
+        <name-one />
+      </author-view:>
+      <owner-view:>
+        <name-one />
+      </owner-view:>
+    </field-list:>
+  </old-form>
+</extend>
+
 <def tag="card" for="Doc">
   <h4>
     <a><name/> --

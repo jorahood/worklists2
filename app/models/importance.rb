@@ -10,13 +10,14 @@ class Importance < ActiveRecord::Base
   set_table_name :importance
   set_search_columns nil
 
+  set_primary_key :rank
+
   has_many :docs, :foreign_key => :importance # the fk in the document table
 
   def self.import_from_bell
     true
   end
 
-  set_primary_key :rank
   # --- Permissions --- #
 
   def create_permitted?
