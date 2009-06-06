@@ -31,6 +31,8 @@ class Domain < ActiveRecord::Base
   has_many :domained_docs, :foreign_key => 'domain'
   has_many :docs, :through => :domained_docs
 
+  has_many :domain_searches
+  
   set_primary_key :domain
 
   def self.import_from_bell

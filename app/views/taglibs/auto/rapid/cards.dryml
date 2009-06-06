@@ -52,6 +52,14 @@
   </card>
 </def>
 
+<def tag="card" for="DomainSearch">
+  <card class="domain-search" param="default" merge>
+    <body: param>
+      <count:domains param/>
+    </body:>
+  </card>
+</def>
+
 <def tag="card" for="DomainedDoc">
   <card class="domained-doc" param="default" merge>
     <header: param>

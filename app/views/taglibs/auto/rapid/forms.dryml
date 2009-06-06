@@ -39,7 +39,7 @@
 <def tag="form" for="Doc">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="birthdate, modifieddate, approveddate, author_assoc, importance_assoc, lists, owner_assoc, status_assoc, visibility_assoc, volatility_assoc" param/>
+    <field-list fields="birthdate, modifieddate, approveddate, author_assoc, domains, importance_assoc, lists, owner_assoc, status_assoc, visibility_assoc, volatility_assoc" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -147,7 +147,7 @@
 <def tag="form" for="Search">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name, author, importance, owner, status, visibility, volatility" param/>
+    <field-list fields="name, author, domains, importance, owner, status, visibility, volatility" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>

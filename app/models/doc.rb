@@ -45,7 +45,8 @@ class Doc < ActiveRecord::Base
   has_many :domained_docs,
     :foreign_key => 'id'
   has_many :domains,
-    :through => :domained_docs
+    :through => :domained_docs,
+    :accessible => true
   has_many :titles,
     :foreign_key => 'docid'
   has_many :expirations,

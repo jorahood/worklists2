@@ -1,11 +1,6 @@
-#http://blog.internautdesign.com/2008/6/14/array-of-all-activerecord-models-in-a-rails-app
-#all_models = Dir.glob( File.join( RAILS_ROOT, 'app', 'models', '*.rb') ).map{|path| path[/.+\/(.+).rb/,1] }
-#AR_models = all_models.select{|m| m.classify.constantize < ActiveRecord::Base}
-#Dir.glob(RAILS_ROOT + '/app/models/*.rb').each { |file| require file }
-
-# rake tasks to import the tables from the kb3 Oracle db on bell. The task names
-# are generated from the model names themselves and then
-# an "all" task is generated to run all of the imports 
+# rake task to import the tables from the kb3 Oracle db on bell. The task
+# takes as an argument either a model name or 'all' to load all models with
+# import_from_bell == true
 
 namespace :bell do
   desc "Reload a model (e.g. 'docs', default='all') from bell"

@@ -2,6 +2,10 @@
 
 <show-page>
   <after-field-list:>
+          <section class="collection-section">
+            <h3 class="collection-heading">Domains</h3>
+            <collection:domains/>
+          </section>
     <do with="&@result_docs">
       <section class="collection-section">
         <h3 class="collection-heading"><count/> returned</h3>

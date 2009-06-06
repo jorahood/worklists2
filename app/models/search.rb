@@ -17,7 +17,13 @@ class Search < ActiveRecord::Base
   belongs_to :owner,
     :class_name => 'Kbuser',
     :foreign_key => :owner_id
-  
+
+  has_many :domain_searches
+  has_many :domains,
+    :through => :domain_searches,
+    :accessible => true
+
+
   # --- Permissions --- #
 
   def create_permitted?
