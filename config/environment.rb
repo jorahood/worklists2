@@ -30,7 +30,7 @@ Rails::Initializer.run do |config|
   config.gem 'ar-extensions'
   # :lib config value found at http://www.foliosus.com/blog/connecting-ruby-on-rails-to-oracle-on-an-intel-mac-in-leopard-take-2 : see comment 7
   config.gem 'activerecord-oracle-adapter', :lib => 'active_record/connection_adapters/oracle_adapter', :source => 'http://gems.rubyonrails.org'
-  config.gem 'composite_primary_keys'
+  config.gem 'composite_primary_keys' #supports primary keys based on multiple columns
   config.gem 'rubycas-client'
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
