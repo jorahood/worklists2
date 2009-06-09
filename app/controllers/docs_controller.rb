@@ -6,7 +6,7 @@ class DocsController < ApplicationController
 
   def index
     hobo_index Doc.apply_scopes(
-      :order_by => parse_sort_param(:id),
+      :order_by => parse_sort_param(:id, :birthdate, :modifieddate, :approveddate),
       :visibility_assoc_is => params[:visibility],
       :volatility_assoc_is => params[:volatility])
   end

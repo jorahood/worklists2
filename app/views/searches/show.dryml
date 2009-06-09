@@ -1,18 +1,13 @@
 <!-- Search -->
 
 <show-page>
+  <field-list: fields="author, importance, owner, status, visibility, volatility, domains"/>
   <after-field-list:>
-          <section class="collection-section">
-            <h3 class="collection-heading">Domains</h3>
-            <collection:domains/>
-          </section>
     <do with="&@result_docs">
       <section class="collection-section">
         <h3 class="collection-heading"><count/> returned</h3>
         <page-nav/>
-          <table-plus without-search-form fields='this, titles, birthdate, modifieddate,
-                approveddate, owner_assoc, author_assoc, importance_assoc,
-                visibility_assoc, volatility_assoc, status_assoc'>
+          <table-plus without-search-form fields='id'>
           </table-plus>
         <page-nav/>
       </section>
