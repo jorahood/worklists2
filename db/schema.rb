@@ -9,12 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090609183408) do
-
-  create_table "audiences", :id => false, :force => true do |t|
-    t.string "id"
-    t.string "description"
-  end
+ActiveRecord::Schema.define(:version => 20090606030258) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -59,11 +54,6 @@ ActiveRecord::Schema.define(:version => 20090609183408) do
     t.string  "domain_id"
   end
 
-  create_table "domained_docs", :id => false, :force => true do |t|
-    t.string "doc_id"
-    t.string "domain_id"
-  end
-
   create_table "domainlist", :id => false, :force => true do |t|
     t.string "domain"
     t.string "class"
@@ -85,19 +75,9 @@ ActiveRecord::Schema.define(:version => 20090609183408) do
     t.string "hotitem"
   end
 
-  create_table "hotitems", :id => false, :force => true do |t|
-    t.string "doc_id"
-    t.string "name"
-  end
-
   create_table "importance", :id => false, :force => true do |t|
     t.integer "rank"
     t.string  "importance"
-  end
-
-  create_table "importances", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name"
   end
 
   create_table "kbresource", :id => false, :force => true do |t|
@@ -105,25 +85,8 @@ ActiveRecord::Schema.define(:version => 20090609183408) do
     t.string "username"
   end
 
-  create_table "kbresources", :id => false, :force => true do |t|
-    t.string "doc_id"
-    t.string "kbuser_id"
-  end
-
   create_table "kbuser", :id => false, :force => true do |t|
     t.string "username"
-    t.string "lastname"
-    t.string "firstname"
-    t.string "email"
-    t.string "worknumber"
-    t.string "homenumber"
-    t.string "status"
-    t.string "password"
-    t.string "pagernumber"
-  end
-
-  create_table "kbusers", :id => false, :force => true do |t|
-    t.string "id"
     t.string "lastname"
     t.string "firstname"
     t.string "email"
@@ -177,11 +140,6 @@ ActiveRecord::Schema.define(:version => 20090609183408) do
     t.string  "status"
   end
 
-  create_table "statuses", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name"
-  end
-
   create_table "titleaudience", :id => false, :force => true do |t|
     t.string "audience"
     t.string "description"
@@ -191,12 +149,6 @@ ActiveRecord::Schema.define(:version => 20090609183408) do
     t.string "title"
     t.string "docid"
     t.string "audience"
-  end
-
-  create_table "titles", :id => false, :force => true do |t|
-    t.string "title"
-    t.string "doc_id"
-    t.string "audience_id"
   end
 
   create_table "users", :force => true do |t|
@@ -213,19 +165,9 @@ ActiveRecord::Schema.define(:version => 20090609183408) do
     t.datetime "key_timestamp"
   end
 
-  create_table "visibilities", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name"
-  end
-
   create_table "visibility", :id => false, :force => true do |t|
     t.integer "rank"
     t.string  "visibility"
-  end
-
-  create_table "volatilities", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name"
   end
 
   create_table "volatility", :id => false, :force => true do |t|
