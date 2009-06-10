@@ -10,7 +10,7 @@ require 'rake/rdoctask'
 require 'tasks/rails'
   begin
     require 'vlad'
-    Vlad.load :app => :passenger, :web => nil 
+    Vlad.load :app => :passenger, :web => nil
   rescue LoadError
     # do nothing
   end

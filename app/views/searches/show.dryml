@@ -7,7 +7,8 @@
       <section class="collection-section">
         <h3 class="collection-heading"><count/> returned</h3>
         <page-nav/>
-          <table-plus without-search-form fields='id'>
+          <table-plus without-search-form fields='id, birthdate, modifieddate, approveddate'>
+            <id-view:><doc-link/></id-view:>
           </table-plus>
         <page-nav/>
       </section>

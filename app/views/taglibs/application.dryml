@@ -70,3 +70,7 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
 </def>
 
 <def tag="empty-collection-message"></def>
+
+<def tag="doc-link">
+  <%= link_to this, :controller => "docs", :action => "show", :id => this %>
+</def>

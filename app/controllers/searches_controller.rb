@@ -15,7 +15,7 @@ class SearchesController < ApplicationController
       :owner_is => @search.owner,
       :importance_is => @search.importance,
       :with_domains => @search.domains,
-      :order_by => parse_sort_param(:id)
+      :order_by => parse_sort_param(:id, :birthdate, :modifieddate, :approveddate)
     ).paginate(
       :page => params[:page])
   end
