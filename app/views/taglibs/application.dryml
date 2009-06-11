@@ -27,6 +27,15 @@
 <extend tag="form" for="Search">
   <old-form merge>
     <field-list:>
+      <birthdate-view:>
+        <input prompt/>
+      </birthdate-view:>
+      <modifieddate-view:>
+        <input prompt/>
+      </modifieddate-view:>
+      <approveddate-view:>
+        <input prompt/>
+      </approveddate-view:>
       <importance-view:>
         <select-one  include-none blank-message="Any"/>
       </importance-view:>
@@ -48,6 +57,13 @@
     </field-list:>
   </old-form>
 </extend>
+
+<!-- I want nil dates & datetimes to be nil, not today, so you don't automatically start searches with approveddate, modfieddate, and birthdate set to today
+      hobo's input for date provides today's date by default, so I'm redefining it to remove that-->
+<def attrs='order' tag='input' for='date'>
+  <% order = order.nil? ? [:year, :month, :day] : comma_split(order).*.to_sym -%>
+  <%= select_date(this, attributes.merge(:prefix => param_name_for_this, :order => order)) %>
+</def>
 
 <def tag="card" for="Doc">
   <h4>

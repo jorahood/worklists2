@@ -8,6 +8,9 @@ class SearchesController < ApplicationController
     @search = find_instance
     @result_docs =
       Doc.apply_scopes(
+      :birthdate_is => @search.birthdate,
+      :approveddate_is => @search.approveddate,
+      :modifieddate_is => @search.modifieddate,
       :visibility_is => @search.visibility,
       :volatility_is => @search.volatility,
       :status_is => @search.status,

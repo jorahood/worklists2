@@ -134,9 +134,9 @@ ActiveRecord::Schema.define(:version => 20090611181901) do
     t.string   "author_id"
     t.string   "owner_id"
     t.string   "title_search"
-    t.date     "birthdate_search"
-    t.datetime "modifieddate_search"
-    t.date     "approveddate_search"
+    t.date     "birthdate"
+    t.date     "modifieddate"
+    t.date     "approveddate"
   end
 
   create_table "status", :id => false, :force => true do |t|

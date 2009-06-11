@@ -147,7 +147,7 @@
 <def tag="form" for="Search">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name, author, domains, importance, owner, status, title, visibility, volatility" param/>
+    <field-list fields="name, title_search, approveddate, modifieddate, birthdate, author, domains, importance, owner, status, visibility, volatility" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -171,7 +171,7 @@
 <def tag="form" for="Title">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="title, audience, doc" param/>
+    <field-list fields="title, docid, audience, audience, doc" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
