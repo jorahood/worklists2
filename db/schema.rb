@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090606030258) do
+ActiveRecord::Schema.define(:version => 20090611181901) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -133,6 +133,10 @@ ActiveRecord::Schema.define(:version => 20090606030258) do
     t.integer  "status_id"
     t.string   "author_id"
     t.string   "owner_id"
+    t.string   "title_search",        :limit => 60
+    t.date     "birthdate_search"
+    t.datetime "modifieddate_search"
+    t.date     "approveddate_search"
   end
 
   create_table "status", :id => false, :force => true do |t|

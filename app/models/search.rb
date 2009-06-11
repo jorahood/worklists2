@@ -4,6 +4,10 @@ class Search < ActiveRecord::Base
 
   fields do
     name :string
+    title_search :string
+    approveddate_search :date
+    modifieddate_search :datetime
+    birthdate_search :date
     timestamps
   end
 
@@ -17,8 +21,7 @@ class Search < ActiveRecord::Base
   belongs_to :owner,
     :class_name => 'Kbuser',
     :foreign_key => :owner_id
-  belongs_to :title
-  
+
   has_many :domain_searches
   has_many :domains,
     :through => :domain_searches,
