@@ -1335,7 +1335,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="author, importance, owner, status, visibility, volatility" param/>
+            <field-list fields="author, importance, owner, status, title, visibility, volatility" param/>
           </section>
     </content:>
     
@@ -1531,7 +1531,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="docid, audience, audience, doc" param/>
+            <field-list fields="audience, doc" param/>
           </section>
     </content:>
     
