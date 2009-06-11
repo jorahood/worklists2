@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(:version => 20090611181901) do
     t.integer  "status_id"
     t.string   "author_id"
     t.string   "owner_id"
-    t.string   "title_search",        :limit => 60
+    t.string   "title_search"
     t.date     "birthdate_search"
     t.datetime "modifieddate_search"
     t.date     "approveddate_search"
