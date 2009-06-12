@@ -8,7 +8,7 @@ set :repository, 'svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/wo
 # your SCM below:
 #set :scm, :git
    
-set :ruby_vm_type,      :ree        # :ree, :mri
+set :ruby_vm_type,      :mri        # :ree, :mri
 set :web_server_type,   :apache     # :apache, :nginx
 set :app_server_type,   :passenger  # :passenger, :mongrel
 set :db_server_type,    :mysql      # :mysql, :postgresql, :sqlite

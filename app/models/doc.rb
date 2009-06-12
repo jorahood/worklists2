@@ -73,13 +73,18 @@ class Doc < ActiveRecord::Base
 
   named_scope :unarchived, :conditions => 'visibility > 3'
 
-def default_title
-  titles.default.first
-end
+  named_scope :title_search, lambda { |search|
+    {:joins => :titles,
+    :conditions => ["#{Title.table_name}.title LIKE ?", "%#{search}%"]}
+  }
 
-def docid
-  id
-end
+  def default_title
+    titles.default.first
+  end
+
+  def docid
+    id
+  end
   # --- Permissions --- #
 
   def create_permitted?

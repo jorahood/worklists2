@@ -6,6 +6,7 @@
 
 <set-theme name="clean"/>
 
+<def tag="nil-view"></def>
 <def tag="app-name"><app-release/></def>
 
 <def tag="app-release"><%= svn_rev ||= /^URL: .*\/(\S+?\/\S+?)$/.match(`svn info`)[1] || 'unknown' %></def>
