@@ -10,6 +10,7 @@ class SearchesController < ApplicationController
       Doc.apply_scopes(
       :title_search => @search.title_search,
       :birthdate_is => @search.birthdate,
+      :expires_on => @search.expiredate,
 #      :approveddate_is => @search.approveddate,
       :modifieddate_is => @search.modifieddate,
       :visibility_is => @search.visibility,

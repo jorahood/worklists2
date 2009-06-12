@@ -1,7 +1,7 @@
 <!-- Search -->
 
 <show-page>
-  <field-list: fields="author, importance, owner, status, visibility, volatility, birthdate, approveddate, modifieddate, title_search, domains"/>
+  <field-list: fields="author, importance, owner, status, visibility, volatility, birthdate, expiredate, approveddate, modifieddate, title_search, domains"/>
   <after-field-list:>
     <do with="&@result_docs">
       <section class="collection-section">

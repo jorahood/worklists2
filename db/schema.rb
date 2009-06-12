@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090611181901) do
+ActiveRecord::Schema.define(:version => 20090612183321) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20090611181901) do
     t.date     "birthdate"
     t.date     "modifieddate"
     t.date     "approveddate"
+    t.date     "expiredate"
   end
 
   create_table "status", :id => false, :force => true do |t|

@@ -8,6 +8,7 @@ class Search < ActiveRecord::Base
     approveddate :date
     modifieddate :date #leaving this a date for now to simplify equality-searching and because Hobo can't deal with nil datetimes yet
     birthdate :date
+    expiredate :date
     timestamps
   end
 

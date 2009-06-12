@@ -78,6 +78,11 @@ class Doc < ActiveRecord::Base
     :conditions => ["#{Title.table_name}.title LIKE ?", "%#{search}%"]}
   }
 
+  named_scope :expires_on, lambda { |date|
+    {:joins => :expirations,
+    :conditions => ["#{Expiration.table_name}.expiredate = ?", date]}
+  }
+  
   def default_title
     titles.default.first
   end

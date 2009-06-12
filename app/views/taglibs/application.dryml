@@ -31,6 +31,9 @@
       <birthdate-view:>
         <input prompt/>
       </birthdate-view:>
+      <expiredate-view:>
+        <input prompt/>
+      </expiredate-view:>
       <modifieddate-view:>
         <input prompt/>
       </modifieddate-view:>
