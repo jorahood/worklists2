@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090612183321) do
+ActiveRecord::Schema.define(:version => 20090615153424) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(:version => 20090612183321) do
     t.string "username"
   end
 
+  add_index "kbresource", ["id"], :name => "index_kbresource_on_id"
+
   create_table "kbuser", :id => false, :force => true do |t|
     t.string "username"
     t.string "lastname"
@@ -138,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20090612183321) do
     t.date     "modifieddate"
     t.date     "approveddate"
     t.date     "expiredate"
+    t.string   "resource_id"
   end
 
   create_table "status", :id => false, :force => true do |t|

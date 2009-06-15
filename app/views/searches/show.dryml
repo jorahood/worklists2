@@ -1,8 +1,8 @@
 <!-- Search -->
 
 <show-page>
-  <field-list: fields="author, importance, owner, status, visibility, volatility, birthdate, expiredate, approveddate, modifieddate, title_search, domains"/>
   <after-field-list:>
+    <field-list: fields="domains"/>
     <do with="&@result_docs">
       <section class="collection-section">
         <h3 class="collection-heading"><count/> returned</h3>

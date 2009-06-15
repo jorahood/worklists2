@@ -58,6 +58,9 @@
       <owner-view:>
         <name-one />
       </owner-view:>
+      <resource-view:>
+        <name-one />
+      </resource-view:>
     </field-list:>
   </old-form>
 </extend>

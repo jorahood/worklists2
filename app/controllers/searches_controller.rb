@@ -18,6 +18,7 @@ class SearchesController < ApplicationController
       :status_is => @search.status,
       :author_is => @search.author,
       :owner_is => @search.owner,
+      :with_resource => @search.resource,
       :importance_is => @search.importance,
       :with_domains => @search.domains,
       :order_by => parse_sort_param(:id, :birthdate, :modifieddate, :approveddate)
