@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090615182557) do
+ActiveRecord::Schema.define(:version => 20090615190225) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -185,6 +185,12 @@ ActiveRecord::Schema.define(:version => 20090615182557) do
   create_table "volatility", :id => false, :force => true do |t|
     t.integer "rank"
     t.string  "volatility"
+  end
+
+  create_table "xtra", :id => false, :force => true do |t|
+    t.string  "term"
+    t.integer "weight"
+    t.string  "id"
   end
 
 end
