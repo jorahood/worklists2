@@ -9,6 +9,7 @@ class SearchesController < ApplicationController
     @result_docs =
       Doc.apply_scopes(
       :title_search => @search.title_search,
+      :xtra_search => @search.xtra_search,
       :birthdate_is => @search.birthdate,
       :expires_on => @search.expiredate,
 #      :approveddate_is => @search.approveddate,

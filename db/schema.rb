@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090615190225) do
+ActiveRecord::Schema.define(:version => 20090615195257) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20090615190225) do
     t.string   "resource_id"
     t.string   "boiler_id"
     t.string   "hotitem_id"
+    t.string   "xtra_search"
   end
 
   create_table "status", :id => false, :force => true do |t|
@@ -192,5 +193,7 @@ ActiveRecord::Schema.define(:version => 20090615190225) do
     t.integer "weight"
     t.string  "id"
   end
+
+  add_index "xtra", ["id"], :name => "index_xtra_on_id"
 
 end

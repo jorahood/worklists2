@@ -415,6 +415,10 @@
             <h3 param="boilers-collection">Boilers</h3>
             <collection:boilers/>
           </section>
+          <section param="xtras-collection-section">
+            <h3 param="xtras-collection">Xtras</h3>
+            <collection:xtras/>
+          </section>
         </aside>
       </section-group>
     </content:>
@@ -1335,7 +1339,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="title_search, approveddate, modifieddate, birthdate, expiredate, author, boiler, hotitem, importance, owner, resource, status, visibility, volatility" param/>
+            <field-list fields="title_search, xtra_search, approveddate, modifieddate, birthdate, expiredate, author, boiler, hotitem, importance, owner, resource, status, visibility, volatility" param/>
           </section>
     </content:>
     
@@ -1896,6 +1900,102 @@
       <section param="content-header">
         <h2 param="heading">Edit <type-name/></h2>
         <delete-button label="Remove This Volatility" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
+<!-- ====== Xtra Pages ====== -->
+
+
+<def tag="index-page" for="Xtra">
+  <page merge title="Xtras">
+    <body: class="index-page xtra" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Xtras</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Xtra">
+  <page merge title="New Xtra">
+    <body: class="new-page xtra" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Xtra</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Xtra"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Xtra">
+  <page merge title="Xtra">
+
+    <body: class="show-page xtra" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Xtra</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="weight, doc" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Xtra">
+  <page merge title="Edit Xtra">
+
+    <body: class="edit-page xtra" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Xtra" param/>
       </section>
 
       <section param="content-body">

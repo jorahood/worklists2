@@ -8,4 +8,8 @@
         <div class="raw-xml"><%= simple_format h this.kbxml_body %></div>
       </section>
     </after-collection:>
+    <xtras-collection-section: replace>
+        <h3 class="xtras-collection">Xtras</h3>
+        <repeat:xtras join=", "><a/></repeat>
+    </xtras-collection-section:>
 </show-page>

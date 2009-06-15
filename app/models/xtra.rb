@@ -7,6 +7,7 @@ class Xtra < ActiveRecord::Base
     weight :integer
   end
 
+  set_primary_keys :term, :id
   set_table_name :xtra
   set_search_columns nil
 

@@ -66,6 +66,8 @@ class Doc < ActiveRecord::Base
   has_many :referenced_boilers,
     :through => :boiler_usages,
     :source => :doc_as_boiler
+  has_many :xtras,
+    :foreign_key => :id
 
   def self.import_from_bell
     true
@@ -78,6 +80,11 @@ class Doc < ActiveRecord::Base
     :conditions => ["#{Title.table_name}.title LIKE ?", "%#{search}%"]}
   }
 
+  named_scope :xtra_search, lambda { |search|
+    {:joins => :xtras,
+      :conditions => ["#{Xtra.table_name}.term LIKE ?", "%#{search}%"]}
+  }
+  
   named_scope :expires_on, lambda { |date|
     {:joins => :expirations,
     :conditions => ["#{Expiration.table_name}.expiredate = ?", date]}
