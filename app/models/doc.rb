@@ -67,8 +67,14 @@ class Doc < ActiveRecord::Base
     :through => :boiler_usages,
     :source => :doc_as_boiler
   has_many :xtras,
-    :foreign_key => :id
-
+    :foreign_key => 'id'
+  has_many :refs,
+    :class_name => 'Reference',
+    :foreign_key => 'toid'
+  has_many :refbys,
+    :class_name => 'Reference',
+    :foreign_key => 'fromid'
+  
   def self.import_from_bell
     true
   end
