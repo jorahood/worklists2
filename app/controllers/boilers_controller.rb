@@ -4,6 +4,8 @@ class BoilersController < ApplicationController
 
   auto_actions :all
 
+  autocomplete :limit => 20, :query_scope => :name_starts
+
   def show
     @boiler = find_instance # Hobo needs @boiler defined
     @paginated_appearances_in_unarchived_docs = @boiler.appearances.unarchived.paginate(:page => params[:page])

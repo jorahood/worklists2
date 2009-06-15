@@ -19,6 +19,7 @@ class SearchesController < ApplicationController
       :author_is => @search.author,
       :owner_is => @search.owner,
       :with_resource => @search.resource,
+      :with_referenced_boiler => @search.boiler,
       :importance_is => @search.importance,
       :with_domains => @search.domains,
       :order_by => parse_sort_param(:id, :birthdate, :modifieddate, :approveddate)
