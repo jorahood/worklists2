@@ -64,6 +64,9 @@
       <boiler-view:>
         <name-one />
       </boiler-view:>
+      <hotitem-view:>
+        <name-one />
+      </hotitem-view:>
     </field-list:>
   </old-form>
 </extend>

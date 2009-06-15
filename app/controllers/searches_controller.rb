@@ -20,6 +20,7 @@ class SearchesController < ApplicationController
       :owner_is => @search.owner,
       :with_resource => @search.resource,
       :with_referenced_boiler => @search.boiler,
+      :with_hotitem => @search.hotitem,
       :importance_is => @search.importance,
       :with_domains => @search.domains,
       :order_by => parse_sort_param(:id, :birthdate, :modifieddate, :approveddate)

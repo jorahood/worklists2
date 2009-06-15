@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090615160745) do
+ActiveRecord::Schema.define(:version => 20090615182557) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20090615160745) do
     t.string "id"
     t.string "hotitem"
   end
+
+  add_index "hotitem", ["id"], :name => "index_hotitem_on_id"
 
   create_table "importance", :id => false, :force => true do |t|
     t.integer "rank"
@@ -142,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20090615160745) do
     t.date     "expiredate"
     t.string   "resource_id"
     t.string   "boiler_id"
+    t.string   "hotitem_id"
   end
 
   create_table "status", :id => false, :force => true do |t|

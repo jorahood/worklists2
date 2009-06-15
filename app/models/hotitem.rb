@@ -3,7 +3,7 @@ class Hotitem < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    hotitem :string
+    hotitem :string, :name => true
   end
 
   set_table_name :hotitem

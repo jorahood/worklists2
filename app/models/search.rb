@@ -26,6 +26,7 @@ class Search < ActiveRecord::Base
     :class_name => 'Kbuser',
     :foreign_key => :resource_id
   belongs_to :boiler
+  belongs_to :hotitem
 
   has_many :domain_searches
   has_many :domains,
