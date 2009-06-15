@@ -144,6 +144,18 @@
 
 
 
+<def tag="form" for="Reference">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="ref_doc, refby_doc" param/>
+    <div param="actions">
+      <submit label="Save" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
 <def tag="form" for="Search">
   <form merge param="default">
     <error-messages param/>

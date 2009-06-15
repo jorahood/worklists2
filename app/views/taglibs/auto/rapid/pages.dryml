@@ -415,9 +415,13 @@
             <h3 param="boilers-collection">Boilers</h3>
             <collection:boilers/>
           </section>
-          <section param="xtras-collection-section">
-            <h3 param="xtras-collection">Xtras</h3>
-            <collection:xtras/>
+          <section param="refs-collection-section">
+            <h3 param="refs-collection">Refs</h3>
+            <collection:refs/>
+          </section>
+          <section param="refbys-collection-section">
+            <h3 param="refbys-collection">Refbys</h3>
+            <collection:refbys/>
           </section>
         </aside>
       </section-group>
@@ -1269,6 +1273,102 @@
 
 
 
+
+
+
+
+  
+<!-- ====== Reference Pages ====== -->
+
+
+<def tag="index-page" for="Reference">
+  <page merge title="References">
+    <body: class="index-page reference" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">References</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Reference">
+  <page merge title="New Reference">
+    <body: class="new-page reference" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Reference</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Reference"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Reference">
+  <page merge title="Reference">
+
+    <body: class="show-page reference" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Reference</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="ref_doc, refby_doc" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Reference">
+  <page merge title="Edit Reference">
+
+    <body: class="edit-page reference" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Reference" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
 
 
 
