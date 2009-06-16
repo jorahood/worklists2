@@ -1,6 +1,7 @@
 <!-- Doc -->
 
 <show-page>
+    <!-- the  main collection is titles, shown here without the doc link -->
     <collection:><card: without-doc-link /></collection:>
     <after-collection:>
       <section>
@@ -12,4 +13,12 @@
         <h3 class="xtras-collection">Xtras</h3>
         <repeat:xtras join=", "><a/></repeat>
     </xtras-collection-section:>
+   <refs-collection-section: replace>
+      <h3 class="refs-collection">Refs</h3>
+      <collection:refs><card: without-ref-link/></collection:refs>
+    </refs-collection-section:>
+    <refbys-collection-section: replace>
+      <h3 class="refbys-collection">Refbys</h3>
+      <collection:refbys><card: without-refby-link/></collection:refbys>
+     </refbys-collection-section:>
 </show-page>
