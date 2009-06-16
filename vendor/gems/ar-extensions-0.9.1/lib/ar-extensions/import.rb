@@ -185,7 +185,11 @@ class ActiveRecord::Base
       # Force the primary key col into the insert if it's not
       # on the list and we are using a sequence and stuff a nil
       # value for it into each row so the sequencer will fire later
-      if !column_names.include?(primary_key) && sequence_name && connection.prefetch_primary_key?
+      # add support for composite primary keys: check that the set of
+      # primary key(s) (converted to symbols) is a subset of the
+      # columns being imported, as symbols -jorahood
+      if ![primary_key].flatten.*.to_sym.to_set.subset?(column_names.*.to_sym.to_set) &&
+          sequence_name && connection.prefetch_primary_key?
          column_names << primary_key
          array_of_attributes.each { |a| a << nil }
       end
