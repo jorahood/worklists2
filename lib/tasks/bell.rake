@@ -39,7 +39,7 @@ namespace :bell do
       ActiveRecord::Base.establish_connection
       # wrap the truncation and importing in a transaction so no client sees empty tables
       ActiveRecord::Base.transaction do
-        ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table}")
+        ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{ActiveRecord::Base.connection.quote_table_name(table)}")
         puts "2. Truncated 'worklists2_#{RAILS_ENV}.#{table}'."
         model.import bell_columns, bell_values, :validate => false
         puts "3. Imported #{all_records.length} instances of #{model}."

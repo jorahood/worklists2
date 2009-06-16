@@ -7,6 +7,6 @@ class AddReferencesModel < ActiveRecord::Migration
   end
 
   def self.down
-    remove_table :references
+    drop_table :references
   end
 end
