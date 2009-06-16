@@ -70,10 +70,10 @@ class Doc < ActiveRecord::Base
     :foreign_key => 'id'
   has_many :refs,
     :class_name => 'Reference',
-    :foreign_key => 'toid'
+    :foreign_key => 'fromid'
   has_many :refbys,
     :class_name => 'Reference',
-    :foreign_key => 'fromid'
+    :foreign_key => 'toid'
   
   def self.import_from_bell
     true

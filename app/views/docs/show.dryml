@@ -15,10 +15,10 @@
     </xtras-collection-section:>
    <refs-collection-section: replace>
       <h3 class="refs-collection">Refs</h3>
-      <collection:refs><card: without-ref-link/></collection:refs>
+      <collection:refs><card: without-refby-link/></collection:refs>
     </refs-collection-section:>
     <refbys-collection-section: replace>
       <h3 class="refbys-collection">Refbys</h3>
-      <collection:refbys><card: without-refby-link/></collection:refbys>
+      <collection:refbys><card: without-ref-link/></collection:refbys>
      </refbys-collection-section:>
 </show-page>
