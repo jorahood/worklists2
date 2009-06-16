@@ -1,0 +1,8 @@
+--- 
+format: 1
+handler: 
+  piston:remote-revision: 122
+  piston:uuid: 5128a5ed-121c-0410-8d5c-98af306bc9be
+lock: false
+repository_url: svn://rubyforge.org/var/svn/arext/trunk/ar-extensions
+repository_class: Piston::Svn::Repository
