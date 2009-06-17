@@ -7,12 +7,12 @@ class Xtra < ActiveRecord::Base
     weight :integer
   end
 
-  set_primary_keys :term, :id
+#  set_primary_keys :term, :id
   set_table_name :xtra
   set_search_columns nil
 
   belongs_to :doc,
-    :foreign_key => :id
+    :foreign_key => 'id'
 
   def self.import_from_bell
     true

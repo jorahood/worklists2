@@ -423,6 +423,10 @@
             <h3 param="refbys-collection">Refbys</h3>
             <collection:refbys/>
           </section>
+          <section param="xtras-collection-section">
+            <h3 param="xtras-collection">Xtras</h3>
+            <collection:xtras/>
+          </section>
         </aside>
       </section-group>
     </content:>
