@@ -78,6 +78,16 @@
   <%= select_date(this, attributes.merge(:prefix => param_name_for_this, :order => order)) %>
 </def>
 
+<def tag="input" for="datetime" attrs="order">
+  <% if ! order.nil?
+       order = comma_split(order).*.to_sym
+       attributes.merge!(:order => order)
+       require 'ruby-debug'
+       debugger
+     end -%>
+  <%= select_datetime(this, attributes.merge(:prefix => param_name_for_this)) %>
+</def>
+
 <def tag="card" for="Doc">
   <h4>
     <a><name/> --

@@ -7,7 +7,7 @@ class Search < ActiveRecord::Base
     title_search :string
     xtra_search :string
     approveddate :date
-    modifieddate :date #leaving this a date for now to simplify equality-searching and because Hobo can't deal with nil datetimes yet
+    modifieddate :datetime
     birthdate :date
     expiredate :date
     timestamps

@@ -3,7 +3,7 @@ class AddTitleAndDatesForSearches < ActiveRecord::Migration
     change_table(:searches) do |t|
       t.column :title_search, :string
       t.column :birthdate, :date
-      t.column :modifieddate, :date
+      t.column :modifieddate, :datetime
       t.column :approveddate, :date
     end
   end

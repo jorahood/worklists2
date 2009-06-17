@@ -4,6 +4,6 @@ class AddBoilerToSearch < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :searches, :boiler_id, :string
+    remove_column :searches, :boiler_id
   end
 end
