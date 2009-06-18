@@ -1443,7 +1443,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="title_search, xtra_search, approveddate, modifieddate, birthdate, expiredate, author, boiler, hotitem, importance, owner, resource, status, visibility, volatility" param/>
+            <field-list fields="title_search, xtra_search, approveddate, adate_comp, modifieddate, mdate_comp, birthdate, bdate_comp, expiredate, edate_comp, author, boiler, hotitem, importance, owner, resource, status, visibility, volatility" param/>
           </section>
     </content:>
     
@@ -1639,7 +1639,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="docid, audience, audience, doc" param/>
+            <field-list fields="audience, doc" param/>
           </section>
     </content:>
     

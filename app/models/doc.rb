@@ -7,7 +7,7 @@ class Doc < ActiveRecord::Base
   fields do
     id :string, :name => true #unique_index
     birthdate :date
-    modifieddate :datetime
+    modifieddate :date
     approveddate :date
   end
 

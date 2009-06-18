@@ -2,14 +2,20 @@ class Search < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  DateComparison = HoboFields::EnumString.for(:is, :before, :after)
+
   fields do
     name :string
     title_search :string
     xtra_search :string
     approveddate :date
-    modifieddate :datetime
+    adate_comp DateComparison
+    modifieddate :date
+    mdate_comp DateComparison
     birthdate :date
+    bdate_comp DateComparison
     expiredate :date
+    edate_comp DateComparison
     timestamps
   end
 

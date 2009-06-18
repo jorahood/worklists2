@@ -10,10 +10,10 @@ class SearchesController < ApplicationController
       Doc.apply_scopes(
       :title_search => @search.title_search,
       :xtra_search => @search.xtra_search,
-      :birthdate_is => @search.birthdate,
+      :"birthdate_#{@search.bdate_comp}" => @search.birthdate,
       :expires_on => @search.expiredate,
-      :approveddate_is => @search.approveddate,
-      :modifieddate_is => @search.modifieddate,
+      :"approveddate_#{@search.adate_comp}" => @search.approveddate,
+      :"modifieddate_#{@search.mdate_comp}" => @search.modifieddate,
       :visibility_is => @search.visibility,
       :volatility_is => @search.volatility,
       :status_is => @search.status,

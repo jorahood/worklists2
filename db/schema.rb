@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090616021458) do
+ActiveRecord::Schema.define(:version => 20090618150813) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -20,16 +20,16 @@ ActiveRecord::Schema.define(:version => 20090616021458) do
   add_index "boilerusage", ["fromid"], :name => "index_boilerusage_on_fromid"
 
   create_table "document", :id => false, :force => true do |t|
-    t.string   "id"
-    t.date     "birthdate"
-    t.datetime "modifieddate"
-    t.date     "approveddate"
-    t.string   "owner"
-    t.string   "author"
-    t.integer  "importance"
-    t.integer  "visibility"
-    t.integer  "volatility"
-    t.integer  "status"
+    t.string  "id"
+    t.date    "birthdate"
+    t.date    "modifieddate"
+    t.date    "approveddate"
+    t.string  "owner"
+    t.string  "author"
+    t.integer "importance"
+    t.integer "visibility"
+    t.integer "volatility"
+    t.integer "status"
   end
 
   add_index "document", ["id"], :name => "index_docs_on_id", :unique => true
@@ -146,11 +146,15 @@ ActiveRecord::Schema.define(:version => 20090616021458) do
     t.string   "resource_id"
     t.string   "title_search"
     t.date     "birthdate"
-    t.datetime "modifieddate"
+    t.date     "modifieddate"
     t.date     "approveddate"
     t.string   "boiler_id"
     t.string   "hotitem_id"
     t.string   "xtra_search"
+    t.string   "adate_comp"
+    t.string   "bdate_comp"
+    t.string   "mdate_comp"
+    t.string   "edate_comp"
   end
 
   create_table "status", :id => false, :force => true do |t|

@@ -13,7 +13,7 @@ class Title < ActiveRecord::Base
     :foreign_key => 'docid'
   belongs_to :audience,
     :foreign_key => 'audience'
-#  set_primary_keys :docid, :audience
+  set_primary_keys :docid, :audience
   
 
   def self.import_from_bell
