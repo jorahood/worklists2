@@ -1,24 +1,50 @@
 <!-- Doc -->
 
 <show-page>
-    <!-- the  main collection is titles, shown here without the doc link -->
-    <collection:><card: without-doc-link /></collection:>
-    <after-collection:>
-      <section>
-        <h3>Doc kbxml</h3>
-        <div class="raw-xml"><%= simple_format h this.kbxml_body %></div>
-      </section>
-    </after-collection:>
-    <xtras-collection-section: replace>
-        <h3 class="xtras-collection">Xtras</h3>
-        <repeat:xtras join=", "><a/></repeat>
-    </xtras-collection-section:>
-   <refs-collection-section: replace>
+  <!-- the  main collection is titles, shown here without the doc link -->
+  <collection:><card: without-doc-link /></collection:>
+  <after-collection:>
+    <section>
+      <h3>Doc kbxml</h3>
+      <div class="raw-xml"><%= simple_format h this.kbxml_body %></div>
+    </section>
+  </after-collection:>
+  <aside:>
+    <section if="&this.domains" class="domains-collection-section">
+      <h3 class="domains-collection">Domains</h3>
+      <collection:domains/>
+    </section>
+    <section if="&this.hotitems" class="hotitems-collection-section">
+      <h3 class="hotitems-collection">Hotitems</h3>
+      <collection:hotitems/>
+    </section>
+    <section if="&this.expirations" class="expirations-collection-section">
+      <h3 class="expirations-collection">Expirations</h3>
+      <collection:expirations/>
+    </section>
+    <section if="&this.resources" class="resources-collection-section">
+      <h3 class="resources-collection">Resources</h3>
+      <collection:resources/>
+    </section>
+    <section if="&this.referenced_boilers" class="referenced_boilers-collection-section">
+      <h3 class="referenced_boilers-collection">Referenced Boilers</h3>
+      <collection:referenced_boilers/>
+    </section>
+    <section if="&this.boilers" class="boilers-collection-section">
+      <h3 class="boilers-collection">Boilers</h3>
+      <collection:boilers/>
+    </section>
+    <section if="&this.refs" class="refs-collection-section">
       <h3 class="refs-collection">Refs</h3>
       <collection:refs><card: without-refby-link/></collection:refs>
-    </refs-collection-section:>
-    <refbys-collection-section: replace>
+    </section>
+    <section if="&this.refbys" class="refbys-collection-section">
       <h3 class="refbys-collection">Refbys</h3>
       <collection:refbys><card: without-ref-link/></collection:refbys>
-     </refbys-collection-section:>
+    </section>
+    <section if="&this.xtras" class="xtras-collection-section">
+      <h3 class="xtras-collection">Xtras</h3>
+      <repeat:xtras join=", "><a/></repeat>
+    </section>
+  </aside:>
 </show-page>

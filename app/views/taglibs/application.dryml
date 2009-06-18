@@ -80,19 +80,19 @@
 
 <def tag="input" for="datetime" attrs="order">
   <% if ! order.nil?
-       order = comma_split(order).*.to_sym
-       attributes.merge!(:order => order)
-       require 'ruby-debug'
-       debugger
-     end -%>
+    order = comma_split(order).*.to_sym
+    attributes.merge!(:order => order)
+    require 'ruby-debug'
+    debugger
+  end -%>
   <%= select_datetime(this, attributes.merge(:prefix => param_name_for_this)) %>
 </def>
 
 <def tag="card" for="Doc">
   <h4>
     <a><name/> --
-    <!-- FIXME: HOBO - the 'inline' attribute doesn't work when I call the <view> tag directly-->
-    <name:default-title inline />
+      <!-- FIXME: HOBO - the 'inline' attribute doesn't work when I call the <view> tag directly-->
+      <name:default-title inline />
     </a>
   </h4>
 </def>
@@ -108,12 +108,14 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
   </h4>
 </def>
 
-<def tag="card" for="Reference">
-    <h4>
-        <doc-link:fromid param="refby-link"/>
-        <doc-link:toid param="ref-link"/>
-    </h4>
-</def>
+<extend tag="card" for="Reference">
+  <old-card merge>
+    <heading:>
+      <doc-link:fromid param="refby-link"/>
+      <doc-link:toid param="ref-link"/>
+    </heading:>
+  </old-card>
+</extend>
 
 <def tag="empty-collection-message"></def>
 

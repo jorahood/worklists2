@@ -12,7 +12,7 @@ class SearchesController < ApplicationController
       :xtra_search => @search.xtra_search,
       :birthdate_is => @search.birthdate,
       :expires_on => @search.expiredate,
-#      :approveddate_is => @search.approveddate,
+      :approveddate_is => @search.approveddate,
       :modifieddate_is => @search.modifieddate,
       :visibility_is => @search.visibility,
       :volatility_is => @search.volatility,

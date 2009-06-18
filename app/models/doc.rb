@@ -88,6 +88,7 @@ class Doc < ActiveRecord::Base
 
   named_scope :xtra_search, lambda { |search|
     {:joins => :xtras,
+      :select => "DISTINCT #{Doc.table_name}.*",
       :conditions => ["#{Xtra.table_name}.term LIKE ?", "%#{search}%"]}
   }
   
