@@ -5,6 +5,11 @@ module ActiveRecord
     def self.import_from_bell
       false
     end
+    # define a new default records-per-page value--30 is too low
+    def self.per_page
+      60
+    end
+
   end
 
   # support migrations creating tables with composite primary keys. Syntax is, e.g.,

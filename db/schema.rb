@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090618150813) do
+ActiveRecord::Schema.define(:version => 20090620234309) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -151,10 +151,10 @@ ActiveRecord::Schema.define(:version => 20090618150813) do
     t.string   "boiler_id"
     t.string   "hotitem_id"
     t.string   "xtra_search"
-    t.string   "adate_comp"
-    t.string   "bdate_comp"
-    t.string   "mdate_comp"
-    t.string   "edate_comp"
+    t.string   "approveddate_is"
+    t.string   "birthdate_is"
+    t.string   "modifieddate_is"
+    t.string   "expiredate_is"
   end
 
   create_table "status", :id => false, :force => true do |t|
@@ -168,10 +168,14 @@ ActiveRecord::Schema.define(:version => 20090618150813) do
   end
 
   create_table "titlecache", :id => false, :force => true do |t|
-    t.string "title"
-    t.string "docid"
-    t.string "audience"
+    t.string  "title"
+    t.string  "docid"
+    t.string  "audience"
+    t.integer "id"
   end
+
+  add_index "titlecache", ["audience"], :name => "index_titlecache_on_audience"
+  add_index "titlecache", ["docid"], :name => "index_titlecache_on_docid"
 
   create_table "users", :force => true do |t|
     t.string   "name"

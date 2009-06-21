@@ -10,10 +10,18 @@ class SearchesController < ApplicationController
       Doc.apply_scopes(
       :title_search => @search.title_search,
       :xtra_search => @search.xtra_search,
-      :"birthdate_#{@search.bdate_comp}" => @search.birthdate,
-      :expires_on => @search.expiredate,
-      :"approveddate_#{@search.adate_comp}" => @search.approveddate,
-      :"modifieddate_#{@search.mdate_comp}" => @search.modifieddate,
+      :"approveddate_#{@search.approveddate_is}" => 
+        !@search.approveddate_is.blank? && @search.approveddate ?
+        @search.approveddate : nil,
+      :"birthdate_#{@search.birthdate_is}" => 
+        !@search.birthdate_is.blank? && @search.birthdate ?
+        @search.birthdate : nil,
+      :"expiredate_#{@search.expiredate_is}" => 
+        !@search.expiredate_is.blank? && @search.expiredate ?
+        @search.expiredate : nil,
+      :"modifieddate_#{@search.modifieddate_is}" => 
+        !@search.modifieddate_is.blank? && @search.modifieddate ?
+        @search.modifieddate : nil,
       :visibility_is => @search.visibility,
       :volatility_is => @search.volatility,
       :status_is => @search.status,
@@ -24,7 +32,8 @@ class SearchesController < ApplicationController
       :with_hotitem => @search.hotitem,
       :importance_is => @search.importance,
       :with_domains => @search.domains,
-      :order_by => parse_sort_param(:id, :birthdate, :modifieddate, :approveddate)
+      :order_by => parse_sort_param(:id, :default_title, :birthdate, :modifieddate, :approveddate),
+      :with_default_title => true
     ).paginate(
       :page => params[:page])
   end

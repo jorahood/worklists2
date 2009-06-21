@@ -117,6 +117,10 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
   </old-card>
 </extend>
 
+<extend tag="input" for="HoboFields::EnumString">
+  <old-input merge titleize="&false" first-option="any"/>
+</extend>
+
 <def tag="empty-collection-message"></def>
 
 <def tag="doc-link">

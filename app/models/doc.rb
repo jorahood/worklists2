@@ -74,16 +74,22 @@ class Doc < ActiveRecord::Base
   has_many :refbys,
     :class_name => 'Reference',
     :foreign_key => 'toid'
-  
+
+  has_one :default_title,
+    :class_name => 'Title',
+    :foreign_key => 'docid',
+    :conditions => ["#{Title.table_name}.audience = ?", "default"]
+
   def self.import_from_bell
     true
   end
 
-  named_scope :unarchived, :conditions => 'visibility > 3'
+  named_scope :unarchived,
+    :conditions => "#{Doc.table_name}.visibility > 3"
 
   named_scope :title_search, lambda { |search|
     {:joins => :titles,
-    :conditions => ["#{Title.table_name}.title LIKE ?", "%#{search}%"]}
+      :conditions => ["#{Title.table_name}.title LIKE ?", "%#{search}%"]}
   }
 
   named_scope :xtra_search, lambda { |search|
@@ -92,14 +98,35 @@ class Doc < ActiveRecord::Base
       :conditions => ["#{Xtra.table_name}.term LIKE ?", "%#{search}%"]}
   }
   
-  named_scope :expires_on, lambda { |date|
-    {:joins => :expirations,
-    :conditions => ["#{Expiration.table_name}.expiredate = ?", date]}
+  named_scope :approveddate_on, lambda { |date|
+    {:conditions => ["#{Doc.table_name}.approveddate = ?", date]}
   }
-  
-  def default_title
-    titles.default.first
-  end
+
+  named_scope :birthdate_on, lambda { |date|
+    {:conditions => ["#{Doc.table_name}.birthdate = ?", date]}
+  }
+
+  named_scope :expiredate_before, lambda { |date|
+    {:joins => :expirations,
+      :conditions => ["#{Expiration.table_name}.expiredate < ?", date]}
+  }
+
+  named_scope :expiredate_on, lambda { |date|
+    {:joins => :expirations,
+      :conditions => ["#{Expiration.table_name}.expiredate = ?", date]}
+  }
+
+  named_scope :expiredate_after, lambda { |date|
+    {:joins => :expirations,
+      :conditions => ["#{Expiration.table_name}.expiredate > ?", date]}
+  }
+
+  named_scope :modifieddate_on, lambda { |date|
+      {:conditions => ["#{Doc.table_name}.modifieddate = ?", date]}
+  }
+
+  named_scope :with_default_title, 
+    :include => :default_title
 
   def docid
     id
