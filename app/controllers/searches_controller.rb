@@ -11,17 +11,13 @@ class SearchesController < ApplicationController
       :title_search => @search.title_search,
       :xtra_search => @search.xtra_search,
       :"approveddate_#{@search.approveddate_is}" => 
-        !@search.approveddate_is.blank? && @search.approveddate ?
-        @search.approveddate : nil,
+        !@search.approveddate_is.blank? && @search.approveddate,
       :"birthdate_#{@search.birthdate_is}" => 
-        !@search.birthdate_is.blank? && @search.birthdate ?
-        @search.birthdate : nil,
+        !@search.birthdate_is.blank? && @search.birthdate,
       :"expiredate_#{@search.expiredate_is}" => 
-        !@search.expiredate_is.blank? && @search.expiredate ?
-        @search.expiredate : nil,
+        !@search.expiredate_is.blank? && @search.expiredate,
       :"modifieddate_#{@search.modifieddate_is}" => 
-        !@search.modifieddate_is.blank? && @search.modifieddate ?
-        @search.modifieddate : nil,
+        !@search.modifieddate_is.blank? && @search.modifieddate,
       :visibility_is => @search.visibility,
       :volatility_is => @search.volatility,
       :status_is => @search.status,
