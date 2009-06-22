@@ -1,6 +1,7 @@
 <!-- Search -->
 
 <show-page>
+  <field-list: view-blank="&false"/>
   <after-field-list:>
     <field-list: fields="domains"/>
     <do with="&@result_docs">

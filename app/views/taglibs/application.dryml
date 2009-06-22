@@ -15,6 +15,12 @@
   <old-page merge />
 </extend>
 
+<!--<extend tag="card" for="Domain">
+  <old-card merge>
+    <count:></count:>
+  </old-card>
+</extend>
+-->
 <extend tag="card" for="List">
   <old-card merge>
     <append-body:>

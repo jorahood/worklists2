@@ -19,7 +19,7 @@
       <collection:hotitems/>
     </section>
     <section if="&this.expirations" class="expirations-collection-section">
-      <h3 class="expirations-collection">Expirations</h3>
+      <h3 class="expirations-collection">Expiration</h3>
       <collection:expirations/>
     </section>
     <section if="&this.resources" class="resources-collection-section">
@@ -31,7 +31,7 @@
       <collection:referenced_boilers/>
     </section>
     <section if="&this.boilers" class="boilers-collection-section">
-      <h3 class="boilers-collection">Boilers</h3>
+      <h3 class="boilers-collection">Boiler Name</h3>
       <collection:boilers/>
     </section>
     <section if="&this.refs" class="refs-collection-section">

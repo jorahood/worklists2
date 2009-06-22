@@ -8,7 +8,8 @@
  - fields: Comma separated list of field names to display. Defaults to the fields returned by the `standard_fields` helper. That is, all fields apart from IDs and timestamps.
  
  - force-all: All non-viewable fields will be skipped unless this attribute is given
- 
+
+ - view-blank:
  - skip: Comma separated list of fields to exclude
 
  - tag: The name of a tag to use inside the `<td>` to display the value. Defaults to `view`
@@ -18,14 +19,17 @@
    to `<view>` if the user does not have edit permission.)
      
 -->
-<def tag="field-list" attrs="tag, no-edit">
-  <% tag ||= scope.in_form ? "input" : "view"; no_edit ||= "skip" %>
+<def tag="field-list" attrs="tag, no-edit, view-blank">
+  <% tag ||= scope.in_form ? "input" : "view"
+  no_edit ||= "skip"
+  view_blank = true if view_blank.nil?
+  %>
   <labelled-item-list merge-attrs="&attributes - attrs_for(:with_fields)">
     <with-fields merge-attrs="&attributes & attrs_for(:with_fields)">
     <% field_name = this_field_name 
        input_attrs = {:no_edit => no_edit} if tag == "input" && no_edit == "disable"
     -%>
-      <labelled-item unless="&tag == 'input' && no_edit == 'skip' && !can_edit?">
+      <labelled-item unless="&tag == 'input' && no_edit == 'skip' && !can_edit? || (tag == 'view' && this.blank? && !view_blank)">
         <item-label param="#{this_field.to_s.sub('?', '')}-label" unless="&field_name.blank?">
           <do param="label"><%= field_name %></do>
         </item-label>
