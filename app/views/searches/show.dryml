@@ -9,7 +9,7 @@
       <section class="collection-section">
         <h3 class="collection-heading"><count/></h3>
         <page-nav/>
-          <table-plus without-search-form fields='id, default_title, birthdate, modifieddate, approveddate'>
+          <table-plus without-search-form fields='id, default_title, visibility_assoc, volatility_assoc, birthdate, modifieddate, approveddate'>
             <id-view:><doc-link/></id-view:>
           </table-plus>
         <page-nav/>

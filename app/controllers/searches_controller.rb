@@ -24,8 +24,10 @@ class SearchesController < ApplicationController
       :with_referenced_boiler => @search.boiler,
       :with_hotitem => @search.hotitem,
       :with_domains => @search.domains,
-      :order_by => parse_sort_param(:id, :default_title, :birthdate, :modifieddate, :approveddate),
-      :include => :default_title
+      :order_by => parse_sort_param(:id, :default_title, :visibility_assoc, :volatility_assoc, :birthdate, :modifieddate, :approveddate),
+      :include => :default_title,
+      :include => :visibility_assoc,
+      :include => :volatility_assoc
     ).paginate(
       :page => params[:page])
   end

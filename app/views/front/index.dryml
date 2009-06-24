@@ -5,6 +5,13 @@
 
     <content:>
         <header class="content-header">
+          <h3>June 24, 2009 - the "Mini KBSS" release</h3>
+        </header>
+          <section class="content-body">
+            <p>This release of Worklists2 can do searches. It can't search on everything that <a href="https://kbhandbook.indiana.edu/kbss">kbss.cgi</a> can yet, and it can't save the search results as a worklist. </p>
+            <p>You can browse the sample searches I've created on the <a with="&Search">Searches</a> index page, and create your own.</p>
+          </section>
+        <header class="content-header">
           <h3>May 21, 2009 - the "boilerlist.cgi" release</h3>
         </header>
           <section class="content-body">
