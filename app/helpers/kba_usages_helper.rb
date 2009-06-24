@@ -1,0 +1,2 @@
+module KbaUsagesHelper
+end

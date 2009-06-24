@@ -852,6 +852,102 @@
 
 
   
+<!-- ====== KbaUsage Pages ====== -->
+
+
+<def tag="index-page" for="KbaUsage">
+  <page merge title="Kba Usages">
+    <body: class="index-page kba-usage" param/>
+    
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">Kba Usages</h2>
+
+        <p param="count" if>There <count prefix="are"/></p>
+      </header>
+      
+      <section param="content-body">
+
+        <a action="new" to="&model" param="new-link"/>      
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="KbaUsage">
+  <page merge title="New Kba Usage">
+    <body: class="new-page kba-usage" param/>
+    
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">New Kba Usage</h2>
+      </section>
+      
+      <section param="content-body">
+        <form param>
+          <submit: label="Create Kba Usage"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="KbaUsage">
+  <page merge title="Kba Usage">
+
+    <body: class="show-page kba-usage" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading"><name/></h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">Edit Kba Usage</a>
+          </header>
+    
+          <section param="content-body">
+            <field-list fields="doc, doc_as_kba" param/>
+          </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+<def tag="edit-page" for="KbaUsage">
+  <page merge title="Edit Kba Usage">
+
+    <body: class="edit-page kba-usage" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">Edit <type-name/></h2>
+        <delete-button label="Remove This Kba Usage" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
+
+
+
+  
 <!-- ====== Kbuser Pages ====== -->
 
 
