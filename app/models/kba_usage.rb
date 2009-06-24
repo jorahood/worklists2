@@ -6,8 +6,11 @@ class KbaUsage < ActiveRecord::Base
   set_search_columns nil
   set_table_name :kba_usage
 
-  belongs_to :doc, :foreign_key => 'docid'
-  belongs_to :doc_as_kba,
+  belongs_to :from_doc,
+    :class_name => 'Doc',
+    :foreign_key => 'docid'
+
+  belongs_to :to_doc,
     :class_name => 'Doc',
     :foreign_key => 'kba'
 

@@ -99,7 +99,7 @@
 <def tag="form" for="KbaUsage">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="doc, doc_as_kba" param/>
+    <field-list fields="from_doc, to_doc" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>

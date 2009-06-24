@@ -74,6 +74,12 @@ class Doc < ActiveRecord::Base
   has_many :refbys,
     :class_name => 'Reference',
     :foreign_key => 'toid'
+  has_many :kbas,
+    :class_name => 'KbaUsage',
+    :foreign_key => 'docid'
+  has_many :kba_bys,
+    :class_name => 'KbaUsage',
+    :foreign_key => 'kba'
 
   has_one :default_title,
     :class_name => 'Title',

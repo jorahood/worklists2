@@ -204,6 +204,15 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
   </old-card>
 </extend>
 
+<extend tag="card" for="KbaUsage">
+  <old-card merge>
+    <heading:>
+      <doc-link:docid param="kba_by-link"/>
+      <doc-link:kba param="kba-link"/>
+    </heading:>
+  </old-card>
+</extend>
+
 <extend tag="input" for="HoboFields::EnumString">
   <old-input merge titleize="&false"/>
 </extend>

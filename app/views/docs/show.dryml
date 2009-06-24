@@ -9,42 +9,62 @@
       <div class="raw-xml"><%= simple_format h this.kbxml_body %></div>
     </section>
   </after-collection:>
+
   <aside:>
     <section if="&this.domains" class="domains-collection-section">
       <h3 class="domains-collection">Domains</h3>
       <collection:domains/>
     </section>
+
     <section if="&this.hotitems" class="hotitems-collection-section">
       <h3 class="hotitems-collection">Hotitems</h3>
       <collection:hotitems/>
     </section>
+
     <section if="&this.expirations" class="expirations-collection-section">
       <h3 class="expirations-collection">Expiration</h3>
       <collection:expirations/>
     </section>
+
     <section if="&this.resources" class="resources-collection-section">
       <h3 class="resources-collection">Resources</h3>
       <collection:resources/>
     </section>
+
     <section if="&this.referenced_boilers" class="referenced_boilers-collection-section">
       <h3 class="referenced_boilers-collection">Referenced Boilers</h3>
       <collection:referenced_boilers/>
     </section>
+
     <section if="&this.boilers" class="boilers-collection-section">
       <h3 class="boilers-collection">Boiler Name</h3>
       <collection:boilers/>
     </section>
+
     <section if="&this.refs" class="refs-collection-section">
       <h3 class="refs-collection">Refs</h3>
       <collection:refs><card: without-refby-link/></collection:refs>
     </section>
+
     <section if="&this.refbys" class="refbys-collection-section">
       <h3 class="refbys-collection">Refbys</h3>
       <collection:refbys><card: without-ref-link/></collection:refbys>
     </section>
+
+    <section if="&this.kbas" class="kbas-collection-section">
+      <h3 class="kbas-collection">KBAs</h3>
+      <collection:kbas><card: without-kba_by-link/></collection:kbas>
+    </section>
+
+    <section if="&this.kba_bys" class="kba_bys-collection-section">
+      <h3 class="kba_bys-collection">KBA'd By</h3>
+      <collection:kba_bys><card: without-kba-link/></collection:kba_bys>
+    </section>
+
     <section if="&this.xtras" class="xtras-collection-section">
       <h3 class="xtras-collection">Xtras</h3>
       <repeat:xtras join=", "><a/></repeat>
     </section>
+
   </aside:>
 </show-page>

@@ -423,6 +423,14 @@
             <h3 param="refbys-collection">Refbys</h3>
             <collection:refbys/>
           </section>
+          <section param="kbas-collection-section">
+            <h3 param="kbas-collection">Kbas</h3>
+            <collection:kbas/>
+          </section>
+          <section param="kba_bys-collection-section">
+            <h3 param="kba_bys-collection">Kba Bys</h3>
+            <collection:kba_bys/>
+          </section>
           <section param="xtras-collection-section">
             <h3 param="xtras-collection">Xtras</h3>
             <collection:xtras/>
@@ -917,7 +925,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="doc, doc_as_kba" param/>
+            <field-list fields="from_doc, to_doc" param/>
           </section>
     </content:>
     
