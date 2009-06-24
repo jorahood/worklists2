@@ -38,52 +38,116 @@ the keyword associations this doesn't work because the associations come
 after all the attributes. So, doing the order manually here. Using this tag 
 in my extension of <form> and customization of <show-page> for Search-->
 <def tag="field-list-for-search">
-  <field-list: fields="name, title_search, xtra_search, approveddate_is,
-               approveddate, modifieddate_is, modifieddate, birthdate_is,
-               birthdate, expiredate_is, expiredate, importance_is,
-               importance, visibility_is, visibility, volatility_is, volatility,
-               status_is, status, author, owner, resource, boiler, hotitem,
-               domains" view-blank="&false">
+  <field-list: fields="name, approveddate_is, approveddate, birthdate_is,
+               birthdate, expiredate_is, expiredate, modifieddate_is, modifieddate, 
+               importance_is, importance, visibility_is, visibility, volatility_is, 
+               volatility, status_is, status, title_search, xtra_search, author, owner,
+               resource, boiler, hotitem, domains" view-blank="&false">
     <birthdate-view:>
-      <input prompt if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <input prompt/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </birthdate-view:>
     <expiredate-view:>
-      <input prompt if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <input prompt/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </expiredate-view:>
     <modifieddate-view:>
-      <input prompt if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <input prompt/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </modifieddate-view:>
     <approveddate-view:>
-      <input prompt if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <input prompt/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </approveddate-view:>
     <importance-view:>
-      <select-one  include-none blank-message="Any" if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <select-one  include-none blank-message="Any"/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </importance-view:>
     <visibility-view:>
-      <select-one  include-none blank-message="Any" if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <select-one  include-none blank-message="Any"/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </visibility-view:>
     <volatility-view:>
-      <select-one  include-none blank-message="Any" if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <select-one  include-none blank-message="Any"/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </volatility-view:>
     <status-view:>
-      <select-one  include-none blank-message="Any" if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <select-one  include-none blank-message="Any"/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </status-view:>
     <author-view:>
-      <name-one if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <name-one/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </author-view:>
     <owner-view:>
-      <name-one if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <name-one/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </owner-view:>
     <resource-view:>
-      <name-one if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <name-one/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </resource-view:>
     <boiler-view:>
-      <name-one if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <name-one/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </boiler-view:>
     <hotitem-view:>
-      <name-one if="&scope.in_form"/>
+      <if test="&scope.in_form">
+        <name-one/>
+      </if>
+      <else>
+        <view/>
+      </else>
     </hotitem-view:>
-  </field-list>
+    </field-list>
 </def>
 
 <extend tag="form" for="Search">
