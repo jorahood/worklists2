@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090624145938) do
+ActiveRecord::Schema.define(:version => 20090624172948) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -80,6 +80,16 @@ ActiveRecord::Schema.define(:version => 20090624145938) do
   create_table "importance", :id => false, :force => true do |t|
     t.integer "rank"
     t.string  "importance"
+  end
+
+  create_table "kba_by_searches", :force => true do |t|
+    t.integer "search_id"
+    t.string  "kba_by_id"
+  end
+
+  create_table "kba_searches", :force => true do |t|
+    t.integer "search_id"
+    t.string  "kba_id"
   end
 
   create_table "kba_usage", :id => false, :force => true do |t|
@@ -178,8 +188,8 @@ ActiveRecord::Schema.define(:version => 20090624145938) do
 
   create_table "titlecache", :id => false, :force => true do |t|
     t.string  "title"
-    t.string  "docid"
-    t.string  "audience"
+    t.string  "docid",    :default => "", :null => false
+    t.string  "audience", :default => "", :null => false
     t.integer "id"
   end
 
