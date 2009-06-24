@@ -45,43 +45,43 @@ in my extension of <form> and customization of <show-page> for Search-->
                status_is, status, author, owner, resource, boiler, hotitem,
                domains" view-blank="&false">
     <birthdate-view:>
-      <input prompt/>
+      <input prompt if="&scope.in_form"/>
     </birthdate-view:>
     <expiredate-view:>
-      <input prompt/>
+      <input prompt if="&scope.in_form"/>
     </expiredate-view:>
     <modifieddate-view:>
-      <input prompt/>
+      <input prompt if="&scope.in_form"/>
     </modifieddate-view:>
     <approveddate-view:>
-      <input prompt/>
+      <input prompt if="&scope.in_form"/>
     </approveddate-view:>
     <importance-view:>
-      <select-one  include-none blank-message="Any"/>
+      <select-one  include-none blank-message="Any" if="&scope.in_form"/>
     </importance-view:>
     <visibility-view:>
-      <select-one  include-none blank-message="Any"/>
+      <select-one  include-none blank-message="Any" if="&scope.in_form"/>
     </visibility-view:>
     <volatility-view:>
-      <select-one  include-none blank-message="Any"/>
+      <select-one  include-none blank-message="Any" if="&scope.in_form"/>
     </volatility-view:>
     <status-view:>
-      <select-one  include-none blank-message="Any"/>
+      <select-one  include-none blank-message="Any" if="&scope.in_form"/>
     </status-view:>
     <author-view:>
-      <name-one />
+      <name-one if="&scope.in_form"/>
     </author-view:>
     <owner-view:>
-      <name-one />
+      <name-one if="&scope.in_form"/>
     </owner-view:>
     <resource-view:>
-      <name-one />
+      <name-one if="&scope.in_form"/>
     </resource-view:>
     <boiler-view:>
-      <name-one />
+      <name-one if="&scope.in_form"/>
     </boiler-view:>
     <hotitem-view:>
-      <name-one />
+      <name-one if="&scope.in_form"/>
     </hotitem-view:>
   </field-list>
 </def>

@@ -2,7 +2,7 @@ class Search < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
-  before_save :sync_comparisons
+  before_save :clear_unneeded_comparison_attrs
 
   DateComparison = HoboFields::EnumString.for :is, :before, :after, :is_not
   KeywordComparison = HoboFields::EnumString.for :is, :above, :below, :is_not
@@ -66,16 +66,19 @@ class Search < ActiveRecord::Base
   end
 
   private
-  def sync_comparisons
+  def clear_unneeded_comparison_attrs
     # each date selector and keyword selector (i.e., visibility, volatility, 
     # status, importance) consists of a value object
     # and a comparison (i.e., on, before, & after for dates,
     # equal to, greater than, & less than for keywords).
     # The search model doesn't care if it has one without the other but
     # it will be confusing to users to see just a date or keyword without its
-    # comparison, or just a comparison without its date or keyword,
-    # so we'll set or clear the comparisons based on whether their
-    # associated date or keyword is set or not
+    # comparison, or just a comparison without its date or keyword.
+    # The EnumStrings for the comparisons will submit the first value as a param
+    # every time so that takes care of a default for comparisons,
+    # so I'll clear the comparisons where their
+    # associated date or keyword is nil.
+
     dates = %w{approveddate birthdate expiredate modifieddate}
     dates.each { |date|
       # Clear the comparison so it doesn't appear sans its date
