@@ -187,10 +187,9 @@ ActiveRecord::Schema.define(:version => 20090624172948) do
   end
 
   create_table "titlecache", :id => false, :force => true do |t|
-    t.string  "title"
-    t.string  "docid",    :default => "", :null => false
-    t.string  "audience", :default => "", :null => false
-    t.integer "id"
+    t.string "title"
+    t.string "docid",    :default => "", :null => false
+    t.string "audience", :default => "", :null => false
   end
 
   add_index "titlecache", ["audience"], :name => "index_titlecache_on_audience"

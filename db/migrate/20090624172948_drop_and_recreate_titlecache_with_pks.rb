@@ -4,7 +4,6 @@ class DropAndRecreateTitlecacheWithPks < ActiveRecord::Migration
       t.string  "title"
       t.string  "docid"
       t.string  "audience"
-      t.integer "id"
     end
 
     add_index "titlecache", ["audience"], :name => "index_titlecache_on_audience"
@@ -16,7 +15,6 @@ class DropAndRecreateTitlecacheWithPks < ActiveRecord::Migration
     t.string  "title"
     t.string  "docid"
     t.string  "audience"
-    t.integer "id"
   end
 
   add_index "titlecache", ["audience"], :name => "index_titlecache_on_audience"
