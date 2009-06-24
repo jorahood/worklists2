@@ -11,6 +11,7 @@
         <page-nav/>
           <table-plus without-search-form fields='id, default_title, visibility_assoc, volatility_assoc, birthdate, modifieddate, approveddate'>
             <id-view:><doc-link/></id-view:>
+            <default-title-view:><name/></default-title-view:>
           </table-plus>
         <page-nav/>
       </section>
