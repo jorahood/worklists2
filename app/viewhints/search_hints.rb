@@ -4,8 +4,16 @@ class SearchHints < Hobo::ViewHints
     :modifieddate => '&nbsp;',
     :approveddate => '&nbsp;',
     :expiredate => '&nbsp;',
-    :birthdate_is => 'Born',
-    :modifieddate_is => 'Modified',
-    :approveddate_is => 'Approved',
-    :expiredate_is => 'Expires'
+    :birthdate_is => 'Birthdate',
+    :modifieddate_is => 'Modifieddate',
+    :approveddate_is => 'Approveddate',
+    :expiredate_is => 'Expiredate',
+    :status => "&nbsp;",
+    :importance => "&nbsp;",
+    :volatility => "&nbsp;",
+    :visibility => "&nbsp;",
+    :status_is => "Status",
+    :importance_is => "Importance",
+    :volatility_is => "Volatility",
+    :visibility_is => "Visibility"
 end

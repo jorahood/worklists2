@@ -10,26 +10,22 @@ class SearchesController < ApplicationController
       Doc.apply_scopes(
       :title_search => @search.title_search,
       :xtra_search => @search.xtra_search,
-      :"approveddate_#{@search.approveddate_is}" => 
-        !@search.approveddate_is.blank? && @search.approveddate,
-      :"birthdate_#{@search.birthdate_is}" => 
-        !@search.birthdate_is.blank? && @search.birthdate,
-      :"expiredate_#{@search.expiredate_is}" => 
-        !@search.expiredate_is.blank? && @search.expiredate,
-      :"modifieddate_#{@search.modifieddate_is}" => 
-        !@search.modifieddate_is.blank? && @search.modifieddate,
-      :visibility_is => @search.visibility,
-      :volatility_is => @search.volatility,
-      :status_is => @search.status,
+      :"approveddate_#{@search.approveddate_is}" => @search.approveddate,
+      :"birthdate_#{@search.birthdate_is}" => @search.birthdate,
+      :"expiredate_#{@search.expiredate_is}" => @search.expiredate,
+      :"modifieddate_#{@search.modifieddate_is}" => @search.modifieddate,
+      :"visibility_#{@search.visibility_is}" => @search.visibility_id,
+      :"volatility_#{@search.volatility_is}" => @search.volatility_id,
+      :"status_#{@search.status_is}" => @search.status_id,
+      :"importance_#{@search.importance_is}" => @search.importance_id,
       :author_is => @search.author,
       :owner_is => @search.owner,
       :with_resource => @search.resource,
       :with_referenced_boiler => @search.boiler,
       :with_hotitem => @search.hotitem,
-      :importance_is => @search.importance,
       :with_domains => @search.domains,
       :order_by => parse_sort_param(:id, :default_title, :birthdate, :modifieddate, :approveddate),
-      :with_default_title => true
+      :include => :default_title
     ).paginate(
       :page => params[:page])
   end

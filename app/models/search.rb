@@ -2,7 +2,10 @@ class Search < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
-  DateComparison = HoboFields::EnumString.for :on, :before, :after
+  before_save :sync_comparisons
+
+  DateComparison = HoboFields::EnumString.for :is, :before, :after, :is_not
+  KeywordComparison = HoboFields::EnumString.for :is, :above, :below, :is_not
 
   fields do
     name :string
@@ -16,6 +19,10 @@ class Search < ActiveRecord::Base
     birthdate :date
     expiredate_is DateComparison
     expiredate :date
+    importance_is KeywordComparison
+    visibility_is KeywordComparison
+    volatility_is KeywordComparison
+    status_is KeywordComparison
     timestamps
   end
 
@@ -40,7 +47,6 @@ class Search < ActiveRecord::Base
     :through => :domain_searches,
     :accessible => true
 
-
   # --- Permissions --- #
 
   def create_permitted?
@@ -57,6 +63,33 @@ class Search < ActiveRecord::Base
 
   def view_permitted?(field)
     true
+  end
+
+  private
+  def sync_comparisons
+    # each date selector and keyword selector (i.e., visibility, volatility, 
+    # status, importance) consists of a value object
+    # and a comparison (i.e., on, before, & after for dates,
+    # equal to, greater than, & less than for keywords).
+    # The search model doesn't care if it has one without the other but
+    # it will be confusing to users to see just a date or keyword without its
+    # comparison, or just a comparison without its date or keyword,
+    # so we'll set or clear the comparisons based on whether their
+    # associated date or keyword is set or not
+    dates = %w{approveddate birthdate expiredate modifieddate}
+    dates.each { |date|
+      # Clear the comparison so it doesn't appear sans its date
+      if !self[date] && self[date + "_is"]
+        self[date + "_is"] = nil
+      end
+    }
+    keywords = %w{importance visibility volatility status}
+    keywords.each { |keyword|
+      # Clear the comparison so it doesn't appear sans its keyword
+      if !self[keyword + "_id"] && self[keyword + "_is"]
+        self[keyword + "_is"] = nil
+      end
+    }
   end
 
 end

@@ -1,12 +1,13 @@
 <!-- Search -->
 
 <show-page>
-  <field-list: view-blank="&false"/>
-  <after-field-list:>
-    <field-list: fields="domains"/>
+  <field-list: replace>
+    <field-list-for-search/>
+  </field-list:>
+  <append-content-body:>
     <do with="&@result_docs">
       <section class="collection-section">
-        <h3 class="collection-heading"><count/> returned</h3>
+        <h3 class="collection-heading"><count/></h3>
         <page-nav/>
           <table-plus without-search-form fields='id, default_title, birthdate, modifieddate, approveddate'>
             <id-view:><doc-link/></id-view:>
@@ -14,5 +15,5 @@
         <page-nav/>
       </section>
     </do>
-  </after-field-list:>
+  </append-content-body:>
 </show-page>

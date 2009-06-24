@@ -98,22 +98,9 @@ class Doc < ActiveRecord::Base
       :conditions => ["#{Xtra.table_name}.term LIKE ?", "%#{search}%"]}
   }
   
-  named_scope :approveddate_on, lambda { |date|
-    {:conditions => ["#{Doc.table_name}.approveddate = ?", date]}
-  }
-
-  named_scope :birthdate_on, lambda { |date|
-    {:conditions => ["#{Doc.table_name}.birthdate = ?", date]}
-  }
-
   named_scope :expiredate_before, lambda { |date|
     {:joins => :expirations,
       :conditions => ["#{Expiration.table_name}.expiredate < ?", date]}
-  }
-
-  named_scope :expiredate_on, lambda { |date|
-    {:joins => :expirations,
-      :conditions => ["#{Expiration.table_name}.expiredate = ?", date]}
   }
 
   named_scope :expiredate_after, lambda { |date|
@@ -121,12 +108,37 @@ class Doc < ActiveRecord::Base
       :conditions => ["#{Expiration.table_name}.expiredate > ?", date]}
   }
 
-  named_scope :modifieddate_on, lambda { |date|
-      {:conditions => ["#{Doc.table_name}.modifieddate = ?", date]}
+  named_scope :importance_below, lambda { |rank|
+      {:conditions => ["importance < ?", rank]}
   }
 
-  named_scope :with_default_title, 
-    :include => :default_title
+  named_scope :importance_above, lambda { |rank|
+      {:conditions => ["importance > ?", rank]}
+  }
+
+  named_scope :status_below, lambda { |rank|
+      {:conditions => ["status < ?", rank]}
+  }
+
+  named_scope :status_above, lambda { |rank|
+      {:conditions => ["status > ?", rank]}
+  }
+
+  named_scope :visibility_below, lambda { |rank|
+      {:conditions => ["visibility < ?", rank]}
+  }
+
+  named_scope :visibility_above, lambda { |rank|
+      {:conditions => ["visibility > ?", rank]}
+  }
+
+  named_scope :volatility_below, lambda { |rank|
+      {:conditions => ["volatility < ?", rank]}
+  }
+
+  named_scope :volatility_above, lambda { |rank|
+      {:conditions => ["volatility > ?", rank]}
+  }
 
   def docid
     id

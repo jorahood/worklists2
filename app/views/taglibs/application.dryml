@@ -31,48 +31,65 @@
   </old-card>
 </extend>
 
+<!--define the field-list tag for search to set the order of appearance of 
+the fields so that importance will come just below importance_is, etc. With 
+dates I could set the order in the fields declaration in search.rb but with 
+the keyword associations this doesn't work because the associations come
+after all the attributes. So, doing the order manually here. Using this tag 
+in my extension of <form> and customization of <show-page> for Search-->
+<def tag="field-list-for-search">
+  <field-list: fields="name, title_search, xtra_search, approveddate_is,
+               approveddate, modifieddate_is, modifieddate, birthdate_is,
+               birthdate, expiredate_is, expiredate, importance_is,
+               importance, visibility_is, visibility, volatility_is, volatility,
+               status_is, status, author, owner, resource, boiler, hotitem,
+               domains" view-blank="&false">
+    <birthdate-view:>
+      <input prompt/>
+    </birthdate-view:>
+    <expiredate-view:>
+      <input prompt/>
+    </expiredate-view:>
+    <modifieddate-view:>
+      <input prompt/>
+    </modifieddate-view:>
+    <approveddate-view:>
+      <input prompt/>
+    </approveddate-view:>
+    <importance-view:>
+      <select-one  include-none blank-message="Any"/>
+    </importance-view:>
+    <visibility-view:>
+      <select-one  include-none blank-message="Any"/>
+    </visibility-view:>
+    <volatility-view:>
+      <select-one  include-none blank-message="Any"/>
+    </volatility-view:>
+    <status-view:>
+      <select-one  include-none blank-message="Any"/>
+    </status-view:>
+    <author-view:>
+      <name-one />
+    </author-view:>
+    <owner-view:>
+      <name-one />
+    </owner-view:>
+    <resource-view:>
+      <name-one />
+    </resource-view:>
+    <boiler-view:>
+      <name-one />
+    </boiler-view:>
+    <hotitem-view:>
+      <name-one />
+    </hotitem-view:>
+  </field-list>
+</def>
+
 <extend tag="form" for="Search">
   <old-form merge>
-    <field-list:>
-      <birthdate-view:>
-        <input prompt/>
-      </birthdate-view:>
-      <expiredate-view:>
-        <input prompt/>
-      </expiredate-view:>
-      <modifieddate-view:>
-        <input prompt/>
-      </modifieddate-view:>
-      <approveddate-view:>
-        <input prompt/>
-      </approveddate-view:>
-      <importance-view:>
-        <select-one  include-none blank-message="Any"/>
-      </importance-view:>
-      <visibility-view:>
-        <select-one  include-none blank-message="Any"/>
-      </visibility-view:>
-      <volatility-view:>
-        <select-one  include-none blank-message="Any"/>
-      </volatility-view:>
-      <status-view:>
-        <select-one  include-none blank-message="Any"/>
-      </status-view:>
-      <author-view:>
-        <name-one />
-      </author-view:>
-      <owner-view:>
-        <name-one />
-      </owner-view:>
-      <resource-view:>
-        <name-one />
-      </resource-view:>
-      <boiler-view:>
-        <name-one />
-      </boiler-view:>
-      <hotitem-view:>
-        <name-one />
-      </hotitem-view:>
+    <field-list: replace>
+      <field-list-for-search/>
     </field-list:>
   </old-form>
 </extend>
@@ -124,7 +141,7 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
 </extend>
 
 <extend tag="input" for="HoboFields::EnumString">
-  <old-input merge titleize="&false" first-option="any"/>
+  <old-input merge titleize="&false"/>
 </extend>
 
 <def tag="empty-collection-message"></def>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090620234309) do
+ActiveRecord::Schema.define(:version => 20090623144231) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -155,6 +155,10 @@ ActiveRecord::Schema.define(:version => 20090620234309) do
     t.string   "birthdate_is"
     t.string   "modifieddate_is"
     t.string   "expiredate_is"
+    t.string   "importance_is"
+    t.string   "visibility_is"
+    t.string   "volatility_is"
+    t.string   "status_is"
   end
 
   create_table "status", :id => false, :force => true do |t|
