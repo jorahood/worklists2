@@ -25,9 +25,9 @@ class SearchesController < ApplicationController
       :with_hotitem => @search.hotitem,
       :with_domains => @search.domains,
       :order_by => parse_sort_param(:id, :default_title, :visibility_assoc, :volatility_assoc, :birthdate, :modifieddate, :approveddate),
-      :include => :default_title,
-      :include => :visibility_assoc,
-      :include => :volatility_assoc
+      :include_default_title => true,
+      :include_visibility => true,
+      :include_volatility => true
     ).paginate(
       :page => params[:page])
   end

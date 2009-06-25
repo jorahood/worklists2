@@ -95,6 +95,7 @@ class Doc < ActiveRecord::Base
 
   named_scope :title_search, lambda { |search|
     {:joins => :titles,
+      :select => "DISTINCT #{Doc.table_name}.*",
       :conditions => ["#{Title.table_name}.title LIKE ?", "%#{search}%"]}
   }
 
@@ -115,37 +116,46 @@ class Doc < ActiveRecord::Base
   }
 
   named_scope :importance_below, lambda { |rank|
-      {:conditions => ["#{Doc.table_name}.importance < ?", rank]}
+    {:conditions => ["#{Doc.table_name}.importance < ?", rank]}
   }
 
   named_scope :importance_above, lambda { |rank|
-      {:conditions => ["#{Doc.table_name}.importance > ?", rank]}
+    {:conditions => ["#{Doc.table_name}.importance > ?", rank]}
   }
 
   named_scope :status_below, lambda { |rank|
-      {:conditions => ["#{Doc.table_name}.status < ?", rank]}
+    {:conditions => ["#{Doc.table_name}.status < ?", rank]}
   }
 
   named_scope :status_above, lambda { |rank|
-      {:conditions => ["#{Doc.table_name}.status > ?", rank]}
+    {:conditions => ["#{Doc.table_name}.status > ?", rank]}
   }
 
   named_scope :visibility_below, lambda { |rank|
-      {:conditions => ["#{Doc.table_name}.visibility < ?", rank]}
+    {:conditions => ["#{Doc.table_name}.visibility < ?", rank]}
   }
 
   named_scope :visibility_above, lambda { |rank|
-      {:conditions => ["#{Doc.table_name}.visibility > ?", rank]}
+    {:conditions => ["#{Doc.table_name}.visibility > ?", rank]}
   }
 
   named_scope :volatility_below, lambda { |rank|
-      {:conditions => ["#{Doc.table_name}.volatility < ?", rank]}
+    {:conditions => ["#{Doc.table_name}.volatility < ?", rank]}
   }
 
   named_scope :volatility_above, lambda { |rank|
-      {:conditions => ["#{Doc.table_name}.volatility > ?", rank]}
+    {:conditions => ["#{Doc.table_name}.volatility > ?", rank]}
   }
 
+  named_scope :include_default_title,
+    :include => :default_title
+
+  named_scope :include_visibility,
+    :include => :visibility_assoc
+
+  named_scope :include_volatility,
+    :include => :volatility_assoc
+  
   def docid
     id
   end
