@@ -6,13 +6,25 @@
 
 <set-theme name="clean"/>
 
+<def tag="main-nav">
+  <navigation class="main-nav" merge-attrs param="default">
+    <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Audience">Audiences</nav-item>
+    <nav-item with="&Boiler">Boilers</nav-item>
+    <nav-item with="&BoilerUsage">Boiler Usages</nav-item>
+    <nav-item with="&Doc">Docs</nav-item>
+    <nav-item with="&Domain">Domains</nav-item>
+    <nav-item with="&Search">Searches</nav-item>
+  </navigation>
+</def>
+
 <def tag="nil-view"></def>
 <def tag="app-name"><app-release/></def>
 
 <def tag="app-release"><%= svn_rev ||= /^URL: .*\/(\S+?\/\S+?)$/.match(`svn info`)[1] || 'unknown' %></def>
 
 <extend tag="page">
-  <old-page merge />
+  <old-page merge without-live-search/>
 </extend>
 
 <!--<extend tag="card" for="Domain">

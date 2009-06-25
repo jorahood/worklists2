@@ -6,22 +6,22 @@ class DomainSearch < ActiveRecord::Base
     timestamps
   end
 
-belongs_to :domain
-belongs_to :search
+  belongs_to :domain
+  belongs_to :search
 
 
   # --- Permissions --- #
 
   def create_permitted?
-    acting_user.administrator?
+    true
   end
 
   def update_permitted?
-    acting_user.administrator?
+    true
   end
 
   def destroy_permitted?
-    acting_user.administrator?
+    true
   end
 
   def view_permitted?(field)
