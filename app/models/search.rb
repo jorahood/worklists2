@@ -46,6 +46,29 @@ class Search < ActiveRecord::Base
   has_many :domains,
     :through => :domain_searches,
     :accessible => true
+  has_many :lists
+
+  def perform
+    Doc.apply_scopes(
+      :title_search => title_search,
+      :xtra_search => xtra_search,
+      :"approveddate_#{approveddate_is}" => approveddate,
+      :"birthdate_#{birthdate_is}" => birthdate,
+      :"expiredate_#{expiredate_is}" => expiredate,
+      :"modifieddate_#{modifieddate_is}" => modifieddate,
+      :"visibility_#{visibility_is}" => visibility_id,
+      :"volatility_#{volatility_is}" => volatility_id,
+      :"status_#{status_is}" => status_id,
+      :"importance_#{importance_is}" => importance_id,
+      :author_is => author,
+      :owner_is => owner,
+      :with_resource => resource,
+      :with_referenced_boiler => boiler,
+      :with_hotitem => hotitem,
+      :with_domains => domains
+    )
+  end
+
 
   # --- Permissions --- #
 
