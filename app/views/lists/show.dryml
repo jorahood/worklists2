@@ -2,9 +2,9 @@
 
 <show-page>
   <collection: replace>
-    <table-plus with='&@listed_docs' fields='doc, doc.titles, doc.birthdate, doc.modifieddate,
+    <table-plus with='&@listed_docs' fields='doc, doc.birthdate, doc.modifieddate,
                 doc.approveddate, doc.owner, doc.author, doc.importance,
-                doc.visibility, doc.volatility, doc.status, status, tag, notes'>
+                doc.visibility, doc.volatility, doc.status, status, tag'>
     </table-plus>
   </collection:>
 </show-page>

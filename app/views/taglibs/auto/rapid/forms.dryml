@@ -39,7 +39,7 @@
 <def tag="form" for="Doc">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="birthdate, modifieddate, approveddate, author_assoc, domains, importance_assoc, lists, owner_assoc, status_assoc, visibility_assoc, volatility_assoc" param/>
+    <field-list fields="birthdate, modifieddate, approveddate, importance, visibility, volatility, status, author, owner, author_assoc, domains, importance_assoc, lists, owner_assoc, status_assoc, visibility_assoc, volatility_assoc" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -135,7 +135,7 @@
 <def tag="form" for="List">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name, comment, audience, docs, owner" param/>
+    <field-list fields="name, comment, audience, docs, owner, search" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>
@@ -171,7 +171,7 @@
 <def tag="form" for="Search">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name, title_search, xtra_search, approveddate_is, approveddate, modifieddate_is, modifieddate, birthdate_is, birthdate, expiredate_is, expiredate, importance_is, visibility_is, volatility_is, status_is, author, boiler, domains, hotitem, importance, owner, resource, status, visibility, volatility" param/>
+    <field-list fields="name, title_search, xtra_search, approveddate_is, approveddate, modifieddate_is, modifieddate, birthdate_is, birthdate, expiredate_is, expiredate, importance_is, visibility_is, volatility_is, status_is, author, boiler, domains, hotitem, importance, lists, owner, resource, status, visibility, volatility" param/>
     <div param="actions">
       <submit label="Save" param/><or-cancel param="cancel"/>
     </div>

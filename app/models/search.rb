@@ -46,7 +46,8 @@ class Search < ActiveRecord::Base
   has_many :domains,
     :through => :domain_searches,
     :accessible => true
-  has_many :lists
+  has_many :lists,
+    :accessible => true
 
   def perform
     Doc.apply_scopes(
@@ -69,6 +70,9 @@ class Search < ActiveRecord::Base
     )
   end
 
+  def save_as_list
+    
+  end
 
   # --- Permissions --- #
 

@@ -18,15 +18,14 @@ class List < ActiveRecord::Base
   belongs_to :search
 
   has_many :listed_docs,
-    :dependent=>:destroy
+    :dependent => :destroy
   has_many :docs, 
-    :through =>:listed_docs,
+    :through => :listed_docs,
     :accessible => true
 
-#  accepts_nested_attributes_for :docs,
-#    :allow_destroy => true
-
   def populate
+    #FIXME: the following is too slow for 1000+ doc lists, 
+    #for speed use ActiveRecord::Base#import provided by ar_extensions
     self.docs = search.perform
   end
   # --- Permissions --- #

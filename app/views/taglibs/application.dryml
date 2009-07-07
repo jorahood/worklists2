@@ -37,7 +37,7 @@
   <old-card merge>
     <append-body:>
       <div class="docs">
-        <repeat:docs join=", "><a/></repeat:docs>
+        <repeat:listed_docs join=", "><doc-link:doc_id/></repeat:listed_docs>
       </div>
     </append-body:>
   </old-card>
@@ -54,7 +54,7 @@ in my extension of <form> and customization of <show-page> for Search-->
                birthdate, expiredate_is, expiredate, modifieddate_is, modifieddate, 
                importance_is, importance, visibility_is, visibility, volatility_is, 
                volatility, status_is, status, title_search, xtra_search, author, owner,
-               resource, boiler, hotitem, domains" view-blank="&false">
+               resource, boiler, hotitem, domains, lists" view-blank="&false">
     <birthdate-view:>
       <if test="&scope.in_form">
         <input prompt/>

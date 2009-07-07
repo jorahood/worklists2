@@ -12,7 +12,7 @@ class Doc < ActiveRecord::Base
   end
 
   #don't display the fks
-  never_show :importance, :visibility, :volatility, :status, :author, :owner
+#  never_show :importance, :visibility, :volatility, :status, :author, :owner
   set_table_name :document
   set_search_columns :id
 
