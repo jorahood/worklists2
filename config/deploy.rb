@@ -1,5 +1,6 @@
 require 'deprec'
-  
+
+set :database_yml_in_scm, false
 set :domain, "156.56.19.9"
 set :application, "worklists2"
 set :repository, 'svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/worklists2'
@@ -8,7 +9,7 @@ set :repository, 'svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/wo
 # your SCM below:
 #set :scm, :git
    
-set :ruby_vm_type,      :mri        # :ree, :mri
+set :ruby_vm_type,      :ree        # :ree, :mri
 set :web_server_type,   :apache     # :apache, :nginx
 set :app_server_type,   :passenger  # :passenger, :mongrel
 set :db_server_type,    :mysql      # :mysql, :postgresql, :sqlite
