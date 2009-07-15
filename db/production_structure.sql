@@ -1,9 +1,9 @@
 CREATE TABLE `boilerusage` (
   `boiler` varchar(255) default NULL,
   `fromid` varchar(255) default NULL,
-  KEY `index_boilerusage_on_boiler` (`boiler`),
-  KEY `index_boilerusage_on_fromid` (`fromid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `index_boilerusage_on_fromid` (`fromid`),
+  KEY `index_boilerusage_on_boiler` (`boiler`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `document` (
   `id` varchar(255) default NULL,
@@ -17,27 +17,27 @@ CREATE TABLE `document` (
   `volatility` int(11) default NULL,
   `status` int(11) default NULL,
   UNIQUE KEY `index_docs_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `documentdomain` (
   `id` varchar(255) default NULL,
   `domain` varchar(255) default NULL,
   KEY `index_documentdomain_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `documentnames` (
   `name` varchar(255) default NULL,
   `docid` varchar(255) default NULL,
   KEY `index_documentnames_on_docid` (`docid`),
   KEY `index_documentnames_on_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `domain_searches` (
   `id` int(11) NOT NULL auto_increment,
   `search_id` int(11) default NULL,
   `domain_id` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `domainlist` (
   `domain` varchar(255) default NULL,
@@ -47,50 +47,36 @@ CREATE TABLE `domainlist` (
   `visible` varchar(512) default NULL,
   `accessible` varchar(512) default NULL,
   `audience` varchar(512) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `expire` (
   `id` varchar(255) default NULL,
   `expiredate` date default NULL,
   `explanation` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `hotitem` (
   `id` varchar(255) default NULL,
   `hotitem` varchar(255) default NULL,
   KEY `index_hotitem_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `importance` (
   `rank` int(11) default NULL,
   `importance` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `kba_by_searches` (
-  `id` int(11) NOT NULL auto_increment,
-  `search_id` int(11) default NULL,
-  `kba_by_id` varchar(255) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `kba_searches` (
-  `id` int(11) NOT NULL auto_increment,
-  `search_id` int(11) default NULL,
-  `kba_id` varchar(255) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `kba_usage` (
   `docid` varchar(4) NOT NULL default '',
   `kba` varchar(4) NOT NULL default '',
   PRIMARY KEY  (`docid`,`kba`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `kbresource` (
   `id` varchar(255) default NULL,
   `username` varchar(255) default NULL,
   KEY `index_kbresource_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `kbuser` (
   `username` varchar(255) default NULL,
@@ -102,7 +88,7 @@ CREATE TABLE `kbuser` (
   `status` varchar(255) default NULL,
   `password` varchar(255) default NULL,
   `pagernumber` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `listed_docs` (
   `id` int(11) NOT NULL auto_increment,
@@ -113,7 +99,7 @@ CREATE TABLE `listed_docs` (
   `status` varchar(255) default NULL,
   `tag` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=681 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `lists` (
   `id` int(11) NOT NULL auto_increment,
@@ -123,9 +109,8 @@ CREATE TABLE `lists` (
   `owner_id` int(11) default NULL,
   `comment` text,
   `audience_id` varchar(255) default NULL,
-  `search_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `notes` (
   `id` int(11) NOT NULL auto_increment,
@@ -135,18 +120,18 @@ CREATE TABLE `notes` (
   `owner_id` int(11) default NULL,
   `listed_doc_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `references` (
   `fromid` varchar(255) NOT NULL default '',
   `toid` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`fromid`,`toid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) NOT NULL,
   UNIQUE KEY `unique_schema_migrations` (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `searches` (
   `id` int(11) NOT NULL auto_increment,
@@ -159,12 +144,12 @@ CREATE TABLE `searches` (
   `status_id` int(11) default NULL,
   `author_id` varchar(255) default NULL,
   `owner_id` varchar(255) default NULL,
-  `expiredate` date default NULL,
-  `resource_id` varchar(255) default NULL,
   `title_search` varchar(255) default NULL,
   `birthdate` date default NULL,
   `modifieddate` date default NULL,
   `approveddate` date default NULL,
+  `expiredate` date default NULL,
+  `resource_id` varchar(255) default NULL,
   `boiler_id` varchar(255) default NULL,
   `hotitem_id` varchar(255) default NULL,
   `xtra_search` varchar(255) default NULL,
@@ -177,25 +162,26 @@ CREATE TABLE `searches` (
   `volatility_is` varchar(255) default NULL,
   `status_is` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `status` (
   `rank` int(11) default NULL,
   `status` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `titleaudience` (
   `audience` varchar(255) default NULL,
   `description` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `titlecache` (
   `title` varchar(255) default NULL,
   `docid` varchar(255) NOT NULL default '',
   `audience` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`docid`,`audience`),
   KEY `index_titlecache_on_audience` (`audience`),
   KEY `index_titlecache_on_docid` (`docid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL auto_increment,
@@ -211,24 +197,24 @@ CREATE TABLE `users` (
   `state` varchar(255) default 'active',
   `key_timestamp` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `visibility` (
   `rank` int(11) default NULL,
   `visibility` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `volatility` (
   `rank` int(11) default NULL,
   `volatility` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `xtra` (
   `term` varchar(255) default NULL,
   `weight` int(11) default NULL,
   `id` varchar(255) default NULL,
   KEY `index_xtra_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO schema_migrations (version) VALUES ('20080825192621');
 
@@ -368,8 +354,6 @@ INSERT INTO schema_migrations (version) VALUES ('20090615195257');
 
 INSERT INTO schema_migrations (version) VALUES ('20090615203112');
 
-INSERT INTO schema_migrations (version) VALUES ('20090616021458');
-
 INSERT INTO schema_migrations (version) VALUES ('20090618145229');
 
 INSERT INTO schema_migrations (version) VALUES ('20090618150813');
@@ -382,8 +366,4 @@ INSERT INTO schema_migrations (version) VALUES ('20090623144231');
 
 INSERT INTO schema_migrations (version) VALUES ('20090624145938');
 
-INSERT INTO schema_migrations (version) VALUES ('20090624155020');
-
 INSERT INTO schema_migrations (version) VALUES ('20090624172948');
-
-INSERT INTO schema_migrations (version) VALUES ('20090630144740');
