@@ -32,6 +32,8 @@ Rails::Initializer.run do |config|
   config.gem 'activerecord-oracle-adapter', :lib => 'active_record/connection_adapters/oracle_adapter', :source => 'http://gems.rubyonrails.org'
   config.gem 'composite_primary_keys' #supports primary keys based on multiple columns
   config.gem 'rubycas-client'
+  config.gem 'hobo'
+  
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
