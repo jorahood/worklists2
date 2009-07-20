@@ -39,9 +39,14 @@ task :install_instantclient, :roles => :db do
   run "svn export --force svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/instantclient_10_1 /tmp/instantclient"
   run "#{sudo} mkdir /opt/oracle"
   run "#{sudo} mv /tmp/instantclient /opt/oracle/"
+  # add the /opt/oracle/instantclient directory to the ld.so.conf path rather than using the LD_LIBRARY_PATH env variable,
+  # which is a bitch to set in my bell:load rake task when installing it in cron with craken
+  run "echo '/opt/oracle/instantclient' | #{sudo} tee /etc/ld.so.conf.d/instantclient.conf"
+  # reload the dynamic loader cache so it finds instantclient.conf
+  run "#{sudo} ldconfig"
 end
 
 desc "Install ruby-oci8 gem"
 task :install_oci8, :roles => :db do
-    run "#{sudo} LD_LIBRARY_PATH=/opt/oracle/instantclient gem install --no-rdoc --no-ri ruby-oci8"
+    gem2.install 'ruby-oci8'
 end
