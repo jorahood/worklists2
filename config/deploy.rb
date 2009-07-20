@@ -45,10 +45,3 @@ desc "Install ruby-oci8 gem"
 task :install_oci8, :roles => :db do
     run "#{sudo} LD_LIBRARY_PATH=/opt/oracle/instantclient gem install --no-rdoc --no-ri ruby-oci8"
 end
-
-desc "copy the config/crontab/"
-task :write_crontab, :roles => :app do
-  puts "Installing server-specific crontab."
-  run("cd #{deploy_to}/current/config/crontab; crontab default.cron")
-end
-after "deploy:restart", "write_crontab"
