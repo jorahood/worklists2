@@ -46,7 +46,7 @@ task :install_instantclient, :roles => :db do
   run "#{sudo} ldconfig"
 end
 
-desc "Install ruby-oci8 gem"
+desc "Install ruby-oci8 gem version 1.0.6"
 task :install_oci8, :roles => :db do
-    gem2.install 'ruby-oci8'
+    gem2.install 'ruby-oci8', '1.0.6'
 end
