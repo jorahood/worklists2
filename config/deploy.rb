@@ -32,3 +32,16 @@ namespace :deploy do
     top.deprec.app.restart
   end
 end
+
+desc "Install InstantClient libraries"
+task :install_instantclient, :roles => :db do
+  run "svn export --force svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/instantclient_10_1 /tmp/instantclient"
+  run "#{sudo} mkdir /opt/oracle"
+  run "#{sudo} mv /tmp/instantclient /opt/oracle/"
+end
+
+desc "Install ruby-oci8 gem"
+task :install_oci8, :roles => :db do
+    run "#{sudo} LD_LIBRARY_PATH=/opt/oracle/instantclient gem install --no-rdoc --no-ri ruby-oci8"
+end
+
