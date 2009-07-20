@@ -1,1 +1,1 @@
-05,15,27,35,45,55 * * * * export LD_LIBRARY_PATH=/opt/oracle/instantclient && bell:load
+05,15,27,35,45,55 * * * * export LD_LIBRARY_PATH=/opt/oracle/instantclient; bell:load
