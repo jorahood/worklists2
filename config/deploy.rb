@@ -21,6 +21,7 @@ set :db_server_type,    :mysql      # :mysql, :postgresql, :sqlite
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
+role :cron, domain # for craken: http://github.com/latimes/craken/tree/master
 
 # If you aren't deploying to /opt/apps/#{application} on the target
 # servers (which is the deprec default), you can specify the actual location
@@ -45,3 +46,9 @@ task :install_oci8, :roles => :db do
     run "#{sudo} LD_LIBRARY_PATH=/opt/oracle/instantclient gem install --no-rdoc --no-ri ruby-oci8"
 end
 
+desc "copy the config/crontab/"
+task :write_crontab, :roles => :app do
+  puts "Installing server-specific crontab."
+  run("cd #{deploy_to}/current/config/crontab; crontab default.cron")
+end
+after "deploy:restart", "write_crontab"
