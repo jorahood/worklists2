@@ -6,8 +6,6 @@ namespace :bell do
   desc "Reload a model (e.g. 'docs', default='all') from bell"
   # rake tasks with arguments: http://rake.rubyforge.org/files/doc/release_notes/rake-0_8_3_rdoc.html
   task :load, :model, :needs => :environment do |t, args|
-    # create an auto-closing ssh tunnel: http://www.g-loaded.eu/2006/11/24/auto-closing-ssh-tunnels
-    system('ssh -f -L 1521:bell.ucs.indiana.edu:1521 bell.ucs.indiana.edu sleep 1' )
     # args.with_defaults: http://dev.nuclearrooster.com/2009/01/05/rake-task-with-arguments/
     args.with_defaults(:model => 'all')
     models_from_bell = (args.model == 'all') ?
