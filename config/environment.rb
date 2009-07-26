@@ -29,7 +29,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 config.gem 'jorahood-ar-extensions',
   :version => '0.9.2.3',
-  :lib => 'ar-extensions',
+  :lib => 'ar-extensions/extensions',
   :source => 'http://gems.github.com'
   # :lib config value found at http://www.foliosus.com/blog/connecting-ruby-on-rails-to-oracle-on-an-intel-mac-in-leopard-take-2 : see comment 7
 config.gem 'activerecord-oracle-adapter',
