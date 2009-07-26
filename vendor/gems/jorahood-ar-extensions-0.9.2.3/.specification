@@ -1,0 +1,149 @@
+--- !ruby/object:Gem::Specification 
+name: jorahood-ar-extensions
+version: !ruby/object:Gem::Version 
+  version: 0.9.2.3
+platform: ruby
+authors: 
+- Zach Dennis
+- Mark Van Holstyn
+- Blythe Dunham
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-06-16 00:00:00 -04:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: activerecord
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 2.1.2
+    version: 
+description: Extends ActiveRecord functionality by adding better finder/query support, as well as supporting mass data import, foreign key, CSV and temporary tables
+email: zach.dennis@gmail.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+files: 
+- init.rb
+- Rakefile
+- ChangeLog
+- README
+- db/migrate
+- db/migrate/generic_schema.rb
+- db/migrate/mysql_schema.rb
+- db/migrate/oracle_schema.rb
+- db/migrate/version.rb
+- config/database.yml
+- config/database.yml.template
+- config/mysql.schema
+- config/postgresql.schema
+- lib/ar-extensions/create_and_update.rb
+- lib/ar-extensions/csv.rb
+- lib/ar-extensions/delete.rb
+- lib/ar-extensions/extensions.rb
+- lib/ar-extensions/finder_options.rb
+- lib/ar-extensions/finders.rb
+- lib/ar-extensions/foreign_keys.rb
+- lib/ar-extensions/fulltext.rb
+- lib/ar-extensions/import.rb
+- lib/ar-extensions/insert_select.rb
+- lib/ar-extensions/synchronize.rb
+- lib/ar-extensions/temporary_table.rb
+- lib/ar-extensions/union.rb
+- lib/ar-extensions/version.rb
+- tests/connections/native_mysql
+- tests/connections/native_mysql/connection.rb
+- tests/connections/native_oracle
+- tests/connections/native_oracle/connection.rb
+- tests/connections/native_postgresql
+- tests/connections/native_postgresql/connection.rb
+- tests/connections/native_sqlite
+- tests/connections/native_sqlite/connection.rb
+- tests/connections/native_sqlite3
+- tests/connections/native_sqlite3/connection.rb
+- tests/fixtures/addresses.yml
+- tests/fixtures/books.yml
+- tests/fixtures/developers.yml
+- tests/fixtures/unit
+- tests/fixtures/unit/active_record_base_finders
+- tests/fixtures/unit/active_record_base_finders/addresses.yml
+- tests/fixtures/unit/active_record_base_finders/books.yml
+- tests/fixtures/unit/active_record_base_finders/developers.yml
+- tests/fixtures/unit/synchronize
+- tests/fixtures/unit/synchronize/books.yml
+- tests/fixtures/unit/to_csv_headers
+- tests/fixtures/unit/to_csv_headers/addresses.yml
+- tests/fixtures/unit/to_csv_headers/developers.yml
+- tests/fixtures/unit/to_csv_with_common_options
+- tests/fixtures/unit/to_csv_with_common_options/addresses.yml
+- tests/fixtures/unit/to_csv_with_common_options/developers.yml
+- tests/fixtures/unit/to_csv_with_common_options/languages.yml
+- tests/fixtures/unit/to_csv_with_common_options/teams.yml
+- tests/fixtures/unit/to_csv_with_default_options
+- tests/fixtures/unit/to_csv_with_default_options/developers.yml
+- tests/models/address.rb
+- tests/models/animal.rb
+- tests/models/book.rb
+- tests/models/cart_item.rb
+- tests/models/developer.rb
+- tests/models/group.rb
+- tests/models/language.rb
+- tests/models/mysql
+- tests/models/mysql/book.rb
+- tests/models/mysql/test_innodb.rb
+- tests/models/mysql/test_memory.rb
+- tests/models/mysql/test_myisam.rb
+- tests/models/project.rb
+- tests/models/shopping_cart.rb
+- tests/models/team.rb
+- tests/models/topic.rb
+- tests/mysql/test_create_and_update.rb
+- tests/mysql/test_delete.rb
+- tests/mysql/test_finder_options.rb
+- tests/mysql/test_finders.rb
+- tests/mysql/test_import.rb
+- tests/mysql/test_insert_select.rb
+- tests/mysql/test_mysql_adapter.rb
+- tests/mysql/test_union.rb
+- tests/oracle/test_adapter.rb
+- tests/postgresql/test_adapter.rb
+has_rdoc: true
+homepage: http://www.continuousthinking.com/tags/arext
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --main
+- README
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: arext
+rubygems_version: 1.3.3
+signing_key: 
+specification_version: 2
+summary: Extends ActiveRecord functionality. Added compatibility with composite-primary-keys
+test_files: []
+
