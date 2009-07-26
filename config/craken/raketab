@@ -1,1 +1,1 @@
-05,15,27,35,45,55 * * * * bell:load > /dev/null
+20,50 * * * * bell:load > /dev/null
