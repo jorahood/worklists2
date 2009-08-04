@@ -21,7 +21,7 @@
 <def tag="nil-view"></def>
 <def tag="app-name"><app-release/></def>
 
-<def tag="app-release"><%= svn_rev ||= /^URL: .*\/(\S+?\/\S+?)$/.match(`svn info`)[1] || 'unknown' %></def>
+<def tag="app-release"><%= revision_name %></def>
 
 <extend tag="page">
   <old-page merge without-live-search/>
