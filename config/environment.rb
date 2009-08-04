@@ -27,10 +27,11 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-config.gem 'jorahood-ar-extensions',
-  :version => '0.9.2.3',
-  :lib => 'ar-extensions/extensions',
-  :source => 'http://gems.github.com'
+  # ar-extensions 0.9.2.1 contains my changes to provide compatibiltity with models using composite_primary_key gem
+  # http://github.com/jorahood/ar-extensions/commits/composite_compat
+  config.gem 'ar-extensions',
+    :version => '0.9.2.1'
+
   # :lib config value found at http://www.foliosus.com/blog/connecting-ruby-on-rails-to-oracle-on-an-intel-mac-in-leopard-take-2 : see comment 7
 config.gem 'activerecord-oracle-adapter',
   :version => '1.0.0.9250',
