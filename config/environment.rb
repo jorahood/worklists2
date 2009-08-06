@@ -33,17 +33,17 @@ Rails::Initializer.run do |config|
     :version => '0.9.2.1'
 
   # :lib config value found at http://www.foliosus.com/blog/connecting-ruby-on-rails-to-oracle-on-an-intel-mac-in-leopard-take-2 : see comment 7
-config.gem 'activerecord-oracle-adapter',
-  :version => '1.0.0.9250',
-  :lib => 'active_record/connection_adapters/oracle_adapter',
-  :source => 'http://gems.rubyonrails.org'
-config.gem 'composite_primary_keys',
-  :version => '2.3.2'
-config.gem 'jorahood-rubycas-client', 
-  :version => '2.0.99.1',
-  :lib => 'rubycas-client',
-  :source => 'http://gems.github.com'
-#  config.gem 'hobo'
+  config.gem 'activerecord-oracle-adapter',
+    :version => '1.0.0.9250',
+    :lib => 'active_record/connection_adapters/oracle_adapter',
+    :source => 'http://gems.rubyonrails.org'
+  config.gem 'composite_primary_keys',
+    :version => '2.3.2'
+  config.gem 'jorahood-rubycas-client',
+    :version => '2.0.99.1',
+    :lib => 'rubycas-client',
+    :source => 'http://gems.github.com'
+  #  config.gem 'hobo'
   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
