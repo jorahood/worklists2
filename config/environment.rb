@@ -39,11 +39,11 @@ Rails::Initializer.run do |config|
     :source => 'http://gems.rubyonrails.org'
   config.gem 'composite_primary_keys',
     :version => '2.3.2'
-  config.gem 'jorahood-rubycas-client',
-    :version => '2.0.99.1',
-    :lib => 'rubycas-client',
-    :source => 'http://gems.github.com'
-  #  config.gem 'hobo'
+  #rubycas-client 2.0.99.1 makes the rubycas client compatible with IU CAS. I will keep a rebased version available under the iu tag at 
+  #http://github.com/jorahood/rubycas-client/
+  config.gem 'rubycas-client',
+    :version => '2.0.99.1'
+    #  config.gem 'hobo'
   
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
