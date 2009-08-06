@@ -43,20 +43,31 @@ module CASClient
     # If a logout_url has not been explicitly configured,
     # the default is cas_base_url + "/logout".
     #
-    # service_url:: Set this if you want the user to be
-    #               able to immediately log back in. Generally
-    #               you'll want to use something like <tt>request.referer</tt>.
-    #               Note that this only works with RubyCAS-Server.
-    # back_url:: This satisfies section 2.3.1 of the CAS protocol spec.
-    #            See http://www.ja-sig.org/products/cas/overview/protocol
-    def logout_url(service_url = nil, back_url = nil)
+    # destination_url:: Set this if you want the user to be
+    #                   able to immediately log back in. Generally
+    #                   you'll want to use something like <tt>request.referer</tt>.
+    #                   Note that the above behaviour describes RubyCAS-Server 
+    #                   -- other CAS server implementations might use this
+    #                   parameter differently (or not at all).
+    # follow_url:: This satisfies section 2.3.1 of the CAS protocol spec.
+    #              See http://www.ja-sig.org/products/cas/overview/protocol
+    def logout_url(destination_url = nil, follow_url = nil)
       url = @logout_url || (cas_base_url + "/logout")
       
-      if service_url || back_url
+      if destination_url
+        # if present, remove the 'ticket' parameter from the destination_url
+        duri = URI.parse(destination_url)
+        h = duri.query ? query_to_hash(duri.query) : {}
+        h.delete('ticket')
+        duri.query = hash_to_query(h)
+        destination_url = duri.to_s.gsub(/\?$/, '')
+      end
+      
+      if destination_url || follow_url
         uri = URI.parse(url)
         h = uri.query ? query_to_hash(uri.query) : {}
-        h['service'] = service_url if service_url
-        h['url'] = back_url if back_url
+        h['destination'] = destination_url if destination_url
+        h['url'] = follow_url if follow_url
         uri.query = hash_to_query(h)
         uri.to_s
       else
@@ -82,6 +93,30 @@ module CASClient
       return st
     end
     alias validate_proxy_ticket validate_service_ticket
+    
+    # Returns true if the configured CAS server is up and responding;
+    # false otherwise.
+    def cas_server_is_up?
+      uri = URI.parse(login_url)
+      
+      log.debug "Checking if CAS server at URI '#{uri}' is up..."
+      
+      https = Net::HTTP.new(uri.host, uri.port)
+      https.use_ssl = (uri.scheme == 'https')
+      
+      begin
+        raw_res = https.start do |conn|
+          conn.get("#{uri.path}?#{uri.query}")
+        end
+      rescue Errno::ECONNREFUSED => e
+        log.warn "CAS server did not respond! (#{e.inspect})"
+        return false
+      end
+      
+      log.debug "CAS server responded with #{raw_res.inspect}:\n#{raw_res.body}"
+      
+      return raw_res.kind_of?(Net::HTTPSuccess)
+    end
     
     # Requests a login using the given credentials for the given service; 
     # returns a LoginResponse object.
@@ -168,18 +203,30 @@ module CASClient
     # Fetches a CAS response of the given type from the given URI.
     # Type should be either ValidationResponse or ProxyResponse.
     def request_cas_response(uri, type)
-      log.debug "Requesting CAS response form URI #{uri.inspect}"
+      log.debug "Requesting CAS response for URI #{uri}"
       
       uri = URI.parse(uri) unless uri.kind_of? URI
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = (uri.scheme == 'https')
-      raw_res = https.start do |conn|
-        conn.get("#{uri.path}?#{uri.query}")
+      
+      begin
+        raw_res = https.start do |conn|
+          conn.get("#{uri.path}?#{uri.query}")
+        end
+      rescue Errno::ECONNREFUSED => e
+        log.error "CAS server did not respond! (#{e.inspect})"
+        raise "The CAS authentication server at #{uri} is not responding!"
       end
       
-      #TODO: check to make sure that response code is 200 and handle errors otherwise
-      
-      log.debug "CAS Responded with #{raw_res.inspect}:\n#{raw_res.body}"
+      # We accept responses of type 422 since RubyCAS-Server generates these
+      # in response to requests from the client that are processable but contain
+      # invalid CAS data (for example an invalid service ticket).
+      if raw_res.kind_of?(Net::HTTPSuccess) || raw_res.code.to_i == 422
+        log.debug "CAS server responded with #{raw_res.inspect}:\n#{raw_res.body}"
+      else
+        log.error "CAS server responded with an error! (#{raw_res.inspect})"
+        raise "The CAS authentication server at #{uri} responded with an error (#{raw_res.inspect})!"
+      end
       
       type.new(raw_res.body)
     end
@@ -202,8 +249,7 @@ module CASClient
       pairs = []
       hash.each do |k, vals|
         vals = [vals] unless vals.kind_of? Array
-        # IU's CAS server doesn't accept escaped service URLs
-        vals.each {|v| pairs << "#{CGI.escape(k)}=#{v}"}
+        vals.each {|v| pairs << "#{CGI.escape(k)}=#{CGI.escape(v)}"}
       end
       pairs.join("&")
     end

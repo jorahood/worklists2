@@ -1,5 +1,5 @@
 --- !ruby/object:Gem::Specification 
-name: jorahood-rubycas-client
+name: rubycas-client
 version: !ruby/object:Gem::Version 
   version: 2.0.99.1
 platform: ruby
@@ -25,7 +25,7 @@ dependencies:
     version: 
 - !ruby/object:Gem::Dependency 
   name: hoe
-  type: :runtime
+  type: :development
   version_requirement: 
   version_requirements: !ruby/object:Gem::Requirement 
     requirements: 
@@ -33,8 +33,8 @@ dependencies:
       - !ruby/object:Gem::Version 
         version: 1.7.0
     version: 
-description: Client library for the Central Authentication Service (CAS) protocol, modified to work with Indiana University's CAS server.
-email: jorahood at indiana dot edu
+description: Client library for the Central Authentication Service (CAS) protocol.
+email: matt at roughest dot net
 executables: []
 
 extensions: []
