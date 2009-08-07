@@ -40,7 +40,7 @@ Rails::Initializer.run do |config|
   config.gem 'composite_primary_keys',
     :version => '2.3.2'
   #rubycas-client 2.0.99.1 makes the rubycas client compatible with IU CAS. I will keep a rebased version available under the iu tag at 
-  #http://github.com/jorahood/rubycas-client/
+  #http://github.com/jorahood/rubycas-client/tree/iu
   config.gem 'rubycas-client',
     :version => '2.0.99.1'
     #  config.gem 'hobo'
