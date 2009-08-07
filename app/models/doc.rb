@@ -104,7 +104,31 @@ class Doc < ActiveRecord::Base
       :select => "DISTINCT #{Doc.table_name}.*",
       :conditions => ["#{Xtra.table_name}.term LIKE ?", "%#{search}%"]}
   }
+
+  named_scope :approveddate_after, lambda {|date|
+   {:conditions => ["#{Doc.table_name}.approveddate > ?", date]}
+  }
   
+  named_scope :approveddate_before, lambda {|date|
+   {:conditions => ["#{Doc.table_name}.approveddate < ?", date]}
+  }
+
+  named_scope :birthdate_after, lambda {|date|
+   {:conditions => ["#{Doc.table_name}.birthdate > ?", date]}
+  }
+
+  named_scope :birthdate_before, lambda {|date|
+   {:conditions => ["#{Doc.table_name}.birthdate < ?", date]}
+  }
+
+  named_scope :modifieddate_after, lambda {|date|
+   {:conditions => ["#{Doc.table_name}.modifieddate > ?", date]}
+  }
+
+  named_scope :modifieddate_before, lambda {|date|
+   {:conditions => ["#{Doc.table_name}.modifieddate < ?", date]}
+  }
+
   named_scope :expiredate_before, lambda { |date|
     {:joins => :expirations,
       :conditions => ["#{Expiration.table_name}.expiredate < ?", date]}
