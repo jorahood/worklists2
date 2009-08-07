@@ -216,7 +216,7 @@
 
 <def tag="signup-form" polymorphic/>
 <def tag="signup-form" for="User">
-  <form lifecycle="signup">
+  <form lifecycle="signup" merge param="default">
     <error-messages param/>
     <field-list fields="name, email_address, password, password_confirmation" param/>
     <div param="actions">
@@ -227,7 +227,7 @@
 
 <def tag="reset-password-form" polymorphic/>
 <def tag="reset-password-form" for="User">
-  <form lifecycle="reset_password">
+  <form lifecycle="reset_password" merge param="default">
     <error-messages param/>
     <input type="hidden" name="key" value="&this.lifecycle.provided_key" if="&this.lifecycle.provided_key"/>
     <field-list fields="password, password_confirmation" param/>
