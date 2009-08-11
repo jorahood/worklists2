@@ -1,6 +1,5 @@
 class MakeDocsNameFieldThePrimaryKey < ActiveRecord::Migration
   def self.up
-    drop_table :docs
 
     # there is no way I know of yet to make a non-numeric primary key with
     # migrations, so I had to do it directly on the docs table with mysql-admin.
@@ -20,7 +19,6 @@ class MakeDocsNameFieldThePrimaryKey < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :docs
 
     create_table "docs", :force => true do |t|
       t.string   "name"
