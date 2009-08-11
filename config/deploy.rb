@@ -1,7 +1,9 @@
 require 'deprec'
+# http://github.com/mocoso/mysql_tasks/tree/master
+load 'vendor/plugins/mysql_tasks/lib/mysql_deploy'
 
 set :database_yml_in_scm, false
-set :domain, "156.56.19.9"
+set :domain, "test-kmtools.uits.iu.edu"
 set :application, "worklists2"
 set :repository, 'svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/worklists2'
 
@@ -48,5 +50,8 @@ end
 
 desc "Install ruby-oci8 gem version 1.0.6"
 task :install_oci8, :roles => :db do
+	install_instantclient
     gem2.install 'ruby-oci8', '1.0.6'
 end
+
+after :deploy_setup, :install_oci8
