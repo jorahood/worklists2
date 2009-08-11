@@ -56,7 +56,8 @@ end
 
 desc "Bootstrap a new database install from {RAILS_ENV}_structure.sql instead of trying to run all migrations"
 task :bootstrap_db, :roles => :db do
-  run "mysql -u root -p#{Capistrano::CLI.password_prompt("Enter MySQL database password: ")} -f #{application}_#{rails_env} < #{deploy_to}/current/db/#{rails_env}_structure.sql"
+  run "mysql -u root -p#{Capistrano::CLI.password_prompt("Enter MySQL database password: ")} -f " +
+    "#{application}_#{rails_env} < #{deploy_to}/#{current_dir}/db/#{rails_env}_structure.sql"
 end
 
 after 'deprec:rails:install_stack', :install_oci8
