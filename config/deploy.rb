@@ -54,4 +54,5 @@ task :install_oci8, :roles => :db do
     gem2.install 'ruby-oci8', '1.0.6'
 end
 
-after 'deprec.rails.install_stack', :install_oci8
+after 'deprec:rails:install_stack', :install_oci8
+after :deploy, 'craken:install'
