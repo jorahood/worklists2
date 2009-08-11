@@ -1,11 +1,11 @@
 # Don't cause the server to break if Passenger module not loaded
 <IfModule passenger_module>
 	<VirtualHost *:80>
-	  ServerName 156.56.19.9
-        ServerAlias assets0.56.19.9
-        ServerAlias assets1.56.19.9
-        ServerAlias assets2.56.19.9
-        ServerAlias assets3.56.19.9
+	  ServerName test-kmtools.uits.iu.edu
+        ServerAlias assets0.uits.iu.edu
+        ServerAlias assets1.uits.iu.edu
+        ServerAlias assets2.uits.iu.edu
+        ServerAlias assets3.uits.iu.edu
 
 	  DocumentRoot "/opt/apps/worklists2/current/public"
 	  RailsEnv production
