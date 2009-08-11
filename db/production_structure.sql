@@ -3,7 +3,7 @@ CREATE TABLE `boilerusage` (
   `fromid` varchar(255) default NULL,
   KEY `index_boilerusage_on_fromid` (`fromid`),
   KEY `index_boilerusage_on_boiler` (`boiler`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `document` (
   `id` varchar(255) default NULL,
@@ -17,27 +17,27 @@ CREATE TABLE `document` (
   `volatility` int(11) default NULL,
   `status` int(11) default NULL,
   UNIQUE KEY `index_docs_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `documentdomain` (
   `id` varchar(255) default NULL,
   `domain` varchar(255) default NULL,
   KEY `index_documentdomain_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `documentnames` (
   `name` varchar(255) default NULL,
   `docid` varchar(255) default NULL,
   KEY `index_documentnames_on_docid` (`docid`),
   KEY `index_documentnames_on_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `domain_searches` (
   `id` int(11) NOT NULL auto_increment,
   `search_id` int(11) default NULL,
   `domain_id` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `domainlist` (
   `domain` varchar(255) default NULL,
@@ -47,36 +47,36 @@ CREATE TABLE `domainlist` (
   `visible` varchar(512) default NULL,
   `accessible` varchar(512) default NULL,
   `audience` varchar(512) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `expire` (
   `id` varchar(255) default NULL,
   `expiredate` date default NULL,
   `explanation` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `hotitem` (
   `id` varchar(255) default NULL,
   `hotitem` varchar(255) default NULL,
   KEY `index_hotitem_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `importance` (
   `rank` int(11) default NULL,
   `importance` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kba_usage` (
   `docid` varchar(4) NOT NULL default '',
   `kba` varchar(4) NOT NULL default '',
   PRIMARY KEY  (`docid`,`kba`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kbresource` (
   `id` varchar(255) default NULL,
   `username` varchar(255) default NULL,
   KEY `index_kbresource_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kbuser` (
   `username` varchar(255) default NULL,
@@ -88,7 +88,7 @@ CREATE TABLE `kbuser` (
   `status` varchar(255) default NULL,
   `password` varchar(255) default NULL,
   `pagernumber` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `listed_docs` (
   `id` int(11) NOT NULL auto_increment,
@@ -99,7 +99,7 @@ CREATE TABLE `listed_docs` (
   `status` varchar(255) default NULL,
   `tag` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `lists` (
   `id` int(11) NOT NULL auto_increment,
@@ -110,7 +110,7 @@ CREATE TABLE `lists` (
   `comment` text,
   `audience_id` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `notes` (
   `id` int(11) NOT NULL auto_increment,
@@ -120,18 +120,18 @@ CREATE TABLE `notes` (
   `owner_id` int(11) default NULL,
   `listed_doc_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `references` (
   `fromid` varchar(255) NOT NULL default '',
   `toid` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`fromid`,`toid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) NOT NULL,
   UNIQUE KEY `unique_schema_migrations` (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `searches` (
   `id` int(11) NOT NULL auto_increment,
@@ -162,17 +162,17 @@ CREATE TABLE `searches` (
   `volatility_is` varchar(255) default NULL,
   `status_is` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `status` (
   `rank` int(11) default NULL,
   `status` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `titleaudience` (
   `audience` varchar(255) default NULL,
   `description` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `titlecache` (
   `title` varchar(255) default NULL,
@@ -181,7 +181,7 @@ CREATE TABLE `titlecache` (
   PRIMARY KEY  (`docid`,`audience`),
   KEY `index_titlecache_on_audience` (`audience`),
   KEY `index_titlecache_on_docid` (`docid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL auto_increment,
@@ -197,24 +197,24 @@ CREATE TABLE `users` (
   `state` varchar(255) default 'active',
   `key_timestamp` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `visibility` (
   `rank` int(11) default NULL,
   `visibility` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `volatility` (
   `rank` int(11) default NULL,
   `volatility` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `xtra` (
   `term` varchar(255) default NULL,
   `weight` int(11) default NULL,
   `id` varchar(255) default NULL,
   KEY `index_xtra_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO schema_migrations (version) VALUES ('20080825192621');
 
