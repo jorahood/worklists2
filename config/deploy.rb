@@ -54,5 +54,10 @@ task :install_oci8, :roles => :db do
     gem2.install 'ruby-oci8', '1.0.6'
 end
 
+desc "Bootstrap a new database install from {RAILS_ENV}_structure.sql instead of trying to run all migrations"
+task :bootstrap_db, :roles => :db do
+  run "mysql -u root -p #{application}_#{RAILS_ENV} < #{deploy_to}/current/db/#{RAILS_ENV}_structure.sql"
+end
+
 after 'deprec:rails:install_stack', :install_oci8
 after :deploy, 'craken:install'
