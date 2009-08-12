@@ -51,13 +51,17 @@ end
 desc "Install ruby-oci8 gem version 1.0.6"
 task :install_oci8, :roles => :db do
 	install_instantclient
-    gem2.install 'ruby-oci8', '1.0.6'
+  gem2.install 'ruby-oci8', '1.0.6'
 end
-
-desc "Bootstrap a new database install from {RAILS_ENV}_structure.sql instead of trying to run all migrations"
-task :bootstrap_db, :roles => :db do
-  run "mysql -u root -p#{Capistrano::CLI.password_prompt("Enter MySQL database password: ")} -f " +
-    "#{application}_#{rails_env} < #{deploy_to}/#{current_dir}/db/#{rails_env}_structure.sql"
-end
-
 after 'deprec:rails:install_stack', :install_oci8
+
+namespace :db do
+  namespace :prod do
+    desc "Bootstrap a new database install from {RAILS_ENV}_structure.sql instead of trying to run all migrations"
+    task :bootstrap_db, :roles => :db do
+      run "mysql -u root -p#{Capistrano::CLI.password_prompt("Enter MySQL database password: ")} -f " +
+        "#{application}_#{rails_env} < #{deploy_to}/#{current_dir}/db/#{rails_env}_structure.sql"
+    end
+  end
+end
+

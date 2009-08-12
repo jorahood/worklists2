@@ -1,1 +1,2 @@
+MAILTO=worklist@indiana.edu
 20,50 * * * * bell:load > /dev/null
