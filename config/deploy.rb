@@ -1,9 +1,12 @@
 require 'deprec'
 # http://github.com/mocoso/mysql_tasks/tree/master
 load 'vendor/plugins/mysql_tasks/lib/mysql_deploy'
+# cap multistaging support
+set :stages, %w(staging prod)
+set :default_stage, "staging"
+require 'capistrano/ext/multistage'
 
 set :database_yml_in_scm, false
-set :domain, "test-kmtools.uits.iu.edu"
 set :application, "worklists2"
 set :repository, 'svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/worklists2'
 
@@ -18,12 +21,6 @@ set :db_server_type,    :mysql      # :mysql, :postgresql, :sqlite
 
 # set :packages_for_project, %w(libmagick9-dev imagemagick libfreeimage3) # list of packages to be installed
 # set :gems_for_project, %w(rmagick mini_magick image_science) # list of gems to be installed
-
-# Update these if you're not running everything on one host.
-role :app, domain
-role :web, domain
-role :db,  domain, :primary => true
-role :cron, domain # for craken: http://github.com/latimes/craken/tree/master
 
 # If you aren't deploying to /opt/apps/#{application} on the target
 # servers (which is the deprec default), you can specify the actual location
@@ -65,3 +62,6 @@ namespace :db do
   end
 end
 
+task :uname do
+  run "uname -a"
+end
