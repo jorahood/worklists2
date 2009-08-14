@@ -5,13 +5,21 @@
 
     <content:>
         <header class="content-header">
+          <h3>August 14, 2009 - the "First Official" release</h3>
+        </header>
+        <section class="content-body">
+          <p>This release of Worklists2 doesn't do anything really new since the last release (except you can filter the doc index on visibility and volatility), but it does have the feature that it's running on a IUII virtual server rather than on a box under my desk.</p>
+          <p>There is also a Jira queue for tracking problems or feature requests: To open a ticket, email <strong><code>worklist@indiana.edu</code></strong>.
+          </p>
+        </section>
+        <header class="content-header">
           <h3>June 24, 2009 - the "Mini KBSS" release</h3>
         </header>
-          <section class="content-body">
-            <p>This release of Worklists2 can do searches. It can't search on everything that <a href="https://kbhandbook.indiana.edu/kbss">kbss.cgi</a> can yet, and it can't save the search results as a worklist. </p>
-            <p>You can browse the sample searches I've created on the <a with="&Search">Searches</a> index page, and create your own.</p>
-            <p><strong>NOTE:</strong> In order to search on domains, you will have to log in. You can just use a dummy 'guest' account to <a href="/login">log in</a> as guest@guest.com, password: guest</p>
-          </section>
+        <section class="content-body">
+          <p>This release of Worklists2 can do searches. It can't search on everything that <a href="https://kbhandbook.indiana.edu/kbss">kbss.cgi</a> can yet, and it can't save the search results as a worklist. </p>
+          <p>You can browse the sample searches I've created on the <a with="&Search">Searches</a> index page, and create your own.</p>
+          <p><strong>NOTE:</strong> In order to search on domains, you will have to log in. You can just use a dummy 'guest' account to <a href="/login">log in</a> as guest@guest.com, password: guest</p>
+        </section>
         <header class="content-header">
           <h3>May 21, 2009 - the "boilerlist.cgi" release</h3>
         </header>
