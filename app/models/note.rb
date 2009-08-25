@@ -8,7 +8,10 @@ class Note < ActiveRecord::Base
   end
 
   belongs_to :listed_doc
-  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id', :creator => true
+  belongs_to :owner,
+    :class_name => 'User',
+    :foreign_key => 'owner_id',
+    :creator => true
   
     # --- Permissions --- #
 

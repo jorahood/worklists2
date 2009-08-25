@@ -15,14 +15,15 @@ describe Doc do
     @doc.should respond_to(:docid)
   end
 
-  it "should have a title attribute" do
-    @doc.should respond_to(:title)
-  end
-
   
   describe "associations:" do
+
+    it "should have many titles" do
+    @doc.should have_many(:titles)
+  end
+
     it "should have many list_items" do
-      @doc.should have_many(:list_items)
+      @doc.should have_many(:listed_docs)
     end
 
     it "should have many lists through list items" do
