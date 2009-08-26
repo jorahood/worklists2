@@ -8,11 +8,15 @@
     <do with="&@result_docs">
       <section class="collection-section">
         <h3 class="collection-heading"><count/></h3>
+                  <a href=
+             "https://kbhandbook.indiana.edu/kbss?rm=showResults&ar=n&importIDs=#{@search.id}&TITLE=10&APPROVED_DATE=20&MODIFIED_DATE=30&DOMAIN=50&OWNER=60&VISIBILITY=240&.submit=Search">
+                    <strong>EXPORT</strong></a> results to Worklists v1
+
         <page-nav/>
-          <table-plus without-search-form fields='id, default_title, visibility_assoc, volatility_assoc, birthdate, modifieddate, approveddate'>
-            <id-view:><doc-link/></id-view:>
-            <default-title-view:><name/></default-title-view:>
-          </table-plus>
+        <table-plus without-search-form fields='id, default_title, visibility_assoc, volatility_assoc, birthdate, modifieddate, approveddate'>
+          <id-view:><doc-link/></id-view:>
+          <default-title-view:><name/></default-title-view:>
+        </table-plus>
         <page-nav/>
       </section>
     </do>
