@@ -20,7 +20,7 @@ class SearchesController < ApplicationController
 
     hobo_show do |format|
       format.xml do
-        render :xml => @unpaginated_result_docs.to_xml(:only => 'id')
+        render :xml => [@search, @unpaginated_result_docs]
       end
       format.html do
         @result_docs = @unpaginated_result_docs.paginate(
