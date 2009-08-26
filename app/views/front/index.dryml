@@ -4,7 +4,21 @@
     <body: class="front-page"/>
 
     <content:>
-        <header class="content-header">
+      <header class="content-header">
+        <h3>August 27, 2009 - the "Exports to Worklists v1" release</h3>
+      </header>
+      <section class="content-body">
+        <p>This release adds the feature of exporting search 
+          results to <a href="https://kbhandbook.indiana.edu/kbss">Worklists v1</a>. 
+        To export a search, while viewing search results, click the <strong>EXPORT</strong> link just above the results table.</p>
+        <p>There is no way to keep a Worklists2 search in sync with a v1 Worklist, 
+          so you will have to create a new v1 Worklist if you rerun the Worklists2 search 
+          and want to work with the new results in v1. </p>
+        <p>Worklists v1 doesn't deal well with lists longer than a couple hundred
+          documents as it still needs to retrieve metadata for all the docids from Bell
+        and very long lists cause the connection to time out before retrieval is finished.</p>
+      </section>
+      <header class="content-header">
           <h3>August 14, 2009 - the "First Official" release</h3>
         </header>
         <section class="content-body">
