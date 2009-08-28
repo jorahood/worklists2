@@ -10,13 +10,27 @@
       <section class="content-body">
         <p>This release adds the feature of exporting search 
           results to <a href="https://kbhandbook.indiana.edu/kbss">Worklists v1</a>. 
-        To export a search, while viewing search results, click the <strong>EXPORT</strong> link just above the results table.</p>
-        <p>There is no way to keep a Worklists2 search in sync with a v1 Worklist, 
-          so you will have to create a new v1 Worklist if you rerun the Worklists2 search 
-          and want to work with the new results in v1. </p>
-        <p>Worklists v1 doesn't deal well with lists longer than a couple hundred
+        To export a search, while viewing search results, click the <strong>EXPORT</strong>
+        link just above the results table. </p>
+        <br/>
+        <p>A few things to keep in mind:</p>
+        <ul>
+          <li>
+            <p>There is no way to keep a Worklists2 search in sync with a v1 Worklist,
+          so if you rerun the Worklists2 search and want to work with the new results in v1 you will have
+          to export the search results again, creating a new v1 Worklist. </p></li>
+          <li><p>Worklists v1 doesn't deal well with lists longer than a couple hundred
           documents as it still needs to retrieve metadata for all the docids from Bell
-        and very long lists cause the connection to time out before retrieval is finished.</p>
+          and very long lists cause the connection to time out before it can finish retrieving the data.</p></li>
+          <li>
+            <p>
+              Make sure you're logged into Worklists v1 when you click <strong>EXPORT</strong> or
+              Worklists2 will create the v1 list anonymously; i.e., your username will not
+              be associated with the v1 list and it won't appear in your list of lists.
+            </p>
+          </li>
+        </ul>
+
       </section>
       <header class="content-header">
           <h3>August 14, 2009 - the "First Official" release</h3>
