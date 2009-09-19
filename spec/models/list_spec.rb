@@ -6,37 +6,32 @@ describe List do
     @list = List.new(:name=>'test', :owner=>@user)
   end
 
-#  it "should be valid" do
-#    @list.should be_valid
-#  end
-#
-#  it "should have a name" do
-#    @list.should respond_to(:name)
-#  end
-#
-#  it "should have an owner" do
-#    @list.should respond_to(:owner)
-#  end
-#
-#  it "should have a comment" do
-#    @list.should respond_to(:comment)
-#  end
-#
-#  describe "validations:" do
-#    it "should validate presence of name" do
-#      @list.should validate_presence_of(:name)
-#    end
-#
-#    it "should validate presence of owner" do
-#      @list.should validate_presence_of(:owner)
-#    end
-#  end
-#
-#
-#  describe "associations:" do
-#    it "should belong to an owner" do
-#      @list.should belong_to(:owner)
-#    end
+  specify { @list.should be_valid }
+
+  it "should have a name" do
+    @list.should respond_to(:name)
+  end
+
+  it "should have an owner" do
+    @list.should respond_to(:owner)
+  end
+
+  it "should have a comment" do
+    @list.should respond_to(:comment)
+  end
+
+  describe "validations:" do
+
+    specify { @list.should validate_presence_of(:name) }
+
+    specify { @list.should validate_presence_of(:owner) }
+  end
+
+
+  describe "associations:" do
+    it "should belong to an owner" do
+      @list.should belong_to(:owner)
+    end
 #
 #    it "should have the owner be a User object" do
 #      pending "don't know how to spec this"
@@ -115,5 +110,5 @@ describe List do
 #        @list.docs_editable_by?(@user).should be_true
 #      end
 #    end
-#  end
+  end
 end

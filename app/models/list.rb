@@ -8,7 +8,7 @@ class List < ActiveRecord::Base
     timestamps
   end
 
-  #  validates_presence_of :name, :owner
+  validates_presence_of :name, :owner
 
   belongs_to :owner,
     :class_name => "User",
