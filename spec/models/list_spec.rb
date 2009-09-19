@@ -33,23 +33,23 @@ describe List do
 
     specify { @list.should have_many(:listed_docs)}
 
-    it "should have many docs through listed_docs" do
-      @list.should have_many(:docs)
-    end
+    specify { @list.should have_many(:docs).through(:listed_docs)}
   end
 
 
   describe "permissions:" do
-#    before(:each) do
-#      @admin = mock_model(User, :admin? => true, :signed_up? => true)
-#      @other_user = mock_model(User,:admin? => false, :signed_up? => true)
-#      @guest = mock_model(Guest, :signed_up? => false)
-#      @updated_list_w_new_owner = List.new(:name=>'test', :owner=>@other_user)
-#    end
-#
-#    it "should be creatable by owner" do
-#      @list.creatable_by?(@user).should be_true
-#    end
+
+    before(:each) do
+      @admin = mock_model(User, :admin? => true, :signed_up? => true)
+      @other_user = mock_model(User,:admin? => false, :signed_up? => true)
+      @guest = mock_model(Guest, :signed_up? => false)
+      @updated_list_w_new_owner = List.new(:name=>'test', :owner=>@other_user)
+    end
+
+    it "should be creatable by owner" do
+      @list.stub!(:acting_user).and_return(@user)
+      @list.should be_create_permitted
+  end
 #
 #    it "should not be creatable by non-owner" do
 #      # this helps hobo know that the current user can create their own projects
