@@ -29,29 +29,17 @@ describe List do
 
 
   describe "associations:" do
-    it "should belong to an owner" do
-      @list.should belong_to(:owner)
+    specify { @list.should belong_to(:owner)}
+
+    specify { @list.should have_many(:listed_docs)}
+
+    it "should have many docs through listed_docs" do
+      @list.should have_many(:docs)
     end
-#
-#    it "should have the owner be a User object" do
-#      pending "don't know how to spec this"
-#    end
-#
-#    it "should name the owner as creator" do
-#      pending "how do I spec this?"
-#    end
-#
-#    it "should have many list items" do
-#      @list.should have_many(:list_items)
-#    end
-#
-#    it "should have many docs through list_items" do
-#      @list.should have_many(:docs)
-#    end
-#  end
-#
-#
-#  describe "permissions:" do
+  end
+
+
+  describe "permissions:" do
 #    before(:each) do
 #      @admin = mock_model(User, :admin? => true, :signed_up? => true)
 #      @other_user = mock_model(User,:admin? => false, :signed_up? => true)
