@@ -2,8 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe List do
   before(:each) do
-    @user = mock_model(User, :admin? => false, :signed_up? => true)
-    @list = List.new(:name=>'test', :owner=>@user)
+    @list_owner = mock_model(User, :admin? => false, :signed_up? => true, :name=>'List Owner')
+    @list = List.new(:name=>'test', :owner=>@list_owner)
   end
 
   specify { @list.should be_valid }
@@ -20,7 +20,7 @@ describe List do
     @list.should respond_to(:comment)
   end
 
-  describe "validations:" do
+  describe "Validations" do
 
     specify { @list.should validate_presence_of(:name) }
 
@@ -28,7 +28,7 @@ describe List do
   end
 
 
-  describe "associations:" do
+  describe "Associations" do
     specify { @list.should belong_to(:owner)}
 
     specify { @list.should have_many(:listed_docs)}
@@ -37,7 +37,13 @@ describe List do
   end
 
 
-  describe "permissions:" do
+  describe "Permissions" do
+
+    Spec::Matchers.define :be_creatable do 
+      match do |model|
+        model.create_permitted?
+      end
+    end
 
     before(:each) do
       @admin = mock_model(User, :admin? => true, :signed_up? => true)
@@ -46,10 +52,11 @@ describe List do
       @updated_list_w_new_owner = List.new(:name=>'test', :owner=>@other_user)
     end
 
-    it "should be creatable by owner" do
-      @list.stub!(:acting_user).and_return(@user)
-      @list.should be_create_permitted
-  end
+    it "should be creatable by its owner" do
+      @list.stub!(:acting_user).and_return(@list_owner)
+      @list.should be_creatable
+    end
+
 #
 #    it "should not be creatable by non-owner" do
 #      # this helps hobo know that the current user can create their own projects
