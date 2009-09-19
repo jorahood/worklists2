@@ -49,6 +49,8 @@ class Search < ActiveRecord::Base
   has_many :lists,
     :accessible => true
 
+  validates_presence_of :name
+
   def perform
     Doc.apply_scopes(
       :title_search => title_search,
