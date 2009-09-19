@@ -2,11 +2,12 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Search do
   before(:each) do
-    @search = Search.new
+    @valid_attributes = {
+      
+    }
   end
 
-  it "should desc" do
-    # TODO
+  it "should create a new instance given valid attributes" do
+    Search.create!(@valid_attributes)
   end
 end
-
