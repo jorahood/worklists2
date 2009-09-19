@@ -1,6 +1,6 @@
 Feature: Search
   In order to work with a set of documents
-  As a user creating a set of documents
+  As a user searching for documents
   I want to specify search criteria and retrieve matching documents
 
     Scenario: Searches must have names
