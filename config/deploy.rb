@@ -63,12 +63,10 @@ task :upload_poblano_hostkey, :roles => :app do
 end
 
 namespace :db do
-  namespace :prod do
-    desc "Bootstrap a new database install from {RAILS_ENV}_structure.sql instead of trying to run all migrations"
-    task :bootstrap, :roles => :db do
-      run "mysql -u root -p#{Capistrano::CLI.password_prompt("Enter MySQL database password: ")} -f " +
-        "#{application}_#{rails_env} < #{deploy_to}/#{current_dir}/db/#{rails_env}_structure.sql"
-    end
+  desc "Bootstrap a new database install from {RAILS_ENV}_structure.sql instead of trying to run all migrations"
+  task :bootstrap, :roles => :db do
+    run "mysql -u root -p#{Capistrano::CLI.password_prompt("Enter MySQL database password: ")} -f " +
+      "#{application}_#{rails_env} < #{deploy_to}/#{current_dir}/db/#{rails_env}_structure.sql"
   end
 end
 
