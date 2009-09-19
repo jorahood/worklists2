@@ -1,7 +1,7 @@
 Feature: Worklist
-  In order to work on a group of documents as a group
+  In order to work on a group of documents
   As a KB editor
-  I want to be able to create lists of documents
+  I want to create a list of documents
 
   Scenario: Save a search as a list
     Given a search

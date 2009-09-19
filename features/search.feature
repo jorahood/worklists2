@@ -1,8 +1,9 @@
 Feature: Search
   In order to work with a set of documents
-  As a user searching for documents
+  As a kb editor 
   I want to specify search criteria and retrieve matching documents
 
+    @KMWL-6
     Scenario: Searches must have names
       Given I am editing a new unsaved search
       When I fill in "search_name" with ""
