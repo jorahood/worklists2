@@ -10,4 +10,6 @@ describe Search do
   it "should create a new instance given valid attributes" do
     Search.create!(@valid_attributes)
   end
+
+  it 
 end
