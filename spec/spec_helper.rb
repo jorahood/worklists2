@@ -13,7 +13,7 @@ Spork.prefork do
 require File.dirname(__FILE__) + "/../config/environment"# unless defined?(RAILS_ROOT) (http://groups.google.com/group/sporkgem/browse_thread/thread/e107c82b2b63608a)
 require 'spec/autorun'
 require 'spec/rails'
-require 'spec/custom_matchers'
+require 'shoulda'
 
 
   Spec::Runner.configure do |config|
@@ -23,7 +23,6 @@ require 'spec/custom_matchers'
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-  config.include(CustomMatchers)
 
   # == Fixtures
   #
