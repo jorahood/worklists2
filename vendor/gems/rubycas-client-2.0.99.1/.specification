@@ -1,29 +1,20 @@
 --- !ruby/object:Gem::Specification 
-name: activerecord-oracle-adapter
+name: rubycas-client
 version: !ruby/object:Gem::Version 
-  version: 1.0.0.9250
+  version: 2.0.99.1
 platform: ruby
-authors: 
-- Michael Schoen
+authors: []
+
 autorequire: 
 bindir: bin
 cert_chain: []
 
-date: 2008-06-04 00:00:00 -04:00
+date: 2009-09-20 00:00:00 -04:00
 default_executable: 
-dependencies: 
-- !ruby/object:Gem::Dependency 
-  name: activerecord
-  type: :runtime
-  version_requirement: 
-  version_requirements: !ruby/object:Gem::Requirement 
-    requirements: 
-    - - ">="
-      - !ruby/object:Gem::Version 
-        version: 1.15.5.7843
-    version: 
+dependencies: []
+
 description: 
-email: schoenm@earthlink.net
+email: 
 executables: []
 
 extensions: []
@@ -31,17 +22,16 @@ extensions: []
 extra_rdoc_files: []
 
 files: 
-- lib/active_record/connection_adapters/oracle_adapter.rb
+- lib
+- lib/casclient
 has_rdoc: true
-homepage: http://ruby-oci8.rubyforge.org/
+homepage: 
 licenses: []
 
 post_install_message: 
 rdoc_options: []
 
 require_paths: 
-- bin
-- bin
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement 
   requirements: 
@@ -57,10 +47,10 @@ required_rubygems_version: !ruby/object:Gem::Requirement
   version: 
 requirements: []
 
-rubyforge_project: activerecord
+rubyforge_project: 
 rubygems_version: 1.3.5
 signing_key: 
-specification_version: 2
-summary: Oracle adapter for Active Record
+specification_version: 3
+summary: 
 test_files: []
 
