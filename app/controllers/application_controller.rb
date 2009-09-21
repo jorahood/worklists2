@@ -13,10 +13,6 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 
-  before_filter :everybody_but_paprika_has_to_log_into_CAS
+  before_filter CASClient::Frameworks::Rails::Filter
 
-  def everybody_but_paprika_has_to_log_into_CAS
-    CASClient::Frameworks::Rails::Filter unless request.remote_ip == '129.79.213.151'
-  end
-  
 end
