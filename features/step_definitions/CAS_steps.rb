@@ -10,3 +10,11 @@ end
 Then /^I should not be redirected$/ do
   response.should_not be_redirect
 end
+
+Given /^I am not logged into CAS$/ do
+
+end
+
+Given /^I am testing the application$/ do
+  
+end
