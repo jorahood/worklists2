@@ -8,7 +8,3 @@ Feature: CAS
   When I go to the homepage
   Then I should be redirected to "https://cas.iu.edu/cas/login?cassvc=ANY&casurl=http://www.example.com/"
 
-  Scenario: testing user should bypass CAS
-  Given I am testing the application
-  When I go to the homepage
-  Then I should not be redirected
