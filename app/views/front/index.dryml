@@ -1,82 +1,94 @@
 
 <page title="Home">
 
-    <body: class="front-page"/>
+  <body: class="front-page"/>
 
-    <content:>
-      <header class="content-header">
-        <h3>August 27, 2009 - the "Exports to Worklists v1" release</h3>
-      </header>
-      <section class="content-body">
-        <p>This release adds the feature of exporting search 
-          results to <a href="https://kbhandbook.indiana.edu/kbss">Worklists v1</a>. 
+  <content:>
+    <header class="content-header">
+      <h3>September 25, 2009 - the "acceptance test driven" release</h3>
+    </header>
+    <section class="content-body">
+      <p>This release has no new functionality, except 
+        that it won't let you save a search without giving it a name. What I'm
+        happy about is the <a href="/features.html">report</a> of acceptance tests passed, provided by Cucumber. 
+        Cucumber is something I want to use for the Sage project, so I've used the
+        Worklists2 project as a practice platform. You can see in the report that
+      it tests that the CAS authentication is acting appropriately, too. You can also see what I plan on
+      working on next; saving a search as a list. That feature isn't done yet, which is why it is yellow. </p>
+    </section>
+    <header class="content-header">
+      <h3>August 27, 2009 - the "Exports to Worklists v1" release</h3>
+    </header>
+    <section class="content-body">
+      <p>This release adds the feature of exporting search
+        results to <a href="https://kbhandbook.indiana.edu/kbss">Worklists v1</a>.
         To export a search, while viewing search results, click the <strong>EXPORT</strong>
         link just above the results table. </p>
-        <br/>
-        <p>A few things to keep in mind:</p>
-        <ul>
-          <li>
-            <p>There is no way to keep a Worklists2 search in sync with a v1 Worklist,
-          so if you rerun the Worklists2 search and want to work with the new results in v1 you will have
-          to export the search results again, creating a new v1 Worklist. </p></li>
-          <li><p>Worklists v1 doesn't deal well with lists longer than a couple hundred
-          documents as it still needs to retrieve metadata for all the docids from Bell
-          and very long lists cause the connection to time out before it can finish retrieving the data.</p></li>
-          <li>
-            <p>
-              Make sure you're logged into Worklists v1 when you click <strong>EXPORT</strong> or
-              Worklists2 will create the v1 list anonymously; i.e., your username will not
-              be associated with the v1 list and it won't appear in your list of lists.
-            </p>
-          </li>
-        </ul>
-
-      </section>
-      <header class="content-header">
-          <h3>August 14, 2009 - the "First Official" release</h3>
-        </header>
-        <section class="content-body">
-          <p>This release of Worklists2 doesn't do anything really new since the last release (except you can filter the doc index on visibility and volatility), but it does have the feature that it's running on a IUII virtual server rather than on a box under my desk.</p>
-          <p>There is also a Jira queue for tracking problems or feature requests: To open a ticket, email <strong><code>worklist@indiana.edu</code></strong>.
+      <br/>
+      <p>A few things to keep in mind:</p>
+      <ul>
+        <li>
+          <p>There is no way to keep a Worklists2 search in sync with a v1 Worklist,
+            so if you rerun the Worklists2 search and want to work with the new results in v1 you will have
+            to export the search results again, creating a new v1 Worklist. </p></li>
+        <li><p>Worklists v1 doesn't deal well with lists longer than a couple hundred
+            documents as it still needs to retrieve metadata for all the docids from Bell
+            and very long lists cause the connection to time out before it can finish retrieving the data.</p></li>
+        <li>
+          <p>
+            Make sure you're logged into Worklists v1 when you click <strong>EXPORT</strong> or
+            Worklists2 will create the v1 list anonymously; i.e., your username will not
+            be associated with the v1 list and it won't appear in your list of lists.
           </p>
-        </section>
-        <header class="content-header">
-          <h3>June 24, 2009 - the "Mini KBSS" release</h3>
-        </header>
-        <section class="content-body">
-          <p>This release of Worklists2 can do searches. It can't search on everything that <a href="https://kbhandbook.indiana.edu/kbss">kbss.cgi</a> can yet, and it can't save the search results as a worklist. </p>
-          <p>You can browse the sample searches I've created on the <a with="&Search">Searches</a> index page, and create your own.</p>
-          <p><strong>NOTE:</strong> In order to search on domains, you will have to log in. You can just use a dummy 'guest' account to <a href="/login">log in</a> as guest@guest.com, password: guest</p>
-        </section>
-        <header class="content-header">
-          <h3>May 21, 2009 - the "boilerlist.cgi" release</h3>
-        </header>
-          <section class="content-body">
-            <p>The goal for this release of Worklists2 is to replace the <a href="https://bell.ucs.indiana.edu/tools/boilerlist.cgi">boilerlist.cgi</a> tool.</p>
-            <p>The page that accomplishes this is the <a with="&BoilerUsage">Boiler Usages</a> index page. It has a sortable, filterable table view of all the unarchived boilers used in unarchived documents.</p>
-          </section>
-        <header class="content-header">
-            <h3>The "kbkw view" release</h3>
-        </header>
-        <section class="content-body">
-            <p>My goal for this release of Worklist2 is to duplicate the metadata viewing function of the
-                <a href="https://kb.iu.edu/data/anae.html"><code>kbkw</code></a> command line tool on Bell. Some things to note:</p><br/>
-                <ul>
-                    <li>You can go directly to a docid by typing in the url like this:
-                        <br/>
-                        <code>http://chan.uits.indiana.edu/docs/&lt;docid&gt;</code>
-                        <br/>Replace
-                        <code>&lt;docid&gt;</code> with the docid of the document you want to see. (The format of a Firefox <a href="https://kb.iu.edu/data/arjb.html">smart keyword</a> to do this would be: <code>http://chan.uits.indiana.edu/docs/%s</code>)
-                    </li><br/>
-                    <li>You can also search for a document by entering a docid in the "SEARCH" box in the top right corner of every page.
-                        <br/>This is an AJAX search that waits for you to enter at least three characters.
-                    </li><br/>
-                    <li>Worklists2 tries to refresh document metadata from Bell every ten minutes.</li><br/>
-                    <li>My goal for the next release is to provide a more useful version of <a href="https://bell.ucs.indiana.edu/tools/boilerlist.cgi">boilerlist.cgi</a> for managing boilers.</li>
-                    </ul><br/>
-                    <p>Thanks,<br/>Andy</p>
-            </section>
-        </content:>
+        </li>
+      </ul>
+
+    </section>
+    <header class="content-header">
+      <h3>August 14, 2009 - the "First Official" release</h3>
+    </header>
+    <section class="content-body">
+      <p>This release of Worklists2 doesn't do anything really new since the last release (except you can filter the doc index on visibility and volatility), but it does have the feature that it's running on a IUII virtual server rather than on a box under my desk.</p>
+      <p>There is also a Jira queue for tracking problems or feature requests: To open a ticket, email <strong><code>worklist@indiana.edu</code></strong>.
+      </p>
+    </section>
+    <header class="content-header">
+      <h3>June 24, 2009 - the "Mini KBSS" release</h3>
+    </header>
+    <section class="content-body">
+      <p>This release of Worklists2 can do searches. It can't search on everything that <a href="https://kbhandbook.indiana.edu/kbss">kbss.cgi</a> can yet, and it can't save the search results as a worklist. </p>
+      <p>You can browse the sample searches I've created on the <a with="&Search">Searches</a> index page, and create your own.</p>
+      <p><strong>NOTE:</strong> In order to search on domains, you will have to log in. You can just use a dummy 'guest' account to <a href="/login">log in</a> as guest@guest.com, password: guest</p>
+    </section>
+    <header class="content-header">
+      <h3>May 21, 2009 - the "boilerlist.cgi" release</h3>
+    </header>
+    <section class="content-body">
+      <p>The goal for this release of Worklists2 is to replace the <a href="https://bell.ucs.indiana.edu/tools/boilerlist.cgi">boilerlist.cgi</a> tool.</p>
+      <p>The page that accomplishes this is the <a with="&BoilerUsage">Boiler Usages</a> index page. It has a sortable, filterable table view of all the unarchived boilers used in unarchived documents.</p>
+    </section>
+    <header class="content-header">
+      <h3>The "kbkw view" release</h3>
+    </header>
+    <section class="content-body">
+      <p>My goal for this release of Worklist2 is to duplicate the metadata viewing function of the
+        <a href="https://kb.iu.edu/data/anae.html"><code>kbkw</code></a> command line tool on Bell. Some things to note:</p><br/>
+      <ul>
+        <li>You can go directly to a docid by typing in the url like this:
+          <br/>
+          <code>http://chan.uits.indiana.edu/docs/&lt;docid&gt;</code>
+          <br/>Replace
+          <code>&lt;docid&gt;</code> with the docid of the document you want to see. (The format of a Firefox <a href="https://kb.iu.edu/data/arjb.html">smart keyword</a> to do this would be: <code>http://chan.uits.indiana.edu/docs/%s</code>)
+        </li><br/>
+        <li>You can also search for a document by entering a docid in the "SEARCH" box in the top right corner of every page.
+          <br/>This is an AJAX search that waits for you to enter at least three characters.
+        </li><br/>
+        <li>Worklists2 tries to refresh document metadata from Bell every ten minutes.</li><br/>
+        <li>My goal for the next release is to provide a more useful version of <a href="https://bell.ucs.indiana.edu/tools/boilerlist.cgi">boilerlist.cgi</a> for managing boilers.</li>
+      </ul><br/>
+      <p>Thanks,<br/>Andy</p>
+    </section>
+  </content:>
 
 
-    </page>
+</page>

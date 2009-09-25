@@ -1,7 +1,7 @@
 Feature: CAS
   In order to protect the site from outsiders
   As an IU user
-  I want to have the site to use CAS for authentication
+  I want to use CAS for authentication
 
   Scenario: All users have to authenticate through CAS
   Given Worklists2 is in a production environment
