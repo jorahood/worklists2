@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 
-  before_filter CASClient::Frameworks::Rails::Filter
+  before_filter CASClient::Frameworks::Rails::Filter, :unless => :i_am_bdding_or_i_am_paprika
 
+  protected
+
+  def i_am_bdding_or_i_am_paprika
+    ENV['RAILS_ENV'] == 'test' ||
+      ENV['RAILS_ENV'] == 'cucumber' ||
+      request.env['REMOTE_ADDR'] == '129.79.213.151'
+  end
 end
