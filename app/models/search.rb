@@ -73,7 +73,7 @@ class Search < ActiveRecord::Base
   end
 
   def save_as_list
-    
+    List.new
   end
 
   # --- Permissions --- #

@@ -2,15 +2,7 @@
 module ApplicationHelper
 
   def revision_name
-    svn_branch || git_branch || 'worklists2'
+    '0.1.4'
   end
 
-  def svn_branch
-    /^URL: .*\/(\S+?\/\S+?)$/.match(`svn info`) ? $1 : nil
-  end
-
-  def git_branch
-#    /^\* (\S+?)$/.match(`git branch`) ? $1 : nil
-  nil
-  end
 end

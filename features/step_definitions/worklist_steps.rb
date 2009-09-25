@@ -7,11 +7,11 @@ When /^I save the search as a list$/ do
 end
 
 Then /^a new list should be created$/ do
-  pending
   @list.should be_an_instance_of(List)
 end
 
 Then /^the new list should belong to the search$/ do
-  pending
+pending
+  #  @search.lists.should include(@list)
 end
 
