@@ -5,7 +5,7 @@ Feature: Search
 
   @KMWL-6
   Scenario: Searches must have names
-  Given I am editing a new unsaved search
+  Given I am on the search creation page
   When I fill in "search_name" with ""
   And I press "Create Search"
   Then I should see "Name can't be blank"
