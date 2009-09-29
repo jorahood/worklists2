@@ -1,4 +1,2 @@
-bogus: --color
-#the below autotest and autotest-all profiles cause no output in autotest
-#autotest: --color --format pretty
-#autotest-all: --color --format progress
+autotest: --color --format pretty
+autotest-all: --color --format progress
