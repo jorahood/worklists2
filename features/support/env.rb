@@ -5,9 +5,15 @@ require 'cucumber/rails/world'
 
 # Whether or not to run each scenario within a database transaction.
 #
-# If you leave this to true, you can turn off traqnsactions on a
+# If you leave this to true, you can turn off transactions on a
 # per-scenario basis, simply tagging it with @no-txn
 Cucumber::Rails::World.use_transactional_fixtures = true
+
+Fixtures.reset_cache
+fixtures_folder = File.join(RAILS_ROOT, 'spec', 'fixtures')
+fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
+table_names = fixtures.map{|fixture|fixture.classify.constantize.table_name}
+Fixtures.create_fixtures(fixtures_folder, table_names)
 
 # Whether or not to allow Rails to rescue errors and render them on
 # an error page. Default is false, which will cause an error to be
