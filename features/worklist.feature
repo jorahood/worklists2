@@ -9,5 +9,4 @@ Feature: Worklist
   When I edit the worklist "Good List"
   And I select "Good docs" from "list[search_id]"
   And I press "Save"
-  Then I should see "Search: Good docs"
-  
+  Then I should see /Search\s*Good docs/ spanning multiple lines
