@@ -3,7 +3,11 @@ Feature: Worklist
   As a KB editor
   I want to create a list of documents
 
-  Scenario: Save a search as a list
-  Given I am editing search 1
-  When I press "Save as List"
-  Then I should see "Worklist"
+  Scenario: Selecting a search for a list
+  Given a list named "Good list"
+  And a search named "Good docs"
+  When I edit the worklist "Good List"
+  And I select "Good docs" from "list[search_id]"
+  And I press "Save"
+  Then I should see "Search: Good docs"
+  
