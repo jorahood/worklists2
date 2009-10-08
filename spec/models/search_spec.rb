@@ -8,7 +8,7 @@ describe Search do
     it { should have_many :lists }
   end
 
-  describe "Validations" do
+  context "Validations" do
     it { should validate_presence_of(:name) }
   end
 
