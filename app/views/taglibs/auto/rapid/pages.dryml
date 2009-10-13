@@ -1249,7 +1249,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="comment, audience, search" param/>
+            <field-list fields="comment, audience" param/>
             <section param="collection-section">
               <h3 param="collection-heading">Listed Docs</h3>
               
