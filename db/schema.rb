@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20091013163158) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "list_id"
+    t.integer  "search_id"
   end
 
   create_table "searches", :force => true do |t|

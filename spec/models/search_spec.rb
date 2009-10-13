@@ -5,7 +5,8 @@ describe Search do
   subject { Search.new }
 
   context "Associations" do
-    it { should have_many :lists }
+    it {should have_many(:search_to_list_assignments)}
+    it { should have_many(:lists).through(:search_to_list_assignments) }
   end
 
   context "Validations" do

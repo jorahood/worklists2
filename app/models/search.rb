@@ -47,6 +47,10 @@ class Search < ActiveRecord::Base
     :through => :domain_searches,
     :accessible => true
 
+  has_many :search_to_list_assignments
+  has_many :lists,
+    :through => :search_to_list_assignments
+  
   validates_presence_of :name
 
   def perform

@@ -122,7 +122,6 @@ CREATE TABLE `lists` (
   `owner_id` int(11) DEFAULT NULL,
   `comment` text COLLATE utf8_unicode_ci,
   `audience_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `search_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -151,6 +150,7 @@ CREATE TABLE `search_to_list_assignments` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `list_id` int(11) DEFAULT NULL,
+  `search_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -385,8 +385,6 @@ INSERT INTO schema_migrations (version) VALUES ('20090620234309');
 INSERT INTO schema_migrations (version) VALUES ('20090623144231');
 
 INSERT INTO schema_migrations (version) VALUES ('20090624145938');
-
-INSERT INTO schema_migrations (version) VALUES ('20090630144740');
 
 INSERT INTO schema_migrations (version) VALUES ('20091013155759');
 

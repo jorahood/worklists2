@@ -21,18 +21,18 @@ describe List do
   end
 
   context "Validations" do
-    specify { @list.should validate_presence_of(:name) }
-    specify { @list.should validate_presence_of(:owner) }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:owner) }
   end
 
 
   context "Associations" do
-    specify { @list.should belong_to(:owner)}
+    it { should belong_to(:owner)}
     specify { @list.owner.class.should == User }
-    specify { @list.should have_many(:listed_docs)}
-    specify { @list.should have_many(:docs).through(:listed_docs)}
-    specify { @list.should have_many(:search_to_list_assignments)}
-    specify { pending {@list.should have_many(:searches).through(:searches_to_list_assignments)}}
+    it { should have_many(:listed_docs)}
+    it { should have_many(:docs).through(:listed_docs)}
+    it { should have_many(:search_to_list_assignments)}
+    it { should have_many(:searches).through(:search_to_list_assignments)}
   end
 
 

@@ -7,7 +7,8 @@ class SearchToListAssignment < ActiveRecord::Base
   end
 
   belongs_to :list
-
+  belongs_to :search
+  
   # --- Permissions --- #
 
   def create_permitted?
