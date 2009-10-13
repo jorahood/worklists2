@@ -132,7 +132,6 @@ ActiveRecord::Schema.define(:version => 20091013163158) do
     t.integer  "owner_id"
     t.text     "comment"
     t.string   "audience_id"
-    t.integer  "search_id"
   end
 
   create_table "notes", :force => true do |t|

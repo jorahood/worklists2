@@ -15,7 +15,6 @@ class List < ActiveRecord::Base
     :foreign_key => 'owner_id',
     :creator => true
   belongs_to :audience
-  belongs_to :search
 
   has_many :listed_docs,
     :dependent => :destroy

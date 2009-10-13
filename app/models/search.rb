@@ -46,7 +46,6 @@ class Search < ActiveRecord::Base
   has_many :domains,
     :through => :domain_searches,
     :accessible => true
-  has_many :lists
 
   validates_presence_of :name
 
