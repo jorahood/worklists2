@@ -5,7 +5,8 @@ Feature: Worklist
 
   Scenario: Selecting a search for a list
 
-  Given a user named "user_a"
+  Given I am logged in
+  And a user named "user_a"
   And a list named "Good list" owned by "user_a"
   And a search named "Good search"
 
@@ -17,7 +18,8 @@ Feature: Worklist
 
   Scenario: Assigning a search to a list assigns that search's docs to the list
 
-  Given a user named "user_a"
+  Given I am logged in
+  And a user named "user_a"
   And a list named "Good list" owned by "user_a"
   And a search named "Good search"
   And a doc with id "abba"

@@ -1,3 +1,13 @@
+Given /^I am logged in$/ do
+  @me = User.create!(:name => 'dummy',
+    :email_address => 'dummy@example.com',
+    :password => 'valid_password')
+  visit "/login"
+  fill_in :login, :with => @me.email_address
+  fill_in :password, :with => @me.password
+  click_button "Log in"
+end
+
 Given /^I am viewing search (\d+)$/ do |id|
   visit search_path(id)
 end
