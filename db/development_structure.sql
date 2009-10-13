@@ -146,6 +146,14 @@ CREATE TABLE `schema_migrations` (
   UNIQUE KEY `unique_schema_migrations` (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE `search_to_list_assignments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `list_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE `searches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -379,3 +387,7 @@ INSERT INTO schema_migrations (version) VALUES ('20090623144231');
 INSERT INTO schema_migrations (version) VALUES ('20090624145938');
 
 INSERT INTO schema_migrations (version) VALUES ('20090630144740');
+
+INSERT INTO schema_migrations (version) VALUES ('20091013155759');
+
+INSERT INTO schema_migrations (version) VALUES ('20091013163158');

@@ -22,7 +22,7 @@ class List < ActiveRecord::Base
   has_many :docs, 
     :through => :listed_docs,
     :accessible => true
-  has_many :searches_assigned_to_lists
+  has_many :search_to_list_assignments
   
   def populate
     #FIXME: the following is too slow for 1000+ doc lists, 
