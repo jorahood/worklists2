@@ -20,26 +20,23 @@ describe List do
     @list.should respond_to(:comment)
   end
 
-  describe "Validations" do
-
+  context "Validations" do
     specify { @list.should validate_presence_of(:name) }
-
     specify { @list.should validate_presence_of(:owner) }
   end
 
 
-  describe "Associations" do
+  context "Associations" do
     specify { @list.should belong_to(:owner)}
-
     specify { @list.owner.class.should == User }
-
     specify { @list.should have_many(:listed_docs)}
-
     specify { @list.should have_many(:docs).through(:listed_docs)}
+    specify { @list.should have_many(:searches_assigned_to_lists)}
+    specify { pending {@list.should have_many(:searches).through(:searches_assigned_to_lists)}}
   end
 
 
-  describe "Permissions" do
+  context "Permissions" do
 
     Spec::Matchers.define :be_creatable do 
       match do |model|
@@ -107,5 +104,26 @@ describe List do
     #        @list.docs_editable_by?(@user).should be_true
     #      end
     #    end
+  end
+
+  context "with a Search assigned" do
+
+    before do
+      @doc = mock_model(Doc, :id => 'mock')
+      @search = mock_model(Search, :perform => [@doc])
+    end
+
+    it "should ask the search for its docs" do
+    pending
+      @search.should_receive(:perform)
+        @list.search = @search
+    end
+
+    it "should populate its docs from the search" do
+      pending do
+        @list.search = @search
+        @list.docs.should == [@doc]
+      end
+    end
   end
 end

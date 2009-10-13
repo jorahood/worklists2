@@ -22,7 +22,8 @@ class List < ActiveRecord::Base
   has_many :docs, 
     :through => :listed_docs,
     :accessible => true
-
+  has_many :searches_assigned_to_lists
+  
   def populate
     #FIXME: the following is too slow for 1000+ doc lists, 
     #for speed use ActiveRecord::Base#import provided by ar_extensions
