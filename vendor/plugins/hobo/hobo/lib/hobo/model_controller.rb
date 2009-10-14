@@ -111,7 +111,7 @@ module Hobo
           self.this = find_instance(opts)
           raise Hobo::PermissionDeniedError unless @this.method_callable_by?(current_user, method)
           if got_block
-            instance_eval(&block)
+            this.with_acting_user(current_user) { instance_eval(&block) }
           else
             @this.send(method)
           end
@@ -355,9 +355,18 @@ module Hobo
 
     def re_render_form(default_action=nil)
       if params[:page_path]
+        @invalid_record = this        
         controller, view = Controller.controller_and_view_for(params[:page_path])
         view = default_action if view == Dryml::EMPTY_PAGE
-        render :template => "#{controller}/#{view}"
+
+        # Hack fix for Bug 477.  See also bug 489.
+        if self.class.name == "#{controller.camelize}Controller" && view == "index"
+          params['action'] = 'index'
+          self.action_name = 'index'
+          index
+        else
+          render :template => "#{controller}/#{view}"
+        end
       else
         render :action => default_action
       end
@@ -607,7 +616,7 @@ module Hobo
       self.this ||= args.first || find_instance
       this.user_destroy(current_user)
       flash_notice "The #{model.name.titleize.downcase} was deleted"
-      destroy_response(&b)
+      destroy_response(options, &b)
     end
 
 
@@ -696,8 +705,17 @@ module Hobo
     def hobo_completions(attribute, finder, options={})
       options = options.reverse_merge(:limit => 10, :param => :query, :query_scope => "#{attribute}_contains")
       finder = finder.limit(options[:limit]) unless finder.send(:scope, :find, :limit)
-      finder = finder.send(options[:query_scope], params[options[:param]])
-      items = finder.find(:all).select { |r| r.viewable_by?(current_user) }
+
+      begin
+        finder = finder.send(options[:query_scope], params[options[:param]])
+        items = finder.find(:all).select { |r| r.viewable_by?(current_user) }
+      rescue TypeError  # must be a list of methods instead
+        items = []
+        options[:query_scope].each do |qscope|
+          finder2 = finder.send(qscope, params[options[:param]])
+          items += finder2.find(:all).select { |r| r.viewable_by?(current_user) }
+        end
+      end       
       render :text => "<ul>\n" + items.map {|i| "<li>#{i.send(attribute)}</li>\n"}.join + "</ul>"
     end
 

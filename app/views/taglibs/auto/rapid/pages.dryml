@@ -392,48 +392,48 @@
         
         <aside param>
           <section param="domains-collection-section">
-            <h3 param="domains-collection">Domains</h3>
-            <collection:domains/>
+            <h3 param="domains-collection-heading">Domains</h3>
+            <collection:domains  param="domains-collection"/>
           </section>
           <section param="hotitems-collection-section">
-            <h3 param="hotitems-collection">Hotitems</h3>
-            <collection:hotitems/>
+            <h3 param="hotitems-collection-heading">Hotitems</h3>
+            <collection:hotitems  param="hotitems-collection"/>
           </section>
           <section param="expirations-collection-section">
-            <h3 param="expirations-collection">Expirations</h3>
-            <collection:expirations/>
+            <h3 param="expirations-collection-heading">Expirations</h3>
+            <collection:expirations  param="expirations-collection"/>
           </section>
           <section param="resources-collection-section">
-            <h3 param="resources-collection">Resources</h3>
-            <collection:resources/>
+            <h3 param="resources-collection-heading">Resources</h3>
+            <collection:resources  param="resources-collection"/>
           </section>
           <section param="referenced_boilers-collection-section">
-            <h3 param="referenced_boilers-collection">Referenced Boilers</h3>
-            <collection:referenced_boilers/>
+            <h3 param="referenced_boilers-collection-heading">Referenced Boilers</h3>
+            <collection:referenced_boilers  param="referenced_boilers-collection"/>
           </section>
           <section param="boilers-collection-section">
-            <h3 param="boilers-collection">Boilers</h3>
-            <collection:boilers/>
+            <h3 param="boilers-collection-heading">Boilers</h3>
+            <collection:boilers  param="boilers-collection"/>
           </section>
           <section param="refs-collection-section">
-            <h3 param="refs-collection">Refs</h3>
-            <collection:refs/>
+            <h3 param="refs-collection-heading">Refs</h3>
+            <collection:refs  param="refs-collection"/>
           </section>
           <section param="refbys-collection-section">
-            <h3 param="refbys-collection">Refbys</h3>
-            <collection:refbys/>
+            <h3 param="refbys-collection-heading">Refbys</h3>
+            <collection:refbys  param="refbys-collection"/>
           </section>
           <section param="kbas-collection-section">
-            <h3 param="kbas-collection">Kbas</h3>
-            <collection:kbas/>
+            <h3 param="kbas-collection-heading">Kbas</h3>
+            <collection:kbas  param="kbas-collection"/>
           </section>
           <section param="kba_bys-collection-section">
-            <h3 param="kba_bys-collection">Kba Bys</h3>
-            <collection:kba_bys/>
+            <h3 param="kba_bys-collection-heading">Kba Bys</h3>
+            <collection:kba_bys  param="kba_bys-collection"/>
           </section>
           <section param="xtras-collection-section">
-            <h3 param="xtras-collection">Xtras</h3>
-            <collection:xtras/>
+            <h3 param="xtras-collection-heading">Xtras</h3>
+            <collection:xtras  param="xtras-collection"/>
           </section>
         </aside>
       </section-group>
@@ -1034,12 +1034,12 @@
         
         <aside param>
           <section param="owned_docs-collection-section">
-            <h3 param="owned_docs-collection">Owned Docs</h3>
-            <collection:owned_docs/>
+            <h3 param="owned_docs-collection-heading">Owned Docs</h3>
+            <collection:owned_docs  param="owned_docs-collection"/>
           </section>
           <section param="resourced_docs-collection-section">
-            <h3 param="resourced_docs-collection">Resourced Docs</h3>
-            <collection:resourced_docs/>
+            <h3 param="resourced_docs-collection-heading">Resourced Docs</h3>
+            <collection:resourced_docs  param="resourced_docs-collection"/>
           </section>
         </aside>
       </section-group>
@@ -1850,8 +1850,8 @@
         
         <aside param>
           <section param="notes-collection-section">
-            <h3 param="notes-collection">Notes</h3>
-            <collection:notes/>
+            <h3 param="notes-collection-heading">Notes</h3>
+            <collection:notes  param="notes-collection"/>
           </section>
         </aside>
       </section-group>
