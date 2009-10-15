@@ -35,10 +35,17 @@ Given /^search "([^\"]*)" includes doc "([^\"]*)"$/ do |search_name, docid|
   search.stub!(:perform).and_return([Doc.find(docid)])
 end
 
-Given /^List "([^\"]*)" has Search "([^\"]*)"$/ do |list, search|
-
+Given /^list "([^\"]*)" has search "([^\"]*)"$/ do |list_name, search_name|
+  search = Search.find_by_name(search_name)
+  list = List.find_by_name(list_name)
+  list.searches << search
+  list.save!
 end
 
 When /^I edit the worklist "([^\"]*)"$/ do |list_name|
   visit edit_list_path(List.find_by_name(list_name))
+end
+
+When /^I view the worklist "([^\"]*)"$/ do |list_name|
+  visit list_path(List.find_by_name(list_name))
 end

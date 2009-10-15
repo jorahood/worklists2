@@ -7,14 +7,14 @@ Feature: Worklist
   Given I am logged in as "Bob"
   Then I should see "Logged in as Bob"
 
-Scenario: I can select a search for a list
+Scenario: A list will display any searches it has
   Given I am logged in as "Bob"
   And a user named "user_a"
   And a list named "Good list" owned by "user_a"
   And a search named "Good search"
-  And List "Good list" has Search "Good search"
+  And list "Good list" has search "Good search"
 
-  When I edit the worklist "Good list"
+  When I view the worklist "Good list"
   Then I should see "Good search"
 
   Scenario: Assigning a search to a list assigns that search's docs to the list
@@ -26,7 +26,3 @@ Scenario: I can select a search for a list
   And search "Good search" includes doc "abba"
 
   When I edit the worklist "Good list"
-  And I select "Good search" from "list[search_id]"
-  And I press "Save"
-
-  Then I should see "abba"
