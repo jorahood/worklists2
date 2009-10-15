@@ -1,6 +1,6 @@
-Given /^I am logged in$/ do
-  @me = User.create!(:name => 'dummy',
-    :email_address => 'dummy@example.com',
+Given /^I am logged in as "([^\"]*)"$/ do |name|
+  @me = User.create!(:name => name,
+    :email_address => "#{name}@example.com",
     :password => 'valid_password')
   visit "/login"
   fill_in :login, :with => @me.email_address
@@ -33,6 +33,10 @@ end
 Given /^search "([^\"]*)" includes doc "([^\"]*)"$/ do |search_name, docid|
   search = Search.find_by_name(search_name)
   search.stub!(:perform).and_return([Doc.find(docid)])
+end
+
+Given /^List "([^\"]*)" has Search "([^\"]*)"$/ do |list, search|
+
 end
 
 When /^I edit the worklist "([^\"]*)"$/ do |list_name|
