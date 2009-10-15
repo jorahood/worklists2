@@ -3,8 +3,11 @@ Feature: Worklist
   As a KB editor
   I want to create a list of documents
 
-  Scenario: Selecting a search for a list
+  Scenario: I can log in
+  Given I am logged in as Bob
+  Then I should see "Hello, Bob"
 
+Scenario: Selecting a search for a list
   Given I am logged in
   And a user named "user_a"
   And a list named "Good list" owned by "user_a"
@@ -14,10 +17,9 @@ Feature: Worklist
   And I select "Good search" from "list[search_id]"
   And I press "Save"
 
-  Then I should see /Search\s*Good search/ spanning multiple lines
+  Then I should see "Good search"
 
   Scenario: Assigning a search to a list assigns that search's docs to the list
-
   Given I am logged in
   And a user named "user_a"
   And a list named "Good list" owned by "user_a"

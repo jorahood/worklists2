@@ -38,8 +38,3 @@ end
 When /^I edit the worklist "([^\"]*)"$/ do |list_name|
   visit edit_list_path(List.find_by_name(list_name))
 end
-
-Then /^I should see \/(.*)\/ spanning multiple lines$/ do |regexp|
-  regexp = Regexp.new(regexp, Regexp::MULTILINE)
-  response.should contain(regexp)
-end
