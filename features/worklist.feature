@@ -4,7 +4,7 @@ Feature: Worklist
   I want to create a list of documents
 
   Scenario: I can log in
-  Given I am logged in as Bob
+  Given I am logged in as "Bob"
   Then I should see "Hello, Bob"
 
 Scenario: Selecting a search for a list

@@ -1,5 +1,5 @@
 # load my local_env.rb in addition to the default env.rb and and local_paths.rb instead of the default paths.rb 
-default: -r features/support/local_paths.rb -r features/support/env.rb -r features/support/local_env.rb  -r features/step_definitions -r features/support/hooks.rb
+default: -r features/support/env.rb -r features/support/local_env.rb -r features/step_definitions -r features/support/hooks.rb
 
 autotest: --color --format pretty
 autotest-all: --color --format progress
