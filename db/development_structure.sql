@@ -122,8 +122,9 @@ CREATE TABLE `lists` (
   `owner_id` int(11) DEFAULT NULL,
   `comment` text COLLATE utf8_unicode_ci,
   `audience_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `search_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `notes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -143,15 +144,6 @@ CREATE TABLE `references` (
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `unique_schema_migrations` (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE `search_to_list_assignments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `list_id` int(11) DEFAULT NULL,
-  `search_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `searches` (
@@ -183,7 +175,7 @@ CREATE TABLE `searches` (
   `volatility_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `status` (
   `rank` int(11) DEFAULT NULL,
@@ -217,7 +209,7 @@ CREATE TABLE `users` (
   `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'active',
   `key_timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `visibility` (
   `rank` int(11) DEFAULT NULL,
@@ -386,6 +378,4 @@ INSERT INTO schema_migrations (version) VALUES ('20090623144231');
 
 INSERT INTO schema_migrations (version) VALUES ('20090624145938');
 
-INSERT INTO schema_migrations (version) VALUES ('20091013155759');
-
-INSERT INTO schema_migrations (version) VALUES ('20091013163158');
+INSERT INTO schema_migrations (version) VALUES ('20091016152036');

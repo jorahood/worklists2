@@ -12,7 +12,7 @@ Scenario: A list will display any searches it has
   And a user named "user_a"
   And a list named "Good list" owned by "user_a"
   And a search named "Good search"
-  And list "Good list" has search "Good search"
+  And list "Good list" belongs to search "Good search"
 
   When I view the worklist "Good list"
   Then I should see "Good search"

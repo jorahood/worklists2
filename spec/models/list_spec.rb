@@ -31,8 +31,7 @@ describe List do
     specify { @list.owner.class.should == User }
     it { should have_many(:listed_docs)}
     it { should have_many(:docs).through(:listed_docs)}
-    it { should have_many(:search_to_list_assignments)}
-    it { should have_many(:searches).through(:search_to_list_assignments)}
+    it { should belong_to(:search)}
   end
 
 

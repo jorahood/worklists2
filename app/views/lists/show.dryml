@@ -1,12 +1,6 @@
 <!-- List -->
 
 <show-page>
-  <before-collection-section:>
-    <section unless="&this.searches.empty?" class="searches-collection-section">
-      <h5 class="searches-collection">Searches</h5>
-      <collection:searches/>
-    </section>
-  </before-collection-section:>
   <collection: replace>
     <table-plus with='&@listed_docs' fields='doc, doc.birthdate, doc.modifieddate,
                 doc.approveddate, doc.owner, doc.author, doc.importance,

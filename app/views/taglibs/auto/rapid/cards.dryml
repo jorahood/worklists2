@@ -172,14 +172,6 @@
   </card>
 </def>
 
-<def tag="card" for="SearchToListAssignment">
-  <card class="search-to-list-assignment" param="default" merge>
-    <header: param>
-      <h4 param="heading"><name/></h4>
-    </header:>
-  </card>
-</def>
-
 <def tag="card" for="Status">
   <card class="status" param="default" merge>
     <header: param>

@@ -15,15 +15,12 @@ class List < ActiveRecord::Base
     :foreign_key => 'owner_id',
     :creator => true
   belongs_to :audience
-
+  belongs_to :search
+  
   has_many :listed_docs,
     :dependent => :destroy
   has_many :docs, 
     :through => :listed_docs,
-    :accessible => true
-  has_many :search_to_list_assignments
-  has_many :searches,
-    :through => :search_to_list_assignments,
     :accessible => true
   
   def populate
