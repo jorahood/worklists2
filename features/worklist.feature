@@ -19,7 +19,7 @@ Feature: Worklist
 
   Then I should see "Good search"
 
-  Scenario: A list will display the docs returned by the search it belongs to
+  Scenario: A list will display the docs of the search it belongs to
   Given I am logged in as "Bob"
   And a user named "user_a"
   And a list named "Good list" owned by "user_a"
