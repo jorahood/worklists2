@@ -100,7 +100,7 @@ describe List do
   context "with a new search assigned" do
     before do
       @doc = mock_model(Doc, :id => 'mock')
-      @search = mock_model(Search, :perform => [@doc])
+      @search = mock_model(Search, :execute => [@doc])
     end
 
     context "saving a new list" do
@@ -111,8 +111,8 @@ describe List do
         @list.should_receive(:populate!)
         @list.save!
       end
-      it "should ask the search to perform itself" do
-        @search.should_receive(:perform)
+      it "should ask the search to execute" do
+        @search.should_receive(:execute)
         @list.save!
       end
       it "should use the results retrieved from the search" do
@@ -126,29 +126,29 @@ describe List do
         @list.save!
         @list.search = @search
       end
-      it "should ask the search to perform itself" do
-        @search.should_receive(:perform)
+      it "should ask the search to execute" do
+        @search.should_receive(:execute)
         @list.save!
       end
       it "should use the results retrieved from the search" do
         @list.save!
         @list.docs.should == [@doc]
       end
-      context "with a different search than last time it was saved" do
+      context "belonging to a different search than last time it was saved" do
         before do
           @list.save!
-          @a_different_search = mock_model(Search, :perform => [])
+          @a_different_search = mock_model(Search, :execute => [])
           @list.search = @a_different_search
         end
-        it "should ask the search to perform itself" do
-          @a_different_search.should_receive(:perform)
+        it "should ask the search to execute" do
+          @a_different_search.should_receive(:execute)
           @list.save!
         end
       end
     end
   end
 
-  context "with no search assigned" do
+  context "belonging to no search" do
     context "saving a new list" do
       it "should not try to populate itself" do
         @list.should_not_receive(:populate!)
@@ -167,9 +167,9 @@ describe List do
     end
   end
 
-  context "with the same search as last time it was saved" do
+  context "belonging to the same search as last time it was saved" do
     before do
-      @search = mock_model(Search, :perform => [])
+      @search = mock_model(Search, :execute => [])
       @list.search = @search
       @list.save!
     end

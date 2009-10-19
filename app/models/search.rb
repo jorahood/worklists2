@@ -51,7 +51,7 @@ class Search < ActiveRecord::Base
   
   validates_presence_of :name
 
-  def perform
+  def filter
     Doc.apply_scopes(
       :title_search => title_search,
       :xtra_search => xtra_search,
@@ -70,6 +70,10 @@ class Search < ActiveRecord::Base
       :with_hotitem => hotitem,
       :with_domains => domains
     )
+  end
+
+  def execute
+    self.filter.find(:all)
   end
 
   def save_as_list

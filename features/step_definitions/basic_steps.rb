@@ -30,16 +30,14 @@ Given /^a doc with id "([^\"]*)"$/ do |docid|
   doc.save!
 end
 
-Given /^search "([^\"]*)" includes doc "([^\"]*)"$/ do |search_name, docid|
-  search = Search.find_by_name(search_name)
-  search.stub!(:perform).and_return(Doc.find(docid))
+Given /^search "([^\"]*)" returns doc "([^\"]*)"$/ do |search_name, docid|
+  # a search filters out documents based on criteria, so a search with no criteria should return every doc in the database, so this should be true by default
 end
 
 Given /^list "([^\"]*)" belongs to search "([^\"]*)"$/ do |list_name, search_name|
   search = Search.find_by_name(search_name)
   list = List.find_by_name(list_name)
   list.search = search
-  search.stub!(:perform).and_return([])
   list.save!
 end
 

@@ -34,7 +34,7 @@ class List < ActiveRecord::Base
   def populate!
     #FIXME: the following is too slow for 1000+ doc lists, 
     #for speed use ActiveRecord::Base#import provided by ar_extensions
-    self.docs = self.search.perform
+    self.docs = self.search.execute
   end
 
   # --- Permissions --- #
