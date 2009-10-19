@@ -5,17 +5,13 @@ describe List do
     @list_owner = mock_model(User, :admin? => false, :signed_up? => true, :name=>'List Owner')
     @list = List.new(:name=>'test', :owner=>@list_owner)
   end
-
   specify { @list.should be_valid }
-
   it "should have a name" do
     @list.should respond_to(:name)
   end
-
   it "should have an owner" do
     @list.should respond_to(:owner)
   end
-
   it "should have a comment" do
     @list.should respond_to(:comment)
   end
@@ -25,36 +21,32 @@ describe List do
     it { should validate_presence_of(:owner) }
   end
 
-
   context "Associations" do
     it { should belong_to(:owner)}
-    specify { @list.owner.class.should == User }
+    specify "owner should be a User" do
+      @list.owner.class.should == User 
+    end
     it { should have_many(:listed_docs)}
     it { should have_many(:docs).through(:listed_docs)}
     it { should belong_to(:search)}
   end
 
-
   context "Permissions" do
-
     Spec::Matchers.define :be_creatable do 
       match do |model|
         model.create_permitted?
       end
     end
-
     before(:each) do
       @admin = mock_model(User, :admin? => true, :signed_up? => true)
       @other_user = mock_model(User,:admin? => false, :signed_up? => true)
       @guest = mock_model(Guest, :signed_up? => false)
       @updated_list_w_new_owner = List.new(:name=>'test', :owner=>@other_user)
     end
-
     it "should be creatable by its owner" do
       @list.stub!(:acting_user).and_return(@list_owner)
       @list.should be_creatable
     end
-
     #
     #    it "should not be creatable by non-owner" do
     #      # this helps hobo know that the current user can create their own projects
@@ -105,24 +97,74 @@ describe List do
     #    end
   end
 
-  context "with a Search assigned" do
-
+  context "with a new search assigned" do
     before do
       @doc = mock_model(Doc, :id => 'mock')
       @search = mock_model(Search, :perform => [@doc])
     end
 
-    it "should ask the search for its docs" do
-    pending
-      @search.should_receive(:perform)
+    context "a new list" do
+      before do
         @list.search = @search
-    end
-
-    it "should populate its docs from the search" do
-      pending do
-        @list.search = @search
+      end
+      it "should try to populate itself" do
+        @list.should_receive(:populate!)
+        @list.save!
+      end
+      it "should ask the search to perform itself" do
+        @search.should_receive(:perform)
+        @list.save!
+      end
+      it "should populate itself from the results retrieved from the search" do
+        @list.save!
         @list.docs.should == [@doc]
       end
+    end
+
+    context "an existing list" do
+      before do
+        @list.save!
+        @list.search = @search
+      end
+      it "should ask the search to perform itself" do
+        @search.should_receive(:perform)
+        @list.save!
+      end
+      it "should populate its docs from the search" do
+        @list.save!
+        @list.docs.should == [@doc]
+      end
+    end
+  end
+
+  context "with no search assigned" do
+    context "a new list" do
+      it "should not try to populate itself" do
+        @list.should_not_receive(:populate!)
+        @list.save!
+      end
+    end
+
+    context "an existing list" do
+      before do
+        @list.save!
+      end
+      it "should not try to populate itself" do
+        @list.should_not_receive(:populate!)
+        @list.save!
+      end
+    end
+  end
+
+  context "with the same search as last save" do
+    before do
+      @search = mock_model(Search, :perform => [])
+      @list.search = @search
+      @list.save!
+    end
+    it "should not try to populate itself" do
+      @list.should_not_receive(:populate!)
+      @list.save!
     end
   end
 end

@@ -23,11 +23,20 @@ class List < ActiveRecord::Base
     :through => :listed_docs,
     :accessible => true
   
-  def populate
+#  def  before_create
+#    self.populate! if self.search
+#  end
+
+  def before_save
+    self.populate! if self.search && self.changed.include?("search_id")
+  end
+  
+  def populate!
     #FIXME: the following is too slow for 1000+ doc lists, 
     #for speed use ActiveRecord::Base#import provided by ar_extensions
-    self.docs = search.perform
+    self.docs = self.search.perform
   end
+
   # --- Permissions --- #
 
   def create_permitted?
@@ -45,6 +54,5 @@ class List < ActiveRecord::Base
   def view_permitted?(field)
     true
   end
-
 
 end
