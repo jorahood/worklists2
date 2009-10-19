@@ -32,13 +32,14 @@ end
 
 Given /^search "([^\"]*)" includes doc "([^\"]*)"$/ do |search_name, docid|
   search = Search.find_by_name(search_name)
-  search.stub!(:perform).and_return([Doc.find(docid)])
+  search.stub!(:perform).and_return(Doc.find(docid))
 end
 
 Given /^list "([^\"]*)" belongs to search "([^\"]*)"$/ do |list_name, search_name|
   search = Search.find_by_name(search_name)
   list = List.find_by_name(list_name)
   list.search = search
+  search.stub!(:perform).and_return([])
   list.save!
 end
 
