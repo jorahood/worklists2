@@ -31,3 +31,17 @@ Feature: Worklist
   When I view the worklist "Good list"
 
   Then I should see "aaaa"
+
+  Scenario: A list will not display the docs of a search it no longer belongs to
+  Given I am logged in as "Bob"
+  And a user named "user_a"
+  And a list named "Good list" owned by "user_a"
+  And a search named "Good search"
+  And a doc with id "aaaa"
+  And search "Good search" returns doc "aaaa"
+  And list "Good list" belongs to search "Good search"
+
+  When I remove the search assigned to list "Good list"
+  And I view the worklist "Good list"
+
+  Then I should not see "aaaa"

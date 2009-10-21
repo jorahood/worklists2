@@ -23,12 +23,20 @@ class List < ActiveRecord::Base
     :through => :listed_docs,
     :accessible => true
   
-#  def  before_create
-#    self.populate! if self.search
-#  end
+  #  def  before_create
+  #    self.populate! if self.search
+  #  end
 
   def before_save
-    self.populate! if self.search && self.changed.include?("search_id")
+    if changed.include?("search_id")
+      old_search = changes["search_id"][0]
+      depopulate!(old_search) if old_search
+      populate! if search
+    end
+  end
+
+  def depopulate!(from_search)
+    self.docs = []
   end
   
   def populate!

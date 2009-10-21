@@ -43,6 +43,12 @@ Given /^list "([^\"]*)" belongs to search "([^\"]*)"$/ do |list_name, search_nam
   list.save!
 end
 
+When /^I remove the search assigned to list "([^\"]*)"$/ do |list_name|
+  list = List.find_by_name(list_name)
+  list.search = nil
+  list.save!
+end
+
 When /^I edit the worklist "([^\"]*)"$/ do |list_name|
   visit edit_list_path(List.find_by_name(list_name))
 end

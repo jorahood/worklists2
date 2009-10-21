@@ -3,6 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe List do
   before(:each) do
     @list_owner = mock_model(User, :admin? => false, :signed_up? => true, :name=>'List Owner')
+    @doc = mock_model(Doc, :id => 'mock')
+    @search = mock_model(Search, :execute => [@doc])
     @list = List.new(:name=>'test', :owner=>@list_owner)
   end
   specify { @list.should be_valid }
@@ -98,10 +100,6 @@ describe List do
   end
 
   context "with a new search assigned" do
-    before do
-      @doc = mock_model(Doc, :id => 'mock')
-      @search = mock_model(Search, :execute => [@doc])
-    end
 
     context "saving a new list" do
       before do
@@ -156,13 +154,24 @@ describe List do
       end
     end
 
-    context "saving an existing list" do
+    context "not new" do
       before do
         @list.save!
       end
       it "should not try to populate itself" do
         @list.should_not_receive(:populate!)
         @list.save!
+      end
+      context "that had a search" do
+        before do
+          @list.search = @search
+          @list.save!
+          @list.search = nil
+        end
+        it "should clear old docs" do
+          @list.save!
+          @list.docs.should == []
+        end
       end
     end
   end
