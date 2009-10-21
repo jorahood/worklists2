@@ -5,6 +5,16 @@
     <table-plus with='&@listed_docs' fields='doc, doc.birthdate, doc.modifieddate,
                 doc.approveddate, doc.owner, doc.author, doc.importance,
                 doc.visibility, doc.volatility, doc.status, status, tag, notes'>
+  <notes-view:>
+    <collection id="#{this_parent.typed_id}-notes" part="notes">
+      <empty-message:></empty-message:>
+    </collection>
+    <form with="&this.new" owner="listed_doc" update="#{this_parent.typed_id}-notes" without-cancel reset-form>
+      <field-list: skip="listed_doc" without-text-label/>
+      <submit: label="Add note"/>
+    </form>
+    <count lowercase if-any/>
+ </notes-view:>
     </table-plus>
   </collection:>
 </show-page>

@@ -46,6 +46,12 @@ Feature: Worklist
 
   Then I should not see "aaaa" in the body
 
+  Scenario: A list will have a column to show notes for listed docs
+  Given a user named "user_a"
+  And a list named "Docs w/ notes" owned by "user_a"
+
+  Then I should see "Notes" within "th.notes-heading"
+
   Scenario: A list will display notes belonging to its listed docs
   Given I am logged in as "Bob"
   And a user named "user_a"
@@ -57,9 +63,4 @@ Feature: Worklist
   When I view the list "Docs w/ notes"
 
   Then I should see "hoochiemama" within ".notes-view"
-
-  Scenario: A list will have a column to show notes for listed docs
-  Given a user named "user_a"
-  And a list named "Docs w/ notes" owned by "user_a"
-
-  Then I should see "Notes" within "th.notes-heading"
+  
