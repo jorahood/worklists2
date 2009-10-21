@@ -9,11 +9,10 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
-    <nav-item with="&Audience">Audiences</nav-item>
-    <nav-item with="&Boiler">Boilers</nav-item>
     <nav-item with="&BoilerUsage">Boiler Usages</nav-item>
     <nav-item with="&Doc">Docs</nav-item>
     <nav-item with="&Domain">Domains</nav-item>
+    <nav-item with="&List">Lists</nav-item>
     <nav-item with="&Search">Searches</nav-item>
   </navigation>
 </def>

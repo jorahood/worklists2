@@ -43,6 +43,27 @@ Given /^list "([^\"]*)" belongs to search "([^\"]*)"$/ do |list_name, search_nam
   list.save!
 end
 
+Given /^a note with id (\d+) with text "([^\"]*)"$/ do |note_id, text|
+  note = Note.new(:text => text)
+  note.id = note_id
+  note.save!
+end
+
+Given /^doc "([^\"]*)" has note (\d+) in list "([^\"]*)"$/ do |docid, note_id, list_name|
+  doc = Doc.find(docid)
+  note = Note.find(note_id)
+  list = List.find_by_name(list_name)
+  doc_in_list = ListedDoc.new(:doc => doc, :list => list)
+  doc_in_list.notes << note
+  doc_in_list.save!
+end
+
+Given /^doc "([^\"]*)" belongs to list "([^\"]*)"$/ do |docid, list_name|
+  doc = Doc.find(docid)
+  list = List.find_by_name(list_name)
+
+end
+
 When /^I remove the search assigned to list "([^\"]*)"$/ do |list_name|
   list = List.find_by_name(list_name)
   list.search = nil
@@ -53,6 +74,14 @@ When /^I edit the worklist "([^\"]*)"$/ do |list_name|
   visit edit_list_path(List.find_by_name(list_name))
 end
 
-When /^I view the worklist "([^\"]*)"$/ do |list_name|
+When /^I view the list "([^\"]*)"$/ do |list_name|
   visit list_path(List.find_by_name(list_name))
+end
+
+Then /^I should see "([^\"]*)" in the body$/ do |stuff|
+  Then "I should see \"#{stuff}\" within \"div.content-body\""
+end
+
+Then /^I should not see "([^\"]*)" in the body$/ do |stuff|
+  Then "I should not see \"#{stuff}\" within \"div.content-body\""
 end

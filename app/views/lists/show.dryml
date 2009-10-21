@@ -4,7 +4,7 @@
   <collection: replace>
     <table-plus with='&@listed_docs' fields='doc, doc.birthdate, doc.modifieddate,
                 doc.approveddate, doc.owner, doc.author, doc.importance,
-                doc.visibility, doc.volatility, doc.status, status, tag'>
+                doc.visibility, doc.volatility, doc.status, status, tag, notes'>
     </table-plus>
   </collection:>
 </show-page>

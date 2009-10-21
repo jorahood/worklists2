@@ -15,9 +15,9 @@ Feature: Worklist
   And a search named "Good search"
   And list "Good list" belongs to search "Good search"
 
-  When I view the worklist "Good list"
+  When I view the list "Good list"
 
-  Then I should see "Good search"
+  Then I should see "Good search" in the body
 
   Scenario: A list will display the docs of the search it belongs to
   Given I am logged in as "Bob"
@@ -28,9 +28,9 @@ Feature: Worklist
   And search "Good search" returns doc "aaaa"
   And list "Good list" belongs to search "Good search"
 
-  When I view the worklist "Good list"
+  When I view the list "Good list"
 
-  Then I should see "aaaa"
+  Then I should see "aaaa" in the body
 
   Scenario: A list will not display the docs of a search it no longer belongs to
   Given I am logged in as "Bob"
@@ -42,6 +42,24 @@ Feature: Worklist
   And list "Good list" belongs to search "Good search"
 
   When I remove the search assigned to list "Good list"
-  And I view the worklist "Good list"
+  And I view the list "Good list"
 
-  Then I should not see "aaaa"
+  Then I should not see "aaaa" in the body
+
+  Scenario: A list will display notes belonging to its listed docs
+  Given I am logged in as "Bob"
+  And a user named "user_a"
+  And a list named "Docs w/ notes" owned by "user_a"
+  And a doc with id "aaaa"
+  And a note with id 1 with text "hoochiemama"
+  And doc "aaaa" has note 1 in list "Docs w/ notes"
+
+  When I view the list "Docs w/ notes"
+
+  Then I should see "hoochiemama" within ".notes-view"
+
+  Scenario: A list will have a column to show notes for listed docs
+  Given a user named "user_a"
+  And a list named "Docs w/ notes" owned by "user_a"
+
+  Then I should see "Notes" within "th.notes-heading"
