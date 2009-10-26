@@ -3,12 +3,13 @@ require 'deprec'
 load 'vendor/plugins/mysql_tasks/lib/mysql_deploy'
 # cap multistaging support
 set :stages, %w(staging prod)
-#set :default_stage, "staging"
+set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
 set :database_yml_in_scm, false
 set :application, "worklists2"
 set :repository, 'svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/worklists2'
+set :deploy_to, "/opt/apps/#{application}"
 
 # ssh keys to be copied to server.
 # id_dsa.pub is for connecting from my development machine,
