@@ -4,15 +4,15 @@ class User < ActiveRecord::Base
 
   fields do
     name :string, :unique
-    email_address :email_address, :unique, :login => true
+    email_address :email_address, :login => true
     administrator :boolean, :default => false
     timestamps
   end
 
   # This gives admin rights to the first sign-up.
   # Just remove it if you don't want that
-  before_create { |user| user.administrator = true if RAILS_ENV != "test" && count == 0 }
-  
+  before_create { |user| user.administrator = true if !Rails.env.test? && count == 0 }
+
   has_many :lists, :foreign_key => 'owner_id', :dependent => :destroy
   has_many :notes, :foreign_key => 'owner_id', :dependent => :destroy
   
@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     create :signup, :available_to => "Guest",
            :params => [:name, :email_address, :password, :password_confirmation],
            :become => :active
-
+             
     transition :request_password_reset, { :active => :active }, :new_key => true do
       UserMailer.deliver_forgot_password(self, lifecycle.key)
     end
@@ -43,7 +43,9 @@ class User < ActiveRecord::Base
   end
 
   def update_permitted?
-    acting_user.administrator? || (acting_user == self && only_changed?(:crypted_password, :email_address))
+    acting_user.administrator? || 
+      (acting_user == self && only_changed?(:email_address, :crypted_password,
+                                            :current_password, :password, :password_confirmation))
     # Note: crypted_password has attr_protected so although it is permitted to change, it cannot be changed
     # directly from a form submission.
   end

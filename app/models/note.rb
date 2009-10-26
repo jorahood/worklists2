@@ -13,7 +13,7 @@ class Note < ActiveRecord::Base
     :foreign_key => 'owner_id',
     :creator => true
   
-    # --- Permissions --- #
+  # --- Permissions --- #
 
   def create_permitted?
     return true if acting_user.administrator?

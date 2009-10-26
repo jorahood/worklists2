@@ -10,5 +10,5 @@ class UserMailer < ActionMailer::Base
     @sent_on    = Time.now
     @headers    = {}
   end
-  
+
 end
