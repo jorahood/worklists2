@@ -1,1 +1,8 @@
 To update the development database from production, run rake mysql:refresh_from_production
+
+Development notes:
+
+* list/show.dryml#<form>: removing owner="listed_doc" allows hobo to set the owner association for the note
+    to the current user when the form is here in the cell of a table-plus of listed_docs for a certain list, just like when editing a note from a listed_doc show page
+    FIXME: What use is the owner attr for forms? I thought I had to set it to the model that the note belonged to, but Hobo figures it out ok without it -->
+

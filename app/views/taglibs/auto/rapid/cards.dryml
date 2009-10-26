@@ -196,6 +196,9 @@
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>
+    <body: param>
+      <count:lists param/>
+    </body:>
   </card>
 </def>
 

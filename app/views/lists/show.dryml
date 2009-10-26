@@ -9,7 +9,7 @@
     <collection id="#{this_parent.typed_id}-notes" part="notes">
       <empty-message:></empty-message:>
     </collection>
-    <form with="&this.new" owner="listed_doc" update="#{this_parent.typed_id}-notes" without-cancel reset-form>
+    <form with="&this.new" update="#{this_parent.typed_id}-notes" without-cancel reset-form>
       <field-list: skip="listed_doc" without-text-label/>
       <submit: label="Add note"/>
     </form>

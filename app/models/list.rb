@@ -12,6 +12,9 @@ class List < ActiveRecord::Base
 
   belongs_to :owner,
     :class_name => "User",
+    # FIXME: foreign_key option required because of monkey_patching of
+    # ActiveRecord::Reflection::AssociationReflection#primary_key_name by
+    # composite_primary_keys gem .
     :foreign_key => 'owner_id',
     :creator => true
   belongs_to :audience
