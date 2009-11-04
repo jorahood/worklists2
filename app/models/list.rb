@@ -13,9 +13,9 @@ class List < ActiveRecord::Base
   belongs_to :owner,
     :class_name => "User",
     # FIXME: foreign_key option required because of monkey_patching of
-    # ActiveRecord::Reflection::AssociationReflection#primary_key_name by
-    # composite_primary_keys gem .
-    :foreign_key => 'owner_id',
+  # ActiveRecord::Reflection::AssociationReflection#primary_key_name by
+  # composite_primary_keys gem .
+  :foreign_key => 'owner_id',
     :creator => true
   belongs_to :audience
   belongs_to :search
@@ -23,8 +23,7 @@ class List < ActiveRecord::Base
   has_many :listed_docs,
     :dependent => :destroy
   has_many :docs, 
-    :through => :listed_docs,
-    :accessible => true
+    :through => :listed_docs
   
   #  def  before_create
   #    self.populate! if self.search
@@ -51,11 +50,11 @@ class List < ActiveRecord::Base
   # --- Permissions --- #
 
   def create_permitted?
-    true
+    owner_is?(acting_user)
   end
 
   def update_permitted?
-    true
+    !owner.changed? || acting_user.administrator?
   end
 
   def destroy_permitted?

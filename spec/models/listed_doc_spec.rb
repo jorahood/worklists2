@@ -5,11 +5,6 @@ describe ListedDoc do
     @listed_doc = ListedDoc.new
   end
 
-  it "should be valid" do
-    @listed_doc.should be_valid
-  end
-
-
   describe "validations:" do
 #    it "should validate existence of list"
 #    it "should validate existence of doc"
@@ -33,9 +28,9 @@ describe ListedDoc do
   
   describe "permissions:" do
     before do
-      @admin = stub('User', :username=>'Admin', :signed_up? => true, :administrator? => true)
-      @list_owner = stub('User', :username=>'Chuck', :signed_up? => true, :administrator? => false)
-      @other_user = stub('User', :username=>'Bob', :signed_up? => true, :administrator? => false)
+      @admin = mock_model(User, :name=>'Admin', :signed_up? => true, :administrator? => true)
+      @list_owner = mock_model(User, :name=>'Chuck', :signed_up? => true, :administrator? => false)
+      @other_user = mock_model(User, :name=>'Bob', :signed_up? => true, :administrator? => false)
       @list = mock_model(List, :name=>'test', :owner_is? =>@list_owner)
       @doc = mock_model(Doc, :docid=>'blah', :title=>'blahblah')
       @listed_doc.list = @list
@@ -91,13 +86,7 @@ describe ListedDoc do
 #      @listed_doc.updatable_by?(@admin,ListedDoc.new(:doc=>@doc, :list=>mock_model(List))).should be_true
 #    end
 #
-#    it "should allow admin to update doc" do
-#      @listed_doc.updatable_by?(@admin,ListedDoc.new(:list=>@list, :doc=>mock_model(Doc))).should be_true
-#    end
-#
-#    it "should allow owner to delete" do
-#      @listed_doc.deletable_by?(@list_owner).should be_true
-#    end
-
+    specify { @listed_doc.should be_updatable_by @admin }
+    specify { @listed_doc.should be_destroyable_by @list_owner }
   end
 end

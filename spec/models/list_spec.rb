@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe List do
   before(:each) do
-    @list_owner = mock_model(User, :admin? => false, :signed_up? => true, :name=>'List Owner')
+    @list_owner = mock_model(User, :administrator? => false, :signed_up? => true, :name=>'List Owner')
     @doc = mock_model(Doc, :id => 'mock')
     @search = mock_model(Search, :execute => [@doc])
     @list = List.new(:name=>'test', :owner=>@list_owner)
@@ -40,34 +40,40 @@ describe List do
       end
     end
     before(:each) do
-      @admin = mock_model(User, :admin? => true, :signed_up? => true)
-      @other_user = mock_model(User,:admin? => false, :signed_up? => true)
+      @admin = mock_model(User, :administrator? => true, :signed_up? => true)
+      @other_user = mock_model(User, :admin? => false, :signed_up? => true)
       @guest = mock_model(Guest, :signed_up? => false)
-      @updated_list_w_new_owner = List.new(:name=>'test', :owner=>@other_user)
     end
+
     it "should be creatable by its owner" do
       @list.stub!(:acting_user).and_return(@list_owner)
-      @list.should be_creatable
+      @list.should be_creatable_by(@list_owner)
     end
-    #
-    #    it "should not be creatable by non-owner" do
-    #      # this helps hobo know that the current user can create their own projects
-    #      # only, and the Owner field shouldn't be displayed on the new list form
-    #        @list.creatable_by?(@other_user).should be_false
-    #    end
+    
+    it "should not be creatable by non-owner" do
+      # this helps hobo know that the current user can create their own projects
+      # only, and the Owner field shouldn't be displayed on the new list form
+      @list.stub!(:acting_user).and_return(@other_user)
+      @list.should_not be_creatable_by(@other_user)
+    end
     #
     #    it "should not be creatable by guest" do
     #      @list.creatable_by?(@guest).should be_false
     #    end
     #
-    #    it "should not allow non-admins to change the owner" do
-    #      @list.updatable_by?(@user,@updated_list_w_new_owner).should be_false
-    #    end
-    #
-    #    it "should allow admin to change the owner" do
-    #      @list.updatable_by?(@admin,@updated_list_w_new_owner).should be_true
-    #    end
-    #
+    context "to change the owner" do
+      before do
+        @list_owner.stub(:changed? => true)
+      end
+      it "should not be allowed to non-admins" do
+        @list.should_not be_updatable_by(@list_owner)
+      end
+    
+      it "should be allowed to admin" do
+        @list.should be_updatable_by(@admin)
+      end
+    end
+    
     #    it "should be updatable by owner" do
     #      @list.updatable_by?(@user,nil).should be_true
     #    end
