@@ -16,8 +16,8 @@ Given /^a user named "([^\"]*)"$/ do |name|
   User.create!(:name => name, :email_address => name + '@example.com')
 end
 
-Given /^a list named "([^\"]*)" owned by "([^\"]*)"$/ do |list, user|
-  List.create!(:name => list, :owner => User.find_by_name(user))
+Given /^a list named "([^\"]*)" owned by "([^\"]*)"$/ do |list_name, user_name|
+  List.create!(:name => list_name, :owner => User.find_by_name(user_name))
 end
 
 Given /^a search named "([^\"]*)"$/ do |name|
@@ -68,6 +68,17 @@ end
 Given /^I am not logged in$/ do
 end
 
+Given /^doc "([^\"]*)" belongs to search "([^\"]*)" through a docid search$/ do |docid, search_name|
+  doc = Doc.find(docid)
+  search = Search.find_by_name(search_name)
+  search.docids << doc
+  search.save!
+end
+
+When /^I view the search "([^\"]*)"$/ do |search_name|
+  visit search_path(Search.find_by_name(search_name))
+end
+
 When /^I remove the search assigned to list "([^\"]*)"$/ do |list_name|
   list = List.find_by_name(list_name)
   list.search = nil
@@ -84,6 +95,10 @@ end
 
 When /^I view doc "([^\"]*)" as xml$/ do |docid|
   visit formatted_doc_path(docid, 'xml')
+end
+
+When /^I select "([^\"]*)"$/ do |value|
+  select value
 end
 
 Then /^I should see "([^\"]*)" in the body$/ do |stuff|

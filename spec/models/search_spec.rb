@@ -1,14 +1,17 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Search do
-  context "Associations" do
-    it { should have_many :lists }
-    it {should have_many :docid_searches}
-    it {should have_many(:docids).through(:docid_searches)}
-  end
+  it { should have_many :lists }
+  it {should have_many :docid_searches}
+  it {should have_many(:docids).through(:docid_searches)}
+ 
+  it { should validate_presence_of :name }
 
-  context "Validations" do
-    it { should validate_presence_of :name }
+  it "should invoke Doc#docid_search named scope when docids are given" do
+    doc = mock_model(Doc, :id => 'aaaa')
+    subject.docids << doc
+    Doc.should_receive(:docid_search).with(doc)
+    subject.filter
   end
 
   it "should create a list of the results" do

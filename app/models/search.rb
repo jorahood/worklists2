@@ -59,6 +59,7 @@ class Search < ActiveRecord::Base
 
   def filter
     Doc.apply_scopes(
+      :docid_search => docids,
       :title_search => title_search,
       :xtra_search => xtra_search,
       :"approveddate_#{approveddate_is}" => approveddate,

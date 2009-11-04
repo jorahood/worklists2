@@ -12,7 +12,7 @@ class Doc < ActiveRecord::Base
   end
 
   #don't display the fks
-#  never_show :importance, :visibility, :volatility, :status, :author, :owner
+  #  never_show :importance, :visibility, :volatility, :status, :author, :owner
   set_table_name :document
   set_search_columns :id
 
@@ -80,8 +80,7 @@ class Doc < ActiveRecord::Base
   has_many :kba_bys,
     :class_name => 'KbaUsage',
     :foreign_key => 'kba'
-  has_many :docid_searches,
-    :foreign_key => 'doc_id'
+  has_many :docid_searches
   has_many :searches,
     :through => :docid_searches
   has_one :default_title,
@@ -93,6 +92,10 @@ class Doc < ActiveRecord::Base
     true
   end
 
+  named_scope :docid_search, lambda { |docids|
+   { :conditions => {:id => docids} }
+  }
+  
   named_scope :unarchived,
     :conditions => "#{Doc.table_name}.visibility > 3"
 
@@ -109,27 +112,27 @@ class Doc < ActiveRecord::Base
   }
 
   named_scope :approveddate_after, lambda {|date|
-   {:conditions => ["#{Doc.table_name}.approveddate > ?", date]}
+    {:conditions => ["#{Doc.table_name}.approveddate > ?", date]}
   }
   
   named_scope :approveddate_before, lambda {|date|
-   {:conditions => ["#{Doc.table_name}.approveddate < ?", date]}
+    {:conditions => ["#{Doc.table_name}.approveddate < ?", date]}
   }
 
   named_scope :birthdate_after, lambda {|date|
-   {:conditions => ["#{Doc.table_name}.birthdate > ?", date]}
+    {:conditions => ["#{Doc.table_name}.birthdate > ?", date]}
   }
 
   named_scope :birthdate_before, lambda {|date|
-   {:conditions => ["#{Doc.table_name}.birthdate < ?", date]}
+    {:conditions => ["#{Doc.table_name}.birthdate < ?", date]}
   }
 
   named_scope :modifieddate_after, lambda {|date|
-   {:conditions => ["#{Doc.table_name}.modifieddate > ?", date]}
+    {:conditions => ["#{Doc.table_name}.modifieddate > ?", date]}
   }
 
   named_scope :modifieddate_before, lambda {|date|
-   {:conditions => ["#{Doc.table_name}.modifieddate < ?", date]}
+    {:conditions => ["#{Doc.table_name}.modifieddate < ?", date]}
   }
 
   named_scope :expiredate_before, lambda { |date|
