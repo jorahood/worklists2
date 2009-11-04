@@ -80,7 +80,10 @@ class Doc < ActiveRecord::Base
   has_many :kba_bys,
     :class_name => 'KbaUsage',
     :foreign_key => 'kba'
-
+  has_many :docid_searches,
+    :foreign_key => 'doc_id'
+  has_many :searches,
+    :through => :docid_searches
   has_one :default_title,
     :class_name => 'Title',
     :foreign_key => 'docid',

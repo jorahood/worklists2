@@ -41,6 +41,14 @@
   </card>
 </def>
 
+<def tag="card" for="DocidSearch">
+  <card class="docid-search" param="default" merge>
+    <header: param>
+      <h4 param="heading"><name/></h4>
+    </header:>
+  </card>
+</def>
+
 <def tag="card" for="Domain">
   <card class="domain" param="default" merge>
     <header: param>

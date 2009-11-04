@@ -47,6 +47,12 @@ class Search < ActiveRecord::Base
     :through => :domain_searches,
     :accessible => true
 
+  has_many :docid_searches
+  has_many :docids,
+    :through => :docid_searches,
+    :source => :doc,
+    :accessible => true
+  
   has_many :lists
   
   validates_presence_of :name

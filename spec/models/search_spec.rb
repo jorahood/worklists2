@@ -3,6 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Search do
   context "Associations" do
     it { should have_many :lists }
+    it {should have_many :docid_searches}
+    it {should have_many(:docids).through(:docid_searches)}
   end
 
   context "Validations" do

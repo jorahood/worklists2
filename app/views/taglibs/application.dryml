@@ -53,7 +53,7 @@ in my extension of <form> and customization of <show-page> for Search-->
                birthdate, expiredate_is, expiredate, modifieddate_is, modifieddate, 
                importance_is, importance, visibility_is, visibility, volatility_is, 
                volatility, status_is, status, title_search, xtra_search, author, owner,
-               resource, boiler, hotitem, domains, lists" view-blank="&false">
+               resource, boiler, hotitem, docids, domains, lists" view-blank="&false">
     <birthdate-view:>
       <if test="&scope.in_form">
         <input prompt/>
