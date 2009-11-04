@@ -11,4 +11,15 @@ class DocsController < ApplicationController
       :volatility_assoc_is => params[:volatility])
   end
 
+  def show
+    @doc = find_instance
+    hobo_show do |format|
+      format.xml do
+        render :xml => @doc
+      end
+      format.html do
+        #leave this here
+      end
+    end
+  end
 end

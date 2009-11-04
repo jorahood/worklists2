@@ -82,6 +82,10 @@ When /^I view the list "([^\"]*)"$/ do |list_name|
   visit list_path(List.find_by_name(list_name))
 end
 
+When /^I view doc "([^\"]*)" as xml$/ do |docid|
+  visit formatted_doc_path(docid, 'xml')
+end
+
 Then /^I should see "([^\"]*)" in the body$/ do |stuff|
   Then "I should see \"#{stuff}\" within \"div.content-body\""
 end
