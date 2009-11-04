@@ -61,7 +61,11 @@ end
 Given /^doc "([^\"]*)" belongs to list "([^\"]*)"$/ do |docid, list_name|
   doc = Doc.find(docid)
   list = List.find_by_name(list_name)
+  list.docs << doc
+  list.save!
+end
 
+Given /^I am not logged in$/ do
 end
 
 When /^I remove the search assigned to list "([^\"]*)"$/ do |list_name|
@@ -84,4 +88,16 @@ end
 
 Then /^I should not see "([^\"]*)" in the body$/ do |stuff|
   Then "I should not see \"#{stuff}\" within \"div.content-body\""
+end
+
+Then /^I should see element "([^\"]*)" within "([^\"]*)"$/ do |element, context|
+  within(context) do |content|
+    content.should match_selector(element)
+  end
+end
+
+Then /^I should not see element "([^\"]*)" within "([^\"]*)"$/ do |element, context|
+  within(context) do |content|
+    content.should_not match_selector(element)
+  end
 end
