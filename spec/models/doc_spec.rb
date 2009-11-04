@@ -14,10 +14,13 @@ describe Doc do
     Doc.should respond_to :docid_search
   end
 
-  specify "docid search should return matches for given array of docids" do
+  specify "search by docid should return matches for given list of docids" do
     aaaa = Doc.new
     aaaa.id = 'aaaa'
     aaaa.save!
-    Doc.docid_search(['aaaa']).find(:all).should == [aaaa]
+    bbbb = Doc.new
+    bbbb.id = 'bbbb'
+    bbbb.save!
+    Doc.docid_search('aaaa','bbbb').find(:all).should == [aaaa,bbbb]
   end
 end

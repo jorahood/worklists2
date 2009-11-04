@@ -92,7 +92,7 @@ class Doc < ActiveRecord::Base
     true
   end
 
-  named_scope :docid_search, lambda { |docids|
+  named_scope :docid_search, lambda { |*docids|
    { :conditions => {:id => docids} }
   }
   

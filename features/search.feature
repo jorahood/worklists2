@@ -16,11 +16,14 @@ Feature: Search
   And I am on the search creation page
   Then I should see "aaaa" within ".search-docids"
 
-  Scenario: Searches will not return docs that don't match a docid search
+  Scenario: Searches will only return docs matching a docid search
   Given a doc with id "aaaa"
   And a doc with id "bbbb"
-  And a search named "Search for aaaa"
-  And doc "aaaa" belongs to search "Search for aaaa" through a docid search
-  When I view the search "Search for aaaa"
-  Then I should see "aaaa" within ".collection-section tbody"
-  And I should not see "bbbb" within ".collection-section tbody"
+  And a doc with id "cccc"
+  And a search named "Search by docids"
+  And doc "aaaa" belongs to search "Search by docids" through a docid search
+  And doc "cccc" belongs to search "Search by docids" through a docid search
+  When I view the search "Search by docids"
+  Then I should see "aaaa" within ".collection-section"
+  And I should see "cccc" within ".collection-section"
+  And I should not see "bbbb" within ".collection-section"
