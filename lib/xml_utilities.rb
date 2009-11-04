@@ -19,6 +19,10 @@ module XmlUtilities
     @kbxml ||= request_kbxml
   end
 
+  def to_xml
+    kbxml
+  end
+  
   def kbxml_body
     kbxml =~ /(<kbml .*<\/kbml>)/m
     $1

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE document [
+<!ENTITY nbsp "&#160;">
+<!ENTITY copy "&#169;">
+<!ENTITY reg "&#174;">
+]>
+
+<document>
+  <kbml version="-//Indiana University//DTD KBML 0.9//EN">
+    <kbq>On my NeXT, why won't Mathematica work after I've installed it?
+</kbq>
+    <body>
+<p>After you install Mathematica, you have to run MathInstaller.
+MathInstaller asks you for various pieces of information, such as the
+type of computer that you are using, your license number, and your
+password (the publisher of Mathimatica, Wolfram, supplies the password).
+</p><p>
+You will then see a second menu for the creation of the full &quot;dumped&quot;
+version of Mathematica's main executable file.  In that menu, you are
+asked for the names of two directories where you will put
+Mathematica's packages and command scripts.
+</p><p>
+You are then asked about the amount of <kbh docid="ahtx" access="allowed">memory<domain>all</domain><visibility>visible</visibility></kbh> currently available on
+your machine. If you have relatively little memory, i.e., less than
+16MB, highlight the first radio button; if you have plenty of memory
+available, highlight the second radio button.  This option selects
+whether the full <kbh docid="agsv" access="allowed">kernel<domain>all</domain><visibility>visible</visibility></kbh> of libraries will automatically be loaded, or
+loaded as needed by Mathematica.
+</p><p/><boiler src="statmath"><kbfrag version="-//Indiana University//DTD KBFRAG//EN"><p>
+For more information about statistical and mathematical software, <a href="http://uits.iu.edu/scripts/email.php?cid=22"> email the UITS
+Stat/Math Center</a>, visit the center's <a href="http://www.indiana.edu/~statmath/index.html">web page</a>, or
+phone 812-855-4724 (IUB) or 317-278-4740 (IUPUI). The center is
+located in Bloomington at 410 N. Park Avenue, and is open for
+consultation by appointment Monday-Friday 9am-5pm.</p>
+</kbfrag></boiler><p>
+
+
+</p></body>
+    <xtra/>
+  </kbml>
+  <metadata>
+    <docid>aazf</docid>
+    <owner firstname="" lastname="Statistical and Mathematical Computing">statmath</owner>
+    <birthdate day="30" month="11" year="1992"/>
+    <lastmodified day="21" month="07" year="2006"/>
+    <approved day="26" month="05" year="1995"/>
+    <size>1181</size>
+    <importance>standard</importance>
+    <visibility>archived</visibility>
+    <volatility>stable</volatility>
+    <status>approved</status>
+    <resource>samuel</resource>
+    <domain>all</domain>
+    <reference docid="aazp" access="allowed">
+      <title>Where can I get help with Mathematica?</title>
+      <domain>all</domain>
+      <visibility>visible</visibility>
+    </reference>
+  </metadata>
+</document>
