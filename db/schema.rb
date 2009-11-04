@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090630144740) do
+ActiveRecord::Schema.define(:version => 20091103191442) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(:version => 20090630144740) do
 
   add_index "boilerusage", ["boiler"], :name => "index_boilerusage_on_boiler"
   add_index "boilerusage", ["fromid"], :name => "index_boilerusage_on_fromid"
+
+  create_table "docid_searches", :id => false, :force => true do |t|
+    t.string  "doc_id"
+    t.integer "search_id"
+  end
 
   create_table "document", :id => false, :force => true do |t|
     t.string  "id"
