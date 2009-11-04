@@ -71,3 +71,12 @@ Feature: Worklist
   And doc "aaaa" belongs to list "Docs"
   When I view the list "Docs"
   Then I should not see element "form.new.note" within ".listed_doc"
+
+  Scenario: For a valid user, a list should display an input to refresh search results
+  Given I am logged in as "Bob"
+  And a user named "user_a"
+  And a list named "Docs" owned by "user_a"
+  And a doc with id "aaaa"
+  And doc "aaaa" belongs to list "Docs"
+  When I view the list "Docs"
+  Then I should see element "input" within "form.refresh-search"

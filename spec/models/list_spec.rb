@@ -61,15 +61,15 @@ describe List do
     #      @list.creatable_by?(@guest).should be_false
     #    end
     #
-    context "to change the owner" do
+    context "change owner" do
       before do
         @list_owner.stub(:changed? => true)
       end
-      it "should not be allowed to non-admins" do
+      it "should not allow non-admin users" do
         @list.should_not be_updatable_by(@list_owner)
       end
     
-      it "should be allowed to admin" do
+      it "should allow admin user" do
         @list.should be_updatable_by(@admin)
       end
     end

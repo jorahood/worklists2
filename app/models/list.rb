@@ -25,9 +25,27 @@ class List < ActiveRecord::Base
   has_many :docs, 
     :through => :listed_docs
   
-  #  def  before_create
-  #    self.populate! if self.search
-  #  end
+  lifecycle :key_timestamp_field => false do
+
+    state :attached_search
+
+    create :attach_search,
+      :params => [:last_modified],
+      :become => :attached_search do
+    end
+
+    transition :remove_search,
+      {:attached_search => :destroy} do
+
+    end
+
+    transition :refresh_search, 
+      {:attached_search => :attached_search},
+      :available_to => :owner do
+
+    end
+    
+  end
 
   def before_save
     if changed.include?("search_id")
@@ -42,7 +60,7 @@ class List < ActiveRecord::Base
   end
   
   def populate!
-    #FIXME: the following is too slow for 1000+ doc lists, 
+    #FIXME: the following is too slow for 1000+ doc lists,
     #for speed use ActiveRecord::Base#import provided by ar_extensions
     self.docs = self.search.execute
   end

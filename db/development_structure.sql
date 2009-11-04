@@ -1,232 +1,234 @@
 CREATE TABLE `boilerusage` (
-  `boiler` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fromid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `boiler` varchar(255) DEFAULT NULL,
+  `fromid` varchar(255) DEFAULT NULL,
   KEY `index_boilerusage_on_boiler` (`boiler`),
   KEY `index_boilerusage_on_fromid` (`fromid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `document` (
-  `id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` varchar(255) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `modifieddate` date DEFAULT NULL,
   `approveddate` date DEFAULT NULL,
-  `owner` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `author` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `owner` varchar(255) DEFAULT NULL,
+  `author` varchar(255) DEFAULT NULL,
   `importance` int(11) DEFAULT NULL,
   `visibility` int(11) DEFAULT NULL,
   `volatility` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   UNIQUE KEY `index_docs_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `documentdomain` (
-  `id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `domain` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` varchar(255) DEFAULT NULL,
+  `domain` varchar(255) DEFAULT NULL,
   KEY `index_documentdomain_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `documentnames` (
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `docid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `docid` varchar(255) DEFAULT NULL,
   KEY `index_documentnames_on_docid` (`docid`),
   KEY `index_documentnames_on_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `domain_searches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `search_id` int(11) DEFAULT NULL,
-  `domain_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `domain_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `domainlist` (
-  `domain` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `class` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `visible` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `accessible` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `audience` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `domain` varchar(255) DEFAULT NULL,
+  `class` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `visible` varchar(512) DEFAULT NULL,
+  `accessible` varchar(512) DEFAULT NULL,
+  `audience` varchar(512) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `expire` (
-  `id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` varchar(255) DEFAULT NULL,
   `expiredate` date DEFAULT NULL,
-  `explanation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `explanation` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `hotitem` (
-  `id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `hotitem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` varchar(255) DEFAULT NULL,
+  `hotitem` varchar(255) DEFAULT NULL,
   KEY `index_hotitem_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `importance` (
   `rank` int(11) DEFAULT NULL,
-  `importance` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `importance` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kba_by_searches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `search_id` int(11) DEFAULT NULL,
-  `kba_by_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `kba_by_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kba_searches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `search_id` int(11) DEFAULT NULL,
-  `kba_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `kba_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kba_usage` (
-  `docid` varchar(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `kba` varchar(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `docid` varchar(4) NOT NULL DEFAULT '',
+  `kba` varchar(4) NOT NULL DEFAULT '',
+  PRIMARY KEY (`docid`,`kba`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kbresource` (
-  `id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
   KEY `index_kbresource_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kbuser` (
-  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lastname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `firstname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `worknumber` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `homenumber` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `pagernumber` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `username` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `worknumber` varchar(255) DEFAULT NULL,
+  `homenumber` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `pagernumber` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `listed_docs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `list_id` int(11) DEFAULT NULL,
-  `doc_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `doc_id` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `tag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15640 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `lists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `owner_id` int(11) DEFAULT NULL,
-  `comment` text COLLATE utf8_unicode_ci,
-  `audience_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `comment` text,
+  `audience_id` varchar(255) DEFAULT NULL,
   `search_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `notes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `text` text COLLATE utf8_unicode_ci,
+  `text` text,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `owner_id` int(11) DEFAULT NULL,
   `listed_doc_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `references` (
-  `fromid` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `toid` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `fromid` varchar(255) NOT NULL DEFAULT '',
+  `toid` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`fromid`,`toid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `schema_migrations` (
-  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(255) NOT NULL,
   UNIQUE KEY `unique_schema_migrations` (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `searches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `importance_id` int(11) DEFAULT NULL,
   `visibility_id` int(11) DEFAULT NULL,
   `volatility_id` int(11) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
-  `author_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `owner_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `author_id` varchar(255) DEFAULT NULL,
+  `owner_id` varchar(255) DEFAULT NULL,
   `expiredate` date DEFAULT NULL,
-  `resource_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `title_search` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `resource_id` varchar(255) DEFAULT NULL,
+  `title_search` varchar(255) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `modifieddate` date DEFAULT NULL,
   `approveddate` date DEFAULT NULL,
-  `boiler_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `hotitem_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `xtra_search` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `approveddate_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `birthdate_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `modifieddate_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `expiredate_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `importance_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `visibility_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `volatility_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `boiler_id` varchar(255) DEFAULT NULL,
+  `hotitem_id` varchar(255) DEFAULT NULL,
+  `xtra_search` varchar(255) DEFAULT NULL,
+  `approveddate_is` varchar(255) DEFAULT NULL,
+  `birthdate_is` varchar(255) DEFAULT NULL,
+  `modifieddate_is` varchar(255) DEFAULT NULL,
+  `expiredate_is` varchar(255) DEFAULT NULL,
+  `importance_is` varchar(255) DEFAULT NULL,
+  `visibility_is` varchar(255) DEFAULT NULL,
+  `volatility_is` varchar(255) DEFAULT NULL,
+  `status_is` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `status` (
   `rank` int(11) DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `titleaudience` (
-  `audience` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `audience` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `titlecache` (
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `docid` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `audience` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `title` varchar(255) DEFAULT NULL,
+  `docid` varchar(255) NOT NULL DEFAULT '',
+  `audience` varchar(255) NOT NULL DEFAULT '',
   KEY `index_titlecache_on_audience` (`audience`),
   KEY `index_titlecache_on_docid` (`docid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `crypted_password` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `salt` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `crypted_password` varchar(40) DEFAULT NULL,
+  `salt` varchar(40) DEFAULT NULL,
+  `remember_token` varchar(255) DEFAULT NULL,
   `remember_token_expires_at` datetime DEFAULT NULL,
-  `email_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
   `administrator` tinyint(1) DEFAULT '0',
-  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'active',
+  `state` varchar(255) DEFAULT 'active',
   `key_timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `visibility` (
   `rank` int(11) DEFAULT NULL,
-  `visibility` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `visibility` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `volatility` (
   `rank` int(11) DEFAULT NULL,
-  `volatility` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `volatility` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `xtra` (
-  `term` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `term` varchar(255) DEFAULT NULL,
   `weight` int(11) DEFAULT NULL,
-  `id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` varchar(255) DEFAULT NULL,
   KEY `index_xtra_on_id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO schema_migrations (version) VALUES ('20080825192621');
 
@@ -366,6 +368,8 @@ INSERT INTO schema_migrations (version) VALUES ('20090615195257');
 
 INSERT INTO schema_migrations (version) VALUES ('20090615203112');
 
+INSERT INTO schema_migrations (version) VALUES ('20090616021458');
+
 INSERT INTO schema_migrations (version) VALUES ('20090618145229');
 
 INSERT INTO schema_migrations (version) VALUES ('20090618150813');
@@ -378,4 +382,8 @@ INSERT INTO schema_migrations (version) VALUES ('20090623144231');
 
 INSERT INTO schema_migrations (version) VALUES ('20090624145938');
 
-INSERT INTO schema_migrations (version) VALUES ('20091016152036');
+INSERT INTO schema_migrations (version) VALUES ('20090624155020');
+
+INSERT INTO schema_migrations (version) VALUES ('20090624172948');
+
+INSERT INTO schema_migrations (version) VALUES ('20090630144740');

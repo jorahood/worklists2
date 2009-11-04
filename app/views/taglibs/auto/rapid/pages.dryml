@@ -1283,6 +1283,25 @@
 
 
 
+<def tag="refresh-search-page" polymorphic/>
+<def tag="refresh-search-page" for="List">
+  <page title="Refresh Search" merge>
+    
+    <body: class="lifecycle-transition-page refresh-search-page" param/>
+    
+    <content:>
+      <header param="content-header">
+        <h2 param="heading">Refresh Search</h2>
+      </header>
+      
+      <section param="content-body">
+        <refresh-search-form param="form"/>
+      </section>
+    </content:>
+    
+  </page>
+</def>
+
 
   
 <!-- ====== Note Pages ====== -->
