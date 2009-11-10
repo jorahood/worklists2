@@ -40,7 +40,7 @@ Feature: Worklist
   And search "Search for bbbb" returns doc "bbbb"
   When list "Good list" belongs to search "Search for bbbb"
   And I view the list "Good list"
-  Then I should not see "aaaa" within ".collection-section"
+  Then I should not see the word "aaaa" within ".collection-section"
 
   Scenario: A list should have a column to show notes for listed docs
   Given a user named "user_a"
@@ -66,6 +66,25 @@ Feature: Worklist
   When I view the list "Docs"
   Then I should see element "form.new.note" within ".listed_doc"
 
+  Scenario: The note forms should not display their doc associations; it should be set automatically.
+  Given I am logged in as "Bob"
+  And a user named "user_a"
+  And a list named "Docs" owned by "user_a"
+  And a doc with id "aaaa"
+  And doc "aaaa" belongs to list "Docs"
+  When I view the list "Docs"
+  Then I should not see element "select.note-doc" within ".listed_doc"
+
+  Scenario: The list should automatically set the note's associated doc to the listed_doc's doc.
+  Given I am logged in as "Bob"
+  And a user named "user_a"
+  And a list named "Docs" owned by "user_a"
+  And a doc with id "aaaa"
+  And doc "aaaa" belongs to list "Docs"
+  When I view the list "Docs"
+  And I press "Add note"
+  Then I should see "aaaa" within ".doc-view"
+
   Scenario: For a guest user, lists should not display a form for each listed doc to add a note.
   Given I am not logged in
   And a user named "user_a"
@@ -82,7 +101,7 @@ Feature: Worklist
   And a search named "Searchy"
   And list "Docs" belongs to search "Searchy"
   When I view the list "Docs"
-  Then I should see element "form.refresh-search" within ".content-body"
+  Then I should see element "input.refresh_search-button" within "form.button-to"
 
   Scenario: For a valid user, a list without a search should not display an input to refresh search results
   Given I am logged in as "Bob"

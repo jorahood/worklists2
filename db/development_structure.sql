@@ -117,7 +117,7 @@ CREATE TABLE `listed_docs` (
   `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `lists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -129,7 +129,7 @@ CREATE TABLE `lists` (
   `audience_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `search_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `notes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -138,8 +138,9 @@ CREATE TABLE `notes` (
   `updated_at` datetime DEFAULT NULL,
   `owner_id` int(11) DEFAULT NULL,
   `listed_doc_id` int(11) DEFAULT NULL,
+  `doc_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `references` (
   `fromid` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
@@ -180,7 +181,7 @@ CREATE TABLE `searches` (
   `volatility_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `status` (
   `rank` int(11) DEFAULT NULL,
@@ -214,7 +215,7 @@ CREATE TABLE `users` (
   `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'active',
   `key_timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `visibility` (
   `rank` int(11) DEFAULT NULL,
@@ -384,3 +385,5 @@ INSERT INTO schema_migrations (version) VALUES ('20090623144231');
 INSERT INTO schema_migrations (version) VALUES ('20090624145938');
 
 INSERT INTO schema_migrations (version) VALUES ('20091103191442');
+
+INSERT INTO schema_migrations (version) VALUES ('20091105205540');

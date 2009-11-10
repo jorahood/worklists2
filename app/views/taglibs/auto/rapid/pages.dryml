@@ -1129,7 +1129,7 @@
 
     <content: param>
           <header param="content-header">
-            <a:doc param="parent-link">&laquo; <name/></a:doc>
+            <a:list param="parent-link">&laquo; <name/></a:list>
             <h2 param="heading"><name/></h2>
 
             <record-flags fields="" param/>
@@ -1138,7 +1138,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="status, tag, list" param/>
+            <field-list fields="status, tag, doc" param/>
           </section>
     </content:>
     
@@ -1339,7 +1339,7 @@
           </header>
     
           <section param="content-body">
-            <field-list fields="listed_doc" param/>
+            <field-list fields="doc, listed_doc" param/>
           </section>
     </content:>
     

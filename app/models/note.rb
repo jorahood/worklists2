@@ -8,6 +8,7 @@ class Note < ActiveRecord::Base
   end
 
   belongs_to :listed_doc
+  belongs_to :doc
   belongs_to :owner,
     :class_name => 'User',
     # FIXME: foreign_key option required because of monkey_patching of

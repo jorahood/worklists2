@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091103191442) do
+ActiveRecord::Schema.define(:version => 20091105205540) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20091103191442) do
     t.datetime "updated_at"
     t.integer  "owner_id"
     t.integer  "listed_doc_id"
+    t.string   "doc_id"
   end
 
   create_table "references", :id => false, :force => true do |t|

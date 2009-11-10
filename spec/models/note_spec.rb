@@ -2,14 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Note do
   before(:each) do
-    @user = mock_model(User,:username=>'Fred',:admin? => false, :signed_up? => true)
+    @user = mock_model(User,:username=>'Fred',:administrator? => false, :signed_up? => true)
     @valid_attributes = {
       :text => "This is a note.",
       :owner => @user
     }
     @note = Note.new(@valid_attributes)
   end
-
+specify {@note.should belong_to :doc}
 #  it "should create a new instance given valid attributes" do
 #    Note.create!(@valid_attributes)
 #  end

@@ -138,3 +138,10 @@ Then /^I should not see element "([^\"]*)" within "([^\"]*)"$/ do |element, cont
     content.should_not match_selector(element)
   end
 end
+
+Then /^I should not see the word "([^\"]*)" within "([^\"]*)"$/ do |word, context|
+  regexp = Regexp.new("\b"+word+"\b")
+  within(context) do |content|
+    content.should_not contain(regexp)
+  end
+end

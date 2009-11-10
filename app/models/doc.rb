@@ -37,8 +37,8 @@ class Doc < ActiveRecord::Base
     :class_name => 'Kbuser',
     :foreign_key => 'owner'
     
-  has_many :listed_docs,
-    :dependent=>:destroy
+  has_many :listed_docs
+  has_many :notes
   has_many :lists, 
     :through => :listed_docs,
     :accessible => true

@@ -2,20 +2,22 @@
 
 <show-page>
   <after-field-list:>
-    <form if="&this.search" action="&list_refresh_search_path" class="refresh-search">
-      <input type="submit" value="Refresh search results"/>
-    </form>
+    <remote-method-button if="&this.search" method="refresh_search" label="Refresh search results"/>
   </after-field-list:>
   <collection: replace>
     <table-plus with='&@listed_docs' fields='doc, doc.birthdate, doc.modifieddate,
                 doc.approveddate, doc.owner, doc.author, doc.importance,
                 doc.visibility, doc.volatility, doc.status, status, tag, notes'>
   <notes-view:>
+    <set docid="&this_parent.doc.id"/>
     <collection id="#{this_parent.typed_id}-notes" part="notes">
       <empty-message:></empty-message:>
     </collection>
     <form with="&this.new" update="#{this_parent.typed_id}-notes" without-cancel reset-form>
-      <field-list: skip="listed_doc" without-text-label/>
+      <field-list: skip="listed_doc, doc" without-text-label/>
+      <after-field-list:>
+        <input type="hidden" id="note_doc_id" name="note[doc_id]" value="&docid" />
+      </after-field-list:>
       <submit: label="Add note"/>
     </form>
     <count lowercase if-any/>
