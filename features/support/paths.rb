@@ -19,6 +19,8 @@ module NavigationHelpers
 
     when /the search creation page/
       new_search_path
+    when /the list creation page/
+      new_list_path
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

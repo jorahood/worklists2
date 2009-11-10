@@ -6,6 +6,29 @@ class List < ActiveRecord::Base
     name :string
     comment :text
     timestamps
+    show_approveddate :boolean
+    show_author :boolean
+    show_boiler :boolean
+    show_birthdate :boolean
+    show_domains :boolean
+    show_expirations :boolean
+    show_hotitems :boolean
+    show_importance :boolean
+    show_kbas :boolean
+    show_kba_bys :boolean
+    show_modifieddate :boolean
+    show_notes :boolean
+    show_owner :boolean
+    show_refs :boolean
+    show_refbys :boolean
+    show_referenced_boilers :boolean
+    show_resources :boolean
+    show_status :boolean
+    show_tags :boolean
+    show_titles :boolean
+    show_visibility :boolean
+    show_volatility :boolean
+    show_xtras :boolean
   end
 
   validates_presence_of :name, :owner

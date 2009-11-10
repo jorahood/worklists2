@@ -145,3 +145,11 @@ Then /^I should not see the word "([^\"]*)" within "([^\"]*)"$/ do |word, contex
     content.should_not contain(regexp)
   end
 end
+
+Then /^I should see the following options within "([^\"]*)":$/ do |context, options_table|
+  options_table.hashes.each do |hash|
+    within(context) do |content|
+      content.should contain("Show " + hash['option'])
+    end
+  end
+end

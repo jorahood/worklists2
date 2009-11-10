@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091105205540) do
+ActiveRecord::Schema.define(:version => 20091109213954) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -138,6 +138,29 @@ ActiveRecord::Schema.define(:version => 20091105205540) do
     t.text     "comment"
     t.string   "audience_id"
     t.integer  "search_id"
+    t.boolean  "show_approveddate"
+    t.boolean  "show_author"
+    t.boolean  "show_boiler"
+    t.boolean  "show_birthdate"
+    t.boolean  "show_domains"
+    t.boolean  "show_expirations"
+    t.boolean  "show_hotitems"
+    t.boolean  "show_importance"
+    t.boolean  "show_kbas"
+    t.boolean  "show_kba_bys"
+    t.boolean  "show_modifieddate"
+    t.boolean  "show_notes"
+    t.boolean  "show_owner"
+    t.boolean  "show_refs"
+    t.boolean  "show_refbys"
+    t.boolean  "show_referenced_boilers"
+    t.boolean  "show_resources"
+    t.boolean  "show_status"
+    t.boolean  "show_tags"
+    t.boolean  "show_titles"
+    t.boolean  "show_visibility"
+    t.boolean  "show_volatility"
+    t.boolean  "show_xtras"
   end
 
   create_table "notes", :force => true do |t|

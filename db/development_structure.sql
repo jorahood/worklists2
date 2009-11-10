@@ -128,6 +128,29 @@ CREATE TABLE `lists` (
   `comment` text COLLATE utf8_unicode_ci,
   `audience_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `search_id` int(11) DEFAULT NULL,
+  `show_approveddate` tinyint(1) DEFAULT NULL,
+  `show_author` tinyint(1) DEFAULT NULL,
+  `show_boiler` tinyint(1) DEFAULT NULL,
+  `show_birthdate` tinyint(1) DEFAULT NULL,
+  `show_domains` tinyint(1) DEFAULT NULL,
+  `show_expirations` tinyint(1) DEFAULT NULL,
+  `show_hotitems` tinyint(1) DEFAULT NULL,
+  `show_importance` tinyint(1) DEFAULT NULL,
+  `show_kbas` tinyint(1) DEFAULT NULL,
+  `show_kba_bys` tinyint(1) DEFAULT NULL,
+  `show_modifieddate` tinyint(1) DEFAULT NULL,
+  `show_notes` tinyint(1) DEFAULT NULL,
+  `show_owner` tinyint(1) DEFAULT NULL,
+  `show_refs` tinyint(1) DEFAULT NULL,
+  `show_refbys` tinyint(1) DEFAULT NULL,
+  `show_referenced_boilers` tinyint(1) DEFAULT NULL,
+  `show_resources` tinyint(1) DEFAULT NULL,
+  `show_status` tinyint(1) DEFAULT NULL,
+  `show_tags` tinyint(1) DEFAULT NULL,
+  `show_titles` tinyint(1) DEFAULT NULL,
+  `show_visibility` tinyint(1) DEFAULT NULL,
+  `show_volatility` tinyint(1) DEFAULT NULL,
+  `show_xtras` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -140,7 +163,7 @@ CREATE TABLE `notes` (
   `listed_doc_id` int(11) DEFAULT NULL,
   `doc_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `references` (
   `fromid` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
@@ -387,3 +410,5 @@ INSERT INTO schema_migrations (version) VALUES ('20090624145938');
 INSERT INTO schema_migrations (version) VALUES ('20091103191442');
 
 INSERT INTO schema_migrations (version) VALUES ('20091105205540');
+
+INSERT INTO schema_migrations (version) VALUES ('20091109213954');

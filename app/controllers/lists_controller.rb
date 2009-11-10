@@ -15,5 +15,8 @@ class ListsController < ApplicationController
       @list.listed_docs.apply_scopes(:search => [params[:search], :doc_id, :status, :tag],
       :order_by => parse_sort_param(:doc, :status, :tag),
       :status_is => params[:status])
+      @list_fields = "doc, doc.birthdate, doc.modifieddate,
+                doc.approveddate, doc.owner, doc.author, doc.importance,
+                doc.visibility, doc.volatility, doc.status, status, tag, notes"
   end
 end

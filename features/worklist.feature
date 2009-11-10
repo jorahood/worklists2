@@ -127,3 +127,33 @@ Feature: Worklist
   When I press "Refresh search results"
   Then I should see "aaaa" within ".collection-section"
   And I should see "bbbb" within ".collection-section"
+
+  Scenario: A list should allow you to pick which metadata to show
+  Given I am logged in as "Bob"
+  And I am on the list creation page
+  Then I should see the following options within "form.new.list":
+
+  |option|
+  |Approveddate|
+  |Author|
+  |Boiler|
+  |Birthdate|
+  |Domains|
+  |Expirations|
+  |Hotitems|
+  |Importance|
+  |Kbas|
+  |Kba Bys|
+  |Modifieddate|
+  |Notes|
+  |Owner|
+  |Refs|
+  |Refbys|
+  |Referenced Boilers|
+  |Resources|
+  |Status|
+  |Tags|
+  |Titles|
+  |Visibility|
+  |Volatility|
+  |Xtras|

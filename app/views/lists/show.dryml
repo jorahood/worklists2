@@ -5,9 +5,7 @@
     <remote-method-button if="&this.search" method="refresh_search" label="Refresh search results"/>
   </after-field-list:>
   <collection: replace>
-    <table-plus with='&@listed_docs' fields='doc, doc.birthdate, doc.modifieddate,
-                doc.approveddate, doc.owner, doc.author, doc.importance,
-                doc.visibility, doc.volatility, doc.status, status, tag, notes'>
+    <table-plus with='&@listed_docs' fields='&@list_fields'>
   <notes-view:>
     <set docid="&this_parent.doc.id"/>
     <collection id="#{this_parent.typed_id}-notes" part="notes">
