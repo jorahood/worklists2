@@ -26,4 +26,4 @@ Feature: Search
   When I view the search "Search by docids"
   Then I should see "aaaa" within ".collection-section"
   And I should see "cccc" within ".collection-section"
-  And I should not see "bbbb" within ".collection-section"
+  But I should not see "bbbb" within ".collection-section"
