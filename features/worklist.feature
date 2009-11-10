@@ -27,15 +27,18 @@ Feature: Worklist
   When I view the list "Good list"
   Then I should see "aaaa" within ".collection-section"
 
-  Scenario: A list should not display the docs of a search it no longer belongs to
+  Scenario: A list with a changed search should not display the docs from its old search
   Given I am logged in as "Bob"
   And a user named "user_a"
   And a list named "Good list" owned by "user_a"
-  And a search named "Good search"
+  And a search named "Search for aaaa"
   And a doc with id "aaaa"
-  And search "Good search" returns doc "aaaa"
-  And list "Good list" belongs to search "Good search"
-  When I remove the search assigned to list "Good list"
+  And search "Search for aaaa" returns doc "aaaa"
+  And list "Good list" belongs to search "Search for aaaa"
+  And a search named "Search for bbbb"
+  And a doc with id "bbbb"
+  And search "Search for bbbb" returns doc "bbbb"
+  When list "Good list" belongs to search "Search for bbbb"
   And I view the list "Good list"
   Then I should not see "aaaa" within ".collection-section"
 

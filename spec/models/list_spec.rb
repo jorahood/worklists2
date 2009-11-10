@@ -4,6 +4,7 @@ describe List do
   before(:each) do
     @list_owner = mock_model(User, :administrator? => false, :signed_up? => true, :name=>'List Owner')
     @doc = mock_model(Doc, :id => 'mock')
+    @other_doc = mock_model(Doc, :id => 'othr')
     @search = mock_model(Search, :execute => [@doc])
     @list = List.new(:name=>'test', :owner=>@list_owner)
   end
@@ -62,9 +63,10 @@ describe List do
       @list.stub!(:acting_user).and_return(@other_user)
       @list.method_callable_by?(@other_user, :refresh_search).should be_false
     end
+    
     context "change owner" do
       before do
-        @list_owner.stub(:changed? => true)
+        @list_owner.stub!(:changed? => true)
       end
       it "should not allow non-admin users" do
         @list.should_not be_updatable_by(@list_owner)
@@ -111,18 +113,6 @@ describe List do
       @list.search = @search
     end
 
-    context "refresh_search" do
-      it "should send #execute to attached search" do
-        @search.should_receive(:execute)
-        @list.refresh_search
-      end
-      it "should save!" do
-        @list.should_receive(:save!)
-        @list.refresh_search
-      end
-
-    end
-
     it "should populate itself" do
       @list.should_receive(:populate!)
       @list.save!
@@ -131,7 +121,7 @@ describe List do
       @search.should_receive(:execute)
       @list.save!
     end
-    it "should use the results retrieved from the search" do
+    it "should populate its listed docs with the docs from the search" do
       @list.save!
       @list.docs.should == [@doc]
     end
@@ -180,29 +170,40 @@ describe List do
         @list.should_not_receive(:populate!)
         @list.save!
       end
-      context "that had a search" do
-        before do
-          @list.search = @search
-          @list.save!
-          @list.search = nil
-        end
-        it "should clear old docs" do
-          @list.save!
-          @list.docs.should == []
-        end
-      end
     end
   end
 
-  context "belonging to the same search as last time it was saved" do
+  context "belonging to the same search as last save" do
     before do
-      @search = mock_model(Search, :execute => [])
       @list.search = @search
       @list.save!
     end
     it "should not try to populate itself" do
       @list.should_not_receive(:populate!)
       @list.save!
+    end
+
+    context "refreshing the search" do
+      before do
+        @search.stub!(:execute => [@doc, @other_doc])
+      end
+      it "should execute the search" do
+        @search.should_receive(:execute)
+        @list.refresh_search
+      end
+      it "should save!" do
+        @list.should_receive(:save!)
+        @list.refresh_search
+      end
+      it "should update its listed docs with the docs from the search" do
+        @list.refresh_search
+        @list.docs.should == [@doc, @other_doc]
+      end
+      it "should keep listed docs from refresh to refresh" do
+        old_listed_doc = @list.docs.first
+        @list.refresh_search
+        @list.docs.first.should === old_listed_doc
+      end
     end
   end
 end

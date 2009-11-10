@@ -31,9 +31,10 @@ Given /^a doc with id "([^\"]*)"$/ do |docid|
 end
 
 Given /^search "([^\"]*)" returns doc "([^\"]*)"$/ do |search_name, docid|
-  # searches filter out documents based on criteria, so a search with no
-  # criteria should filter nothing and return every doc in the database,
-  # therefore this should be true by default
+  doc = Doc.find(docid)
+  search = Search.find_by_name(search_name)
+  search.docids << doc
+  search.save!
 end
 
 Given /^list "([^\"]*)" belongs to search "([^\"]*)"$/ do |list_name, search_name|

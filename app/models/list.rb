@@ -27,16 +27,10 @@ class List < ActiveRecord::Base
   
   def before_save
     if changed.include?("search_id")
-      old_search = changes["search_id"][0]
-      depopulate!(old_search) if old_search
       populate! if search
     end
   end
 
-  def depopulate!(from_search)
-    self.docs = []
-  end
-  
   def populate!
     #FIXME: the following is too slow for 1000+ doc lists,
     #for speed use ActiveRecord::Base#import provided by ar_extensions
@@ -44,7 +38,7 @@ class List < ActiveRecord::Base
   end
 
   def refresh_search
-    search.execute
+    populate!
     save!
   end
   # --- Permissions --- #
