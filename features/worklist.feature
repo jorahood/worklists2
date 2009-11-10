@@ -128,32 +128,34 @@ Feature: Worklist
   Then I should see "aaaa" within ".collection-section"
   And I should see "bbbb" within ".collection-section"
 
-  Scenario: A list should allow you to pick which metadata to show
+  Scenario: A list should allow you to pick which metadata to display
   Given I am logged in as "Bob"
   And I am on the list creation page
-  Then I should see the following options within "form.new.list":
+  Then I should see the following options checked:
+  | option|
+  | approveddate |
+  | domains |
+  | modifieddate |
+  | owner |
+  | titles |
+  | visibility |
 
+  And I should see the following options unchecked:
   |option|
-  |Approveddate|
-  |Author|
-  |Boiler|
-  |Birthdate|
-  |Domains|
-  |Expirations|
-  |Hotitems|
-  |Importance|
-  |Kbas|
-  |Kba Bys|
-  |Modifieddate|
-  |Notes|
-  |Owner|
-  |Refs|
-  |Refbys|
-  |Referenced Boilers|
-  |Resources|
-  |Status|
-  |Tags|
-  |Titles|
-  |Visibility|
-  |Volatility|
-  |Xtras|
+  | author |
+  | boiler |
+  | birthdate |
+  | expirations |
+  | hotitems |
+  | importance |
+  | kbas |
+  | kba_bys |
+  | notes |
+  | refs |
+  | refbys |
+  | referenced_boilers |
+  | resources |
+  | status |
+  | tags |
+  | volatility |
+  | xtras |

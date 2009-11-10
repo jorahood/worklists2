@@ -138,27 +138,27 @@ ActiveRecord::Schema.define(:version => 20091109213954) do
     t.text     "comment"
     t.string   "audience_id"
     t.integer  "search_id"
-    t.boolean  "show_approveddate"
+    t.boolean  "show_approveddate",       :default => true
     t.boolean  "show_author"
     t.boolean  "show_boiler"
     t.boolean  "show_birthdate"
-    t.boolean  "show_domains"
+    t.boolean  "show_domains",            :default => true
     t.boolean  "show_expirations"
     t.boolean  "show_hotitems"
     t.boolean  "show_importance"
     t.boolean  "show_kbas"
     t.boolean  "show_kba_bys"
-    t.boolean  "show_modifieddate"
+    t.boolean  "show_modifieddate",       :default => true
     t.boolean  "show_notes"
-    t.boolean  "show_owner"
+    t.boolean  "show_owner",              :default => true
     t.boolean  "show_refs"
     t.boolean  "show_refbys"
     t.boolean  "show_referenced_boilers"
     t.boolean  "show_resources"
     t.boolean  "show_status"
     t.boolean  "show_tags"
-    t.boolean  "show_titles"
-    t.boolean  "show_visibility"
+    t.boolean  "show_titles",             :default => true
+    t.boolean  "show_visibility",         :default => true
     t.boolean  "show_volatility"
     t.boolean  "show_xtras"
   end

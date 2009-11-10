@@ -146,10 +146,14 @@ Then /^I should not see the word "([^\"]*)" within "([^\"]*)"$/ do |word, contex
   end
 end
 
-Then /^I should see the following options within "([^\"]*)":$/ do |context, options_table|
+Then /^I should see the following options checked:$/ do |options_table|
   options_table.hashes.each do |hash|
-    within(context) do |content|
-      content.should contain("Show " + hash['option'])
-    end
+    response.should match_selector("input#list_show_" + hash['option'] + "[checked]")
+  end
+end
+
+Then /^I should see the following options unchecked:$/ do |options_table|
+  options_table.hashes.each do |hash|
+    response.should match_selector("input#list_show_" + hash['option'] + ":not([checked])")
   end
 end
