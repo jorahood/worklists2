@@ -3,6 +3,7 @@ class ListsController < ApplicationController
   hobo_model_controller
 
   auto_actions :all
+  web_method :refresh_search
 
   def show
     @list = find_instance

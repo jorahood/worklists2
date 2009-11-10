@@ -25,28 +25,6 @@ class List < ActiveRecord::Base
   has_many :docs, 
     :through => :listed_docs
   
-  lifecycle :key_timestamp_field => false do
-
-    state :attached_search
-
-    create :attach_search,
-      :params => [:last_modified],
-      :become => :attached_search do
-    end
-
-    transition :remove_search,
-      {:attached_search => :destroy} do
-
-    end
-
-    transition :refresh_search, 
-      {:attached_search => :attached_search},
-      :available_to => :owner do
-
-    end
-    
-  end
-
   def before_save
     if changed.include?("search_id")
       old_search = changes["search_id"][0]
@@ -62,9 +40,13 @@ class List < ActiveRecord::Base
   def populate!
     #FIXME: the following is too slow for 1000+ doc lists,
     #for speed use ActiveRecord::Base#import provided by ar_extensions
-    self.docs = self.search.execute
+    self.docs = search.execute
   end
 
+  def refresh_search
+    search.execute
+    save!
+  end
   # --- Permissions --- #
 
   def create_permitted?
@@ -81,6 +63,10 @@ class List < ActiveRecord::Base
 
   def view_permitted?(field)
     true
+  end
+
+  def refresh_search_permitted?
+    owner_is?(acting_user) || acting_user.administrator?
   end
 
 end

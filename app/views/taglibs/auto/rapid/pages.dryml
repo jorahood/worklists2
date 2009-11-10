@@ -1139,19 +1139,6 @@
     
           <section param="content-body">
             <field-list fields="status, tag, list" param/>
-            <section param="collection-section">
-              <h3 param="collection-heading">Notes</h3>
-              
-              <collection:notes param/>
-
-              <section param="add-to-collection" if="&can_create?(@listed_doc.notes)">
-                <h3 param="add-form-heading">Add a Note</h3>
-                <form with="&@note || new_for_current_user(@listed_doc.notes)" owner="listed_doc" without-cancel param>
-                  <field-list: skip="listed_doc"/>
-                  <submit: label="Add"/>
-                </form>
-              </section>
-            </section>
           </section>
     </content:>
     
@@ -1283,25 +1270,6 @@
 
 
 
-<def tag="refresh-search-page" polymorphic/>
-<def tag="refresh-search-page" for="List">
-  <page title="Refresh Search" merge>
-    
-    <body: class="lifecycle-transition-page refresh-search-page" param/>
-    
-    <content:>
-      <header param="content-header">
-        <h2 param="heading">Refresh Search</h2>
-      </header>
-      
-      <section param="content-body">
-        <refresh-search-form param="form"/>
-      </section>
-    </content:>
-    
-  </page>
-</def>
-
 
   
 <!-- ====== Note Pages ====== -->
@@ -1361,7 +1329,6 @@
 
     <content: param>
           <header param="content-header">
-            <a:listed_doc param="parent-link">&laquo; <name/></a:listed_doc>
             <h2 param="heading"><name/></h2>
 
             <record-flags fields="" param/>
@@ -1372,6 +1339,7 @@
           </header>
     
           <section param="content-body">
+            <field-list fields="listed_doc" param/>
           </section>
     </content:>
     

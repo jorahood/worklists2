@@ -7,41 +7,35 @@ describe List do
     @search = mock_model(Search, :execute => [@doc])
     @list = List.new(:name=>'test', :owner=>@list_owner)
   end
-  specify { @list.should be_valid }
-  it "should have a name" do
-    @list.should respond_to(:name)
-  end
-  it "should have an owner" do
-    @list.should respond_to(:owner)
-  end
-  it "should have a comment" do
-    @list.should respond_to(:comment)
-  end
+  it { should respond_to :name }
+  it { should respond_to :owner }
+  it { should respond_to :comment }
 
-  context "Validations" do
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:owner) }
-  end
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:owner) }
 
-  context "Associations" do
-    it { should belong_to(:owner)}
-    specify "owner should be a User" do
-      @list.owner.class.should == User 
-    end
-    it { should have_many(:listed_docs)}
-    it { should have_many(:docs).through(:listed_docs)}
-    it { should belong_to(:search)}
+  it { should belong_to(:owner)}
+  specify "owner should be a User" do
+    @list.owner.class.should == User
   end
+  it { should have_many(:listed_docs)}
+  it { should have_many(:docs).through(:listed_docs)}
+  it { should belong_to(:search)}
 
   context "Permissions" do
-    Spec::Matchers.define :be_creatable do 
+    Spec::Matchers.define :be_creatable do
+      match do |model|
+        model.create_permitted?
+      end
+    end
+    Spec::Matchers.define :be_creatable do
       match do |model|
         model.create_permitted?
       end
     end
     before(:each) do
       @admin = mock_model(User, :administrator? => true, :signed_up? => true)
-      @other_user = mock_model(User, :admin? => false, :signed_up? => true)
+      @other_user = mock_model(User, :administrator? => false, :signed_up? => true)
       @guest = mock_model(Guest, :signed_up? => false)
     end
 
@@ -56,11 +50,18 @@ describe List do
       @list.stub!(:acting_user).and_return(@other_user)
       @list.should_not be_creatable_by(@other_user)
     end
-    #
-    #    it "should not be creatable by guest" do
-    #      @list.creatable_by?(@guest).should be_false
-    #    end
-    #
+    it "should not be creatable by guest" do
+      @list.stub!(:acting_user).and_return(@guest)
+      @list.should_not be_creatable_by(@guest)
+    end
+    specify "search should be refreshable by owner" do
+      @list.stub!(:acting_user).and_return(@list_owner)
+      @list.method_callable_by?(@list_owner, :refresh_search).should be_true
+    end
+    specify "search should not be refreshable by non-owner" do
+      @list.stub!(:acting_user).and_return(@other_user)
+      @list.method_callable_by?(@other_user, :refresh_search).should be_false
+    end
     context "change owner" do
       before do
         @list_owner.stub(:changed? => true)
@@ -106,27 +107,38 @@ describe List do
   end
 
   context "with a new search assigned" do
+    before do
+      @list.search = @search
+    end
 
-    context "saving a new list" do
-      before do
-        @list.search = @search
-      end
-      it "should populate itself" do
-        @list.should_receive(:populate!)
-        @list.save!
-      end
-      it "should ask the search to execute" do
+    context "refresh_search" do
+      it "should send #execute to attached search" do
         @search.should_receive(:execute)
-        @list.save!
+        @list.refresh_search
       end
-      it "should use the results retrieved from the search" do
-        @list.save!
-        @list.docs.should == [@doc]
+      it "should save!" do
+        @list.should_receive(:save!)
+        @list.refresh_search
       end
+
+    end
+
+    it "should populate itself" do
+      @list.should_receive(:populate!)
+      @list.save!
+    end
+    it "should ask the search to execute" do
+      @search.should_receive(:execute)
+      @list.save!
+    end
+    it "should use the results retrieved from the search" do
+      @list.save!
+      @list.docs.should == [@doc]
     end
 
     context "saving an existing list" do
       before do
+        @list.search = nil
         @list.save!
         @list.search = @search
       end

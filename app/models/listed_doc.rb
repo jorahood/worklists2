@@ -10,7 +10,7 @@ class ListedDoc < ActiveRecord::Base
 
   belongs_to :doc
   belongs_to :list
-  has_many :notes, :dependent => :destroy
+  has_many :notes
 
   # --- Permissions --- #
 

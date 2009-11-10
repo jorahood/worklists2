@@ -2,7 +2,7 @@
 
 <show-page>
   <after-field-list:>
-    <form action="#{this.to_param}/do_refresh" class="refresh-search">
+    <form if="&this.search" action="&list_refresh_search_path" class="refresh-search">
       <input type="submit" value="Refresh search results"/>
     </form>
   </after-field-list:>

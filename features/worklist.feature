@@ -25,7 +25,7 @@ Feature: Worklist
   And search "Good search" returns doc "aaaa"
   And list "Good list" belongs to search "Good search"
   When I view the list "Good list"
-  Then I should see "aaaa" in the body
+  Then I should see "aaaa" within ".collection-section"
 
   Scenario: A list should not display the docs of a search it no longer belongs to
   Given I am logged in as "Bob"
@@ -37,13 +37,13 @@ Feature: Worklist
   And list "Good list" belongs to search "Good search"
   When I remove the search assigned to list "Good list"
   And I view the list "Good list"
-  Then I should not see "aaaa" in the body
+  Then I should not see "aaaa" within ".collection-section"
 
   Scenario: A list should have a column to show notes for listed docs
   Given a user named "user_a"
   And a list named "Docs w/ notes" owned by "user_a"
   When I view the list "Docs w/ notes"
-  Then I should see "Notes" within "th.notes-heading"
+  Then I should see "Notes" within ".notes-heading"
 
   Scenario: A list should display notes belonging to its listed docs
   Given a user named "user_a"
@@ -72,11 +72,36 @@ Feature: Worklist
   When I view the list "Docs"
   Then I should not see element "form.new.note" within ".listed_doc"
 
-  Scenario: For a valid user, a list should display an input to refresh search results
+  Scenario: For a valid user, a list with a search should display an input to refresh search results
   Given I am logged in as "Bob"
   And a user named "user_a"
   And a list named "Docs" owned by "user_a"
-  And a doc with id "aaaa"
-  And doc "aaaa" belongs to list "Docs"
+  And a search named "Searchy"
+  And list "Docs" belongs to search "Searchy"
   When I view the list "Docs"
-  Then I should see element "input" within "form.refresh-search"
+  Then I should see element "form.refresh-search" within ".content-body"
+
+  Scenario: For a valid user, a list without a search should not display an input to refresh search results
+  Given I am logged in as "Bob"
+  And a user named "user_a"
+  And a list named "Docs" owned by "user_a"
+  When I view the list "Docs"
+  Then I should not see element "form.refresh-search" within ".content-body"
+
+  Scenario: For the list owner, clicking the "refresh search" button should rerun the list's search
+  Given I am logged in as "Bob"
+  And a list named "Docs" owned by "Bob"
+  And a doc with id "aaaa"
+  And a kbuser named "jthatche"
+  And doc "aaaa" has author "jthatche"
+  And a search named "Authored by julie"
+  And search "Authored by julie" has author "jthatche"
+  And list "Docs" belongs to search "Authored by julie"
+  And I view the list "Docs"
+  And I should see "aaaa" within ".collection-section"
+  But I should not see "bbbb" within ".collection-section"
+  And a doc with id "bbbb"
+  And doc "bbbb" has author "jthatche"
+  When I press "Refresh search results"
+  Then I should see "aaaa" within ".collection-section"
+  And I should see "bbbb" within ".collection-section"

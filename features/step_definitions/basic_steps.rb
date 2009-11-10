@@ -75,6 +75,23 @@ Given /^doc "([^\"]*)" belongs to search "([^\"]*)" through a docid search$/ do 
   search.save!
 end
 
+Given /^a kbuser named "([^\"]*)"$/ do |name|
+  kbuser = Kbuser.create!(:username => name)
+end
+
+Given /^doc "([^\"]*)" has author "([^\"]*)"$/ do |docid, author_name|
+  doc = Doc.find(docid)
+  author = Kbuser.find_by_username(author_name)
+  doc.author = author
+  doc.save!
+end
+
+Given /^search "([^\"]*)" has author "([^\"]*)"$/ do |search_name, author_name|
+  search = Search.find_by_name(search_name)
+  author = Kbuser.find_by_username(author_name)
+  search.author = author
+end
+
 When /^I view the search "([^\"]*)"$/ do |search_name|
   visit search_path(Search.find_by_name(search_name))
 end
