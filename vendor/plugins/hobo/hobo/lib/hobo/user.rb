@@ -70,7 +70,7 @@ module Hobo
         end
       end
 
-      attr_reader :login_attribute
+      inheriting_cattr_reader :login_attribute
 
 
       # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
@@ -153,7 +153,7 @@ module Hobo
     
     
     def lifecycle_changing_password?
-      lifecycle.active_step && :password.in?(lifecycle.active_step.parameters)
+      self.class.has_lifecycle? && lifecycle.active_step && :password.in?(lifecycle.active_step.parameters)
     end
 
     # Is a new password (and confirmation) required? (i.e. signing up or changing password)
@@ -163,7 +163,7 @@ module Hobo
 
 
     def validate_current_password_when_changing_password
-      changing_password? && !authenticated?(current_password) and errors.add :current_password, "is not correct"
+      changing_password? && !authenticated?(current_password) and errors.add :current_password, ht(:hobo.messages.current_password_is_not_correct, :default["is not correct"])
     end
 
   end

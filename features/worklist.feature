@@ -176,3 +176,15 @@ Feature: Worklist
   | visibility |
   | workstate |
   And I should not see any other headings
+
+  Scenario: A list should display only the metadata columns I pick
+  Given I am logged in as "Bob"
+  And a list named "Docs" owned by "Bob"
+  When I edit the list "Docs"
+  And I check "list_show_boiler"
+  And I check "list_show_xtras"
+  And I uncheck "list_show_visibility"
+  And I press "Save"
+  Then I should see element "th.boiler-heading" within "tr.field-heading-row"
+  And I should see element "th.xtras-heading" within "tr.field-heading-row"
+  But I should not see element "th.visibility-heading" within "tr.field-heading-row"

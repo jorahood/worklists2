@@ -103,7 +103,7 @@ When /^I remove the search assigned to list "([^\"]*)"$/ do |list_name|
   list.save!
 end
 
-When /^I edit the worklist "([^\"]*)"$/ do |list_name|
+When /^I edit the list "([^\"]*)"$/ do |list_name|
   visit edit_list_path(List.find_by_name(list_name))
 end
 
@@ -161,9 +161,9 @@ end
 Then /^I should see the following headings:$/ do |table|
   classes = []
   table.hashes.each do |hash|
-    classes << "." + hash['column'] + "-heading"
+    column = hash["column"]
     within("tr.field-heading-row") do |content|
-      content.should match_selector("th" + classes.last)
+      content.should match_selector("th.#{column}-heading")
     end
   end
   @total_headings = table.hashes.size

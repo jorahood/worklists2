@@ -17,6 +17,18 @@ module HoboFields
     
     TYPE_SYNONYMS = [[:timestamp, :datetime]]
 
+    begin
+      MYSQL_COLUMN_CLASS = ActiveRecord::ConnectionAdapters::MysqlColumn
+    rescue NameError
+      MYSQL_COLUMN_CLASS = NilClass
+    end
+
+    begin
+      SQLITE_COLUMN_CLASS = ActiveRecord::ConnectionAdapters::SQLiteColumn
+    rescue NameError
+      SQLITE_COLUMN_CLASS = NilClass
+    end
+
     def sql_type
       options[:sql_type] or begin
                               if native_type?(type)
@@ -55,7 +67,7 @@ module HoboFields
           return col_spec.type.in?(synonyms)
         end
       end
-      t = col_spec.type
+      t == col_spec.type
     end
       
 
@@ -63,9 +75,16 @@ module HoboFields
       !same_type?(col_spec) ||
         begin
           check_attributes = [:null, :default]
-          check_attributes += [:precision, :scale] if sql_type == :decimal
+          check_attributes += [:precision, :scale] if sql_type == :decimal && !col_spec.is_a?(SQLITE_COLUMN_CLASS)  # remove when rails fixes https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/2872
+          check_attributes -= [:default] if sql_type == :text && col_spec.is_a?(MYSQL_COLUMN_CLASS)
           check_attributes << :limit if sql_type.in?([:string, :text, :binary, :integer])
-          check_attributes.any? { |k| col_spec.send(k) != self.send(k) }
+          check_attributes.any? do |k|
+            if k==:default && sql_type==:datetime
+              col_spec.default.try.to_datetime != default.try.to_datetime
+            else
+              col_spec.send(k) != self.send(k)
+            end
+          end
         end
     end
 

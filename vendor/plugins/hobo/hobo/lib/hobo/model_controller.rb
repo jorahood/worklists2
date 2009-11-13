@@ -383,13 +383,18 @@ module Hobo
         (!destroyed && object_url(@this)) ||
 
         # Then the show page of the 'owning' object if there is one
-        (@this.class.default_dependent_on && object_url(@this.send(@this.class.default_dependent_on))) ||
+        object_url(owning_object) ||
 
         # Last try - the index page for this model
         object_url(@this.class) ||
 
         # Give up
         home_page
+    end
+
+    def owning_object
+      method = @this.class.dependent_on.detect {|m| !@this.send(m).nil?}
+      method ? @this.send(method) : nil
     end
     
     
@@ -457,9 +462,9 @@ module Hobo
     
     def find_owner_and_association(owner_association)
       refl = model.reflections[owner_association]
-      klass = refl.klass
-      id = params["#{owner_association}_id"]
-      owner = klass.find(id)
+      owner_name = refl.macro == :has_many ? owner_association.to_s.singularize : owner_association
+      id = params["#{owner_name}_id"]
+      owner = refl.klass.find(id)
       instance_variable_set("@#{owner_association}", owner)
       [owner, owner.send(model.reverse_reflection(owner_association).name)]
     end
@@ -486,7 +491,7 @@ module Hobo
 
     def hobo_show(*args, &b)
       options = args.extract_options!
-      self.this ||= find_instance(options)
+      self.this ||= args.first || find_instance(options)
       response_block(&b)
     end
 
@@ -544,7 +549,7 @@ module Hobo
 
 
     def create_response(new_action, options={}, &b)
-      flash_notice "The #{@this.class.name.titleize.downcase} was created successfully" if valid?
+      flash_notice (ht( :"#{@this.class.name.pluralize.underscore}.messages.create.success", :default=>["The #{@this.class.name.titleize.downcase} was created successfully"])) if valid?
 
       response_block(&b) or
         if valid?
@@ -554,10 +559,12 @@ module Hobo
           end
         else
           respond_to do |wants|
+			# errors is used by the translation helper, ht, below.
+			errors = this.errors.full_messages.join("\n")
             wants.html { re_render_form(new_action) }
             wants.js   { render(:status => 500,
-                                :text => ("Couldn't create the #{this.class.name.titleize.downcase}.\n" +
-                                          this.errors.full_messages.join("\n"))) }
+                                :text => ht( :"#{this.class.name.pluralize.underscore}.messages.create.error", :errors=>errors,:default=>["Couldn't create the #{this.class.name.titleize.downcase}.\n #{errors}"])
+                               )}
           end
         end
     end
@@ -567,7 +574,7 @@ module Hobo
       options = args.extract_options!
 
       self.this ||= args.first || find_instance
-      changes = options[:attributes] || attribute_parameters or raise RuntimeError, "No update specified in params"
+      changes = options[:attributes] || attribute_parameters or raise RuntimeError, ht(:"hobo.messages.update.no_attribute_error", :default=>["No update specified in params"])
       this.user_update_attributes(current_user, changes)
 
       # Ensure current_user isn't out of date
@@ -579,7 +586,8 @@ module Hobo
 
 
     def update_response(in_place_edit_field=nil, options={}, &b)
-      flash_notice "Changes to the #{@this.class.name.titleize.downcase} were saved" if valid?
+      
+      flash_notice (ht(:"#{@this.class.name.pluralize.underscore}.messages.update.success", :default=>["Changes to the #{@this.class.name.titleize.downcase} were saved"])) if valid?
 
       response_block(&b) or
         if valid?
@@ -602,10 +610,12 @@ module Hobo
           end
         else
           respond_to do |wants|
+			# errors is used by the translation helper, ht, below.
+            errors = @this.errors.full_messages.join("\n")
             wants.html { re_render_form(:edit) }
             wants.js { render(:status => 500,
-                              :text => ("There was a problem with that change.\n" +
-                                        @this.errors.full_messages.join("\n"))) }
+                              :text => ht(:"#{@this.class.name.pluralize.underscore}.messages.update.error",:default=>["There was a problem with that change.\n#{errors}"], :errors=>errors)
+                             ) }
           end
         end
     end
@@ -615,7 +625,7 @@ module Hobo
       options = args.extract_options!
       self.this ||= args.first || find_instance
       this.user_destroy(current_user)
-      flash_notice "The #{model.name.titleize.downcase} was deleted"
+      flash_notice ht( :"#{model.name.pluralize.underscore}.messages.destroy.success", :default=>["The #{model.name.titleize.downcase} was deleted"])
       destroy_response(options, &b)
     end
 
@@ -652,10 +662,12 @@ module Hobo
         else
           this.exempt_from_edit_checks = true
           respond_to do |wants|
+  			# errors is used by the translation helper, ht, below.
+			errors = this.errors.full_messages.join("\n")
             wants.html { re_render_form(name) }
             wants.js   { render(:status => 500,
-                                :text => ("Couldn't do creator #{name}.\n" +
-                                          this.errors.full_messages.join("\n"))) }
+                                :text => ht(:"#{@this.class.name.pluralize.underscore}.messages.creator.error", :default=>["Couldn't do creator #{name}.\n#{errors}"], :name=>name, :errors=>errors)
+                               )}
           end
         end
     end
@@ -663,12 +675,13 @@ module Hobo
 
     def prepare_transition(name, options)
       key = options.delete(:key) || params[:key]
-      
-      self.this = find_instance do |record|
-        # The block allows us to perform actions on the records before the permission check
-        record.exempt_from_edit_checks = true
-        record.lifecycle.provided_key = key
-      end
+
+      # we don't use find_instance here, as it fails for key_holder transitions on objects that Guest can't view
+      record = model.find(params[:id])
+      record.exempt_from_edit_checks = true
+      record.lifecycle.provided_key = key
+      self.this = record
+
       this.lifecycle.find_transition(name, current_user) or raise Hobo::PermissionDeniedError
     end
 
@@ -691,10 +704,12 @@ module Hobo
           end
         else
           respond_to do |wants|
+  			# errors is used by the translation helper, ht, below.
+			errors = this.errors.full_messages.join("\n")
             wants.html { re_render_form(name) }
             wants.js   { render(:status => 500,
-                                :text => ("Couldn't do transition #{name}.\n" +
-                                          this.errors.full_messages.join("\n"))) }
+                                :text => ht(:"#{@this.class.name.pluralize.underscore}.messages.transition.error", :default=>["Couldn't do transition #{name}.\n#{errors}"], :name=>name, :errors=>errors)
+                               )}
           end
         end
     end
@@ -748,24 +763,13 @@ module Hobo
             if render_tag("permission-denied-page", { }, :status => 403)
               # job done
             else
-              render :text => "Permission Denied", :status => 403
+              render :text => ht(:"hobo.messages.permission_denied", :default=>["Permission Denied"]), :status => 403
             end
           end
           wants.js do
-            render :text => "Permission Denied", :status => 403
+            render :text => ht(:"hobo.messages.permission_denied", :default=>["Permission Denied"]), :status => 403
           end
         end
-      end
-    end
-
-
-    def not_found(error)
-      if "not_found_response".in?(self.class.superclass.instance_methods)
-        super
-      elsif render_tag("not-found-page", {}, :status => 404)
-        # cool
-      else
-        render(:text => "The page you requested cannot be found.", :status => 404)
       end
     end
 
@@ -794,7 +798,8 @@ module Hobo
     def render_with_hobo_model(*args, &block)
       options = args.extract_options!
       self.this = options[:object] if options[:object]
-      this.user_view(current_user) if this && this.respond_to?(:user_view)
+      # this causes more problems than it solves, and Tom says it's not supposed to be here
+      # this.user_view(current_user) if this && this.respond_to?(:user_view)
       render_without_hobo_model(*args + [options], &block)
     end
 
