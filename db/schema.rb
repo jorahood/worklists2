@@ -141,8 +141,9 @@ ActiveRecord::Schema.define(:version => 20091110200843) do
     t.boolean  "show_workstate",          :default => true
     t.boolean  "show_approveddate",       :default => true
     t.boolean  "show_author"
-    t.boolean  "show_boiler"
+    t.boolean  "show_boilers"
     t.boolean  "show_birthdate"
+    t.boolean  "show_doc_id",             :default => true
     t.boolean  "show_domains",            :default => true
     t.boolean  "show_expirations"
     t.boolean  "show_hotitems"

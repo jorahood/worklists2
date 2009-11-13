@@ -18,6 +18,12 @@ class Xtra < ActiveRecord::Base
     true
   end
 
+  # hacking compatibility with composite primary keys for Hobo. Hobo tries to
+  # instantiate a new record when checking view permissions when rendering
+  # lists/show.dryml and doesn't know to use two ids.
+  def id=(id)
+    return true
+  end
   # --- Permissions --- #
 
   def create_permitted?

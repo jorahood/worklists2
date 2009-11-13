@@ -15,6 +15,6 @@ class ListsController < ApplicationController
       @list.listed_docs.apply_scopes(:search => [params[:search], :doc_id, :status, :tag],
       :order_by => parse_sort_param(:doc, :status, :tag),
       :status_is => params[:status])
-      @list_fields = @list.selected_columns.join(', ')
+      @listed_doc_fields = @list.selected_columns.join(', ')
   end
 end

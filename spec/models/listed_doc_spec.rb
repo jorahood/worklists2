@@ -4,11 +4,11 @@ describe ListedDoc do
 
   it {should respond_to :workstate}
 
-it "should delegate doc metadata accessors" do
+  it "should delegate doc metadata accessors" do
     subject.should respond_to *ListedDoc.delegated_accessors
-end
-#  it {should validate_presence_of :list}
-#  it {should validate_presence_of :doc}
+  end
+  #  it {should validate_presence_of :list}
+  #  it {should validate_presence_of :doc}
   it { should belong_to :doc }
   it { should belong_to :list }
   it { should have_many :notes }

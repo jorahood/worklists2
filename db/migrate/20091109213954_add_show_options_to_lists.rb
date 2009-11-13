@@ -2,8 +2,9 @@ class AddShowOptionsToLists < ActiveRecord::Migration
   def self.up
     add_column :lists, :show_approveddate, :boolean, :default => true
     add_column :lists, :show_author, :boolean
-    add_column :lists, :show_boiler, :boolean
+    add_column :lists, :show_boilers, :boolean
     add_column :lists, :show_birthdate, :boolean
+    add_column :lists, :show_doc_id, :boolean, :default => true
     add_column :lists, :show_domains, :boolean, :default => true
     add_column :lists, :show_expirations, :boolean
     add_column :lists, :show_hotitems, :boolean
@@ -28,8 +29,9 @@ class AddShowOptionsToLists < ActiveRecord::Migration
   def self.down
     remove_column :lists, :show_approveddate
     remove_column :lists, :show_author
-    remove_column :lists, :show_boiler
+    remove_column :lists, :show_boilers
     remove_column :lists, :show_birthdate
+    remove_column :lists, :show_doc_id
     remove_column :lists, :show_domains
     remove_column :lists, :show_expirations
     remove_column :lists, :show_hotitems

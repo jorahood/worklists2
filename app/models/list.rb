@@ -14,9 +14,10 @@ class List < ActiveRecord::Base
     timestamps
     show_approveddate :boolean, :default => true
     show_author :boolean
-    show_boiler :boolean
+    show_boilers :boolean
     show_birthdate :boolean
     show_domains :boolean, :default => true
+#    show_doc_id :boolean, :default => true
     show_expirations :boolean
     show_hotitems :boolean
     show_importance :boolean

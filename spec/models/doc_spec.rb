@@ -23,4 +23,11 @@ describe Doc do
     bbbb.save!
     Doc.docid_search('aaaa','bbbb').find(:all).should == [aaaa,bbbb]
   end
+
+  it "should have a method for each of ListedDoc's delegated accessors" do
+    ListedDoc.delegated_accessors.each do |method|
+      lambda {subject.send(method)}.should_not raise_error(NoMethodError)
+    end
+  end
+
 end

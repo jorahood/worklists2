@@ -159,14 +159,18 @@ Then /^I should see the following options unchecked:$/ do |table|
 end
 
 Then /^I should see the following headings:$/ do |table|
-  classes = []
   table.hashes.each do |hash|
-    column = hash["column"]
     within("tr.field-heading-row") do |content|
-      content.should match_selector("th.#{column}-heading")
+      content.should match_selector("th.#{hash[:heading]}-heading")
     end
   end
   @total_headings = table.hashes.size
+end
+
+When /^I check the following boxes:$/ do |table|
+  table.hashes.each do |hash|
+    check "list_show_#{hash['checkbox']}"
+  end
 end
 
 And /^I should not see any other headings$/ do

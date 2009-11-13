@@ -145,7 +145,7 @@ Feature: Worklist
   And I should see the following options unchecked:
   |option|
   | author |
-  | boiler |
+  | boilers |
   | birthdate |
   | expirations |
   | hotitems |
@@ -165,7 +165,7 @@ Feature: Worklist
   And a list named "Docs" owned by "Bob"
   When I view the list "Docs"
   Then I should see the following headings:
-  |column|
+  |heading|
   | doc |
   | approveddate |
   | domains |
@@ -177,14 +177,73 @@ Feature: Worklist
   | workstate |
   And I should not see any other headings
 
-  Scenario: A list should display only the metadata columns I pick
+  Scenario: A list showable doc metadata should all correspond to actual attributes and associations of the doc
+  Given I am logged in as "Bob"
+  And a list named "Docs" owned by "Bob"
+  And a doc with id "aaaa"
+  And doc "aaaa" belongs to list "Docs"
+  When I edit the list "Docs"
+  And I check the following boxes:
+  |checkbox|
+  | approveddate |
+  | domains |
+  | modifieddate |
+  | notes |
+  | owner |
+  | titles |
+  | visibility |
+  | workstate |
+  | author |
+  | boilers |
+  | birthdate |
+  | expirations |
+  | hotitems |
+  | importance |
+  | kbas |
+  | kba_bys |
+  | refs |
+  | refbys |
+  | referenced_boilers |
+  | resources |
+  | status |
+  | volatility |
+  | xtras |
+  And I press "Save"
+  Then I should see the following headings:
+  |heading|
+  |doc|
+  | approveddate |
+  | domains |
+  | modifieddate |
+  | notes |
+  | owner |
+  | titles |
+  | visibility |
+  | workstate |
+  | author |
+  | boilers |
+  | birthdate |
+  | expirations |
+  | hotitems |
+  | importance |
+  | kbas |
+  | kba-bys |
+  | refs |
+  | refbys |
+  | referenced-boilers |
+  | resources |
+  | status |
+  | volatility |
+  | xtras |
+  
+  Scenario: A list should display only the metadata columns I pick plus 'doc'
   Given I am logged in as "Bob"
   And a list named "Docs" owned by "Bob"
   When I edit the list "Docs"
-  And I check "list_show_boiler"
+  And I check "list_show_boilers"
   And I check "list_show_xtras"
   And I uncheck "list_show_visibility"
   And I press "Save"
-  Then I should see element "th.boiler-heading" within "tr.field-heading-row"
+  Then I should see element "th.boilers-heading" within "tr.field-heading-row"
   And I should see element "th.xtras-heading" within "tr.field-heading-row"
   But I should not see element "th.visibility-heading" within "tr.field-heading-row"

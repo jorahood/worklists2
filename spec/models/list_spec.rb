@@ -11,7 +11,8 @@ describe List do
   it { should respond_to :name }
   it { should respond_to :owner }
   it { should respond_to :comment }
-
+  it { should respond_to :show_doc_id }
+  
   it { should validate_presence_of :name }
   it { should validate_presence_of :owner }
 
