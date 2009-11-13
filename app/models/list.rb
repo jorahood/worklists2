@@ -17,14 +17,14 @@ class List < ActiveRecord::Base
     show_kbas :boolean
     show_kba_bys :boolean
     show_modifieddate :boolean, :default => true
-    show_notes :boolean
+    show_notes :boolean, :default => true
     show_owner :boolean, :default => true
     show_refs :boolean
     show_refbys :boolean
     show_referenced_boilers :boolean
     show_resources :boolean
     show_status :boolean
-    show_tags :boolean
+    show_tags :boolean, :default => true
     show_titles :boolean, :default => true
     show_visibility :boolean, :default => true
     show_volatility :boolean

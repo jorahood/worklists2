@@ -11,14 +11,14 @@ class AddShowOptionsToLists < ActiveRecord::Migration
     add_column :lists, :show_kbas, :boolean
     add_column :lists, :show_kba_bys, :boolean
     add_column :lists, :show_modifieddate, :boolean, :default => true
-    add_column :lists, :show_notes, :boolean
+    add_column :lists, :show_notes, :boolean, :default => true
     add_column :lists, :show_owner, :boolean, :default => true
     add_column :lists, :show_refs, :boolean
     add_column :lists, :show_refbys, :boolean
     add_column :lists, :show_referenced_boilers, :boolean
     add_column :lists, :show_resources, :boolean
     add_column :lists, :show_status, :boolean
-    add_column :lists, :show_tags, :boolean
+    add_column :lists, :show_tags, :boolean, :default => true
     add_column :lists, :show_titles, :boolean, :default => true
     add_column :lists, :show_visibility, :boolean, :default => true
     add_column :lists, :show_volatility, :boolean

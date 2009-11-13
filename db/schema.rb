@@ -149,14 +149,14 @@ ActiveRecord::Schema.define(:version => 20091109213954) do
     t.boolean  "show_kbas"
     t.boolean  "show_kba_bys"
     t.boolean  "show_modifieddate",       :default => true
-    t.boolean  "show_notes"
+    t.boolean  "show_notes",              :default => true
     t.boolean  "show_owner",              :default => true
     t.boolean  "show_refs"
     t.boolean  "show_refbys"
     t.boolean  "show_referenced_boilers"
     t.boolean  "show_resources"
     t.boolean  "show_status"
-    t.boolean  "show_tags"
+    t.boolean  "show_tags",               :default => true
     t.boolean  "show_titles",             :default => true
     t.boolean  "show_visibility",         :default => true
     t.boolean  "show_volatility"

@@ -136,7 +136,9 @@ Feature: Worklist
   | approveddate |
   | domains |
   | modifieddate |
+  | notes |
   | owner |
+  | tags |
   | titles |
   | visibility |
 
@@ -150,12 +152,10 @@ Feature: Worklist
   | importance |
   | kbas |
   | kba_bys |
-  | notes |
   | refs |
   | refbys |
   | referenced_boilers |
   | resources |
   | status |
-  | tags |
   | volatility |
   | xtras |
