@@ -5,7 +5,7 @@
     <error-messages param/>
     <field-list fields="description" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'audiences.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -17,7 +17,7 @@
     <error-messages param/>
     <field-list fields="fromid, boiler, doc, doc_as_boiler" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'boiler_usages.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -29,7 +29,7 @@
     <error-messages param/>
     <field-list fields="docid, doc" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'boilers.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -41,7 +41,7 @@
     <error-messages param/>
     <field-list fields="birthdate, modifieddate, approveddate, importance, visibility, volatility, status, author, owner, author_assoc, domains, importance_assoc, lists, owner_assoc, status_assoc, visibility_assoc, volatility_assoc" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'docs.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -53,7 +53,7 @@
     <error-messages param/>
     <field-list fields="type, description, visible, accessible, audience" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'domains.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -65,7 +65,7 @@
     <error-messages param/>
     <field-list fields="expiredate, explanation, doc" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'expirations.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -77,7 +77,7 @@
     <error-messages param/>
     <field-list fields="id, doc" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'hotitems.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -89,7 +89,7 @@
     <error-messages param/>
     <field-list fields="importance" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'importances.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -101,7 +101,7 @@
     <error-messages param/>
     <field-list fields="from_doc, to_doc" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'kba_usages.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -113,7 +113,7 @@
     <error-messages param/>
     <field-list fields="lastname, firstname, email, status" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'kbusers.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -125,7 +125,7 @@
     <error-messages param/>
     <field-list fields="workstate, doc, list" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'listed_docs.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -137,7 +137,7 @@
     <error-messages param/>
     <field-list fields="name, comment, show_approveddate, show_author, show_boiler, show_birthdate, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_titles, show_visibility, show_volatility, show_workstate, show_xtras, audience, owner, search" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'lists.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -149,7 +149,7 @@
     <error-messages param/>
     <field-list fields="text, doc, listed_doc, owner" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'notes.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -161,7 +161,7 @@
     <error-messages param/>
     <field-list fields="ref_doc, refby_doc" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'references.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -173,7 +173,7 @@
     <error-messages param/>
     <field-list fields="name, title_search, xtra_search, approveddate_is, approveddate, modifieddate_is, modifieddate, birthdate_is, birthdate, expiredate_is, expiredate, importance_is, visibility_is, volatility_is, status_is, author, boiler, docids, domains, hotitem, importance, owner, resource, status, visibility, volatility" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'searches.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -185,7 +185,7 @@
     <error-messages param/>
     <field-list fields="status" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'statuses.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -197,7 +197,7 @@
     <error-messages param/>
     <field-list fields="title, audience, doc" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'titles.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -209,7 +209,7 @@
     <error-messages param/>
     <field-list fields="name, email_address, administrator" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'users.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -220,7 +220,7 @@
     <error-messages param/>
     <field-list fields="name, email_address, password, password_confirmation" param/>
     <div param="actions">
-      <submit label="Signup" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'users.actions.signup', :default=>['Signup']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -232,7 +232,7 @@
     <input type="hidden" name="key" value="&this.lifecycle.provided_key" if="&this.lifecycle.provided_key"/>
     <field-list fields="password, password_confirmation" param/>
     <div param="actions">
-      <submit label="Reset Password" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'users.actions.reset_password', :default=>['Reset Password']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -242,7 +242,7 @@
     <error-messages param/>
     <field-list fields="visibility" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'visibilities.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -254,7 +254,7 @@
     <error-messages param/>
     <field-list fields="volatility" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'volatilities.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>
@@ -266,7 +266,7 @@
     <error-messages param/>
     <field-list fields="weight, doc" param/>
     <div param="actions">
-      <submit label="Save" param/><or-cancel param="cancel"/>
+      <submit label="#{ht 'xtras.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
   </form>
 </def>

@@ -6,7 +6,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:titles param/>
+      <ht key="titles.collection.count" count="&this.titles.size">
+         <count:titles param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -17,7 +19,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:appearances param/>
+      <ht key="appearances.collection.count" count="&this.appearances.size">
+         <count:appearances param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -36,7 +40,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:titles param/>
+      <ht key="titles.collection.count" count="&this.titles.size">
+         <count:titles param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -55,7 +61,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:docs param/>
+      <ht key="docs.collection.count" count="&this.docs.size">
+         <count:docs param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -63,7 +71,9 @@
 <def tag="card" for="DomainSearch">
   <card class="domain-search" param="default" merge>
     <body: param>
-      <count:domains param/>
+      <ht key="domains.collection.count" count="&this.domains.size">
+         <count:domains param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -98,7 +108,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:docs param/>
+      <ht key="docs.collection.count" count="&this.docs.size">
+         <count:docs param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -125,7 +137,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:authored_docs param/>
+      <ht key="authored_docs.collection.count" count="&this.authored_docs.size">
+         <count:authored_docs param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -137,7 +151,9 @@
     </header:>
     <body: param>
       <a:owner param="creator-link"/>
-      <count:listed_docs param/>
+      <ht key="listed_docs.collection.count" count="&this.listed_docs.size">
+         <count:listed_docs param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -183,7 +199,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:docs param/>
+      <ht key="docs.collection.count" count="&this.docs.size">
+         <count:docs param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -202,7 +220,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:lists param/>
+      <ht key="lists.collection.count" count="&this.lists.size">
+         <count:lists param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -213,7 +233,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:docs param/>
+      <ht key="docs.collection.count" count="&this.docs.size">
+         <count:docs param/>
+      </ht>
     </body:>
   </card>
 </def>
@@ -224,7 +246,9 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <count:docs param/>
+      <ht key="docs.collection.count" count="&this.docs.size">
+         <count:docs param/>
+      </ht>
     </body:>
   </card>
 </def>
