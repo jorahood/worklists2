@@ -62,9 +62,10 @@ class List < ActiveRecord::Base
   end
 
   def selected_columns
-    List.showable_columns.find_all do |column|
+    columns = List.showable_columns.find_all do |column|
       self.send("show_#{column}".to_sym)
     end
+    columns.unshift(:doc) # doc id always has to be first
   end
 
   def populate!

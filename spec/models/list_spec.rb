@@ -36,7 +36,11 @@ describe List do
       subject.send("show_#{column}".to_sym)
     end
     subject.selected_columns.should_not == []
-    subject.selected_columns.should == columns
+    subject.selected_columns.should == columns.unshift(:doc)
+  end
+
+  it "should always have doc as the first column" do
+    subject.selected_columns.first.should == :doc
   end
 
   context "Permissions" do
