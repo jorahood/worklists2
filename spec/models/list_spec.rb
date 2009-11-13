@@ -29,11 +29,6 @@ describe List do
         model.create_permitted?
       end
     end
-    Spec::Matchers.define :be_creatable do
-      match do |model|
-        model.create_permitted?
-      end
-    end
     before(:each) do
       @admin = mock_model(User, :administrator? => true, :signed_up? => true)
       @other_user = mock_model(User, :administrator? => false, :signed_up? => true)
@@ -48,19 +43,15 @@ describe List do
     it "should not be creatable by non-owner" do
       # this helps hobo know that the current user can create their own projects
       # only, and the Owner field shouldn't be displayed on the new list form
-      @list.stub!(:acting_user).and_return(@other_user)
       @list.should_not be_creatable_by(@other_user)
     end
     it "should not be creatable by guest" do
-      @list.stub!(:acting_user).and_return(@guest)
       @list.should_not be_creatable_by(@guest)
     end
     specify "search should be refreshable by owner" do
-      @list.stub!(:acting_user).and_return(@list_owner)
       @list.method_callable_by?(@list_owner, :refresh_search).should be_true
     end
     specify "search should not be refreshable by non-owner" do
-      @list.stub!(:acting_user).and_return(@other_user)
       @list.method_callable_by?(@other_user, :refresh_search).should be_false
     end
     
