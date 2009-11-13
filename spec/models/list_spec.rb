@@ -12,16 +12,32 @@ describe List do
   it { should respond_to :owner }
   it { should respond_to :comment }
 
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:owner) }
+  it { should validate_presence_of :name }
+  it { should validate_presence_of :owner }
 
-  it { should belong_to(:owner)}
+  it { should belong_to :owner }
   specify "owner should be a User" do
     @list.owner.class.should == User
   end
-  it { should have_many(:listed_docs)}
-  it { should have_many(:docs).through(:listed_docs)}
-  it { should belong_to(:search)}
+  it { should have_many :listed_docs }
+  it { should have_many(:docs).through :listed_docs }
+  it { should belong_to :search }
+
+  it "should return a list of showable metadata columns" do
+    columns = List.attr_order.*.to_s.grep(/^show_/) do |method_name|
+      method_name.gsub(/^show_/,'').to_sym
+    end
+    List.showable_columns.should_not == []
+    List.showable_columns.should == columns
+  end
+
+  it "should return a list of selected showable metadata columns" do
+    columns = List.showable_columns.find_all do |column|
+      subject.send("show_#{column}".to_sym)
+    end
+    subject.selected_columns.should_not == []
+    subject.selected_columns.should == columns
+  end
 
   context "Permissions" do
     Spec::Matchers.define :be_creatable do

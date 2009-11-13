@@ -114,7 +114,7 @@ CREATE TABLE `listed_docs` (
   `updated_at` datetime DEFAULT NULL,
   `list_id` int(11) DEFAULT NULL,
   `doc_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `workstate` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -128,6 +128,7 @@ CREATE TABLE `lists` (
   `comment` text COLLATE utf8_unicode_ci,
   `audience_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `search_id` int(11) DEFAULT NULL,
+  `show_workstate` tinyint(1) DEFAULT '1',
   `show_approveddate` tinyint(1) DEFAULT '1',
   `show_author` tinyint(1) DEFAULT NULL,
   `show_boiler` tinyint(1) DEFAULT NULL,
@@ -146,7 +147,6 @@ CREATE TABLE `lists` (
   `show_referenced_boilers` tinyint(1) DEFAULT NULL,
   `show_resources` tinyint(1) DEFAULT NULL,
   `show_status` tinyint(1) DEFAULT NULL,
-  `show_tags` tinyint(1) DEFAULT '1',
   `show_titles` tinyint(1) DEFAULT '1',
   `show_visibility` tinyint(1) DEFAULT '1',
   `show_volatility` tinyint(1) DEFAULT NULL,
@@ -412,3 +412,7 @@ INSERT INTO schema_migrations (version) VALUES ('20091103191442');
 INSERT INTO schema_migrations (version) VALUES ('20091105205540');
 
 INSERT INTO schema_migrations (version) VALUES ('20091109213954');
+
+INSERT INTO schema_migrations (version) VALUES ('20091110200159');
+
+INSERT INTO schema_migrations (version) VALUES ('20091110200843');

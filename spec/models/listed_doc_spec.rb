@@ -2,16 +2,17 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ListedDoc do
 
-  describe "validations:" do
-    #    it "should validate existence of list"
-    #    it "should validate existence of doc"
-  end
-  context "Associations" do
-    it { should belong_to :doc }
-    it { should belong_to :list }
-    it { should have_many :notes }
-  end
-  
+  it {should respond_to :workstate}
+
+it "should delegate doc metadata accessors" do
+    subject.should respond_to *ListedDoc.delegated_accessors
+end
+#  it {should validate_presence_of :list}
+#  it {should validate_presence_of :doc}
+  it { should belong_to :doc }
+  it { should belong_to :list }
+  it { should have_many :notes }
+
   context "Permissions" do
     before do
       @listed_doc =  ListedDoc.new

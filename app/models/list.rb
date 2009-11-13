@@ -2,6 +2,12 @@ class List < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  def self.showable_columns
+    attr_order.*.to_s.grep(/^show_/) do |method_name|
+      method_name.gsub(/^show_/,'').to_sym
+    end
+  end
+
   fields do
     name :string
     comment :text
@@ -24,10 +30,11 @@ class List < ActiveRecord::Base
     show_referenced_boilers :boolean
     show_resources :boolean
     show_status :boolean
-    show_tags :boolean, :default => true
+#    show_tags :boolean, :default => true
     show_titles :boolean, :default => true
     show_visibility :boolean, :default => true
     show_volatility :boolean
+    show_workstate :boolean, :default => true
     show_xtras :boolean
   end
 
@@ -47,10 +54,16 @@ class List < ActiveRecord::Base
     :dependent => :destroy
   has_many :docs, 
     :through => :listed_docs
-  
+
   def before_save
     if changed.include?("search_id")
       populate! if search
+    end
+  end
+
+  def selected_columns
+    List.showable_columns.find_all do |column|
+      self.send("show_#{column}".to_sym)
     end
   end
 
@@ -64,6 +77,8 @@ class List < ActiveRecord::Base
     populate!
     save!
   end
+
+
   # --- Permissions --- #
 
   def create_permitted?

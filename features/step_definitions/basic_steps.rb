@@ -146,14 +146,32 @@ Then /^I should not see the word "([^\"]*)" within "([^\"]*)"$/ do |word, contex
   end
 end
 
-Then /^I should see the following options checked:$/ do |options_table|
-  options_table.hashes.each do |hash|
+Then /^I should see the following options checked:$/ do |table|
+  table.hashes.each do |hash|
     response.should match_selector("input#list_show_" + hash['option'] + "[checked]")
   end
 end
 
-Then /^I should see the following options unchecked:$/ do |options_table|
-  options_table.hashes.each do |hash|
+Then /^I should see the following options unchecked:$/ do |table|
+  table.hashes.each do |hash|
     response.should match_selector("input#list_show_" + hash['option'] + ":not([checked])")
   end
 end
+
+Then /^I should see the following headings:$/ do |table|
+  classes = []
+  table.hashes.each do |hash|
+    classes << "." + hash['column'] + "-heading"
+    within("tr.field-heading-row") do |content|
+      content.should match_selector("th" + classes.last)
+    end
+  end
+  @total_headings = table.hashes.size
+end
+
+And /^I should not see any other headings$/ do
+  within("tr.field-heading-row") do |content|
+    content.should_not match_selector("th:nth-child(#{@total_headings+1})")
+  end
+end
+

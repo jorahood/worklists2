@@ -4,13 +4,20 @@ class ListedDoc < ActiveRecord::Base
 
   fields do
     timestamps
-    status enum_string(:untouched,:pending,:completed)
-    tag :string
+    workstate enum_string(:untouched,:pending,:completed)
   end
 
   belongs_to :doc
   belongs_to :list
   has_many :notes
+  
+  @@delegated_accessors = List.showable_columns - [:notes, :workstate, :tags]
+
+  cattr_reader :delegated_accessors
+
+  @@delegated_accessors.each do |method|
+    delegate method, :to => :doc
+  end
 
   # --- Permissions --- #
 

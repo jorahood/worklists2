@@ -18,7 +18,7 @@ class AddShowOptionsToLists < ActiveRecord::Migration
     add_column :lists, :show_referenced_boilers, :boolean
     add_column :lists, :show_resources, :boolean
     add_column :lists, :show_status, :boolean
-    add_column :lists, :show_tags, :boolean, :default => true
+#    add_column :lists, :show_tags, :boolean, :default => true
     add_column :lists, :show_titles, :boolean, :default => true
     add_column :lists, :show_visibility, :boolean, :default => true
     add_column :lists, :show_volatility, :boolean
@@ -44,7 +44,7 @@ class AddShowOptionsToLists < ActiveRecord::Migration
     remove_column :lists, :show_referenced_boilers
     remove_column :lists, :show_resources
     remove_column :lists, :show_status
-    remove_column :lists, :show_tags
+#    remove_column :lists, :show_tags
     remove_column :lists, :show_titles
     remove_column :lists, :show_visibility
     remove_column :lists, :show_volatility
