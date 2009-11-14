@@ -133,7 +133,7 @@ CREATE TABLE `lists` (
   `show_author` tinyint(1) DEFAULT NULL,
   `show_boilers` tinyint(1) DEFAULT NULL,
   `show_birthdate` tinyint(1) DEFAULT NULL,
-  `show_doc_id` tinyint(1) DEFAULT '1',
+  `show_docid` tinyint(1) DEFAULT '1',
   `show_domains` tinyint(1) DEFAULT '1',
   `show_expirations` tinyint(1) DEFAULT NULL,
   `show_hotitems` tinyint(1) DEFAULT NULL,

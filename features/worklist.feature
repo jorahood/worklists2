@@ -128,7 +128,7 @@ Feature: Worklist
   Then I should see "aaaa" within ".collection-section"
   And I should see "bbbb" within ".collection-section"
 
-  Scenario: A list should have inputs to select which doc metadata to display with the right labels
+  Scenario: A list should have inputs to select which doc metadata to display
   Given I am logged in as "Bob"
   And I am on the list creation page
   Then I should see the following options checked:
@@ -161,6 +161,7 @@ Feature: Worklist
   | xtras |
 
   And I should see "Show Boiler Name" within ".show-boilers-label"
+  And I should not see "Show Docid" within "form.new"
 
   Scenario: A new list should display only the default metadata columns
   Given I am logged in as "Bob"
@@ -168,7 +169,7 @@ Feature: Worklist
   When I view the list "Docs"
   Then I should see the following headings:
   |heading|
-  | doc |
+  | docid |
   | approveddate |
   | domains |
   | modifieddate |
@@ -177,9 +178,10 @@ Feature: Worklist
   | titles |
   | visibility |
   | workstate |
+
   And I should not see any other headings
 
-  Scenario: A list showable doc metadata should all correspond to actual attributes and associations of the doc
+  Scenario: A list's showable doc metadata should all correspond to actual attributes and associations of the doc
   Given I am logged in as "Bob"
   And a list named "Docs" owned by "Bob"
   And a doc with id "aaaa"
@@ -210,10 +212,11 @@ Feature: Worklist
   | status |
   | volatility |
   | xtras |
+
   And I press "Save"
   Then I should see the following headings:
   |heading|
-  |doc|
+  |docid|
   | approveddate |
   | domains |
   | modifieddate |
@@ -238,7 +241,7 @@ Feature: Worklist
   | volatility |
   | xtras |
 
-  Scenario: A list should display only the metadata I pick plus 'doc' and the headings should look right
+  Scenario: A list should display only the metadata I pick plus 'docid' and the boilers heading should say boiler name
   Given I am logged in as "Bob"
   And a list named "Docs" owned by "Bob"
   When I edit the list "Docs"
@@ -249,4 +252,5 @@ Feature: Worklist
   Then I should see element "th.boilers-heading" within "tr.field-heading-row"
   And I should see "Boiler Name" within "tr.field-heading-row"
   And I should see element "th.xtras-heading" within "tr.field-heading-row"
+  And I should see element "th.docid-heading" within "tr.field-heading-row"
   But I should not see element "th.visibility-heading" within "tr.field-heading-row"

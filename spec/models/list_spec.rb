@@ -11,7 +11,7 @@ describe List do
   it { should respond_to :name }
   it { should respond_to :owner }
   it { should respond_to :comment }
-  it { should respond_to :show_doc_id }
+  it { should respond_to :show_docid }
   
   it { should validate_presence_of :name }
   it { should validate_presence_of :owner }
@@ -24,7 +24,7 @@ describe List do
   it { should have_many(:docs).through :listed_docs }
   it { should belong_to :search }
 
-  it "should return a list of showable metadata columns" do
+  it "should return showable metadata columns" do
     columns = List.attr_order.*.to_s.grep(/^show_/) do |method_name|
       method_name.gsub(/^show_/,'').to_sym
     end
@@ -32,16 +32,12 @@ describe List do
     List.showable_columns.should == columns
   end
 
-  it "should return a list of selected showable metadata columns" do
+  it "should return selected showable metadata columns" do
     columns = List.showable_columns.find_all do |column|
       subject.send("show_#{column}".to_sym)
     end
     subject.selected_columns.should_not == []
-    subject.selected_columns.should == columns.unshift(:doc)
-  end
-
-  it "should always have doc as the first column" do
-    subject.selected_columns.first.should == :doc
+    subject.selected_columns.should == columns
   end
 
   context "Permissions" do

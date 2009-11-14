@@ -1584,7 +1584,7 @@
               </ht>
             </h2>
 
-            <record-flags fields="show_workstate, show_approveddate, show_author, show_boilers, show_birthdate, show_doc_id, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_titles, show_visibility, show_volatility, show_xtras" param/>
+            <record-flags fields="show_workstate, show_approveddate, show_author, show_boilers, show_birthdate, show_docid, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_titles, show_visibility, show_volatility, show_xtras" param/>
 
             <a:owner param="creator-link"/>
 

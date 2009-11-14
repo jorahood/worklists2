@@ -17,7 +17,7 @@ class List < ActiveRecord::Base
     show_boilers :boolean
     show_birthdate :boolean
     show_domains :boolean, :default => true
-#    show_doc_id :boolean, :default => true
+    show_docid :boolean, :default => true
     show_expirations :boolean
     show_hotitems :boolean
     show_importance :boolean
@@ -31,7 +31,7 @@ class List < ActiveRecord::Base
     show_referenced_boilers :boolean
     show_resources :boolean
     show_status :boolean
-#    show_tags :boolean, :default => true
+    #    show_tags :boolean, :default => true
     show_titles :boolean, :default => true
     show_visibility :boolean, :default => true
     show_volatility :boolean
@@ -39,6 +39,8 @@ class List < ActiveRecord::Base
     show_xtras :boolean
   end
 
+  never_show :show_docid
+  
   validates_presence_of :name, :owner
 
   belongs_to :owner,
@@ -63,10 +65,9 @@ class List < ActiveRecord::Base
   end
 
   def selected_columns
-    columns = List.showable_columns.find_all do |column|
+    List.showable_columns.find_all do |column|
       self.send("show_#{column}".to_sym)
     end
-    columns.unshift(:doc) # doc id always has to be first
   end
 
   def populate!
