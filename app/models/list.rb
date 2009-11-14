@@ -31,7 +31,7 @@ class List < ActiveRecord::Base
     show_referenced_boilers :boolean
     show_resources :boolean
     show_status :boolean
-    #    show_tags :boolean, :default => true
+    show_tags :boolean, :default => true
     show_titles :boolean, :default => true
     show_visibility :boolean, :default => true
     show_volatility :boolean

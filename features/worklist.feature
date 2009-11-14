@@ -138,6 +138,7 @@ Feature: Worklist
   | modifieddate |
   | notes |
   | owner |
+  | tags |
   | titles |
   | visibility |
   | workstate |
@@ -175,6 +176,7 @@ Feature: Worklist
   | modifieddate |
   | notes |
   | owner |
+  | tags |
   | titles |
   | visibility |
   | workstate |
@@ -194,6 +196,7 @@ Feature: Worklist
   | modifieddate |
   | notes |
   | owner |
+  | tags |
   | titles |
   | visibility |
   | workstate |
@@ -222,6 +225,7 @@ Feature: Worklist
   | modifieddate |
   | notes |
   | owner |
+  | tags |
   | titles |
   | visibility |
   | workstate |

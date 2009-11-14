@@ -10,6 +10,7 @@ class ListedDoc < ActiveRecord::Base
   belongs_to :doc
   belongs_to :list
   has_many :notes
+  has_many :tags
   
   @@delegated_accessors = List.showable_columns - [:notes, :workstate, :tags]
 

@@ -12,6 +12,7 @@ describe ListedDoc do
   it { should belong_to :doc }
   it { should belong_to :list }
   it { should have_many :notes }
+  it { should have_many :tags }
 
   context "Permissions" do
     before do

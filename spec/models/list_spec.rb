@@ -12,6 +12,7 @@ describe List do
   it { should respond_to :owner }
   it { should respond_to :comment }
   it { should respond_to :show_docid }
+  it { should respond_to :show_tags }
   
   it { should validate_presence_of :name }
   it { should validate_presence_of :owner }

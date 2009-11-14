@@ -117,7 +117,7 @@ CREATE TABLE `listed_docs` (
   `workstate` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `lists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -210,6 +210,14 @@ CREATE TABLE `searches` (
 CREATE TABLE `status` (
   `rank` int(11) DEFAULT NULL,
   `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `titleaudience` (
@@ -417,3 +425,5 @@ INSERT INTO schema_migrations (version) VALUES ('20091109213954');
 INSERT INTO schema_migrations (version) VALUES ('20091110200159');
 
 INSERT INTO schema_migrations (version) VALUES ('20091110200843');
+
+INSERT INTO schema_migrations (version) VALUES ('20091114194638');

@@ -1584,7 +1584,7 @@
               </ht>
             </h2>
 
-            <record-flags fields="show_workstate, show_approveddate, show_author, show_boilers, show_birthdate, show_docid, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_titles, show_visibility, show_volatility, show_xtras" param/>
+            <record-flags fields="show_workstate, show_approveddate, show_author, show_boilers, show_birthdate, show_docid, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_titles, show_visibility, show_volatility, show_xtras, show_tags" param/>
 
             <a:owner param="creator-link"/>
 
@@ -2119,6 +2119,126 @@
           </ht>
         </h2>
         <delete-button label="#{ht 'statuses.actions.delete', :default=>['Remove This Status']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
+
+
+
+
+<!-- ====== Tag Pages ====== -->
+
+<def tag="index-page" for="Tag">
+  <page merge title="#{ht 'tags.index.title', :default=>['Tags'] }">
+    <body: class="index-page tag" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="tags.index.heading">
+            Tags
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="tags.collection.count" count="&this.size">
+            There <count prefix="are"/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="tags.actions.new">New Tag</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Tag">
+  <page merge title="#{ht 'tags.new.title', :default=>['New Tag'] }">
+    <body: class="new-page tag" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="tags.new.heading">
+            New Tag
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'tags.actions.create', :default=>['Create Tag']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Tag">
+  <page merge title="#{ht 'tags.show.title', :default=>['Tag'] }">
+
+    <body: class="show-page tag" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="tags.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
+                <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="tags.actions.edit" name="&this.respond_to?(:name) ? this.name : ''">
+                Edit Tag
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+            <field-list fields="listed_doc" param/>
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Tag">
+  <page merge title="#{ht 'tags.edit.title', :default=>['Edit Tag'] }">
+
+    <body: class="edit-page tag" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="tags.edit.heading" name="&this.respond_to?(:name) ? this.name : ''">
+            Edit <type-name/>
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'tags.actions.delete', :default=>['Remove This Tag']}" param/>
       </section>
 
       <section param="content-body">

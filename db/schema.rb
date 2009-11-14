@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091110200843) do
+ActiveRecord::Schema.define(:version => 20091114200406) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20091110200843) do
     t.boolean  "show_visibility",         :default => true
     t.boolean  "show_volatility"
     t.boolean  "show_xtras"
+    t.boolean  "show_tags",               :default => true
   end
 
   create_table "notes", :force => true do |t|
@@ -210,6 +211,13 @@ ActiveRecord::Schema.define(:version => 20091110200843) do
   create_table "status", :id => false, :force => true do |t|
     t.integer "rank"
     t.string  "status"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.integer  "listed_doc_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "titleaudience", :id => false, :force => true do |t|
