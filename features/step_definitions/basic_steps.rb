@@ -148,13 +148,17 @@ end
 
 Then /^I should see the following options checked:$/ do |table|
   table.hashes.each do |hash|
-    response.should match_selector("input#list_show_" + hash['option'] + "[checked]")
+    within("form.new") do |content|
+      response.should match_selector("input#list_show_" + hash['option'] + "[checked]")
+    end
   end
 end
 
 Then /^I should see the following options unchecked:$/ do |table|
   table.hashes.each do |hash|
-    response.should match_selector("input#list_show_" + hash['option'] + ":not([checked])")
+    within("form.new") do |content|
+      content.should match_selector("input#list_show_" + hash['option'] + ":not([checked])")
+    end
   end
 end
 
