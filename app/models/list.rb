@@ -2,12 +2,6 @@ class List < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
-  def self.showable_columns
-    attr_order.*.to_s.grep(/^show_/) do |method_name|
-      method_name.gsub(/^show_/,'').to_sym
-    end
-  end
-
   fields do
     name :string
     comment :text
@@ -57,6 +51,14 @@ class List < ActiveRecord::Base
     :dependent => :destroy
   has_many :docs, 
     :through => :listed_docs
+
+  attr_accessor :import_v1, :type => :integer
+
+  def self.showable_columns
+    attr_order.*.to_s.grep(/^show_/) do |method_name|
+      method_name.gsub(/^show_/,'').to_sym
+    end
+  end
 
   def before_save
     if changed.include?("search_id")

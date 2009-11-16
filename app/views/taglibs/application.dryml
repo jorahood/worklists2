@@ -233,3 +233,11 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
 <def tag="doc-link">
   <%= link_to this, :controller => "docs", :action => "show", :id => this %>
 </def>
+
+<extend tag="form" for="List">
+  <old-form merge>
+    <after-field-list:>
+    Import Worklists v1 list: <input:import_v1/>
+    </after-field-list:>
+  </old-form>
+</extend>
