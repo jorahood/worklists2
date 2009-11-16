@@ -259,7 +259,8 @@ Feature: Worklist
   And I should see element "th.docid-heading" within "tr.field-heading-row"
   But I should not see element "th.visibility-heading" within "tr.field-heading-row"
 
-  Scenario: A list should accept a Worklists1 id to import
+  Scenario: A list should have a labelled input for a Worklists1 id to import
   Given I am logged in as "Bob"
   And I am on the list creation page
-  Then I should see element "input.list-import-v1" within "form.new"
+  Then I should see element "input.list-import-v1" within "table.field-list"
+  And I should see "Import v1 Worklist" within "table.field-list"

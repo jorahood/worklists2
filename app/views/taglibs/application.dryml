@@ -236,8 +236,6 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
 
 <extend tag="form" for="List">
   <old-form merge>
-    <after-field-list:>
-    Import Worklists v1 list: <input:import_v1/>
-    </after-field-list:>
+    <field-list: fields="&standard_fields(List).join(', ') + ', import_v1'"/>
   </old-form>
 </extend>
