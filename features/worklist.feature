@@ -262,5 +262,20 @@ Feature: Worklist
   Scenario: A list should have a labelled input for a Worklists1 id to import
   Given I am logged in as "Bob"
   And I am on the list creation page
-  Then I should see element "input.list-import-v1" within "table.field-list"
+  Then I should see element "input.list-wl1-id" within "table.field-list"
   And I should see "Import v1 Worklist" within "table.field-list"
+
+  Scenario: A list should import the docids of the v1 Worklist id entered
+  Given I am logged in as "Bob"
+  And I am on the list creation page
+  And a doc with id "arxq"
+  And a doc with id "apev"
+  And a doc with id "avck"
+  And a doc with id "awfj"
+  When I fill in "list_name" with "test"
+  When I fill in "list_wl1_id" with "11777"
+  And I press "Create List"
+  Then I should see "arxq" within ".collection-section"
+  And I should see "apev" within ".collection-section"
+  And I should see "avck" within ".collection-section"
+  And I should see "awfj" within ".collection-section"
