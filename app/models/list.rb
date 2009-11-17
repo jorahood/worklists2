@@ -70,9 +70,7 @@ class List < ActiveRecord::Base
   end
 
   def do_import_if_wl1_id
-    if @wl1_id
-      do_import(@wl1_id)
-    end
+    do_import(@wl1_id) if @wl1_id
   end
   
   def selected_columns
@@ -105,6 +103,7 @@ class List < ActiveRecord::Base
       self.docs << docids.map {|docid| Doc.find(docid)}
     end
   end
+
   # --- Permissions --- #
 
   def create_permitted?
