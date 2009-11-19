@@ -26,6 +26,10 @@
   <old-page merge without-live-search/>
 </extend>
 
+<extend tag="account-nav">
+  <old-account-nav merge without-account without-log-out without-log-in without-sign-up/>
+</extend>
+
 <!--<extend tag="card" for="Domain">
   <old-card merge>
     <count:></count:>

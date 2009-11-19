@@ -16,6 +16,15 @@ Given /^a user named "([^\"]*)"$/ do |name|
   User.create!(:name => name, :email_address => name + '@example.com')
 end
 
+Given /^a kbuser named "([^\"]*)"$/ do |name|
+  user = Kbuser.new
+  # have to set the username after creating the new object because it is set as
+  # the primary key because Rails will autogen a sequence integer for it if I
+  # did Kbuser.create!(:username => 'blah')
+  user.username = name
+  user.save!
+end
+
 Given /^a list named "([^\"]*)" owned by "([^\"]*)"$/ do |list_name, user_name|
   List.create!(:name => list_name, :owner => User.find_by_name(user_name))
 end
@@ -74,10 +83,6 @@ Given /^doc "([^\"]*)" belongs to search "([^\"]*)" through a docid search$/ do 
   search = Search.find_by_name(search_name)
   search.docids << doc
   search.save!
-end
-
-Given /^a kbuser named "([^\"]*)"$/ do |name|
-  kbuser = Kbuser.create!(:username => name)
 end
 
 Given /^doc "([^\"]*)" has author "([^\"]*)"$/ do |docid, author_name|

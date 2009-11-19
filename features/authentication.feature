@@ -1,4 +1,4 @@
-Feature: CAS
+Feature: Authentication
   In order to protect the site from outsiders
   As an IU user
   I want to use CAS for authentication
@@ -19,3 +19,12 @@ Feature: CAS
   And Worklists2 is in a production environment
   When I go to the homepage
   Then I should not have to log into CAS first
+
+  Scenario: New users should not be logged in automatically with their CAS username
+  Given I am logged into CAS as "bob" and go to the homepage
+  Then I should not see "Logged in as bob" within ".account-nav"
+
+  Scenario: Existing users should be logged in automatically with their CAS username
+  Given a kbuser named "bob"
+  When I am logged into CAS as "bob" and go to the homepage
+  Then I should see "Logged in as bob" within ".account-nav"

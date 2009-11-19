@@ -1,6 +1,6 @@
 class Kbuser < ActiveRecord::Base
 
-  hobo_model # Don't put anything above this
+  hobo_user_model # Don't put anything above this
 
   fields do
     username    :string, :name => true
@@ -37,6 +37,13 @@ class Kbuser < ActiveRecord::Base
     :foreign_key => 'owner'
 
   never_show :worknumber, :homenumber, :pagernumber, :password
+
+  def login
+  end
+
+  def administrator?
+    username == 'jorahood'
+  end
 
   # --- Permissions --- #
 

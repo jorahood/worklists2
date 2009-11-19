@@ -1,6 +1,6 @@
 class KbusersController < ApplicationController
 
-  hobo_model_controller
+  hobo_user_controller
 
   auto_actions :all
 
@@ -13,7 +13,7 @@ class KbusersController < ApplicationController
     @authored = @kbuser.authored_docs
     @resourced = @kbuser.resourced_docs
     @main_docs, @first_aside_docs, @second_aside_docs = 
-    [@kbuser.owned_docs, @authored, @resourced].sort_by {|docs| docs.length}.reverse
+      [@kbuser.owned_docs, @authored, @resourced].sort_by {|docs| docs.length}.reverse
     @paginated_docs = @main_docs.empty? ? @main_docs : @main_docs.paginate(:page => params[:page])
   end
 

@@ -1326,8 +1326,8 @@
             <field-list fields="lastname, firstname, email, status" param/>
             <section param="collection-section">
               <h3 param="collection-heading">
-                <ht key="kbusers.collection.heading.other" >
-                  Authored Docs
+                <ht key="kbusers.collection.heading.your" >
+                  <Your/>Authored Docs
                 </ht>
               </h3>
 
