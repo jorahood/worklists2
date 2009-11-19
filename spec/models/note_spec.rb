@@ -2,14 +2,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Note do
   before(:each) do
-    @user = mock_model(User,:username=>'Fred',:administrator? => false, :signed_up? => true)
+    @user = mock_model(Kbuser,:username=>'Fred',:administrator? => false, :signed_up? => true)
     @valid_attributes = {
       :text => "This is a note.",
-      :owner => @user
+      :creator => @user
     }
     @note = Note.new(@valid_attributes)
   end
-specify {@note.should belong_to :doc}
+
+  it { should belong_to :listed_doc }
+  it { should belong_to :doc }
+  it { should belong_to :creator }
+
 #  it "should create a new instance given valid attributes" do
 #    Note.create!(@valid_attributes)
 #  end
@@ -27,10 +31,6 @@ specify {@note.should belong_to :doc}
 #      @note.should belong_to(:list_item)
 #    end
 #
-#    it "should belong to a user" do
-#      @note.should belong_to(:user)
-#    end
-#
 #    it "should have user=creator" do
 #      pending "durrrrrr?"
 #    end
@@ -40,10 +40,10 @@ specify {@note.should belong_to :doc}
   describe "permissions:" do
 
     before(:each) do
-      @admin = mock_model(User, :admin? => true, :signed_up? => true)
-      @other_user = mock_model(User,:username=>'George',:admin? => false, :signed_up? => true)
+      @admin = mock_model(Kbuser, :administrator? => true, :signed_up? => true)
+      @other_user = mock_model(Kbuser,:username=>'George',:administrator? => false, :signed_up? => true)
       @guest = mock_model(Guest, :signed_up? => false)
-      @updated_note_w_new_user = Note.new(:owner=>@other_user)
+      @updated_note_w_new_user = Note.new(:creator=>@other_user)
     end
 
 #    it "should be creatable by signed-up user" do
@@ -52,7 +52,7 @@ specify {@note.should belong_to :doc}
 #
 #    it "should be tied to a user as creator" do
 #      # this helps hobo know that the current user can create their own projects
-#      # only, and the Owner field shouldn't be displayed on the new list form
+#      # only, and the creator field shouldn't be displayed on the new list form
 #      @note.creatable_by?(@other_user).should be_false
 #    end
 #

@@ -150,7 +150,7 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <a:owner param="creator-link"/>
+      <a:creator param="creator-link"/>
       <ht key="listed_docs.collection.count" count="&this.listed_docs.size">
          <count:listed_docs param/>
       </ht>
@@ -172,7 +172,7 @@
       <h4 param="heading"><a><name/></a></h4>
     </header:>
     <body: param>
-      <a:owner param="creator-link"/>
+      <a:creator param="creator-link"/>
     </body:>
   </card>
 </def>
@@ -219,19 +219,6 @@
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>
-  </card>
-</def>
-
-<def tag="card" for="User">
-  <card class="user" param="default" merge>
-    <header: param>
-      <h4 param="heading"><a><name/></a></h4>
-    </header:>
-    <body: param>
-      <ht key="lists.collection.count" count="&this.lists.size">
-         <count:lists param/>
-      </ht>
-    </body:>
   </card>
 </def>
 

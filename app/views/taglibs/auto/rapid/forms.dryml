@@ -135,7 +135,7 @@
 <def tag="form" for="List">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name, comment, show_approveddate, show_author, show_boilers, show_birthdate, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_tags, show_titles, show_visibility, show_volatility, show_workstate, show_xtras, wl1_import, audience, owner, search" param/>
+    <field-list fields="name, comment, show_approveddate, show_author, show_boilers, show_birthdate, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_tags, show_titles, show_visibility, show_volatility, show_workstate, show_xtras, wl1_import, audience, creator, search" param/>
     <div param="actions">
       <submit label="#{ht 'lists.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
@@ -147,7 +147,7 @@
 <def tag="form" for="Note">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="text, doc, listed_doc, owner" param/>
+    <field-list fields="text, creator, doc, listed_doc" param/>
     <div param="actions">
       <submit label="#{ht 'notes.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
@@ -215,39 +215,6 @@
 </def>
 
 
-
-<def tag="form" for="User">
-  <form merge param="default">
-    <error-messages param/>
-    <field-list fields="name, email_address, administrator" param/>
-    <div param="actions">
-      <submit label="#{ht 'users.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
-    </div>
-  </form>
-</def>
-
-<def tag="signup-form" polymorphic/>
-<def tag="signup-form" for="User">
-  <form lifecycle="signup" merge param="default">
-    <error-messages param/>
-    <field-list fields="name, email_address, password, password_confirmation" param/>
-    <div param="actions">
-      <submit label="#{ht 'users.actions.signup', :default=>['Signup']}" param/><or-cancel param="cancel"/>
-    </div>
-  </form>
-</def>
-
-<def tag="reset-password-form" polymorphic/>
-<def tag="reset-password-form" for="User">
-  <form lifecycle="reset_password" merge param="default">
-    <error-messages param/>
-    <input type="hidden" name="key" value="&this.lifecycle.provided_key" if="&this.lifecycle.provided_key"/>
-    <field-list fields="password, password_confirmation" param/>
-    <div param="actions">
-      <submit label="#{ht 'users.actions.reset_password', :default=>['Reset Password']}" param/><or-cancel param="cancel"/>
-    </div>
-  </form>
-</def>
 
 <def tag="form" for="Visibility">
   <form merge param="default">

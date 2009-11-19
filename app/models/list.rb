@@ -36,19 +36,19 @@ class List < ActiveRecord::Base
 
   never_show :show_docid
   
-  validates_presence_of :name, :owner
+  validates_presence_of :name, :creator
   validates_numericality_of :wl1_import,
     :allow_nil => true
   
-  belongs_to :owner,
-    :class_name => "User",
+  belongs_to :audience
+  belongs_to :search
+  belongs_to :creator,
+    :class_name => "Kbuser",
     # FIXME: foreign_key option required because of monkey_patching of
   # ActiveRecord::Reflection::AssociationReflection#primary_key_name by
   # composite_primary_keys gem .
-  :foreign_key => 'owner_id',
+  :foreign_key => 'creator_id',
     :creator => true
-  belongs_to :audience
-  belongs_to :search
   
   has_many :listed_docs,
     :dependent => :destroy
@@ -108,11 +108,11 @@ class List < ActiveRecord::Base
   # --- Permissions --- #
 
   def create_permitted?
-    owner_is?(acting_user)
+    creator_is? acting_user
   end
 
   def update_permitted?
-    !owner.changed? || acting_user.administrator?
+    !creator.changed? || acting_user.administrator?
   end
 
   def destroy_permitted?
@@ -124,7 +124,7 @@ class List < ActiveRecord::Base
   end
 
   def refresh_search_permitted?
-    owner_is?(acting_user) || acting_user.administrator?
+    creator_is? acting_user || acting_user.administrator?
   end
 
 end

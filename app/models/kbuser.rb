@@ -14,6 +14,9 @@ class Kbuser < ActiveRecord::Base
     pagernumber :string
   end
 
+  has_many :lists, :foreign_key => 'creator_id', :dependent => :destroy
+  has_many :notes, :foreign_key => 'creator_id', :dependent => :destroy
+
   def self.import_from_bell
     true
   end

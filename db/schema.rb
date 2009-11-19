@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091117180543) do
+ActiveRecord::Schema.define(:version => 20091119205550) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -134,7 +134,6 @@ ActiveRecord::Schema.define(:version => 20091117180543) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.integer  "owner_id"
     t.text     "comment"
     t.string   "audience_id"
     t.integer  "search_id"
@@ -164,15 +163,16 @@ ActiveRecord::Schema.define(:version => 20091117180543) do
     t.boolean  "show_workstate",          :default => true
     t.boolean  "show_tags",               :default => true
     t.integer  "wl1_import"
+    t.string   "creator_id"
   end
 
   create_table "notes", :force => true do |t|
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "owner_id"
     t.integer  "listed_doc_id"
     t.string   "doc_id"
+    t.string   "creator_id"
   end
 
   create_table "references", :id => false, :force => true do |t|
