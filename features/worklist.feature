@@ -3,6 +3,16 @@ Feature: Worklist
   As a KB editor
   I want to create a list of documents
 
+  Scenario: A list should display the total number of listed docs
+  Given a user named "user_a"
+  And a list named "Docs" owned by "user_a"
+  And a doc with id "aaaa"
+  And a doc with id "bbbb"
+  And doc "aaaa" belongs to list "Docs"
+  And doc "bbbb" belongs to list "Docs"
+  When I view the list "Docs"
+  Then I should see /^\s*2 Listed Docs\s*$/ within ".collection-heading"
+
   Scenario: I can log in
   Given I am logged in as "Bob"
   Then I should see "Logged in as Bob"

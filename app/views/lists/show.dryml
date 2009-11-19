@@ -4,6 +4,9 @@
   <after-field-list:>
     <remote-method-button if="&this.search" method="refresh_search" label="Refresh search results"/>
   </after-field-list:>
+    <collection-heading: replace>
+    <h3 class="collection-heading"><count:listed_docs/></h3>
+  </collection-heading:>
   <collection: replace>
     <table-plus with='&@listed_docs' fields='&@listed_doc_fields'>
   <notes-view:>
