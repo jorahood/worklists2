@@ -13,7 +13,7 @@ describe List do
   it { should respond_to :comment }
   it { should respond_to :show_docid }
   it { should respond_to :show_tags }
-  it { should respond_to :wl1_id }
+  it { should respond_to :wl1_import }
   
   it { should validate_presence_of :name }
   it { should validate_presence_of :owner }
@@ -216,10 +216,11 @@ describe List do
       end
     end
   end
+  
   context "importing a v1 worklist" do
-    it "should try to do the import when an id is entered for wl1_id field" do
+    it "should do_import when wl1_import changed" do
       @list.should_receive(:do_import).with(100)
-      @list.wl1_id = 100
+      @list.wl1_import = 100
       @list.save!
     end
 

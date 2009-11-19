@@ -1584,7 +1584,7 @@
               </ht>
             </h2>
 
-            <record-flags fields="show_workstate, show_approveddate, show_author, show_boilers, show_birthdate, show_docid, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_titles, show_visibility, show_volatility, show_xtras, show_tags" param/>
+            <record-flags fields="show_approveddate, show_author, show_boilers, show_birthdate, show_docid, show_domains, show_expirations, show_hotitems, show_importance, show_kbas, show_kba_bys, show_modifieddate, show_notes, show_owner, show_refs, show_refbys, show_referenced_boilers, show_resources, show_status, show_titles, show_visibility, show_volatility, show_xtras, show_workstate, show_tags" param/>
 
             <a:owner param="creator-link"/>
 
@@ -1596,7 +1596,7 @@
           </header>
 
           <section param="content-body">
-            <field-list fields="comment, audience, search" param/>
+            <field-list fields="comment, wl1_import, audience, search" param/>
             <section param="collection-section">
               <h3 param="collection-heading">
                 <ht key="lists.collection.heading.other" >

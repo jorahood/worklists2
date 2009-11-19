@@ -31,6 +31,7 @@ class List < ActiveRecord::Base
     show_volatility :boolean
     show_workstate :boolean, :default => true
     show_xtras :boolean
+    wl1_import :integer
   end
 
   never_show :show_docid
@@ -52,8 +53,6 @@ class List < ActiveRecord::Base
   has_many :docs, 
     :through => :listed_docs
 
-  attr_accessor :wl1_id, :type => :integer
-
   def self.showable_columns
     attr_order.*.to_s.grep(/^show_/) do |method_name|
       method_name.gsub(/^show_/,'').to_sym
@@ -61,7 +60,7 @@ class List < ActiveRecord::Base
   end
 
   before_save :populate_if_search_changed,
-    :do_import_if_wl1_id
+    :do_import_if_wl1_import
 
   def populate_if_search_changed
     if changed.include?("search_id")
@@ -69,8 +68,8 @@ class List < ActiveRecord::Base
     end
   end
 
-  def do_import_if_wl1_id
-    do_import(@wl1_id) if @wl1_id
+  def do_import_if_wl1_import
+    do_import(wl1_import) if wl1_import
   end
   
   def selected_columns
@@ -90,14 +89,14 @@ class List < ActiveRecord::Base
     save!
   end
 
-  def do_import(wl1_id)
+  def do_import(wl1_import)
     https = Net::HTTP.new('kbhandbook.indiana.edu',443)
     https.use_ssl = true
     https.ssl_timeout = 2
     https.verify_mode = OpenSSL::SSL::VERIFY_PEER
     https.verify_depth = 2
     https.start do |connection|
-      action = Net::HTTP::Get.new("/worklist/#{wl1_id}/fooplist")
+      action = Net::HTTP::Get.new("/worklist/#{wl1_import}/fooplist")
       response = connection.request(action)
       docids = response.body.split("\n")
       self.docs << docids.map {|docid| Doc.find(docid)}
