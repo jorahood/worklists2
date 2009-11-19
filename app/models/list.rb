@@ -37,7 +37,9 @@ class List < ActiveRecord::Base
   never_show :show_docid
   
   validates_presence_of :name, :owner
-
+  validates_numericality_of :wl1_import,
+    :allow_nil => true
+  
   belongs_to :owner,
     :class_name => "User",
     # FIXME: foreign_key option required because of monkey_patching of

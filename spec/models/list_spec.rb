@@ -17,7 +17,8 @@ describe List do
   
   it { should validate_presence_of :name }
   it { should validate_presence_of :owner }
-
+  it { should validate_numericality_of :wl1_import }
+  
   it { should belong_to :owner }
   specify "owner should be a User" do
     @list.owner.class.should == User
