@@ -2,6 +2,15 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe DocsController do
 
+  context "testing login here instead of shaving the yak of setting up app-wide spec in application_controller_spec.rb" do
+
+    it "should set current_user to cas_user if present" do
+      session[:cas_user] = 'bob'
+      get :index
+#      controller.current_user.should == 'bob'
+    end
+  end
+  
   context "handling GET doc.xml" do
 
     before do

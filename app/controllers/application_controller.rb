@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   before_filter CASClient::Frameworks::Rails::Filter, :unless => :i_am_bdding_or_i_am_paprika
+  before_filter :set_cas_user, :set_current_user_from_cas_user
 
   protected
 
@@ -21,5 +22,17 @@ class ApplicationController < ActionController::Base
     ENV['RAILS_ENV'] == 'test' ||
       ENV['RAILS_ENV'] == 'cucumber' ||
       request.env['REMOTE_ADDR'] == '129.79.213.151'
+  end
+
+  def set_cas_user
+    @cas_user ||= self.session[:cas_user]
+  end
+
+  def set_current_user_from_cas_user
+    if @cas_user
+      if my_user = User.find_by_name(@cas_user)
+        self.current_user = my_user
+      end
+    end
   end
 end

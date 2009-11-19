@@ -182,4 +182,3 @@ And /^I should not see any other headings$/ do
     content.should_not match_selector("th:nth-child(#{@total_headings+1})")
   end
 end
-
