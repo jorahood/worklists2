@@ -8,3 +8,6 @@ Fixtures.create_fixtures(fixtures_folder, table_names)
 
 # support stubs:
 require "spec/mocks"
+
+# pretty formatting
+require File.expand_path(File.dirname(__FILE__) + '/textmate_formatter')
