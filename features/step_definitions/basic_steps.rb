@@ -1,32 +1,19 @@
-Given /^I am logged in as "([^\"]*)"$/ do |name|
-  @me = User.create!(:name => name,
-    :email_address => "#{name}@example.com",
-    :password => 'valid_password')
-  visit "/login"
-  fill_in :login, :with => @me.email_address
-  fill_in :password, :with => @me.password
-  click_button "Log in"
-end
-
 Given /^I am viewing search (\d+)$/ do |id|
   visit search_path(id)
 end
 
-Given /^a user named "([^\"]*)"$/ do |name|
-  User.create!(:name => name, :email_address => name + '@example.com')
-end
-
 Given /^a kbuser named "([^\"]*)"$/ do |name|
   user = Kbuser.new
-  # have to set the username after creating the new object because it is set as
-  # the primary key because Rails will autogen a sequence integer for it if I
-  # did Kbuser.create!(:username => 'blah')
+  # We have to set the username after creating the new object because it is set
+  # as the primary key because Rails will autogen a sequence integer for it and
+  # drop the username if I tried to set it on create: Kbuser.create!(:username
+  # => 'blah')
   user.username = name
   user.save!
 end
 
-Given /^a list named "([^\"]*)" owned by "([^\"]*)"$/ do |list_name, user_name|
-  List.create!(:name => list_name, :owner => User.find_by_name(user_name))
+Given /^a list named "([^\"]*)" created by "([^\"]*)"$/ do |list_name, username|
+  List.create!(:name => list_name, :creator => Kbuser.find_by_username(username))
 end
 
 Given /^a search named "([^\"]*)"$/ do |name|

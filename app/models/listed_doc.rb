@@ -23,7 +23,7 @@ class ListedDoc < ActiveRecord::Base
   # --- Permissions --- #
 
   def create_permitted?
-    acting_user.administrator? || list.owner_is?(acting_user)
+    acting_user.administrator? || list.creator_is?(acting_user)
   end
 
   def update_permitted?
@@ -31,7 +31,7 @@ class ListedDoc < ActiveRecord::Base
   end
 
   def destroy_permitted?
-    acting_user.administrator? || list.owner_is?(acting_user)
+    acting_user.administrator? || list.creator_is?(acting_user)
   end
 
   def view_permitted?(field)

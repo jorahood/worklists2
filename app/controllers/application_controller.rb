@@ -18,10 +18,16 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def i_am_bdding_or_i_am_paprika
-    ENV['RAILS_ENV'] == 'test' ||
-      ENV['RAILS_ENV'] == 'cucumber' ||
+  def i_am_bdding
+    ENV['RAILS_ENV'] == 'test' || ENV['RAILS_ENV'] == 'cucumber'
+  end
+
+  def i_am_paprika
       request.env['REMOTE_ADDR'] == '129.79.213.151'
+  end
+
+  def i_am_bdding_or_i_am_paprika
+    i_am_bdding || i_am_paprika
   end
 
   def get_cas_username

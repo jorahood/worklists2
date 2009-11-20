@@ -1,7 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
- fixture_user:
-   name: fixture_user
-
-# two:
-#   column: value

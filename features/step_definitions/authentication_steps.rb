@@ -6,6 +6,12 @@ class ApplicationController
     params[:username]
   end
 
+
+end
+
+Given /^I am logged in as "([^\"]*)"$/ do |username|
+  Given "a kbuser named \"#{username}\""
+  get '/', :username => username
 end
 
 When /^I am logged into CAS as "([^\"]*)" and go to the homepage$/ do |username|

@@ -17,17 +17,17 @@ describe ListedDoc do
   context "Permissions" do
     before do
       @listed_doc =  ListedDoc.new
-      @admin = mock_model(User, :name=>'Admin', :signed_up? => true, :administrator? => true)
-      @list_owner = mock_model(User, :name=>'Chuck', :signed_up? => true, :administrator? => false)
-      @other_user = mock_model(User, :name=>'Bob', :signed_up? => true, :administrator? => false)
-      @list = mock_model(List, :name=>'test', :owner_is? =>@list_owner)
+      @admin = mock_model(Kbuser, :username=>'Admin', :signed_up? => true, :administrator? => true)
+      @list_creator = mock_model(Kbuser, :username=>'Chuck', :signed_up? => true, :administrator? => false)
+      @other_user = mock_model(Kbuser, :username=>'Bob', :signed_up? => true, :administrator? => false)
+      @list = mock_model(List, :name=>'test', :creator_is? =>@list_creator)
       @doc = mock_model(Doc, :docid=>'blah', :title=>'blahblah')
       @listed_doc.list = @list
     end
 
-    specify { @listed_doc.should be_creatable_by @list_owner }
+    specify { @listed_doc.should be_creatable_by @list_creator }
     
-    #    it "should not be creatable by non-admin list non-owner" do
+    #    it "should not be creatable by non-admin list non-creator" do
     #      @listed_doc.creatable_by?(@other_user).should be_false
     #    end
     #
@@ -35,8 +35,8 @@ describe ListedDoc do
     #      @listed_doc.creatable_by?(@admin).should be_true
     #    end
     #
-    #    it "should be updatable by list owner" do
-    #      @listed_doc.updatable_by?(@list_owner,@listed_doc).should be_true
+    #    it "should be updatable by list creator" do
+    #      @listed_doc.updatable_by?(@list_creator,@listed_doc).should be_true
     #    end
     #
     #
@@ -48,11 +48,11 @@ describe ListedDoc do
     #      end
     #
     #      it "should allow adding notes" do
-    #        @listed_doc.updatable_by?(@list_owner,@listed_doc_w_note).should be_true
+    #        @listed_doc.updatable_by?(@list_creator,@listed_doc_w_note).should be_true
     #      end
     #
     #      it "should not allow non-admins to remove notes" do
-    #        @listed_doc_w_note.updatable_by?(@list_owner,@listed_doc).should be_false
+    #        @listed_doc_w_note.updatable_by?(@list_creator,@listed_doc).should be_false
     #      end
     #
     #      it "should allow admins to remove notes" do
@@ -62,11 +62,11 @@ describe ListedDoc do
     #
     #    # Since the listed_doc is just a join model, it shouldn't let users change its associations
     #    it "should not allow non-admin to update list" do
-    #      @listed_doc.updatable_by?(@list_owner,ListedDoc.new(:doc=>@doc, :list=>mock_model(List))).should be_false
+    #      @listed_doc.updatable_by?(@list_creator,ListedDoc.new(:doc=>@doc, :list=>mock_model(List))).should be_false
     #    end
     #
     #    it "should not allow non-admin to update doc" do
-    #      @listed_doc.updatable_by?(@list_owner,ListedDoc.new(:list=>@list, :doc=>mock_model(Doc))).should be_false
+    #      @listed_doc.updatable_by?(@list_creator,ListedDoc.new(:list=>@list, :doc=>mock_model(Doc))).should be_false
     #    end
     #
     #    it "should allow admin to update list" do
@@ -74,6 +74,6 @@ describe ListedDoc do
     #    end
     #
     specify { @listed_doc.should be_updatable_by @admin }
-    specify { @listed_doc.should be_destroyable_by @list_owner }
+    specify { @listed_doc.should be_destroyable_by @list_creator }
   end
 end
