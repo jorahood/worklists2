@@ -211,7 +211,7 @@ describe List do
     end
   end
   
-  context "cloning or importing a v1 worklist" do
+  context "cloning/importing v1 worklist" do
     before do
       @v1list_hash = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
       @list.stub(:request_and_load_yaml).with(11777).and_return(@v1list_hash)
@@ -267,6 +267,10 @@ describe List do
     it "should set its comment to the comments of the cloned list" do
       @list.do_clone(11777)
       @list.comment.should == @v1list_hash['comments']
+    end
+    it "should set its name to the name of the cloned list" do
+      @list.do_clone(11777)
+      @list.name.should == @v1list_hash['name']
     end
   end
 end

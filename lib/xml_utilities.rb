@@ -48,7 +48,7 @@ module XmlUtilities
 
   def get_v1_list_and_find_docs(wl1id)
     wl1hash = request_and_load_yaml(wl1id)
-    wl1hash["docs"].map! {|doc_attrs| Doc.find(doc_attrs["id"]) }
+    wl1hash['doc_objects'] = wl1hash["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
     wl1hash
   end
 

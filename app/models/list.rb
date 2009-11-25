@@ -101,13 +101,14 @@ class List < ActiveRecord::Base
 
   def do_import(wl1id)
     v1_list = get_v1_list_and_find_docs(wl1id)
-    self.docs << v1_list['docs']
+    self.docs << v1_list['doc_objects']
   end
 
   def do_clone(wl1id)
     v1_list = get_v1_list_and_find_docs(wl1id)
-    self.docs = v1_list['docs']
+    self.docs = v1_list['doc_objects']
     self.comment = v1_list['comments']
+    self.name = v1_list['name']
   end
 
   # --- Permissions --- #

@@ -20,6 +20,10 @@ class ListedDoc < ActiveRecord::Base
     delegate method, :to => :doc
   end
 
+  def clone_notes(v1_listed_doc)
+    note = Note.new(:text => v1_listed_doc['editornotes'])
+    self.notes << note
+  end
   # --- Permissions --- #
 
   def create_permitted?
