@@ -99,20 +99,15 @@ class List < ActiveRecord::Base
     save!
   end
 
-  def retrieve_and_instantiate_docs(wl1id)
-    wl1hash = request_and_load_yaml(wl1id)
-    wl1hash["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
-  end
-
   def do_import(wl1id)
-    wl1docs = retrieve_and_instantiate_docs(wl1id)
-    self.docs << wl1docs
+    v1_list = get_v1_list_and_find_docs(wl1id)
+    self.docs << v1_list['docs']
   end
 
   def do_clone(wl1id)
-    wl1docs = retrieve_and_instantiate_docs(wl1id)
-    self.docs = wl1docs
-
+    v1_list = get_v1_list_and_find_docs(wl1id)
+    self.docs = v1_list['docs']
+    self.comment = v1_list['comments']
   end
 
   # --- Permissions --- #

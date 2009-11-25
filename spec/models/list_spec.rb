@@ -214,7 +214,7 @@ describe List do
   context "cloning or importing a v1 worklist" do
     before do
       @v1list_hash = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
-      @list.stub(:request_and_load_yaml).and_return(@v1list_hash)
+      @list.stub(:request_and_load_yaml).with(11777).and_return(@v1list_hash)
       @sample_docs = []
       @v1list_hash["docs"].each do |attrs|
         @sample_docs << Factory.create(:doc, :id => attrs['id'])
@@ -235,7 +235,7 @@ describe List do
       Doc.should_receive(:find).with('apev').and_return(Factory :doc)
       Doc.should_receive(:find).with('arxq').and_return(Factory :doc)
       Doc.should_receive(:find).with('avck').and_return(Factory :doc)
-      @list.retrieve_and_instantiate_docs(11777)
+      @list.get_v1_list_and_find_docs(11777)
     end
     it "should request and load a yaml serialization of the v1 worklist when cloning" do
       @list.should_receive(:request_and_load_yaml).with(11777).and_return(@v1list_hash)
@@ -263,6 +263,10 @@ describe List do
       @list.docs << Factory(:doc, :id => 'blah')
       @list.do_clone(11777)
       @list.docs.should == @sample_docs
+    end
+    it "should set its comment to the comments of the cloned list" do
+      @list.do_clone(11777)
+      @list.comment.should == @v1list_hash['comments']
     end
   end
 end
