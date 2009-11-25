@@ -15,7 +15,8 @@ docs:
 
     editornotes: |
       test editor note for apev
-
+    notes: |
+      test owner note for apev
   - id: arxq
 
     category: testcategory1

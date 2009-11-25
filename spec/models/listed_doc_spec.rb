@@ -83,5 +83,12 @@ describe ListedDoc do
       subject.notes[0].should_not be_nil
       subject.notes[0].text.should == @v1_apev['editornotes']
     end
+    it "should clone both editornotes and ownernotes if they exist" do
+      subject.clone_notes(@v1_apev)
+      subject.notes[0].should_not be_nil
+      subject.notes[1].should_not be_nil
+      subject.notes[0].text.should == @v1_apev['notes']
+      subject.notes[1].text should == @v1_apev['editornotes']
+    end
   end
 end
