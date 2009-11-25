@@ -2,7 +2,7 @@ Given /^I am viewing search (\d+)$/ do |id|
   visit search_path(id)
 end
 
-Given /^a kbuser named "([^\"]*)"$/ do |name|
+Given /^a kbuser named (.*)$/ do |name|
   user = Kbuser.new
   # We have to set the username after creating the new object because it is set
   # as the primary key because Rails will autogen a sequence integer for it and
@@ -12,7 +12,7 @@ Given /^a kbuser named "([^\"]*)"$/ do |name|
   user.save!
 end
 
-Given /^a list named "([^\"]*)" created by "([^\"]*)"$/ do |list_name, username|
+Given /^a list named "([^\"]*)" created by (.*)$/ do |list_name, username|
   List.create!(:name => list_name, :creator => Kbuser.find_by_username(username))
 end
 
@@ -20,13 +20,13 @@ Given /^a search named "([^\"]*)"$/ do |name|
   Search.create!(:name => name)
 end
 
-Given /^a doc with id "([^\"]*)"$/ do |docid|
+Given /^a doc with id ([a-z]{4})$/ do |docid|
   doc = Doc.new
   doc.id = docid
   doc.save!
 end
 
-Given /^search "([^\"]*)" returns doc "([^\"]*)"$/ do |search_name, docid|
+Given /^search "([^\"]*)" returns doc ([a-z]{4})$/ do |search_name, docid|
   doc = Doc.find(docid)
   search = Search.find_by_name(search_name)
   search.docids << doc
@@ -46,7 +46,7 @@ Given /^a note with id (\d+) with text "([^\"]*)"$/ do |note_id, text|
   note.save!
 end
 
-Given /^doc "([^\"]*)" has note (\d+) in list "([^\"]*)"$/ do |docid, note_id, list_name|
+Given /^doc ([a-z]{4}) has note (\d+) in list "([^\"]*)"$/ do |docid, note_id, list_name|
   doc = Doc.find(docid)
   note = Note.find(note_id)
   list = List.find_by_name(list_name)
@@ -55,7 +55,7 @@ Given /^doc "([^\"]*)" has note (\d+) in list "([^\"]*)"$/ do |docid, note_id, l
   doc_in_list.save!
 end
 
-Given /^doc "([^\"]*)" belongs to list "([^\"]*)"$/ do |docid, list_name|
+Given /^doc ([a-z]{4}) belongs to list "([^\"]*)"$/ do |docid, list_name|
   doc = Doc.find(docid)
   list = List.find_by_name(list_name)
   list.docs << doc
@@ -65,21 +65,21 @@ end
 Given /^I am not logged in$/ do
 end
 
-Given /^doc "([^\"]*)" belongs to search "([^\"]*)" through a docid search$/ do |docid, search_name|
+Given /^doc ([a-z]{4}) belongs to search "([^\"]*)" through a docid search$/ do |docid, search_name|
   doc = Doc.find(docid)
   search = Search.find_by_name(search_name)
   search.docids << doc
   search.save!
 end
 
-Given /^doc "([^\"]*)" has author "([^\"]*)"$/ do |docid, author_name|
+Given /^doc ([a-z]{4}) has author (\w+)$/ do |docid, author_name|
   doc = Doc.find(docid)
   author = Kbuser.find_by_username(author_name)
   doc.author = author
   doc.save!
 end
 
-Given /^search "([^\"]*)" has author "([^\"]*)"$/ do |search_name, author_name|
+Given /^search "([^\"]*)" has author (\w+)$/ do |search_name, author_name|
   search = Search.find_by_name(search_name)
   author = Kbuser.find_by_username(author_name)
   search.author = author
@@ -103,7 +103,7 @@ When /^I view the list "([^\"]*)"$/ do |list_name|
   visit list_path(List.find_by_name(list_name))
 end
 
-When /^I view doc "([^\"]*)" as xml$/ do |docid|
+When /^I view doc ([a-z]{4}) as xml$/ do |docid|
   visit formatted_doc_path(docid, 'xml')
 end
 
@@ -141,7 +141,7 @@ end
 Then /^I should see the following options checked:$/ do |table|
   table.hashes.each do |hash|
     within("form.new") do |content|
-      response.should match_selector("input#list_show_" + hash['option'] + "[checked]")
+      response.should match_selector("input#list_show_#{hash['option']}[checked]")
     end
   end
 end
@@ -149,7 +149,7 @@ end
 Then /^I should see the following options unchecked:$/ do |table|
   table.hashes.each do |hash|
     within("form.new") do |content|
-      content.should match_selector("input#list_show_" + hash['option'] + ":not([checked])")
+      content.should match_selector("input#list_show_#{hash['option']}:not([checked])")
     end
   end
 end

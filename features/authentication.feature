@@ -21,10 +21,12 @@ Feature: Authentication
   Then I should not have to log into CAS first
 
   Scenario: New users should not be logged in automatically with their CAS username
-  Given I am logged into CAS as "bob" and go to the homepage
+  Given I am logged into CAS as bob
+  When I go to the homepage
   Then I should not see "Logged in as bob" within ".account-nav"
 
   Scenario: Existing users should be logged in automatically with their CAS username
-  Given a kbuser named "bob"
-  When I am logged into CAS as "bob" and go to the homepage
+  Given a kbuser named bob
+  And I am logged into CAS as bob
+  When I go to the homepage
   Then I should see "Logged in as bob" within ".account-nav"
