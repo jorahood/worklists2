@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'spork'
+require 'factory_girl'
+
 ENV["RAILS_ENV"] ||= 'test'
 
 Spork.prefork do
@@ -14,7 +16,6 @@ require File.dirname(__FILE__) + "/../config/environment"# unless defined?(RAILS
 require 'spec/autorun'
 require 'spec/rails'
 require 'shoulda'
-
 
   Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these

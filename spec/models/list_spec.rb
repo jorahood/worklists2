@@ -6,7 +6,7 @@ describe List do
     @doc = mock_model(Doc, :id => 'mock')
     @other_doc = mock_model(Doc, :id => 'othr')
     @search = mock_model(Search, :execute => [@doc])
-    @list = List.new(:name=>'test', :creator=>@list_creator)
+    @list = List.create!(:name=>'test', :creator=>@list_creator)
   end
   it { should respond_to :name }
   it { should respond_to :creator }
@@ -15,11 +15,9 @@ describe List do
   it { should respond_to :show_tags }
   it { should respond_to :wl1_import }
   it { should respond_to :wl1_clone }
-  
   it { should validate_presence_of :name }
   it { should validate_presence_of :creator }
   it { should validate_numericality_of :wl1_import }
-  
   it { should belong_to :creator }
   specify "creator should be a Kbuser" do
     @list.creator.class.should == Kbuser
@@ -27,7 +25,6 @@ describe List do
   it { should have_many :listed_docs }
   it { should have_many(:docs).through :listed_docs }
   it { should belong_to :search }
-
   it "should return showable metadata columns" do
     columns = List.attr_order.*.to_s.grep(/^show_/) do |method_name|
       method_name.gsub(/^show_/,'').to_sym
@@ -35,7 +32,6 @@ describe List do
     List.showable_columns.should_not == []
     List.showable_columns.should == columns
   end
-
   it "should return selected showable metadata columns" do
     columns = List.showable_columns.find_all do |column|
       subject.send("show_#{column}".to_sym)
@@ -55,12 +51,10 @@ describe List do
       @other_Kbuser = mock_model(Kbuser, :administrator? => false, :signed_up? => true)
       @guest = mock_model(Guest, :signed_up? => false)
     end
-
     it "should be creatable by its creator" do
       @list.stub!(:acting_user).and_return(@list_creator)
       @list.should be_creatable_by(@list_creator)
     end
-    
     it "should not be creatable by non-creator" do
       # this helps hobo know that the current Kbuser can create their own projects
       # only, and the creator field shouldn't be displayed on the new list form
@@ -83,7 +77,6 @@ describe List do
       it "should not allow non-admin Kbusers" do
         @list.should_not be_updatable_by(@list_creator)
       end
-    
       it "should allow admin Kbuser" do
         @list.should be_updatable_by(@admin)
       end
@@ -124,7 +117,6 @@ describe List do
     before do
       @list.search = @search
     end
-
     it "should populate itself" do
       @list.should_receive(:populate!)
       @list.save!
@@ -219,15 +211,58 @@ describe List do
     end
   end
   
-  context "importing a v1 worklist" do
+  context "cloning or importing a v1 worklist" do
+    before do
+      @v1list_hash = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
+      @list.stub(:request_and_load_yaml).and_return(@v1list_hash)
+      @sample_docs = []
+      @v1list_hash["docs"].each do |attrs|
+        @sample_docs << Factory.create(:doc, :id => attrs['id'])
+      end
+    end
     it "should do_import when wl1_import changed" do
       @list.should_receive(:do_import).with(100)
       @list.wl1_import = 100
       @list.save!
     end
-
-  end
-  context "cloning a v1 worklist" do
-
+    it "should do_clone when wl1_clone attr changed" do
+      @list.should_receive(:do_clone).with(100)
+      @list.wl1_clone = 100
+      @list.save!
+    end
+    it "should try to find the docs in the yaml file" do
+      Doc.should_receive(:find).with('awfj').and_return(Factory :doc)
+      Doc.should_receive(:find).with('apev').and_return(Factory :doc)
+      Doc.should_receive(:find).with('arxq').and_return(Factory :doc)
+      Doc.should_receive(:find).with('avck').and_return(Factory :doc)
+      @list.retrieve_and_instantiate_docs(11777)
+    end
+    it "should request and load a yaml serialization of the v1 worklist when cloning" do
+      @list.should_receive(:request_and_load_yaml).with(11777).and_return(@v1list_hash)
+      @list.do_clone(11777)
+    end
+    it "should request and load a yaml serialization of the v1 worklist when importing" do
+      @list.should_receive(:request_and_load_yaml).with(11777).and_return(@v1list_hash)
+      @list.do_import(11777)
+    end
+    it "should set its docs to be the docs from the imported list" do
+      @list.do_import(11777)
+      @list.docs.should == @sample_docs
+    end
+    it "should add to its existing docs when importing, not replace them" do
+      blah = Factory(:doc, :id => 'blah')
+      @list.docs << blah
+      @list.do_import(11777)
+      @list.docs.sort_by{|doc|doc.id}.should == @sample_docs.unshift(blah).sort_by{|doc|doc.id}
+    end
+    it "should set its docs to be the docs from the cloned list" do
+      @list.do_clone(11777)
+      @list.docs.should == @sample_docs
+    end
+    it "should replace all of its existing docs when cloning, not add to them" do
+      @list.docs << Factory(:doc, :id => 'blah')
+      @list.do_clone(11777)
+      @list.docs.should == @sample_docs
+    end
   end
 end

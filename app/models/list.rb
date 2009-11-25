@@ -112,8 +112,7 @@ class List < ActiveRecord::Base
   def do_clone(wl1id)
     wl1docs = retrieve_and_instantiate_docs(wl1id)
     self.docs = wl1docs
-    self.docs.each do |assoc_doc|
-    end
+
   end
 
   # --- Permissions --- #

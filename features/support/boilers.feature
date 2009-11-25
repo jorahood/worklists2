@@ -1,5 +1,5 @@
 Feature: Boilers
 
-Scenario: Boiler names with .s in them are routable
+Scenario: Boilers with dots in their  names are routable
 Given a boiler named "emacs.faq"
-Then I can view boiler "emacs.faq"
+Then I view boiler "emacs.faq"
