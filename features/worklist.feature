@@ -3,7 +3,7 @@ Feature: Worklist
   As a KB editor
   I want to create a list of documents
 
-  Scenario: A list should display the total number of listed docs
+  Scenario: It displays the total number of listed docs
   Given a kbuser named user_a
   And a list named "Docs" created by user_a
   And a doc with id aaaa
@@ -17,7 +17,7 @@ Feature: Worklist
   Given I am logged in as Bob
   Then I should see "Logged in as Bob"
 
-  Scenario: A list should display the search it belongs to
+  Scenario: It displays the search it belongs to
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Good list" created by user_a
@@ -26,7 +26,7 @@ Feature: Worklist
   When I view the list "Good list"
   Then I should see "Good search" in the body
 
-  Scenario: A list should display the docs of the search it belongs to
+  Scenario: It displays the docs of the search it belongs to
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Good list" created by user_a
@@ -37,7 +37,7 @@ Feature: Worklist
   When I view the list "Good list"
   Then I should see "aaaa" within ".collection-section"
 
-  Scenario: A list with a changed search should not display the docs from its old search
+  Scenario: With a changed search, it does not display the docs from its old search
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Good list" created by user_a
@@ -52,13 +52,13 @@ Feature: Worklist
   And I view the list "Good list"
   Then I should not see the word "aaaa" within ".collection-section"
 
-  Scenario: A list should have a column to show notes for listed docs
+  Scenario: Has a column to show notes for listed docs
   Given a kbuser named user_a
   And a list named "Docs w/ notes" created by user_a
   When I view the list "Docs w/ notes"
   Then I should see "Notes" within ".notes-heading"
 
-  Scenario: A list should display notes belonging to its listed docs
+  Scenario: Display notes belonging to its listed docs
   Given a kbuser named user_a
   And a list named "Docs w/ notes" created by user_a
   And a doc with id aaaa
@@ -67,7 +67,7 @@ Feature: Worklist
   When I view the list "Docs w/ notes"
   Then I should see "hoochiemama" within ".notes-view"
 
-  Scenario: For a valid user, a list should display a form for each listed doc to add a note.
+  Scenario: For a valid user, it displays a form for each listed doc to add a note.
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Docs" created by user_a
@@ -76,7 +76,7 @@ Feature: Worklist
   When I view the list "Docs"
   Then I should see element "form.new.note" within ".listed_doc"
 
-  Scenario: The note forms should not display their doc associations; it should be set automatically.
+  Scenario: The note forms do not display their doc associations.
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Docs" created by user_a
@@ -85,7 +85,7 @@ Feature: Worklist
   When I view the list "Docs"
   Then I should not see element "select.note-doc" within ".listed_doc"
 
-  Scenario: The list should automatically set the note's associated doc to the listed_doc's doc.
+  Scenario: It automatically sets the note's associated doc to the listed_doc's doc.
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Docs" created by user_a
@@ -95,7 +95,7 @@ Feature: Worklist
   And I press "Add note"
   Then I should see "aaaa" within ".doc-view"
 
-  Scenario: For a guest user, lists should not display a form for each listed doc to add a note.
+  Scenario: For a guest user, it does not display a form for each listed doc to add a note.
   Given I am not logged in
   And a kbuser named user_a
   And a list named "Docs" created by user_a
@@ -104,7 +104,7 @@ Feature: Worklist
   When I view the list "Docs"
   Then I should not see element "form.new.note" within ".listed_doc"
 
-  Scenario: For a valid user, a list with a search should display an input to refresh search results
+  Scenario: For a valid user, a list with a search does not display an input to refresh search results
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Docs" created by user_a
@@ -113,14 +113,14 @@ Feature: Worklist
   When I view the list "Docs"
   Then I should see element "input.refresh_search-button" within "form.button-to"
 
-  Scenario: For a valid user, a list without a search should not display an input to refresh search results
+  Scenario: For a valid user, a list without a search does not display an input to refresh search results
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Docs" created by user_a
   When I view the list "Docs"
   Then I should not see element "form.refresh-search" within ".content-body"
 
-  Scenario: For the list owner, clicking the "refresh search" button should rerun the list's search
+  Scenario: For the list owner, clicking the "refresh search" button reruns the list's search
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
   And a doc with id aaaa
@@ -138,7 +138,7 @@ Feature: Worklist
   Then I should see "aaaa" within ".collection-section"
   And I should see "bbbb" within ".collection-section"
 
-  Scenario: A list should have inputs to select which doc metadata to display
+  Scenario: It has inputs to select which doc metadata to display
   Given I am logged in as Bob
   And I am on the list creation page
   Then I should see the following options checked:
@@ -174,7 +174,7 @@ Feature: Worklist
   And I should see "Show Boiler Name" within ".show-boilers-label"
   And I should not see "Show Docid" within "form.new"
 
-  Scenario: A new list should display only the default metadata columns
+  Scenario: A new list displays only the default metadata columns
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
   When I view the list "Docs"
@@ -193,7 +193,7 @@ Feature: Worklist
 
   And I should not see any other headings
 
-  Scenario: A list's showable doc metadata should all correspond to actual attributes and associations of the doc
+  Scenario: Showable doc metadata all correspond to actual attributes and associations of the doc
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
   And a doc with id aaaa
@@ -255,7 +255,7 @@ Feature: Worklist
   | volatility |
   | xtras |
 
-  Scenario: A list should display only the metadata I pick plus 'docid' and the boilers heading should say boiler name
+  Scenario: It displays only the metadata I pick plus 'docid' and the boilers heading should say boiler name
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
   When I edit the list "Docs"
@@ -269,13 +269,13 @@ Feature: Worklist
   And I should see element "th.docid-heading" within "tr.field-heading-row"
   But I should not see element "th.visibility-heading" within "tr.field-heading-row"
 
-  Scenario: A list should have a labelled input for a Worklists1 id to import
+  Scenario: It has a labelled input for a Worklists1 id to import
   Given I am logged in as Bob
   And I am on the list creation page
   Then I should see element "input.list-wl1-import" within "table.field-list"
   And I should see "Import v1 Worklist" within "table.field-list"
 
-  Scenario: A list should import the docids of the v1 Worklist id entered
+  Scenario: It imports the docids of the v1 Worklist id entered
   Given I am logged in as Bob
   And I am on the list creation page
   And a doc with id arxq
@@ -289,3 +289,35 @@ Feature: Worklist
   And I should see "apev" within ".collection-section"
   And I should see "avck" within ".collection-section"
   And I should see "awfj" within ".collection-section"
+
+  Scenario: It has a labelled input for a Worklists1 id to clone
+  Given I am logged in as Bob
+  And I am on the list creation page
+  Then I should see element "input.list-wl1-clone" within "table.field-list"
+  And I should see "Clone v1 Worklist" within "table.field-list"
+
+Scenario: It clones the comments, docids, categories, workstates, and notes of the v1 Worklist id entered
+  Given I am logged in as Bob
+  And I am on the list creation page
+  And a doc with id arxq
+  And a doc with id apev
+  And a doc with id avck
+  And a doc with id awfj
+  When I fill in "list_name" with "test"
+  When I fill in "list_wl1_clone" with "11777"
+  And I press "Create List"
+  Then I should see "arxq" within ".collection-section"
+  And I should see "apev" within ".collection-section"
+  And I should see "avck" within ".collection-section"
+  And I should see "awfj" within ".collection-section"
+  And I should see "test comments for 11777" within ".list-comment"
+  And I should see "testcategory4" in the "tags-view" cell of doc "awfj"
+  And I should see "test editor note for apev" in the "notes-view" cell of doc "apev"
+  And I should see "test owner note for arxq" in the "notes-view" cell of doc "arxq"
+  And I should see "pending" in the "workstate-view" cell of doc "arxq"
+  And I should see "completed" in the "workstate-view" cell of doc "avck"
+  And I should see "untouched" in the "workstate-view" cell of doc "apev"
+
+Scenario: Importing adds docs to a list's existing docs
+
+Scenario: Cloning overwrites a list's docs

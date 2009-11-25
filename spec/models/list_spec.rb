@@ -14,6 +14,7 @@ describe List do
   it { should respond_to :show_docid }
   it { should respond_to :show_tags }
   it { should respond_to :wl1_import }
+  it { should respond_to :wl1_clone }
   
   it { should validate_presence_of :name }
   it { should validate_presence_of :creator }

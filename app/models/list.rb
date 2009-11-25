@@ -2,6 +2,8 @@ class List < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  include XmlUtilities
+  
   fields do
     name :string
     comment :text
@@ -32,6 +34,7 @@ class List < ActiveRecord::Base
     show_workstate :boolean, :default => true
     show_xtras :boolean
     wl1_import :integer
+    wl1_clone :integer
   end
 
   never_show :show_docid
@@ -62,7 +65,8 @@ class List < ActiveRecord::Base
   end
 
   before_save :populate_if_search_changed,
-    :do_import_if_wl1_import
+    :do_import_if_wl1_import,
+    :do_clone_if_wl1_clone
 
   def populate_if_search_changed
     if changed.include?("search_id")
@@ -74,6 +78,10 @@ class List < ActiveRecord::Base
     do_import(wl1_import) if wl1_import
   end
   
+  def do_clone_if_wl1_clone
+    do_clone(wl1_clone) if wl1_clone
+  end
+
   def selected_columns
     List.showable_columns.find_all do |column|
       self.send("show_#{column}".to_sym)
@@ -91,17 +99,17 @@ class List < ActiveRecord::Base
     save!
   end
 
-  def do_import(wl1_import)
-    https = Net::HTTP.new('kbhandbook.indiana.edu',443)
-    https.use_ssl = true
-    https.ssl_timeout = 2
-    https.verify_mode = OpenSSL::SSL::VERIFY_PEER
-    https.verify_depth = 2
-    https.start do |connection|
-      action = Net::HTTP::Get.new("/worklist/#{wl1_import}/fooplist")
-      response = connection.request(action)
-      docids = response.body.split("\n")
-      self.docs << docids.map {|docid| Doc.find(docid)}
+  def do_import(wl1id)
+    wl1hash = request_and_load_yaml(wl1id)
+    wl1docs = wl1hash["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
+    self.docs << wl1docs
+  end
+
+  def do_clone(wl1id)
+    wl1hash = request_and_load_yaml(wl1id)
+    wl1docs = wl1hash["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
+    self.docs = wl1docs
+    self.docs.each do |assoc_doc|
     end
   end
 

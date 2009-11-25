@@ -2,6 +2,8 @@ require 'net/http'
 
 module XmlUtilities
 
+  WL1_URL = 'https://kbhandbook.indiana.edu/worklist'
+  
   @@rest_login = {
     :username_production => 'kbdevtest',
     :password_production => 'EKQ6JNSC5A',
@@ -27,6 +29,28 @@ module XmlUtilities
     kbxml =~ /(<kbml .*<\/kbml>)/m
     $1
   end
+
+  def fetch_url(url_string)
+    url = URI.parse(url_string)
+    transfer = Net::HTTP.new(url.host,url.port)
+    config_ssl(transfer) if url.scheme == 'https'
+    transfer.start do |connect|
+      connect.get(url.path)
+    end
+  end
+
+  def config_ssl(transfer)
+    transfer.use_ssl = true
+    transfer.ssl_timeout = 2
+    transfer.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    transfer.verify_depth = 2
+  end
+
+  def request_and_load_yaml(wl1id)
+    response = fetch_url("#{WL1_URL}/#{wl1id}/yaml")
+    YAML.load(response.body)
+  end
+  
   def request_kbxml
     http = Net::HTTP.new('remote.kb.iu.edu')
     http.start do |connection|

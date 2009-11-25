@@ -174,3 +174,11 @@ And /^I should not see any other headings$/ do
     content.should_not match_selector("th:nth-child(#{@total_headings+1})")
   end
 end
+
+Then /^I should see "([^\"]*)" in the "([^\"]*)" cell of doc "([^\"]*)"$/ do |string, cell, docid|
+  # select the <td> element in the same <tr> as a span with the docid in it. Ugly xpath.
+  within("//tr//span[.='#{docid}']/../../td[@class='#{cell}']") do |cell|
+    cell.should contain string
+  end
+
+end
