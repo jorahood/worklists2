@@ -97,5 +97,11 @@ describe ListedDoc do
       subject.notes[1].should be_nil
       subject.notes[0].text.should == @v1_arxq['notes']
     end
+    it "should make the kbuser 'kb' the creator of cloned notes" do
+      kb = Factory(:kbuser, :username => 'kb')
+      subject.clone_notes(@v1_arxq)
+      subject.notes[0].should_not be_nil
+      subject.notes[0].creator.should == kb
+    end
   end
 end

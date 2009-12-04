@@ -1,3 +1,7 @@
 Factory.define :doc do |doc|
-  doc
+
+end
+
+Factory.define :kbuser do |kbuser|
+
 end
