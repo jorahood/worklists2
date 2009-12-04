@@ -84,14 +84,15 @@ describe ListedDoc do
 
     it "should clone notes, tags, and workstate" do
       subject.do_clone(@v1_apev)
-        subject.notes[0].should_not be_nil
-        subject.notes[1].should_not be_nil
-        subject.notes[0].text.should == @v1_apev['notes']
-        subject.notes[1].text.should == @v1_apev['editornotes']
-        subject.tags[0].should_not be_nil
-        subject.tags[0].name.should == @v1_apev['category']
-        subject.workstate.should == 'pending'
+      subject.notes[0].should_not be_nil
+      subject.notes[1].should_not be_nil
+      subject.notes[0].text.should == @v1_apev['notes']
+      subject.notes[1].text.should == @v1_apev['editornotes']
+      subject.tags[0].should_not be_nil
+      subject.tags[0].name.should == @v1_apev['category']
+      subject.workstate.should == 'pending'
     end
+
     context "notes" do
       it "should get their text from the notes of the doc in the imported v1 list" do
         subject.clone_notes(@v1_apev)
@@ -123,13 +124,13 @@ describe ListedDoc do
         subject.tags[0].name.should == @v1_apev['category']
       end
       it "should not be created unless the v1 listed doc has a category" do
-       subject.clone_tags(@v1_arxq)
-       subject.tags.should be_empty
+        subject.clone_tags(@v1_arxq)
+        subject.tags.should be_empty
       end
       it "should be reused for identical categories" do
-       subject.clone_tags(@v1_awfj)
-       subject.clone_tags(@v1_apev)
-       subject.tags[0].should == subject.tags[1]
+        subject.clone_tags(@v1_awfj)
+        subject.clone_tags(@v1_apev)
+        subject.tags[0].should == subject.tags[1]
       end
     end
 

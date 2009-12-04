@@ -64,22 +64,20 @@ class List < ActiveRecord::Base
     end
   end
 
-  before_save :populate_if_search_changed
-  before_save  :do_import, :if => :wl1_import
-  before_save  :do_clone_if_wl1_clone
+  before_save :populate, :if => :new_search?
+  before_save  :do_import, :if => :new_import?
+  before_save  :do_clone, :if => :new_clone?
 
-  def populate_if_search_changed
-    if changed.include?("search_id")
-      populate! if search
-    end
+  def new_search?
+    search && search_id_changed?
   end
 
-  def do_import_if_wl1_import
-    do_import(wl1_import) if wl1_import
+  def new_import?
+    wl1_import && wl1_import_changed?
   end
-  
-  def do_clone_if_wl1_clone
-    do_clone(wl1_clone) if wl1_clone
+
+  def new_clone?
+    wl1_clone && wl1_clone_changed?
   end
 
   def selected_columns
@@ -88,14 +86,14 @@ class List < ActiveRecord::Base
     end
   end
 
-  def populate!
+  def populate
     #FIXME: the following is too slow for 1000+ doc lists,
     #for speed use ActiveRecord::Base#import provided by ar_extensions
     self.docs = search.execute
   end
 
   def refresh_search
-    populate!
+    populate
     save!
   end
 
@@ -119,12 +117,15 @@ class List < ActiveRecord::Base
     v1_list = get_v1_list_and_find_docs(wl1_clone)
     self.comment = v1_list['comments']
     self.name = v1_list['name']
-    self.docs = v1_list['doc_objects']
-    self.docs.each_with_index do |doc, i|
-      doc.listed_docs[0].do_clone(v1_list['docs'][i])
+    listed_docs = []
+    v1_list['docs'].each do |doc|
+      listed_doc = ListedDoc.new(:list_id => self.id, :doc_id => doc['id'])
+      listed_doc.do_clone(doc)
+      listed_doc.save
+      listed_docs << listed_doc
     end
+    self.listed_docs = listed_docs
   end
-
   # --- Permissions --- #
 
   def create_permitted?

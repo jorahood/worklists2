@@ -118,7 +118,7 @@ describe List do
       @list.search = @search
     end
     it "should populate itself" do
-      @list.should_receive(:populate!)
+      @list.should_receive(:populate)
       @list.save!
     end
     it "should ask the search to execute" do
@@ -225,8 +225,19 @@ describe List do
       before do
         @list.wl1_import = 11777
       end
-      it "should do_import when wl1_import changed" do
+      it "should do_import when wl1_import is changed and exists" do
         @list.should_receive(:do_import)
+        @list.save!
+      end
+      it "should not do_import when wl1_import is not changed" do
+        @list.save!
+        @list.should_not_receive(:do_import)
+        @list.save!
+      end
+      it "should not do_import when wl1_import is removed" do
+        @list.save!
+        @list.should_not_receive(:do_import)
+        @list.wl1_import = nil
         @list.save!
       end
       it "should try to find the docs in the yaml file" do
@@ -260,6 +271,17 @@ describe List do
         @list.should_receive(:do_clone)
         @list.save!
       end
+      it "should not do_clone when wl1_clone is not changed" do
+        @list.save!
+        @list.should_not_receive(:do_clone)
+        @list.save!
+      end
+      it "should not do_clone when wl1_clone is removed" do
+        @list.save!
+        @list.should_not_receive(:do_clone)
+        @list.wl1_clone = nil
+        @list.save!
+      end
       it "should request and load a yaml serialization of the v1 worklist when cloning" do
         @list.should_receive(:request_and_load_yaml).and_return(@v1_list_hash)
         @list.do_clone
@@ -268,10 +290,15 @@ describe List do
         @list.do_clone
         @list.docs.should == @sample_docs
       end
+      it "should raise an error if the doc to be cloned doesn't exist" do
+        @v1_list_hash['docs'][0]['id'] = 'zzzz'
+        lambda {@list.do_clone}.should raise_error(ActiveRecord::RecordNotFound)
+      end
       it "should replace all of its existing docs when cloning, not add to them" do
-        @list.docs << Factory(:doc, :id => 'blah')
+        blah = Factory(:doc, :id => 'blah')
+        @list.docs << blah
         @list.do_clone
-        @list.docs.should == @sample_docs
+        @list.docs.should_not include blah
       end
       it "should set its comment to the comments of the cloned list" do
         @list.do_clone
@@ -280,12 +307,6 @@ describe List do
       it "should set its name to the name of the cloned list" do
         @list.do_clone
         @list.name.should == @v1_list_hash['name']
-      end
-      it "should tell each listed doc to do_clone of its v1 counterpart" do
-        @sample_docs.each_with_index do |doc, i|
-          doc.listed_docs[0].should_receive(:do_clone).with(@v1_list_hash['docs'][i])
-        end
-        @list.do_clone
       end
     end
   end
