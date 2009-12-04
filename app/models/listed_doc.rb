@@ -21,8 +21,12 @@ class ListedDoc < ActiveRecord::Base
   end
 
   def clone_notes(v1_listed_doc)
-    note = Note.new(:text => v1_listed_doc['editornotes'])
-    self.notes << note
+    if ownernote_text = v1_listed_doc['notes']
+      self.notes << Note.new(:text => ownernote_text)
+    end
+    if editornote_text = v1_listed_doc['editornotes']
+      self.notes << Note.new(:text => editornote_text)
+    end
   end
   # --- Permissions --- #
 

@@ -77,18 +77,25 @@ describe ListedDoc do
     before do
       @v1_list_hash = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
       @v1_apev = @v1_list_hash['docs'][1]
+      @v1_arxq = @v1_list_hash['docs'][2]
     end
-    it "should get its notes from the note of the doc in the imported v1 list" do
+    it "should get its notes from the notes of the doc in the imported v1 list" do
       subject.clone_notes(@v1_apev)
       subject.notes[0].should_not be_nil
-      subject.notes[0].text.should == @v1_apev['editornotes']
+      subject.notes[0].text.should == @v1_apev['notes']
     end
-    it "should clone both editornotes and ownernotes if they exist" do
+    it "should create a note for ownernotes first and for editornotes second" do
       subject.clone_notes(@v1_apev)
       subject.notes[0].should_not be_nil
       subject.notes[1].should_not be_nil
       subject.notes[0].text.should == @v1_apev['notes']
-      subject.notes[1].text should == @v1_apev['editornotes']
+      subject.notes[1].text.should == @v1_apev['editornotes']
+    end
+    it "should only clone existing notes" do
+      subject.clone_notes(@v1_arxq)
+      subject.notes[0].should_not be_nil
+      subject.notes[1].should be_nil
+      subject.notes[0].text.should == @v1_arxq['notes']
     end
   end
 end

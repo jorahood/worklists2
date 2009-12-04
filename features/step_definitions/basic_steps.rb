@@ -112,11 +112,11 @@ When /^I select "([^\"]*)"$/ do |value|
 end
 
 Then /^I should see "([^\"]*)" in the body$/ do |stuff|
-  Then "I should see \"#{stuff}\" within \"div.content-body\""
+  steps %Q{Then I should see "#{stuff}" within "div.content-body"}
 end
 
 Then /^I should not see "([^\"]*)" in the body$/ do |stuff|
-  Then "I should not see \"#{stuff}\" within \"div.content-body\""
+  steps %Q{Then I should not see "#{stuff}" within "div.content-body"}
 end
 
 Then /^I should see element "([^\"]*)" within "([^\"]*)"$/ do |element, context|
