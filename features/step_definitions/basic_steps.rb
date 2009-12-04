@@ -111,6 +111,20 @@ When /^I select "([^\"]*)"$/ do |value|
   select value
 end
 
+Then /^I should see <label> in "([^\"]*)" in the following order, starting with (\d+):$/ do |sibling, offset, table|
+  table.hashes.each_with_index do |hash, i|
+    steps %Q{Then I should see "#{hash['label']}" within "#{sibling}:nth-child(#{i + offset.to_i})"}
+  end
+end
+
+Then /^I should see element "([^\"]*)" in the body$/ do |element|
+  steps %Q{Then I should see element "#{element}" within "div.content-body"}
+end
+
+Then /^I should not see element "([^\"]*)" in the body$/ do |element|
+  steps %Q{Then I should not see element "#{element}" within "div.content-body"}
+end
+
 Then /^I should see "([^\"]*)" in the body$/ do |stuff|
   steps %Q{Then I should see "#{stuff}" within "div.content-body"}
 end

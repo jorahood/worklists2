@@ -8,31 +8,31 @@ class List < ActiveRecord::Base
     name :string
     comment :text
     timestamps
+    show_docid :boolean, :default => true
+    show_titles :boolean, :default => true
     show_approveddate :boolean, :default => true
-    show_author :boolean
-    show_boilers :boolean
+    show_modifieddate :boolean, :default => true
     show_birthdate :boolean
     show_domains :boolean, :default => true
-    show_docid :boolean, :default => true
+    show_owner :boolean, :default => true
+    show_author :boolean
+    show_refs :boolean
+    show_refbys :boolean
+    show_boilers :boolean
+    show_referenced_boilers :boolean
     show_expirations :boolean
     show_hotitems :boolean
     show_importance :boolean
-    show_kbas :boolean
-    show_kba_bys :boolean
-    show_modifieddate :boolean, :default => true
-    show_notes :boolean, :default => true
-    show_owner :boolean, :default => true
-    show_refs :boolean
-    show_refbys :boolean
-    show_referenced_boilers :boolean
     show_resources :boolean
     show_status :boolean
-    show_tags :boolean, :default => true
-    show_titles :boolean, :default => true
     show_visibility :boolean, :default => true
     show_volatility :boolean
-    show_workstate :boolean, :default => true
+    show_kbas :boolean
+    show_kba_bys :boolean
     show_xtras :boolean
+    show_tags :boolean, :default => true
+    show_notes :boolean, :default => true
+    show_workstate :boolean, :default => true
     wl1_import :integer
     wl1_clone :integer
   end

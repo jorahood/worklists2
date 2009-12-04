@@ -196,8 +196,6 @@ Feature: Worklist
   Scenario: Showable doc metadata all correspond to actual attributes and associations of the doc
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
-  And a doc with id aaaa
-  And doc aaaa belongs to list "Docs"
   When I edit the list "Docs"
   And I check the following boxes:
   |checkbox|
@@ -255,6 +253,36 @@ Feature: Worklist
   | volatility |
   | xtras |
 
+  Scenario: Checkboxes for showable metadata appear in the same order as worklists1
+  Given I am logged in as Bob
+  When I go to the list creation page
+  Then I should see <label> in "tr" in the following order, starting with 3:
+  | label |
+  | Show Titles |
+  | Show Approveddate |
+  | Show Modifieddate |
+  | Show Birthdate |
+  | Show Domains |
+  | Show Owner |
+  | Show Author |
+  | Show Refs |
+  | Show Refbys |
+  | Show Boiler Name |
+  | Show Referenced Boilers |
+  | Show Expirations |
+  | Show Hotitems |
+  | Show Importance |
+  | Show Resources |
+  | Show Status |
+  | Show Visibility |
+  | Show Volatility |
+  | Show Kbas |
+  | Show Kba Bys |
+  | Show Xtras |
+  | Show Tags |
+  | Show Notes |
+  | Show Workstate |
+
   Scenario: It displays only the metadata I pick plus 'docid' and the boilers heading should say boiler name
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
@@ -296,7 +324,7 @@ Feature: Worklist
   Then I should see element "input.list-wl1-clone" within "table.field-list"
   And I should see "Clone v1 Worklist" within "table.field-list"
 
-Scenario: It clones the comments, docids, categories (ie., tags), workstates, and notes of the v1 Worklist id entered
+  Scenario: It clones the comments, docids, categories (ie., tags), workstates, and notes of the v1 Worklist id entered
   Given I am logged in as Bob
   And I am on the list creation page
   And a doc with id arxq
@@ -318,6 +346,3 @@ Scenario: It clones the comments, docids, categories (ie., tags), workstates, an
   And I should see "completed" in the "workstate-view" cell of doc "avck"
   And I should see "untouched" in the "workstate-view" cell of doc "apev"
 
-Scenario: Importing adds docs to a list's existing docs
-
-Scenario: Cloning overwrites a list's docs

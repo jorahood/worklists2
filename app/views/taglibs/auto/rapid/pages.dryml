@@ -2218,7 +2218,6 @@
           </header>
 
           <section param="content-body">
-            <field-list fields="listed_doc" param/>
           </section>
     </content:>
 
