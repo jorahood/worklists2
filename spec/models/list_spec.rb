@@ -211,66 +211,82 @@ describe List do
     end
   end
   
-  context "cloning/importing v1 worklist" do
+  context "wl1" do
     before do
-      @v1list_hash = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
-      @list.stub(:request_and_load_yaml).with(11777).and_return(@v1list_hash)
+      @v1_list_hash = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
+      @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
       @sample_docs = []
-      @v1list_hash["docs"].each do |attrs|
+      @v1_list_hash["docs"].each do |attrs|
         @sample_docs << Factory.create(:doc, :id => attrs['id'])
       end
     end
-    it "should do_import when wl1_import changed" do
-      @list.should_receive(:do_import).with(100)
-      @list.wl1_import = 100
-      @list.save!
-    end
-    it "should do_clone when wl1_clone attr changed" do
-      @list.should_receive(:do_clone).with(100)
-      @list.wl1_clone = 100
-      @list.save!
-    end
-    it "should try to find the docs in the yaml file" do
-      Doc.should_receive(:find).with('awfj').and_return(Factory :doc)
-      Doc.should_receive(:find).with('apev').and_return(Factory :doc)
-      Doc.should_receive(:find).with('arxq').and_return(Factory :doc)
-      Doc.should_receive(:find).with('avck').and_return(Factory :doc)
-      @list.get_v1_list_and_find_docs(11777)
-    end
-    it "should request and load a yaml serialization of the v1 worklist when cloning" do
-      @list.should_receive(:request_and_load_yaml).with(11777).and_return(@v1list_hash)
-      @list.do_clone(11777)
-    end
-    it "should request and load a yaml serialization of the v1 worklist when importing" do
-      @list.should_receive(:request_and_load_yaml).with(11777).and_return(@v1list_hash)
-      @list.do_import(11777)
-    end
-    it "should set its docs to be the docs from the imported list" do
-      @list.do_import(11777)
-      @list.docs.should == @sample_docs
-    end
-    it "should add to its existing docs when importing, not replace them" do
-      blah = Factory(:doc, :id => 'blah')
-      @list.docs << blah
-      @list.do_import(11777)
-      @list.docs.sort_by{|doc|doc.id}.should == @sample_docs.unshift(blah).sort_by{|doc|doc.id}
-    end
-    it "should set its docs to be the docs from the cloned list" do
-      @list.do_clone(11777)
-      @list.docs.should == @sample_docs
-    end
-    it "should replace all of its existing docs when cloning, not add to them" do
-      @list.docs << Factory(:doc, :id => 'blah')
-      @list.do_clone(11777)
-      @list.docs.should == @sample_docs
-    end
-    it "should set its comment to the comments of the cloned list" do
-      @list.do_clone(11777)
-      @list.comment.should == @v1list_hash['comments']
-    end
-    it "should set its name to the name of the cloned list" do
-      @list.do_clone(11777)
-      @list.name.should == @v1list_hash['name']
+
+    context "importing" do
+      before do
+        @list.wl1_import = 11777
+      end
+      it "should do_import when wl1_import changed" do
+        @list.should_receive(:do_import)
+        @list.save!
+      end
+      it "should try to find the docs in the yaml file" do
+        Doc.should_receive(:find).with('awfj').and_return(Factory :doc)
+        Doc.should_receive(:find).with('apev').and_return(Factory :doc)
+        Doc.should_receive(:find).with('arxq').and_return(Factory :doc)
+        Doc.should_receive(:find).with('avck').and_return(Factory :doc)
+        @list.do_import
+      end
+      it "should request and load a yaml serialization of the v1 worklist when importing" do
+        @list.should_receive(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.do_import
+      end
+      it "should set its docs to be the docs from the imported list" do
+        @list.do_import
+        @list.docs.should == @sample_docs
+      end
+      it "should add to its existing docs when importing, not replace them" do
+        blah = Factory(:doc, :id => 'blah')
+        @list.docs << blah
+        @list.do_import
+        @list.docs.sort_by{|doc|doc.id}.should == @sample_docs.unshift(blah).sort_by{|doc|doc.id}
+      end
+    end    
+ 
+    context "cloning" do
+      before do
+        @list.wl1_clone = 11777
+      end
+      it "should do_clone when wl1_clone attr changed" do
+        @list.should_receive(:do_clone)
+        @list.save!
+      end
+      it "should request and load a yaml serialization of the v1 worklist when cloning" do
+        @list.should_receive(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.do_clone
+      end
+      it "should set its docs to be the docs from the cloned list" do
+        @list.do_clone
+        @list.docs.should == @sample_docs
+      end
+      it "should replace all of its existing docs when cloning, not add to them" do
+        @list.docs << Factory(:doc, :id => 'blah')
+        @list.do_clone
+        @list.docs.should == @sample_docs
+      end
+      it "should set its comment to the comments of the cloned list" do
+        @list.do_clone
+        @list.comment.should == @v1_list_hash['comments']
+      end
+      it "should set its name to the name of the cloned list" do
+        @list.do_clone
+        @list.name.should == @v1_list_hash['name']
+      end
+      it "should tell each listed doc to do_clone of its v1 counterpart" do
+        @sample_docs.each_with_index do |doc, i|
+          doc.listed_docs[0].should_receive(:do_clone).with(@v1_list_hash['docs'][i])
+        end
+        @list.do_clone
+      end
     end
   end
 end

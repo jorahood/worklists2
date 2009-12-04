@@ -20,6 +20,12 @@ class ListedDoc < ActiveRecord::Base
     delegate method, :to => :doc
   end
 
+  def do_clone(v1_listed_doc)
+    clone_notes(v1_listed_doc)
+    clone_tags(v1_listed_doc)
+    clone_workstate(v1_listed_doc)
+  end
+
   def clone_notes(v1_listed_doc)
     if ownernote_text = v1_listed_doc['notes']
       self.notes << Note.new(:text => ownernote_text, :creator => Kbuser.find_by_username('kb'))

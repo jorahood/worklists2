@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe Tag do
-  it { should belong_to :listed_doc }
+  it { should have_many :taggings }
+  it { should have_many(:listed_docs).through(:taggings) }
 end

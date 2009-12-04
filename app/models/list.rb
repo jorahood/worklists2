@@ -64,9 +64,9 @@ class List < ActiveRecord::Base
     end
   end
 
-  before_save :populate_if_search_changed,
-    :do_import_if_wl1_import,
-    :do_clone_if_wl1_clone
+  before_save :populate_if_search_changed
+  before_save  :do_import, :if => :wl1_import
+  before_save  :do_clone_if_wl1_clone
 
   def populate_if_search_changed
     if changed.include?("search_id")
@@ -99,16 +99,30 @@ class List < ActiveRecord::Base
     save!
   end
 
-  def do_import(wl1id)
-    v1_list = get_v1_list_and_find_docs(wl1id)
+  def request_and_load_yaml(wl1_id)
+    response = fetch_url("#{WL1_URL}/#{wl1_id}/yaml")
+    YAML.load(response.body)
+  end
+
+  def get_v1_list_and_find_docs(wl1_id)
+    wl1hash = request_and_load_yaml(wl1_id)
+    wl1hash['doc_objects'] = wl1hash["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
+    wl1hash
+  end
+
+  def do_import
+    v1_list = get_v1_list_and_find_docs(wl1_import)
     self.docs << v1_list['doc_objects']
   end
 
-  def do_clone(wl1id)
-    v1_list = get_v1_list_and_find_docs(wl1id)
-    self.docs = v1_list['doc_objects']
+  def do_clone
+    v1_list = get_v1_list_and_find_docs(wl1_clone)
     self.comment = v1_list['comments']
     self.name = v1_list['name']
+    self.docs = v1_list['doc_objects']
+    self.docs.each_with_index do |doc, i|
+      doc.listed_docs[0].do_clone(v1_list['docs'][i])
+    end
   end
 
   # --- Permissions --- #
