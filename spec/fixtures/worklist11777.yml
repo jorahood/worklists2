@@ -5,13 +5,13 @@ comments: |
 docs:
   - id: awfj
 
-    category: testcategory4
+    category: testcategory1
 
 
 
   - id: apev
 
-    category: testcategory2
+    category: testcategory1
 
     editornotes: |
       test editor note for apev
@@ -19,11 +19,10 @@ docs:
       test owner note for apev
   - id: arxq
 
-    category: testcategory1
     notes: |
       test owner note for arxq
 
 
   - id: avck
     done: 1
-    category: testcategory3
+    category: testcategory2

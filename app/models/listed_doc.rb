@@ -28,6 +28,22 @@ class ListedDoc < ActiveRecord::Base
       self.notes << Note.new(:text => editornote_text,  :creator => Kbuser.find_by_username('kb'))
     end
   end
+
+  def clone_tags(v1_listed_doc)
+    if tag_name = v1_listed_doc['category']
+      self.tags << Tag.find_or_create_by_name(tag_name)
+    end
+  end
+
+  def clone_workstate(v1_listed_doc)
+    if v1_listed_doc['done']
+      self.workstate = 'completed'
+    elsif v1_listed_doc['notes']
+      self.workstate = 'pending'
+    else
+      self.workstate = 'untouched'
+    end
+  end
   # --- Permissions --- #
 
   def create_permitted?
