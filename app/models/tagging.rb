@@ -1,16 +1,14 @@
-class Tag < ActiveRecord::Base
+class Tagging < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
   fields do
-    name :string
     timestamps
   end
 
-has_many :taggings
-has_many :listed_docs,
-  :through => :taggings
-
+  belongs_to :tag
+  belongs_to :listed_doc
+  
   # --- Permissions --- #
 
   def create_permitted?
@@ -30,3 +28,4 @@ has_many :listed_docs,
   end
 
 end
+

@@ -10,7 +10,9 @@ class ListedDoc < ActiveRecord::Base
   belongs_to :doc
   belongs_to :list
   has_many :notes
-  has_many :tags
+  has_many :taggings
+  has_many :tags,
+    :through => :taggings
   
   @@delegated_accessors = List.showable_columns - [:notes, :workstate, :tags]
 
@@ -57,7 +59,7 @@ class ListedDoc < ActiveRecord::Base
   end
 
   def update_permitted?
-    acting_user.administrator?
+    acting_user.administrator? || list.creator_is?(acting_user)
   end
 
   def destroy_permitted?

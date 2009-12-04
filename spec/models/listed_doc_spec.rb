@@ -19,7 +19,8 @@ describe ListedDoc do
   it { should belong_to :doc }
   it { should belong_to :list }
   it { should have_many :notes }
-  it { should have_many :tags }
+  it { should have_many :taggings }
+  it { should have_many(:tags).through(:taggings) }
 
   context "Permissions" do
     it { should be_creatable_by @list_creator }
@@ -70,6 +71,7 @@ describe ListedDoc do
     #    end
     #
     it { should be_updatable_by @admin }
+    it { should be_updatable_by @list_creator }
     it { should be_destroyable_by @list_creator }
   end
 
