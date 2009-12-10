@@ -117,32 +117,12 @@ Then /^I should see <label> in "([^\"]*)" in the following order, starting with 
   end
 end
 
-Then /^I should see element "([^\"]*)" in the body$/ do |element|
-  steps %Q{Then I should see element "#{element}" within "div.content-body"}
+Then /^I should see element "([^\"]*)"$/ do |element|
+  response.should match_selector element
 end
 
-Then /^I should not see element "([^\"]*)" in the body$/ do |element|
-  steps %Q{Then I should not see element "#{element}" within "div.content-body"}
-end
-
-Then /^I should see "([^\"]*)" in the body$/ do |stuff|
-  steps %Q{Then I should see "#{stuff}" within "div.content-body"}
-end
-
-Then /^I should not see "([^\"]*)" in the body$/ do |stuff|
-  steps %Q{Then I should not see "#{stuff}" within "div.content-body"}
-end
-
-Then /^I should see element "([^\"]*)" within "([^\"]*)"$/ do |element, context|
-  within(context) do |content|
-    content.should match_selector(element)
-  end
-end
-
-Then /^I should not see element "([^\"]*)" within "([^\"]*)"$/ do |element, context|
-  within(context) do |content|
-    content.should_not match_selector(element)
-  end
+Then /^I should not see element "([^\"]*)"$/ do |element|
+  response.should_not match_selector element
 end
 
 Then /^I should not see the word "([^\"]*)" within "([^\"]*)"$/ do |word, context|
@@ -154,38 +134,30 @@ end
 
 Then /^I should see the following options checked:$/ do |table|
   table.hashes.each do |hash|
-    within("form.new") do |content|
-      response.should match_selector("input#list_show_#{hash['option']}[checked]")
-    end
+    response.should match_selector("input#list_show_#{hash['option']}[checked]")
   end
 end
 
 Then /^I should see the following options unchecked:$/ do |table|
   table.hashes.each do |hash|
-    within("form.new") do |content|
-      content.should match_selector("input#list_show_#{hash['option']}:not([checked])")
-    end
+    response.should match_selector("input#list_show_#{hash['option']}:not([checked])")
   end
 end
 
 Then /^I should see the following headings:$/ do |table|
   table.hashes.each do |hash|
-    within("tr.field-heading-row") do |content|
-      content.should match_selector("th.#{hash[:heading]}-heading")
-    end
+    response.should match_selector("th.#{hash[:heading]}-heading")
   end
   @total_headings = table.hashes.size
+end
+
+Then /^I should not see any other headings$/ do
+  response.should_not match_selector("th:nth-child(#{@total_headings+1})")
 end
 
 When /^I check the following boxes:$/ do |table|
   table.hashes.each do |hash|
     check "list_show_#{hash['checkbox']}"
-  end
-end
-
-And /^I should not see any other headings$/ do
-  within("tr.field-heading-row") do |content|
-    content.should_not match_selector("th:nth-child(#{@total_headings+1})")
   end
 end
 

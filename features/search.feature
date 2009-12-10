@@ -3,8 +3,15 @@ Feature: Search
   As a kb editor
   I want to specify search criteria and retrieve matching documents
 
-  @KMWL-6
-  Scenario: Searches must have names
+  Scenario: It has text inputs for Author, Owner, Resource, Boiler, and Hotitem associations
+  Given I am on the search creation page
+  Then I should see element ".author-view input[type='text']"
+  And I should see element ".owner-view input[type='text']"
+  And I should see element ".resource-view input[type='text']"
+  And I should see element ".boiler-view input[type='text']"
+  And I should see element ".hotitem-view input[type='text']" 
+
+  Scenario: It must have a name
   Given I am on the search creation page
   When I fill in "search_name" with ""
   And I press "Create Search"
@@ -16,7 +23,7 @@ Feature: Search
   And I am on the search creation page
   Then I should see "aaaa" within ".search-docids"
 
-  Scenario: Searches will only return docs matching a docid search
+  Scenario: It will only return docs matching a docid search
   Given a doc with id aaaa
   And a doc with id bbbb
   And a doc with id cccc

@@ -74,7 +74,7 @@ Feature: Worklist
   And a doc with id aaaa
   And doc aaaa belongs to list "Docs"
   When I view the list "Docs"
-  Then I should see element "form.new.note" within ".listed_doc"
+  Then I should see element "form.new.note"
 
   Scenario: The note forms do not display their doc associations.
   Given I am logged in as Bob
@@ -83,7 +83,7 @@ Feature: Worklist
   And a doc with id aaaa
   And doc aaaa belongs to list "Docs"
   When I view the list "Docs"
-  Then I should not see element "select.note-doc" within ".listed_doc"
+  Then I should not see element "select.note-doc"
 
   Scenario: It automatically sets the note's associated doc to the listed_doc's doc.
   Given I am logged in as Bob
@@ -102,23 +102,23 @@ Feature: Worklist
   And a doc with id aaaa
   And doc aaaa belongs to list "Docs"
   When I view the list "Docs"
-  Then I should not see element "form.new.note" within ".listed_doc"
+  Then I should not see element "form.new.note"
 
-  Scenario: For a valid user, a list with a search does not display an input to refresh search results
+  Scenario: For a valid user, a list with a search displays an input to refresh search results
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Docs" created by user_a
   And a search named "Searchy"
   And list "Docs" belongs to search "Searchy"
   When I view the list "Docs"
-  Then I should see element "input.refresh_search-button" within "form.button-to"
+  Then I should see element "input.refresh_search-button"
 
   Scenario: For a valid user, a list without a search does not display an input to refresh search results
   Given I am logged in as Bob
   And a kbuser named user_a
   And a list named "Docs" created by user_a
   When I view the list "Docs"
-  Then I should not see element "form.refresh-search" within ".content-body"
+  Then I should not see element "form.refresh-search"
 
   Scenario: For the list owner, clicking the "refresh search" button reruns the list's search
   Given I am logged in as Bob
@@ -291,16 +291,15 @@ Feature: Worklist
   And I check "list_show_xtras"
   And I uncheck "list_show_visibility"
   And I press "Save"
-  Then I should see element "th.boilers-heading" within "tr.field-heading-row"
-  And I should see "Boiler Name" within "tr.field-heading-row"
-  And I should see element "th.xtras-heading" within "tr.field-heading-row"
-  And I should see element "th.docid-heading" within "tr.field-heading-row"
-  But I should not see element "th.visibility-heading" within "tr.field-heading-row"
+  Then I should see "Boiler Name" within "tr.field-heading-row"
+  And I should see "Xtras" within "tr.field-heading-row"
+  And I should see "Docid" within "tr.field-heading-row"
+  But I should not see "Visibility" within "tr.field-heading-row"
 
   Scenario: It has a labelled input for a Worklists1 id to import
   Given I am logged in as Bob
   And I am on the list creation page
-  Then I should see element "input.list-wl1-import" within "table.field-list"
+  Then I should see element "input.list-wl1-import"
   And I should see "Import v1 Worklist" within "table.field-list"
 
   Scenario: It imports the docids of the v1 Worklist id entered
@@ -321,7 +320,7 @@ Feature: Worklist
   Scenario: It has a labelled input for a Worklists1 id to clone
   Given I am logged in as Bob
   And I am on the list creation page
-  Then I should see element "input.list-wl1-clone" within "table.field-list"
+  Then I should see element "input.list-wl1-clone"
   And I should see "Clone v1 Worklist" within "table.field-list"
 
   Scenario: It clones the comments, docids, categories (ie., tags), workstates, and notes of the v1 Worklist id entered
