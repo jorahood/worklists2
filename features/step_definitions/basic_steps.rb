@@ -85,6 +85,14 @@ Given /^search "([^\"]*)" has author (\w+)$/ do |search_name, author_name|
   search.author = author
 end
 
+Given /^a boiler named "([^\"]*)"$/ do |name|
+  Factory.create(:boiler, :name => name)
+end
+
+Then /^I view the boiler "([^\"]*)"$/ do |name|
+  visit boiler_path(name)
+end
+
 When /^I view the search "([^\"]*)"$/ do |search_name|
   visit search_path(Search.find_by_name(search_name))
 end

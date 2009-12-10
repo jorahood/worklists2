@@ -1,6 +1,9 @@
 # support stubs:
 require "spec/mocks"
 
+# support factory_girl
+require 'factory_girl'
+require 'spec/factories'
 # pretty formatting
 require File.expand_path(File.dirname(__FILE__) + '/textmate_formatter')
 

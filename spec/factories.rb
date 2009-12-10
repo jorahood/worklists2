@@ -9,3 +9,7 @@ end
 Factory.define :listed_doc do |listed_doc|
   
 end
+
+Factory.define :boiler do |listed_doc|
+
+end
