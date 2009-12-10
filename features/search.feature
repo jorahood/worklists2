@@ -3,13 +3,13 @@ Feature: Search
   As a kb editor
   I want to specify search criteria and retrieve matching documents
 
-  Scenario: It has text inputs for Author, Owner, Resource, Boiler, and Hotitem associations
+  Scenario: It has autocompleting text inputs for author, owner, resource, boiler, hotitem
   Given I am on the search creation page
-  Then I should see element ".author-view input[type='text']"
-  And I should see element ".owner-view input[type='text']"
-  And I should see element ".resource-view input[type='text']"
-  And I should see element ".boiler-view input[type='text']"
-  And I should see element ".hotitem-view input[type='text']" 
+  Then I should see element "input.autocompleter.search-author[type='text']"
+  And I should see element "input.autocompleter.search-owner[type='text']"
+  And I should see element "input.autocompleter.search-resource[type='text']"
+  And I should see element "input.autocompleter.search-boiler[type='text']"
+  And I should see element "input.autocompleter.search-hotitem[type='text']"
 
   Scenario: It must have a name
   Given I am on the search creation page
@@ -18,10 +18,10 @@ Feature: Search
   Then I should see "Name can't be blank"
   And I should not see "The search was created successfully"
 
-  Scenario: I can select a docid to search on
-  Given a doc with id aaaa
-  And I am on the search creation page
-  Then I should see "aaaa" within ".search-docids"
+#  Scenario: I can select a docid to search on
+#  Given a doc with id aaaa
+#  And I am on the search creation page
+#  Then I should see "aaaa" within ".search-docids"
 
   Scenario: It will only return docs matching a docid search
   Given a doc with id aaaa

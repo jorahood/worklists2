@@ -24,7 +24,7 @@ Feature: Worklist
   And a search named "Good search"
   And list "Good list" belongs to search "Good search"
   When I view the list "Good list"
-  Then I should see "Good search" in the body
+  Then I should see "Good search"
 
   Scenario: It displays the docs of the search it belongs to
   Given I am logged in as Bob

@@ -57,7 +57,7 @@ in my extension of <form> and customization of <show-page> for Search-->
                birthdate, expiredate_is, expiredate, modifieddate_is, modifieddate, 
                importance_is, importance, visibility_is, visibility, volatility_is, 
                volatility, status_is, status, title_search, xtra_search, author, owner,
-               resource, boiler, hotitem, docids, domains, lists" view-blank="&false">
+               resource, boiler, hotitem, domains, lists" view-blank="&false">
     </field-list>
 </def>
 
@@ -65,7 +65,7 @@ in my extension of <form> and customization of <show-page> for Search-->
   <old-form merge>
     <field-list: replace>
       <field-list-for-search/>
-    </field-list:>
+   </field-list:>
   </old-form>
 </extend>
 
@@ -85,6 +85,10 @@ in my extension of <form> and customization of <show-page> for Search-->
   end -%>
   <%= select_datetime(this, attributes.merge(:prefix => param_name_for_this)) %>
 </def>
+
+<def tag="input" for="Kbuser"><name-one merge/></def>
+<def tag="input" for="Boiler"><name-one merge/></def>
+<def tag="input" for="Hotitem"><name-one merge/></def>
 
 <def tag="card" for="Doc">
   <h4>
