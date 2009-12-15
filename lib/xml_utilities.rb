@@ -13,6 +13,41 @@ module XmlUtilities
     :password_test => 'EKQ6JNSC5A'
   }.with_indifferent_access #use symbols or strings as keys to retrieve values
 
+  def self.clone_all_v1_lists
+    lists = []
+    lists = get_all_list_ids
+    if !lists.empty?
+      lists.each do |list_id|
+        List.create!(:wl1_clone => list_id)
+      end
+    end
+  end
+
+  def self.config_ssl(transfer)
+    transfer.use_ssl = true
+    transfer.ssl_timeout = 2
+    transfer.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    transfer.verify_depth = 2
+  end
+
+  def self.fetch_url(url_string)
+    url = URI.parse(url_string)
+    transfer = Net::HTTP.new(url.host,url.port)
+    XmlUtilities.config_ssl(transfer) if url.scheme == 'https'
+    response = transfer.start do |connect|
+      connect.get(url.path)
+    end
+    case response
+    when Net::HTTPSuccess then response.body
+    else raise response.status
+    end
+  end
+
+  def self.get_all_list_ids
+    text = fetch_url("#{WL1_URL}/listids")
+    text.split("\n")
+  end
+
   def rest_path
     @rest_path = "/REST/v0.2//document/#{docid}.xml?domain=kbstaff"
   end
@@ -25,25 +60,15 @@ module XmlUtilities
     kbxml
   end
   
+  def request_and_load_yaml(wl1_id)
+    url = "#{WL1_URL}/#{wl1_id}/yaml"
+    text = XmlUtilities.fetch_url(url)
+    YAML.load(text)
+  end
+
   def kbxml_body
     kbxml =~ /(<kbml .*<\/kbml>)/m
     $1
-  end
-
-  def fetch_url(url_string)
-    url = URI.parse(url_string)
-    transfer = Net::HTTP.new(url.host,url.port)
-    config_ssl(transfer) if url.scheme == 'https'
-    transfer.start do |connect|
-      connect.get(url.path)
-    end
-  end
-
-  def config_ssl(transfer)
-    transfer.use_ssl = true
-    transfer.ssl_timeout = 2
-    transfer.verify_mode = OpenSSL::SSL::VERIFY_PEER
-    transfer.verify_depth = 2
   end
 
   def request_kbxml

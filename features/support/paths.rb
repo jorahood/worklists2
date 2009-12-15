@@ -23,7 +23,9 @@ module NavigationHelpers
       new_list_path
     when /^(.*)'s user page/
       kbuser_path(Kbuser.find_by_username($1))
-
+    when /the lists index page/
+      lists_path
+      
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

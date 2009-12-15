@@ -15,9 +15,18 @@ describe List do
   it { should respond_to :show_tags }
   it { should respond_to :wl1_import }
   it { should respond_to :wl1_clone }
-  it { should validate_presence_of :name }
-  it { should validate_presence_of :creator }
+  it "should give unnamed lists a generic name" do
+    list = List.create!
+    list.name.should_not be_blank
+  end
+  it "should validate presence of name" do
+  List.before_validation.clear # clear the callbacks so the temp name isn't created
+    lambda {
+      list = List.create!
+    }.should raise_error("Validation failed: Name can't be blank")
+  end
   it { should validate_numericality_of :wl1_import }
+  it { should validate_numericality_of :wl1_clone }
   it { should belong_to :creator }
   specify "creator should be a Kbuser" do
     @list.creator.class.should == Kbuser
@@ -214,7 +223,6 @@ describe List do
   context "wl1" do
     before do
       @v1_list_hash = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
-      @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
       @sample_docs = []
       @v1_list_hash["docs"].each do |attrs|
         @sample_docs << Factory.create(:doc, :id => attrs['id'])
@@ -241,6 +249,7 @@ describe List do
         @list.save!
       end
       it "should try to find the docs in the yaml file" do
+        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
         Doc.should_receive(:find).with('awfj').and_return(Factory :doc)
         Doc.should_receive(:find).with('apev').and_return(Factory :doc)
         Doc.should_receive(:find).with('arxq').and_return(Factory :doc)
@@ -252,14 +261,22 @@ describe List do
         @list.do_import
       end
       it "should set its docs to be the docs from the imported list" do
+        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
         @list.do_import
         @list.docs.should == @sample_docs
       end
       it "should add to its existing docs when importing, not replace them" do
+        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
         blah = Factory(:doc, :id => 'blah')
         @list.docs << blah
         @list.do_import
         @list.docs.sort_by{|doc|doc.id}.should == @sample_docs.unshift(blah).sort_by{|doc|doc.id}
+      end
+      specify "do_import should catch errors from trying to retrieve a list" do
+        @list.stub(:get_v1_list_and_find_docs).and_raise
+        lambda {
+          @list.do_import
+        }.should_not raise_error
       end
     end    
  
@@ -287,27 +304,46 @@ describe List do
         @list.do_clone
       end
       it "should set its docs to be the docs from the cloned list" do
+        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
         @list.do_clone
         @list.docs.should == @sample_docs
       end
       it "should raise an error if the doc to be cloned doesn't exist" do
         @v1_list_hash['docs'][0]['id'] = 'zzzz'
+        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
         lambda {@list.do_clone}.should raise_error(ActiveRecord::RecordNotFound)
       end
       it "should replace all of its existing docs when cloning, not add to them" do
+        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
         blah = Factory(:doc, :id => 'blah')
         @list.docs << blah
         @list.do_clone
         @list.docs.should_not include blah
       end
       it "should set its comment to the comments of the cloned list" do
+        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
         @list.do_clone
         @list.comment.should == @v1_list_hash['comments']
       end
       it "should set its name to the name of the cloned list" do
+        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
         @list.do_clone
         @list.name.should == @v1_list_hash['name']
       end
+      specify "get_v1_list_and_find_docs should throw an exception if it can't parse the results of the fetch" do
+        url = 'https://kbhandbook.indiana.edu/worklist/12'
+        lambda {
+          @list.get_v1_list_and_find_docs(12)
+        }.should raise_error
+      end
+      specify "do_clone should catch errors from trying to retrieve a list" do
+        @list.stub(:get_v1_list_and_find_docs).and_raise
+        lambda {
+          @list.do_clone
+        }.should_not raise_error(RuntimeError)
+      end
+
+
     end
   end
 end

@@ -39,8 +39,8 @@ class List < ActiveRecord::Base
 
   never_show :show_docid
   
-  validates_presence_of :name, :creator
-  validates_numericality_of :wl1_import,
+  validates_presence_of :name
+  validates_numericality_of :wl1_import, :wl1_clone,
     :allow_nil => true
   
   belongs_to :audience
@@ -67,6 +67,11 @@ class List < ActiveRecord::Base
   before_save :populate, :if => :new_search?
   before_save  :do_import, :if => :new_import?
   before_save  :do_clone, :if => :new_clone?
+  before_validation :create_temp_name, :unless => :name
+
+  def create_temp_name
+    self.name = "whatevs, can't be bothered to name my list"
+  end
 
   def new_search?
     search && search_id_changed?
@@ -97,24 +102,31 @@ class List < ActiveRecord::Base
     save!
   end
 
-  def request_and_load_yaml(wl1_id)
-    response = fetch_url("#{WL1_URL}/#{wl1_id}/yaml")
-    YAML.load(response.body)
-  end
-
   def get_v1_list_and_find_docs(wl1_id)
-    wl1hash = request_and_load_yaml(wl1_id)
-    wl1hash['doc_objects'] = wl1hash["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
-    wl1hash
+    yaml = request_and_load_yaml(wl1_id)
+    raise "could not retrieve list #{wl1_id}. Result should be a hash, but received #{yaml}" unless yaml.instance_of? Hash
+    yaml['doc_objects'] = yaml["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
+    yaml
   end
 
+  
   def do_import
-    v1_list = get_v1_list_and_find_docs(wl1_import)
+    v1_list = {}
+    begin
+      v1_list = get_v1_list_and_find_docs(wl1_import)
+    rescue Exception => ex
+      return nil
+    end
     self.docs << v1_list['doc_objects']
   end
 
   def do_clone
-    v1_list = get_v1_list_and_find_docs(wl1_clone)
+    v1_list = {}
+    begin
+      v1_list = get_v1_list_and_find_docs(wl1_clone)
+    rescue RuntimeError => ex
+      return nil
+    end
     self.comment = v1_list['comments']
     self.name = v1_list['name']
     listed_docs = []

@@ -3,3 +3,4 @@ log/*
 nbproject/private/*
 tmp/*
 .project
+.DS_Store

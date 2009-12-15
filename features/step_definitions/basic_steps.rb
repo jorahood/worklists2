@@ -20,6 +20,10 @@ Given /^a search named "([^\"]*)"$/ do |name|
   Search.create!(:name => name)
 end
 
+Given /^a list named "([^\"]*)"$/ do |name|
+  Factory.create(:list, :name => name)
+end
+
 Given /^a doc with id ([a-z]{4})$/ do |docid|
   doc = Doc.new
   doc.id = docid
@@ -89,9 +93,9 @@ Given /^a boiler named "([^\"]*)"$/ do |name|
   Factory.create(:boiler, :name => name)
 end
 
-Then /^I view the boiler "([^\"]*)"$/ do |name|
-  visit boiler_path(name)
-end
+#Then /^I view the boiler "([^\"]*)"$/ do |name|
+#  visit boiler_path(name)
+#end
 
 When /^I view the search "([^\"]*)"$/ do |search_name|
   visit search_path(Search.find_by_name(search_name))
@@ -174,5 +178,10 @@ Then /^I should see "([^\"]*)" in the "([^\"]*)" cell of doc "([^\"]*)"$/ do |st
   within("//tr//span[.='#{docid}']/../../td[@class='#{cell}']") do |cell|
     cell.should contain string
   end
+end
 
+Then /^I should see that there are more than 100 lists$/ do
+  within('p.count') do |text|
+    text.should contain(/\d{3} lists/)
+  end
 end

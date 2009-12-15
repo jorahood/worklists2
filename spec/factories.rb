@@ -10,6 +10,10 @@ Factory.define :listed_doc do |listed_doc|
   
 end
 
-Factory.define :boiler do |listed_doc|
+Factory.define :boiler do |boiler|
+
+end
+
+Factory.define :list do |list|
 
 end
