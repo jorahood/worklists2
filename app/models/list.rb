@@ -108,7 +108,6 @@ class List < ActiveRecord::Base
     yaml['doc_objects'] = yaml["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
     yaml
   end
-
   
   def do_import
     v1_list = {}

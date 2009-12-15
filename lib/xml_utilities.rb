@@ -3,6 +3,8 @@ require 'net/http'
 module XmlUtilities
 
   WL1_URL = 'https://kbhandbook.indiana.edu/worklist'
+#   WL1_URL = "https://paprika.uits.indiana.edu/~jorahood/cgi-bin/doclists/cgi-bin/worklist.cgi"
+  WL1ListIndex = WL1_URL + "/listids"
   
   @@rest_login = {
     :username_production => 'kbdevtest',
@@ -39,12 +41,12 @@ module XmlUtilities
     end
     case response
     when Net::HTTPSuccess then response.body
-    else raise response.status
+    else response.error!
     end
   end
 
   def self.get_all_list_ids
-    text = fetch_url("#{WL1_URL}/listids")
+    text = fetch_url(WL1ListIndex)
     text.split("\n")
   end
 

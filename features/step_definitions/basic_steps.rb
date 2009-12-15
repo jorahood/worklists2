@@ -179,9 +179,3 @@ Then /^I should see "([^\"]*)" in the "([^\"]*)" cell of doc "([^\"]*)"$/ do |st
     cell.should contain string
   end
 end
-
-Then /^I should see that there are more than 100 lists$/ do
-  within('p.count') do |text|
-    text.should contain(/\d{3} lists/)
-  end
-end
