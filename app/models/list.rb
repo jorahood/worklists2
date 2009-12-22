@@ -103,17 +103,25 @@ class List < ActiveRecord::Base
   end
 
   def get_v1_list_and_find_docs(wl1_id)
+    yaml = nil
     yaml = request_and_load_yaml(wl1_id)
     raise "could not retrieve list #{wl1_id}. Result should be a hash, but received #{yaml}" unless yaml.instance_of? Hash
-    yaml['doc_objects'] = yaml["docs"].map {|doc_attrs| Doc.find(doc_attrs["id"]) }
+    yaml['doc_objects'] = []
+    yaml["docs"].each do |doc_attrs|
+      begin
+        doc = Doc.find(doc_attrs["id"])
+      rescue ActiveRecord::RecordNotFound => ex
+        next
+      end
+      yaml['doc_objects'] << doc
+    end
     yaml
   end
   
   def do_import
-    v1_list = {}
     begin
       v1_list = get_v1_list_and_find_docs(wl1_import)
-    rescue Exception => ex
+    rescue RuntimeError => ex # couldn't retrieve list because it wasn't a hash
       return nil
     end
     self.docs << v1_list['doc_objects']
@@ -123,7 +131,7 @@ class List < ActiveRecord::Base
     v1_list = {}
     begin
       v1_list = get_v1_list_and_find_docs(wl1_clone)
-    rescue RuntimeError => ex
+    rescue RuntimeError => ex # couldn't retrieve list because it wasn't a hash
       return nil
     end
     self.comment = v1_list['comments']

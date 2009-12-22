@@ -15,7 +15,7 @@ set :deploy_to, "/opt/apps/#{application}"
 # id_dsa.pub is for connecting from my development machine,
 # wl2_rsa.pub is for a connection initiated from my bell account
 # (private key is stored at bell:.ssh/wl2_rsa) tunnelling for port 1521 from bell to the server
-ssh_options[:keys] = %w(/Users/jorahood/.ssh/id_dsa /Users/jorahood/.ssh/wl2_rsa)
+ssh_options[:keys] = %W(/Users/jorahood/.ssh/id_dsa ./config/wl2_rsa)
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:

@@ -20,7 +20,7 @@ describe List do
     list.name.should_not be_blank
   end
   it "should validate presence of name" do
-  List.before_validation.clear # clear the callbacks so the temp name isn't created
+    List.before_validation.clear # clear the callbacks so the temp name isn't created
     lambda {
       list = List.create!
     }.should raise_error("Validation failed: Name can't be blank")
@@ -222,9 +222,9 @@ describe List do
   
   context "wl1" do
     before do
-      @v1_list_hash = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
+      @sample_list = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
       @sample_docs = []
-      @v1_list_hash["docs"].each do |attrs|
+      @sample_list["docs"].each do |attrs|
         @sample_docs << Factory.create(:doc, :id => attrs['id'])
       end
     end
@@ -249,7 +249,7 @@ describe List do
         @list.save!
       end
       it "should try to find the docs in the yaml file" do
-        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         Doc.should_receive(:find).with('awfj').and_return(Factory :doc)
         Doc.should_receive(:find).with('apev').and_return(Factory :doc)
         Doc.should_receive(:find).with('arxq').and_return(Factory :doc)
@@ -257,26 +257,37 @@ describe List do
         @list.do_import
       end
       it "should request and load a yaml serialization of the v1 worklist when importing" do
-        @list.should_receive(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.should_receive(:request_and_load_yaml).and_return(@sample_list)
         @list.do_import
       end
       it "should set its docs to be the docs from the imported list" do
-        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_import
         @list.docs.should == @sample_docs
       end
       it "should add to its existing docs when importing, not replace them" do
-        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         blah = Factory(:doc, :id => 'blah')
         @list.docs << blah
         @list.do_import
         @list.docs.sort_by{|doc|doc.id}.should == @sample_docs.unshift(blah).sort_by{|doc|doc.id}
       end
-      specify "do_import should catch errors from trying to retrieve a list" do
+      it "should not raise a RecordNotFound error if a doc to be imported doesn't exist" do
+        @sample_list['docs'][0]['id'] = 'zzzz'
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
+        lambda {@list.do_import}.should_not raise_error(ActiveRecord::RecordNotFound)
+      end
+      specify "should catch errors generated from trying to retrieve a list" do
         @list.stub(:get_v1_list_and_find_docs).and_raise
         lambda {
           @list.do_import
-        }.should_not raise_error
+        }.should_not raise_error RuntimeError
+      end
+      it "should skip docids that don't exist" do
+        @sample_list['docs'] << {'id' => 'zzzz'}
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
+        @list.do_import
+        @list.docs.should == @sample_docs
       end
     end    
  
@@ -300,35 +311,42 @@ describe List do
         @list.save!
       end
       it "should request and load a yaml serialization of the v1 worklist when cloning" do
-        @list.should_receive(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.should_receive(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
       end
       it "should set its docs to be the docs from the cloned list" do
-        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
         @list.docs.should == @sample_docs
       end
-      it "should raise an error if the doc to be cloned doesn't exist" do
-        @v1_list_hash['docs'][0]['id'] = 'zzzz'
-        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
-        lambda {@list.do_clone}.should raise_error(ActiveRecord::RecordNotFound)
+      it "should not raise an error if a doc to be cloned doesn't exist" do
+        @sample_list['docs'][0]['id'] = 'zzzz'
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
+        lambda {@list.do_clone}.should_not raise_error(ActiveRecord::RecordNotFound)
+      end
+      it "should skip docids that don't exist" do
+        @sample_list_with_nonexistent_doc = @sample_list.clone
+        @sample_list_with_nonexistent_doc['docs'] << {'id' => 'zzzz'}
+        @list.stub(:request_and_load_yaml).and_return(@sample_list_with_nonexistent_doc)
+        @list.do_clone
+        @list.docs.should == @sample_docs
       end
       it "should replace all of its existing docs when cloning, not add to them" do
-        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         blah = Factory(:doc, :id => 'blah')
         @list.docs << blah
         @list.do_clone
         @list.docs.should_not include blah
       end
       it "should set its comment to the comments of the cloned list" do
-        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
-        @list.comment.should == @v1_list_hash['comments']
+        @list.comment.should == @sample_list['comments']
       end
       it "should set its name to the name of the cloned list" do
-        @list.stub(:request_and_load_yaml).and_return(@v1_list_hash)
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
-        @list.name.should == @v1_list_hash['name']
+        @list.name.should == @sample_list['name']
       end
       specify "get_v1_list_and_find_docs should throw an exception if it can't parse the results of the fetch" do
         url = 'https://kbhandbook.indiana.edu/worklist/12'
