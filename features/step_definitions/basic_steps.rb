@@ -173,9 +173,9 @@ When /^I check the following boxes:$/ do |table|
   end
 end
 
-Then /^I should see "([^\"]*)" in the "([^\"]*)" cell of doc "([^\"]*)"$/ do |string, cell, docid|
+Then /^I should see "([^\"]*)" in the "([^\"]*)" cell of doc "([^\"]*)"$/ do |string, cell_class, docid|
   # select the <td> element in the same <tr> as a span with the docid in it. Ugly xpath.
-  within("//tr//span[.='#{docid}']/../../td[@class='#{cell}']") do |cell|
+  within("//tr//span[.='#{docid}']/../../td[@class='#{cell_class}']") do |cell|
     cell.should contain string
   end
 end
