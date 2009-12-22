@@ -325,9 +325,8 @@ describe List do
         lambda {@list.do_clone}.should_not raise_error(ActiveRecord::RecordNotFound)
       end
       it "should skip docids that don't exist" do
-        @sample_list_with_nonexistent_doc = @sample_list.clone
-        @sample_list_with_nonexistent_doc['docs'] << {'id' => 'zzzz'}
-        @list.stub(:request_and_load_yaml).and_return(@sample_list_with_nonexistent_doc)
+        @sample_list['docs'] << {'id' => 'zzzz'}
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
         @list.docs.should == @sample_docs
       end
