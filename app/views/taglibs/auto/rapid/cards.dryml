@@ -27,7 +27,7 @@
 </def>
 
 <def tag="card" for="BoilerUsage">
-  <card class="boiler-usage" param="default" merge>
+  <card class="boiler usage" param="default" merge>
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>
@@ -48,7 +48,7 @@
 </def>
 
 <def tag="card" for="DocidSearch">
-  <card class="docid-search" param="default" merge>
+  <card class="docid search" param="default" merge>
     <header: param>
       <h4 param="heading"><name/></h4>
     </header:>
@@ -69,17 +69,15 @@
 </def>
 
 <def tag="card" for="DomainSearch">
-  <card class="domain-search" param="default" merge>
-    <body: param>
-      <ht key="domains.collection.count" count="&this.domains.size">
-         <count:domains param/>
-      </ht>
-    </body:>
+  <card class="domain search" param="default" merge>
+    <header: param>
+      <h4 param="heading"><name/></h4>
+    </header:>
   </card>
 </def>
 
 <def tag="card" for="DomainedDoc">
-  <card class="domained-doc" param="default" merge>
+  <card class="domained doc" param="default" merge>
     <header: param>
       <h4 param="heading"><name/></h4>
     </header:>
@@ -116,7 +114,7 @@
 </def>
 
 <def tag="card" for="KbaUsage">
-  <card class="kba-usage" param="default" merge>
+  <card class="kba usage" param="default" merge>
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>
@@ -151,15 +149,12 @@
     </header:>
     <body: param>
       <a:creator param="creator-link"/>
-      <ht key="listed_docs.collection.count" count="&this.listed_docs.size">
-         <count:listed_docs param/>
-      </ht>
     </body:>
   </card>
 </def>
 
 <def tag="card" for="ListedDoc">
-  <card class="listed-doc" param="default" merge>
+  <card class="listed doc" param="default" merge>
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>

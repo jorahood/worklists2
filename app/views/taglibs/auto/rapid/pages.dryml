@@ -5,11 +5,11 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
-    <nav-item with="&Audience">Audiences</nav-item>
-    <nav-item with="&Boiler">Boilers</nav-item>
-    <nav-item with="&BoilerUsage">Boiler Usages</nav-item>
-    <nav-item with="&Doc">Docs</nav-item>
-    <nav-item with="&Domain">Domains</nav-item>
+    <nav-item with="&Audience"><ht key="audiences.nav_item">Audiences</ht></nav-item>
+    <nav-item with="&Boiler"><ht key="boilers.nav_item">Boilers</ht></nav-item>
+    <nav-item with="&BoilerUsage"><ht key="boiler_usages.nav_item">Boiler Usages</ht></nav-item>
+    <nav-item with="&Doc"><ht key="docs.nav_item">Docs</ht></nav-item>
+    <nav-item with="&Domain"><ht key="domains.nav_item">Domains</ht></nav-item>
   </navigation>
 </def>
 
@@ -149,7 +149,7 @@
 
 <def tag="index-page" for="BoilerUsage">
   <page merge title="#{ht 'boiler_usages.index.title', :default=>['Boiler Usages'] }">
-    <body: class="index-page boiler-usage" param/>
+    <body: class="index-page boiler usage" param/>
 
     <content: param>
       <header param="content-header">
@@ -186,7 +186,7 @@
 
 <def tag="new-page" for="BoilerUsage">
   <page merge title="#{ht 'boiler_usages.new.title', :default=>['New Boiler Usage'] }">
-    <body: class="new-page boiler-usage" param/>
+    <body: class="new-page boiler usage" param/>
 
     <content: param>
       <section param="content-header">
@@ -210,7 +210,7 @@
 <def tag="show-page" for="BoilerUsage">
   <page merge title="#{ht 'boiler_usages.show.title', :default=>['Boiler Usage'] }">
 
-    <body: class="show-page boiler-usage" param/>
+    <body: class="show-page boiler usage" param/>
 
     <content: param>
           <header param="content-header">
@@ -241,7 +241,7 @@
 <def tag="edit-page" for="BoilerUsage">
   <page merge title="#{ht 'boiler_usages.edit.title', :default=>['Edit Boiler Usage'] }">
 
-    <body: class="edit-page boiler-usage" param/>
+    <body: class="edit-page boiler usage" param/>
 
     <content:>
       <section param="content-header">
@@ -465,6 +465,7 @@
       <section-group>
         <section param="main-content">
           <header param="content-header">
+            <a:status_assoc param="parent-link">&laquo; <ht key="docs.actions.back" to="status_assoc"><name/></ht></a:status_assoc>
             <h2 param="heading">
               <ht key="docs.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>
@@ -481,7 +482,7 @@
           </header>
 
           <section param="content-body" with-flash-messages>
-            <field-list fields="birthdate, modifieddate, approveddate, importance, visibility, volatility, status, author, owner, author_assoc, importance_assoc, owner_assoc, status_assoc, visibility_assoc, volatility_assoc" param/>
+            <field-list fields="birthdate, modifieddate, approveddate, importance, visibility, volatility, status, author, owner, author_assoc, importance_assoc, owner_assoc, visibility_assoc, volatility_assoc" param/>
             <section param="collection-section">
               <h3 param="collection-heading">
                 <ht key="docs.collection.heading.other" >
@@ -1120,7 +1121,7 @@
 
 <def tag="index-page" for="KbaUsage">
   <page merge title="#{ht 'kba_usages.index.title', :default=>['Kba Usages'] }">
-    <body: class="index-page kba-usage" param/>
+    <body: class="index-page kba usage" param/>
 
     <content: param>
       <header param="content-header">
@@ -1157,7 +1158,7 @@
 
 <def tag="new-page" for="KbaUsage">
   <page merge title="#{ht 'kba_usages.new.title', :default=>['New Kba Usage'] }">
-    <body: class="new-page kba-usage" param/>
+    <body: class="new-page kba usage" param/>
 
     <content: param>
       <section param="content-header">
@@ -1181,7 +1182,7 @@
 <def tag="show-page" for="KbaUsage">
   <page merge title="#{ht 'kba_usages.show.title', :default=>['Kba Usage'] }">
 
-    <body: class="show-page kba-usage" param/>
+    <body: class="show-page kba usage" param/>
 
     <content: param>
           <header param="content-header">
@@ -1212,7 +1213,7 @@
 <def tag="edit-page" for="KbaUsage">
   <page merge title="#{ht 'kba_usages.edit.title', :default=>['Edit Kba Usage'] }">
 
-    <body: class="edit-page kba-usage" param/>
+    <body: class="edit-page kba usage" param/>
 
     <content:>
       <section param="content-header">
@@ -1392,7 +1393,7 @@
 
 <def tag="index-page" for="ListedDoc">
   <page merge title="#{ht 'listed_docs.index.title', :default=>['Listed Docs'] }">
-    <body: class="index-page listed-doc" param/>
+    <body: class="index-page listed doc" param/>
 
     <content: param>
       <header param="content-header">
@@ -1429,7 +1430,7 @@
 
 <def tag="new-page" for="ListedDoc">
   <page merge title="#{ht 'listed_docs.new.title', :default=>['New Listed Doc'] }">
-    <body: class="new-page listed-doc" param/>
+    <body: class="new-page listed doc" param/>
 
     <content: param>
       <section param="content-header">
@@ -1453,11 +1454,10 @@
 <def tag="show-page" for="ListedDoc">
   <page merge title="#{ht 'listed_docs.show.title', :default=>['Listed Doc'] }">
 
-    <body: class="show-page listed-doc" param/>
+    <body: class="show-page listed doc" param/>
 
     <content: param>
           <header param="content-header">
-            <a:list param="parent-link">&laquo; <ht key="listed_docs.actions.back" to="list"><name/></ht></a:list>
             <h2 param="heading">
               <ht key="listed_docs.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>
@@ -1474,7 +1474,7 @@
           </header>
 
           <section param="content-body">
-            <field-list fields="workstate, doc" param/>
+            <field-list fields="workstate, doc, list" param/>
           </section>
     </content:>
 
@@ -1485,7 +1485,7 @@
 <def tag="edit-page" for="ListedDoc">
   <page merge title="#{ht 'listed_docs.edit.title', :default=>['Edit Listed Doc'] }">
 
-    <body: class="edit-page listed-doc" param/>
+    <body: class="edit-page listed doc" param/>
 
     <content:>
       <section param="content-header">
@@ -1597,15 +1597,6 @@
 
           <section param="content-body">
             <field-list fields="comment, wl1_import, wl1_clone, audience, search" param/>
-            <section param="collection-section">
-              <h3 param="collection-heading">
-                <ht key="lists.collection.heading.other" >
-                  Listed Docs
-                </ht>
-              </h3>
-
-              <collection:listed_docs param/>
-            </section>
           </section>
     </content:>
 
@@ -2321,6 +2312,7 @@
 
     <content: param>
           <header param="content-header">
+            <a:doc param="parent-link">&laquo; <ht key="titles.actions.back" to="doc"><name/></ht></a:doc>
             <h2 param="heading">
               <ht key="titles.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>
@@ -2337,7 +2329,7 @@
           </header>
 
           <section param="content-body">
-            <field-list fields="audience, doc" param/>
+            <field-list fields="audience" param/>
           </section>
     </content:>
 
