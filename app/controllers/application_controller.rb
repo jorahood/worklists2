@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def clean_casticket_param
-    if request.query_parameters.keys.include?('casticket')
+    if params.keys.include?('casticket')
       params_minus_casticket = params.delete_if{|param,value| param == 'casticket'}
       redirect_to params_minus_casticket
     end
