@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
 
   before_filter CASClient::Frameworks::Rails::Filter, :unless => :i_am_bdding_or_i_am_paprika
   before_filter :set_current_user_from_cas
+  before_filter :clean_casticket_param
 
   protected
 
@@ -23,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def i_am_paprika
-      request.env['REMOTE_ADDR'] == '129.79.213.151'
+    request.env['REMOTE_ADDR'] == '129.79.213.151'
   end
 
   def i_am_bdding_or_i_am_paprika
@@ -32,6 +33,13 @@ class ApplicationController < ActionController::Base
 
   def get_cas_username
     session[:cas_user]
+  end
+
+  def clean_casticket_param
+    if request.query_parameters.keys.include?('casticket')
+      params_minus_casticket = params.delete_if{|param,value| param == 'casticket'}
+      redirect_to params_minus_casticket
+    end
   end
 
   def set_current_user_from_cas
