@@ -1458,6 +1458,7 @@
 
     <content: param>
           <header param="content-header">
+            <a:list param="parent-link">&laquo; <ht key="listed_docs.actions.back" to="list"><name/></ht></a:list>
             <h2 param="heading">
               <ht key="listed_docs.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>
@@ -1474,7 +1475,7 @@
           </header>
 
           <section param="content-body">
-            <field-list fields="workstate, doc, list" param/>
+            <field-list fields="workstate, doc" param/>
           </section>
     </content:>
 
@@ -1597,6 +1598,15 @@
 
           <section param="content-body">
             <field-list fields="comment, wl1_import, wl1_clone, audience, search" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">
+                <ht key="lists.collection.heading.other" >
+                  Listed Docs
+                </ht>
+              </h3>
+
+              <collection:listed_docs param/>
+            </section>
           </section>
     </content:>
 

@@ -149,6 +149,9 @@
     </header:>
     <body: param>
       <a:creator param="creator-link"/>
+      <ht key="listed_docs.collection.count" count="&this.listed_docs.size">
+         <count:listed_docs param/>
+      </ht>
     </body:>
   </card>
 </def>
