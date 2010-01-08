@@ -67,7 +67,7 @@ class List < ActiveRecord::Base
   before_save :populate, :if => :new_search?
   before_save  :do_import, :if => :new_import?
   before_save  :do_clone, :if => :new_clone?
-  before_validation :create_temp_name, :unless => :name
+  before_validation_on_create :create_temp_name, :if => "name.blank?"
 
   def create_temp_name
     self.name = "whatevs, can't be bothered to name my list"

@@ -3,6 +3,13 @@ Feature: Worklist
   As a KB editor
   I want to create a list of documents
 
+  Scenario: Worklists will automatically name themselves
+  Given I am logged in as Bob
+  And I am on the list creation page
+  When I press "Create List"
+  Then I should not see "Name can't be blank"
+  And I should see element ".list-name"
+
   Scenario: It displays the total number of listed docs
   Given a kbuser named user_a
   And a list named "Docs" created by user_a
@@ -12,10 +19,6 @@ Feature: Worklist
   And doc bbbb belongs to list "Docs"
   When I view the list "Docs"
   Then I should see /^\s*2 Listed Docs\s*$/ within ".collection-heading"
-
-  Scenario: I can log in
-  Given I am logged in as Bob
-  Then I should see "Logged in as Bob"
 
   Scenario: It displays the search it belongs to
   Given I am logged in as Bob
@@ -316,32 +319,3 @@ Feature: Worklist
   And I should see "apev" within ".collection-section"
   And I should see "avck" within ".collection-section"
   And I should see "awfj" within ".collection-section"
-
-  Scenario: It has a labelled input for a Worklists1 id to clone
-  Given I am logged in as Bob
-  And I am on the list creation page
-  Then I should see element "input.list-wl1-clone"
-  And I should see "Clone v1 Worklist" within "table.field-list"
-
-  Scenario: It clones the comments, docids, categories (ie., tags), workstates, and notes of the v1 Worklist id entered
-  Given I am logged in as Bob
-  And I am on the list creation page
-  And a doc with id arxq
-  And a doc with id apev
-  And a doc with id avck
-  And a doc with id awfj
-  When I fill in "list_name" with "test"
-  When I fill in "list_wl1_clone" with "11777"
-  And I press "Create List"
-  Then I should see "arxq" within ".collection-section"
-  And I should see "apev" within ".collection-section"
-  And I should see "avck" within ".collection-section"
-  And I should see "awfj" within ".collection-section"
-  And I should see "test comments for 11777" within ".list-comment"
-  And I should see "testcategory4" 
-  And I should see "test editor note for apev" 
-  And I should see "test owner note for arxq" 
-  And I should see "pending" 
-  And I should see "completed" 
-  And I should see "untouched"
-

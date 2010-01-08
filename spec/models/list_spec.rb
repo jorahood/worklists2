@@ -15,9 +15,17 @@ describe List do
   it { should respond_to :show_tags }
   it { should respond_to :wl1_import }
   it { should respond_to :wl1_clone }
-  it "should give unnamed lists a generic name" do
+  it "should give unnamed lists a generic name on create" do
     list = List.create!
     list.name.should_not be_blank
+  end
+  it "should not try to give an existing list a new name if name is deleted" do
+    list = List.create!
+    list.name = nil
+    pending {
+      lambda {
+        list.save!
+      }.should raise_error("Validation failed: Name can't be blank")}
   end
   it "should validate presence of name" do
     List.before_validation.clear # clear the callbacks so the temp name isn't created
