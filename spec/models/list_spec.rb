@@ -19,22 +19,35 @@ describe List do
     list = List.create!
     list.name.should_not be_blank
   end
-  it "should not try to give an existing list a new name if name is deleted" do
+  it "should not try to give an existing list a new name when name is deleted" do
     list = List.create!
     list.name = nil
-    pending {
-      lambda {
-        list.save!
-      }.should raise_error("Validation failed: Name can't be blank")}
+    lambda {
+      list.save!
+    }.should raise_error("Validation failed: Name can't be blank")
   end
   it "should validate presence of name" do
-    List.before_validation.clear # clear the callbacks so the temp name isn't created
+    # this is a hack. The create_temp_name only fires on
+    # before_validation_on_create, so I will test that name is validated when
+    # not creating in order to not fire create_temp_name. This technique is my
+    # solution for the fact that  List.before_validation_on_create.clear
+    # interferes with later tests that depend on create_temp_name to create the
+    # name and I don't know how to restore the callbacks after calling clear
+
+    list = List.create!(:name => 'blah')
+    list.name = nil
     lambda {
-      list = List.create!
+      list.save!
     }.should raise_error("Validation failed: Name can't be blank")
   end
   it { should validate_numericality_of :wl1_import }
   it { should validate_numericality_of :wl1_clone }
+  it "should validate uniqueness of :wl1_clone when not nil" do
+    list =  List.create!(:wl1_clone => 1)
+    lambda {
+      List.create!(:wl1_clone => 1)
+    }.should raise_error(/That list has already been cloned/)
+  end
   it { should belong_to :creator }
   specify "creator should be a Kbuser" do
     @list.creator.class.should == Kbuser
@@ -337,6 +350,7 @@ describe List do
         @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
         @list.docs.should == @sample_docs
+        @list.listed_docs.count.should == @sample_docs.count
       end
       it "should replace all of its existing docs when cloning, not add to them" do
         @list.stub(:request_and_load_yaml).and_return(@sample_list)
@@ -367,8 +381,6 @@ describe List do
           @list.do_clone
         }.should_not raise_error(RuntimeError)
       end
-
-
     end
   end
 end

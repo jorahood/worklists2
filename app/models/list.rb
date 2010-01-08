@@ -42,7 +42,7 @@ class List < ActiveRecord::Base
   validates_presence_of :name
   validates_numericality_of :wl1_import, :wl1_clone,
     :allow_nil => true
-  
+  validates_uniqueness_of :wl1_clone, :allow_blank => true, :message => "That list has already been cloned"
   belongs_to :audience
   belongs_to :search
   belongs_to :creator,
@@ -107,6 +107,10 @@ class List < ActiveRecord::Base
     yaml = request_and_load_yaml(wl1_id)
     raise "could not retrieve list #{wl1_id}. Result should be a hash, but received #{yaml}" unless yaml.instance_of? Hash
     yaml['doc_objects'] = []
+    #delete docs that don't exist in the db
+    yaml['docs'].delete_if do |doc_attrs|
+      !Doc.exists?(doc_attrs['id'])
+    end
     yaml["docs"].each do |doc_attrs|
       begin
         doc = Doc.find(doc_attrs["id"])

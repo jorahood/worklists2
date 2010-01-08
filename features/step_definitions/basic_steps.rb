@@ -93,6 +93,12 @@ Given /^a boiler named "([^\"]*)"$/ do |name|
   Factory.create(:boiler, :name => name)
 end
 
+Given /^list "([^\"]*)" is a clone of (\d+)$/ do |name, wl1_id|
+  list = List.find_by_name(name)
+  list.wl1_clone = wl1_id
+  list.save!
+end
+
 #Then /^I view the boiler "([^\"]*)"$/ do |name|
 #  visit boiler_path(name)
 #end
@@ -101,8 +107,8 @@ When /^I view the search "([^\"]*)"$/ do |search_name|
   visit search_path(Search.find_by_name(search_name))
 end
 
-When /^I remove the search assigned to list "([^\"]*)"$/ do |list_name|
-  list = List.find_by_name(list_name)
+When /^I remove the search assigned to list "([^\"]*)"$/ do |name|
+  list = List.find_by_name(name)
   list.search = nil
   list.save!
 end

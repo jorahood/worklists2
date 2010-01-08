@@ -3,6 +3,10 @@ Feature: Authentication
   As an IU user
   I want to use CAS for authentication
 
+  Scenario: I can log in
+  Given I am logged in as Bob
+  Then I should see "Logged in as Bob"
+
   @production_rails_env
   Scenario: All users have to authenticate through CAS
   Given Worklists2 is in a production environment
