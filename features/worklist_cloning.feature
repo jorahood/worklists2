@@ -39,4 +39,7 @@ Feature: Worklist cloning
   And I fill in "list_wl1_clone" with "11777"
   And I press "Create List"
   Then I should not see "The list was created successfully"
-  And I should see "A clone of list 11777 already exists"
+  And I should see "That list has already been cloned"
+
+  Scenario: Cloning all lists at once
+  When I run blah

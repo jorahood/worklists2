@@ -3,7 +3,7 @@ require 'net/http'
 module XmlUtilities
 
   WL1_URL = 'https://kbhandbook.indiana.edu/worklist'
-#   WL1_URL = "https://paprika.uits.indiana.edu/~jorahood/cgi-bin/doclists/cgi-bin/worklist.cgi"
+  #   WL1_URL = "https://paprika.uits.indiana.edu/~jorahood/cgi-bin/doclists/cgi-bin/worklist.cgi"
   WL1ListIndex = WL1_URL + "/listids"
   
   @@rest_login = {
@@ -20,7 +20,12 @@ module XmlUtilities
     lists = get_all_list_ids
     if !lists.empty?
       lists.each do |list_id|
-        List.create!(:wl1_clone => list_id)
+        list = List.find_by_wl1_clone(list_id)
+        if list.nil?
+          list = List.create!(:wl1_clone => list_id)
+        else
+          list.save!
+        end
       end
     end
   end

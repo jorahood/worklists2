@@ -66,7 +66,7 @@ class List < ActiveRecord::Base
 
   before_save :populate, :if => :new_search?
   before_save  :do_import, :if => :new_import?
-  before_save  :do_clone, :if => :new_clone?
+  before_save  :do_clone, :if => :wl1_clone
   before_validation_on_create :create_temp_name, :if => "name.blank?"
 
   def create_temp_name
@@ -79,10 +79,6 @@ class List < ActiveRecord::Base
 
   def new_import?
     wl1_import && wl1_import_changed?
-  end
-
-  def new_clone?
-    wl1_clone && wl1_clone_changed?
   end
 
   def selected_columns

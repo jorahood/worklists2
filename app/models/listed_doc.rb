@@ -30,10 +30,10 @@ class ListedDoc < ActiveRecord::Base
 
   def clone_notes(v1_listed_doc)
     if ownernote_text = v1_listed_doc['notes']
-      self.notes << Note.new(:text => ownernote_text, :creator => Kbuser.find_by_username('kb'))
+      self.notes[0] = Note.new(:text => ownernote_text, :creator => Kbuser.find_by_username('kb'))
     end
     if editornote_text = v1_listed_doc['editornotes']
-      self.notes << Note.new(:text => editornote_text,  :creator => Kbuser.find_by_username('kb'))
+      self.notes[1] = Note.new(:text => editornote_text,  :creator => Kbuser.find_by_username('kb'))
     end
   end
 

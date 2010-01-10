@@ -117,6 +117,14 @@ describe ListedDoc do
         subject.clone_notes(@v1_arxq)
         subject.notes[0].creator.should == kb
       end
+      it "should only have two notes no matter how many times it's cloned" do
+        subject.clone_notes(@v1_apev)
+        subject.clone_notes(@v1_apev)
+        subject.notes.length.should == 2
+      end
+      it "should update any existing notes with new text" do
+
+      end
     end
 
     context "tags" do

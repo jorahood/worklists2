@@ -315,14 +315,15 @@ describe List do
     context "cloning" do
       before do
         @list.wl1_clone = 11777
+        @list.stub(:request_and_load_yaml).and_return(@sample_list)
       end
       it "should do_clone when wl1_clone attr changed" do
         @list.should_receive(:do_clone)
         @list.save!
       end
-      it "should not do_clone when wl1_clone is not changed" do
+      it "should do_clone when wl1_clone is not changed" do
         @list.save!
-        @list.should_not_receive(:do_clone)
+        @list.should_receive(:do_clone)
         @list.save!
       end
       it "should not do_clone when wl1_clone is removed" do
@@ -336,47 +337,47 @@ describe List do
         @list.do_clone
       end
       it "should set its docs to be the docs from the cloned list" do
-        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
         @list.docs.should == @sample_docs
       end
       it "should not raise an error if a doc to be cloned doesn't exist" do
         @sample_list['docs'][0]['id'] = 'zzzz'
-        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         lambda {@list.do_clone}.should_not raise_error(ActiveRecord::RecordNotFound)
       end
       it "should skip docids that don't exist" do
         @sample_list['docs'] << {'id' => 'zzzz'}
-        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
         @list.docs.should == @sample_docs
         @list.listed_docs.count.should == @sample_docs.count
       end
-      it "should replace all of its existing docs when cloning, not add to them" do
-        @list.stub(:request_and_load_yaml).and_return(@sample_list)
+      it "should replace all non-cloned docs when cloning, not add to them" do
         blah = Factory(:doc, :id => 'blah')
         @list.docs << blah
         @list.do_clone
         @list.docs.should_not include blah
       end
+      it "should reuse existing listed_docs for a given list and doc" do
+        @list.do_clone
+        original_listed_docs = @list.listed_docs
+        @list.do_clone
+        @list.listed_docs[0].should == original_listed_docs[0]
+      end
       it "should set its comment to the comments of the cloned list" do
-        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
         @list.comment.should == @sample_list['comments']
       end
       it "should set its name to the name of the cloned list" do
-        @list.stub(:request_and_load_yaml).and_return(@sample_list)
         @list.do_clone
         @list.name.should == @sample_list['name']
       end
       specify "get_v1_list_and_find_docs should throw an exception if it can't parse the results of the fetch" do
-        url = 'https://kbhandbook.indiana.edu/worklist/12'
+        @list.stub(:request_and_load_yaml).and_return("Blah, I'm a bogus page!")
         lambda {
           @list.get_v1_list_and_find_docs(12)
         }.should raise_error
       end
       specify "do_clone should catch errors from trying to retrieve a list" do
-        @list.stub(:get_v1_list_and_find_docs).and_raise
+        @list.stub(:request_and_load_yaml).and_raise
         lambda {
           @list.do_clone
         }.should_not raise_error(RuntimeError)
