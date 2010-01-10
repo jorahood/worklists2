@@ -356,12 +356,6 @@ describe List do
         @list.do_clone
         @list.docs.should_not include blah
       end
-      it "should reuse existing listed_docs for a given list and doc" do
-        @list.do_clone
-        original_listed_docs = @list.listed_docs
-        @list.do_clone
-        @list.listed_docs[0].should == original_listed_docs[0]
-      end
       it "should set its comment to the comments of the cloned list" do
         @list.do_clone
         @list.comment.should == @sample_list['comments']

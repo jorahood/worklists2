@@ -9,7 +9,7 @@ class ListedDoc < ActiveRecord::Base
 
   belongs_to :doc
   belongs_to :list
-  has_many :notes
+  has_many :notes, :dependent => :destroy
   has_many :taggings
   has_many :tags,
     :through => :taggings
@@ -30,10 +30,10 @@ class ListedDoc < ActiveRecord::Base
 
   def clone_notes(v1_listed_doc)
     if ownernote_text = v1_listed_doc['notes']
-      self.notes[0] = Note.new(:text => ownernote_text, :creator => Kbuser.find_by_username('kb'))
+      self.notes << Note.new(:text => ownernote_text, :creator => Kbuser.find_by_username('kb'))
     end
     if editornote_text = v1_listed_doc['editornotes']
-      self.notes[1] = Note.new(:text => editornote_text,  :creator => Kbuser.find_by_username('kb'))
+      self.notes << Note.new(:text => editornote_text,  :creator => Kbuser.find_by_username('kb'))
     end
   end
 
@@ -63,7 +63,7 @@ class ListedDoc < ActiveRecord::Base
   end
 
   def destroy_permitted?
-    acting_user.administrator? || list.creator_is?(acting_user)
+    acting_user.administrator? 
   end
 
   def view_permitted?(field)

@@ -40,6 +40,3 @@ Feature: Worklist cloning
   And I press "Create List"
   Then I should not see "The list was created successfully"
   And I should see "That list has already been cloned"
-
-  Scenario: Cloning all lists at once
-  When I run blah

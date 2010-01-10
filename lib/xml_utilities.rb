@@ -16,16 +16,12 @@ module XmlUtilities
   }.with_indifferent_access #use symbols or strings as keys to retrieve values
 
   def self.clone_all_v1_lists
+    List.destroy_all("wl1_clone IS NOT NULL")
     lists = []
     lists = get_all_list_ids
     if !lists.empty?
       lists.each do |list_id|
-        list = List.find_by_wl1_clone(list_id)
-        if list.nil?
-          list = List.create!(:wl1_clone => list_id)
-        else
-          list.save!
-        end
+        List.create!(:wl1_clone => list_id)
       end
     end
   end

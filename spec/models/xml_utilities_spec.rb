@@ -44,27 +44,14 @@ describe XmlUtilities do
       @lists = XmlUtilities.get_all_list_ids
       @lists.should == @list_ids_array
     end
-    it "should create new lists if no cloned lists exist and set #wl1_clone for each v1 list id it retrieves" do
+    it "should destroy all existing cloned lists beforehand so I don't have to worry about finding and deleting old notes" do
+      pending
+    end
+    it "should create new lists and set #wl1_clone for each v1 list id it retrieves" do
       XmlUtilities.stub(:fetch_url).and_return(@list_ids_string)
       List.should_receive(:new).with(:wl1_clone=>'1').and_return(@list)
       List.should_receive(:new).with(:wl1_clone=>'2').and_return(@list2)
       List.should_receive(:new).with(:wl1_clone=>'3').and_return(@list3)
-      XmlUtilities.clone_all_v1_lists
-    end
-    it "should find an existing clone of a list rather than creating a new one" do
-      XmlUtilities.stub(:fetch_url).and_return(@list_ids_string)
-      List.should_receive(:find).with(:first, {:conditions=>{:wl1_clone => "1"}}).and_return(@list)
-      List.should_receive(:find).with(:first, {:conditions=>{:wl1_clone => "2"}}).and_return(@list2)
-      List.should_receive(:find).with(:first, {:conditions=>{:wl1_clone => "3"}}).and_return(@list3)
-      List.should_not_receive(:new)
-      XmlUtilities.clone_all_v1_lists
-    end
-    it "should save each existing list to trigger do_clone" do
-      XmlUtilities.stub(:fetch_url).and_return(@list_ids_string)
-      List.stub(:find).with(:first, {:conditions=>{:wl1_clone => "1"}}).and_return(@list)
-      List.stub(:find).with(:first, {:conditions=>{:wl1_clone => "2"}}).and_return(@list2)
-      List.stub(:find).with(:first, {:conditions=>{:wl1_clone => "3"}}).and_return(@list3)
-      @list.should_receive(:save!)
       XmlUtilities.clone_all_v1_lists
     end
     it "should save each new list to trigger do_clone" do

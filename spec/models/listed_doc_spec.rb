@@ -72,7 +72,7 @@ describe ListedDoc do
     #
     it { should be_updatable_by @admin }
     it { should be_updatable_by @list_creator }
-    it { should be_destroyable_by @list_creator }
+    it { should_not be_destroyable_by @list_creator }
   end
 
   context "cloning" do
@@ -116,14 +116,6 @@ describe ListedDoc do
         kb = Factory(:kbuser, :username => 'kb')
         subject.clone_notes(@v1_arxq)
         subject.notes[0].creator.should == kb
-      end
-      it "should only have two notes no matter how many times it's cloned" do
-        subject.clone_notes(@v1_apev)
-        subject.clone_notes(@v1_apev)
-        subject.notes.length.should == 2
-      end
-      it "should update any existing notes with new text" do
-
       end
     end
 
