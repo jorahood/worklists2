@@ -236,6 +236,14 @@
   </card>
 </def>
 
+<def tag="card" for="V1ListedDoc">
+  <card class="v1 listed doc" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
 <def tag="card" for="Visibility">
   <card class="visibility" param="default" merge>
     <header: param>
