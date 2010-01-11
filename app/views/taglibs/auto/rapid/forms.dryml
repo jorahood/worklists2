@@ -216,6 +216,18 @@
 
 
 
+<def tag="form" for="V1List">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, comments, kbss, parameters, total, untouched, pending, completed, deleted, inactive, owner, notify, createddate, modifieddate" param/>
+    <div param="actions">
+      <submit label="#{ht 'v1_lists.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
 <def tag="form" for="Visibility">
   <form merge param="default">
     <error-messages param/>

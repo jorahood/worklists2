@@ -2374,6 +2374,126 @@
 
 
 
+<!-- ====== V1List Pages ====== -->
+
+<def tag="index-page" for="V1List">
+  <page merge title="#{ht 'v1_lists.index.title', :default=>['V1 Lists'] }">
+    <body: class="index-page v1 list" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="v1_lists.index.heading">
+            V1 Lists
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="v1_lists.collection.count" count="&this.size">
+            There <count prefix="are"/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="v1_lists.actions.new">New V1 List</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="V1List">
+  <page merge title="#{ht 'v1_lists.new.title', :default=>['New V1 List'] }">
+    <body: class="new-page v1 list" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="v1_lists.new.heading">
+            New V1 List
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'v1_lists.actions.create', :default=>['Create V1 List']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="V1List">
+  <page merge title="#{ht 'v1_lists.show.title', :default=>['V1 List'] }">
+
+    <body: class="show-page v1 list" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="v1_lists.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
+                <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="v1_lists.actions.edit" name="&this.respond_to?(:name) ? this.name : ''">
+                Edit V1 List
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+            <field-list fields="comments, kbss, parameters, total, untouched, pending, completed, deleted, inactive, owner, notify, createddate, modifieddate" param/>
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="V1List">
+  <page merge title="#{ht 'v1_lists.edit.title', :default=>['Edit V1 List'] }">
+
+    <body: class="edit-page v1 list" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="v1_lists.edit.heading" name="&this.respond_to?(:name) ? this.name : ''">
+            Edit <type-name/>
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'v1_lists.actions.delete', :default=>['Remove This V1 List']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
+
+
+
+
 <!-- ====== Visibility Pages ====== -->
 
 <def tag="index-page" for="Visibility">
