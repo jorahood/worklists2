@@ -2374,6 +2374,126 @@
 
 
 
+<!-- ====== V1Doc Pages ====== -->
+
+<def tag="index-page" for="V1Doc">
+  <page merge title="#{ht 'v1_docs.index.title', :default=>['V1 Docs'] }">
+    <body: class="index-page v1 doc" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="v1_docs.index.heading">
+            V1 Docs
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="v1_docs.collection.count" count="&this.size">
+            There <count prefix="are"/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="v1_docs.actions.new">New V1 Doc</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="V1Doc">
+  <page merge title="#{ht 'v1_docs.new.title', :default=>['New V1 Doc'] }">
+    <body: class="new-page v1 doc" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="v1_docs.new.heading">
+            New V1 Doc
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'v1_docs.actions.create', :default=>['Create V1 Doc']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="V1Doc">
+  <page merge title="#{ht 'v1_docs.show.title', :default=>['V1 Doc'] }">
+
+    <body: class="show-page v1 doc" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="v1_docs.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
+                <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="v1_docs.actions.edit" name="&this.respond_to?(:name) ? this.name : ''">
+                Edit V1 Doc
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+            <field-list fields="category, TITLE, APPROVED_DATE, MODIFIED_DATE, BIRTH_DATE, DOMAIN, OWNER, AUTHOR, EXPIRE_DATE, DIRTY_DOZEN, HITS_ALL, HITS_IUB, HITS_IUBRESHALL, HITS_IUPUI, HITS_OSE, REFS, REFBYS, IMAGE_USAGE, SIZE, STATUS, RESOURCE, IMPORTANCE, URL_USAGE, BOILER_USAGE, VISIBILITY, VOLATILITY, XTRA, ALLHITS, OSEHITS, SAKAIHITS, SCHITS, TGRID_COREHITS, UITSHITS, NEWVERSION, TGRID_ALLHITS, TGRIDHITS" param/>
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="V1Doc">
+  <page merge title="#{ht 'v1_docs.edit.title', :default=>['Edit V1 Doc'] }">
+
+    <body: class="edit-page v1 doc" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="v1_docs.edit.heading" name="&this.respond_to?(:name) ? this.name : ''">
+            Edit <type-name/>
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'v1_docs.actions.delete', :default=>['Remove This V1 Doc']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
+
+
+
+
 <!-- ====== V1ListedDoc Pages ====== -->
 
 <def tag="index-page" for="V1ListedDoc">

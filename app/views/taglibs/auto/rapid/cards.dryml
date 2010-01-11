@@ -228,6 +228,14 @@
   </card>
 </def>
 
+<def tag="card" for="V1Doc">
+  <card class="v1 doc" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
 <def tag="card" for="V1List">
   <card class="v1 list" param="default" merge>
     <header: param>

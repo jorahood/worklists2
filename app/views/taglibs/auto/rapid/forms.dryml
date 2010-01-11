@@ -216,6 +216,18 @@
 
 
 
+<def tag="form" for="V1Doc">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="category, DOCID, TITLE, APPROVED_DATE, MODIFIED_DATE, BIRTH_DATE, DOMAIN, OWNER, AUTHOR, EXPIRE_DATE, DIRTY_DOZEN, HITS_ALL, HITS_IUB, HITS_IUBRESHALL, HITS_IUPUI, HITS_OSE, REFS, REFBYS, IMAGE_USAGE, SIZE, STATUS, RESOURCE, IMPORTANCE, URL_USAGE, BOILER_USAGE, VISIBILITY, VOLATILITY, XTRA, ALLHITS, OSEHITS, SAKAIHITS, SCHITS, TGRID_COREHITS, UITSHITS, NEWVERSION, TGRID_ALLHITS, TGRIDHITS" param/>
+    <div param="actions">
+      <submit label="#{ht 'v1_docs.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
 <def tag="form" for="V1ListedDoc">
   <form merge param="default">
     <error-messages param/>
