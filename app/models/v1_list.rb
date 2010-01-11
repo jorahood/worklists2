@@ -1,7 +1,5 @@
 class V1List < Worklists1
   
-#  establish_connection "worklists1_#{RAILS_ENV}".to_sym
-
   hobo_model # Don't put anything above this
 
   fields do
