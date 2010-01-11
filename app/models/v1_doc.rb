@@ -44,7 +44,11 @@ class V1Doc < Worklists1
   end
 
   set_table_name :docdata
-  
+
+  has_many :v1_listed_docs,
+    :foreign_key => :docKey
+  has_many :v1_lists,
+    :through => :v1_listed_docs
   # --- Permissions --- #
 
   def create_permitted?

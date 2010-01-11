@@ -23,6 +23,8 @@ class V1List < Worklists1
 
   has_many :v1_listed_docs,
     :foreign_key => :listKey
+  has_many :v1_docs,
+    :through => :v1_listed_docs
   
   # --- Permissions --- #
 

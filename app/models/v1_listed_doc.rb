@@ -16,7 +16,9 @@ class V1ListedDoc < Worklists1
   
   belongs_to :v1_list,
     :foreign_key => :listKey
-
+  belongs_to :v1_doc,
+    :foreign_key => :docKey
+  
   # --- Permissions --- #
 
   def create_permitted?

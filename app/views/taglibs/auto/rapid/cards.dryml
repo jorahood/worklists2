@@ -233,6 +233,11 @@
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>
+    <body: param>
+      <ht key="v1_lists.collection.count" count="&this.v1_lists.size">
+         <count:v1_lists param/>
+      </ht>
+    </body:>
   </card>
 </def>
 
@@ -241,6 +246,11 @@
     <header: param>
       <h4 param="heading"><a><name/></a></h4>
     </header:>
+    <body: param>
+      <ht key="v1_docs.collection.count" count="&this.v1_docs.size">
+         <count:v1_docs param/>
+      </ht>
+    </body:>
   </card>
 </def>
 

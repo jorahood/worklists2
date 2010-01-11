@@ -231,7 +231,7 @@
 <def tag="form" for="V1ListedDoc">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="searchdate, modifieddate, category, notes, editornotes, done, v1_list" param/>
+    <field-list fields="searchdate, modifieddate, category, notes, editornotes, done, v1_doc, v1_list" param/>
     <div param="actions">
       <submit label="#{ht 'v1_listed_docs.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>

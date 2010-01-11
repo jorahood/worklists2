@@ -2443,6 +2443,7 @@
 
     <content: param>
           <header param="content-header">
+            <a:v1_lists param="parent-link">&laquo; <ht key="v1_docs.actions.back" to="v1_lists"><name/></ht></a:v1_lists>
             <h2 param="heading">
               <ht key="v1_docs.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>
@@ -2460,6 +2461,15 @@
 
           <section param="content-body">
             <field-list fields="category, TITLE, APPROVED_DATE, MODIFIED_DATE, BIRTH_DATE, DOMAIN, OWNER, AUTHOR, EXPIRE_DATE, DIRTY_DOZEN, HITS_ALL, HITS_IUB, HITS_IUBRESHALL, HITS_IUPUI, HITS_OSE, REFS, REFBYS, IMAGE_USAGE, SIZE, STATUS, RESOURCE, IMPORTANCE, URL_USAGE, BOILER_USAGE, VISIBILITY, VOLATILITY, XTRA, ALLHITS, OSEHITS, SAKAIHITS, SCHITS, TGRID_COREHITS, UITSHITS, NEWVERSION, TGRID_ALLHITS, TGRIDHITS" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">
+                <ht key="v1_docs.collection.heading.other" >
+                  V1 Lists
+                </ht>
+              </h3>
+
+              <collection:v1_lists param/>
+            </section>
           </section>
     </content:>
 
@@ -2579,7 +2589,7 @@
           </header>
 
           <section param="content-body">
-            <field-list fields="searchdate, modifieddate, category, notes, editornotes, done, v1_list" param/>
+            <field-list fields="searchdate, modifieddate, category, notes, editornotes, done, v1_doc, v1_list" param/>
           </section>
     </content:>
 
@@ -2683,6 +2693,7 @@
 
     <content: param>
           <header param="content-header">
+            <a:v1_docs param="parent-link">&laquo; <ht key="v1_lists.actions.back" to="v1_docs"><name/></ht></a:v1_docs>
             <h2 param="heading">
               <ht key="v1_lists.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>
@@ -2700,6 +2711,15 @@
 
           <section param="content-body">
             <field-list fields="comments, kbss, parameters, total, untouched, pending, completed, deleted, inactive, owner, notify, createddate, modifieddate" param/>
+            <section param="collection-section">
+              <h3 param="collection-heading">
+                <ht key="v1_lists.collection.heading.other" >
+                  V1 Docs
+                </ht>
+              </h3>
+
+              <collection:v1_docs param/>
+            </section>
           </section>
     </content:>
 
