@@ -20,6 +20,10 @@ class V1List < Worklists1
   end
 
   set_table_name :listdata
+
+  has_many :v1_listed_docs,
+    :foreign_key => :listKey
+  
   # --- Permissions --- #
 
   def create_permitted?
