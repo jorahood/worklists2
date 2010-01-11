@@ -14,6 +14,7 @@
     <nav-item with="&Domain">Domains</nav-item>
     <nav-item with="&List">Lists</nav-item>
     <nav-item with="&Search">Searches</nav-item>
+    <nav-item with="&V1Doc">V1 Docs</nav-item>
   </navigation>
 </def>
 
@@ -24,6 +25,10 @@
 
 <extend tag="page">
   <old-page merge without-live-search/>
+</extend>
+
+<extend tag="table-plus">
+  <old-table-plus merge without-page-nav/>
 </extend>
 
 <extend tag="account-nav">

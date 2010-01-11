@@ -1,0 +1,6 @@
+<!-- V1Doc -->
+  <index-page>
+  <collection: replace>
+  <table-plus fields="DOCID, TITLE, v1_lists"/>
+  </collection:>
+</index-page>
