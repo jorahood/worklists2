@@ -56,7 +56,7 @@
 
 
 <def tag="new-page" for="Audience">
-  <page merge title="#{ht 'audiences.new.title', :default=>['New Audience'] }">
+  <page merge title="#{ht 'audiences.new.title', :default=>[' New Audience'] }">
     <body: class="new-page audience" param/>
 
     <content: param>
@@ -149,7 +149,7 @@
 
 <def tag="index-page" for="BoilerUsage">
   <page merge title="#{ht 'boiler_usages.index.title', :default=>['Boiler Usages'] }">
-    <body: class="index-page boiler usage" param/>
+    <body: class="index-page boiler-usage" param/>
 
     <content: param>
       <header param="content-header">
@@ -185,8 +185,8 @@
 
 
 <def tag="new-page" for="BoilerUsage">
-  <page merge title="#{ht 'boiler_usages.new.title', :default=>['New Boiler Usage'] }">
-    <body: class="new-page boiler usage" param/>
+  <page merge title="#{ht 'boiler_usages.new.title', :default=>[' New Boiler Usage'] }">
+    <body: class="new-page boiler-usage" param/>
 
     <content: param>
       <section param="content-header">
@@ -210,7 +210,7 @@
 <def tag="show-page" for="BoilerUsage">
   <page merge title="#{ht 'boiler_usages.show.title', :default=>['Boiler Usage'] }">
 
-    <body: class="show-page boiler usage" param/>
+    <body: class="show-page boiler-usage" param/>
 
     <content: param>
           <header param="content-header">
@@ -241,7 +241,7 @@
 <def tag="edit-page" for="BoilerUsage">
   <page merge title="#{ht 'boiler_usages.edit.title', :default=>['Edit Boiler Usage'] }">
 
-    <body: class="edit-page boiler usage" param/>
+    <body: class="edit-page boiler-usage" param/>
 
     <content:>
       <section param="content-header">
@@ -305,7 +305,7 @@
 
 
 <def tag="new-page" for="Boiler">
-  <page merge title="#{ht 'boilers.new.title', :default=>['New Boiler'] }">
+  <page merge title="#{ht 'boilers.new.title', :default=>[' New Boiler'] }">
     <body: class="new-page boiler" param/>
 
     <content: param>
@@ -434,7 +434,7 @@
 
 
 <def tag="new-page" for="Doc">
-  <page merge title="#{ht 'docs.new.title', :default=>['New Doc'] }">
+  <page merge title="#{ht 'docs.new.title', :default=>[' New Doc'] }">
     <body: class="new-page doc" param/>
 
     <content: param>
@@ -659,7 +659,7 @@
 
 
 <def tag="new-page" for="Domain">
-  <page merge title="#{ht 'domains.new.title', :default=>['New Domain'] }">
+  <page merge title="#{ht 'domains.new.title', :default=>[' New Domain'] }">
     <body: class="new-page domain" param/>
 
     <content: param>
@@ -789,7 +789,7 @@
 
 
 <def tag="new-page" for="Expiration">
-  <page merge title="#{ht 'expirations.new.title', :default=>['New Expiration'] }">
+  <page merge title="#{ht 'expirations.new.title', :default=>[' New Expiration'] }">
     <body: class="new-page expiration" param/>
 
     <content: param>
@@ -909,7 +909,7 @@
 
 
 <def tag="new-page" for="Hotitem">
-  <page merge title="#{ht 'hotitems.new.title', :default=>['New Hotitem'] }">
+  <page merge title="#{ht 'hotitems.new.title', :default=>[' New Hotitem'] }">
     <body: class="new-page hotitem" param/>
 
     <content: param>
@@ -1029,7 +1029,7 @@
 
 
 <def tag="new-page" for="Importance">
-  <page merge title="#{ht 'importances.new.title', :default=>['New Importance'] }">
+  <page merge title="#{ht 'importances.new.title', :default=>[' New Importance'] }">
     <body: class="new-page importance" param/>
 
     <content: param>
@@ -1121,7 +1121,7 @@
 
 <def tag="index-page" for="KbaUsage">
   <page merge title="#{ht 'kba_usages.index.title', :default=>['Kba Usages'] }">
-    <body: class="index-page kba usage" param/>
+    <body: class="index-page kba-usage" param/>
 
     <content: param>
       <header param="content-header">
@@ -1157,8 +1157,8 @@
 
 
 <def tag="new-page" for="KbaUsage">
-  <page merge title="#{ht 'kba_usages.new.title', :default=>['New Kba Usage'] }">
-    <body: class="new-page kba usage" param/>
+  <page merge title="#{ht 'kba_usages.new.title', :default=>[' New Kba Usage'] }">
+    <body: class="new-page kba-usage" param/>
 
     <content: param>
       <section param="content-header">
@@ -1182,7 +1182,7 @@
 <def tag="show-page" for="KbaUsage">
   <page merge title="#{ht 'kba_usages.show.title', :default=>['Kba Usage'] }">
 
-    <body: class="show-page kba usage" param/>
+    <body: class="show-page kba-usage" param/>
 
     <content: param>
           <header param="content-header">
@@ -1213,7 +1213,7 @@
 <def tag="edit-page" for="KbaUsage">
   <page merge title="#{ht 'kba_usages.edit.title', :default=>['Edit Kba Usage'] }">
 
-    <body: class="edit-page kba usage" param/>
+    <body: class="edit-page kba-usage" param/>
 
     <content:>
       <section param="content-header">
@@ -1277,7 +1277,7 @@
 
 
 <def tag="new-page" for="Kbuser">
-  <page merge title="#{ht 'kbusers.new.title', :default=>['New Kbuser'] }">
+  <page merge title="#{ht 'kbusers.new.title', :default=>[' New Kbuser'] }">
     <body: class="new-page kbuser" param/>
 
     <content: param>
@@ -1393,7 +1393,7 @@
 
 <def tag="index-page" for="ListedDoc">
   <page merge title="#{ht 'listed_docs.index.title', :default=>['Listed Docs'] }">
-    <body: class="index-page listed doc" param/>
+    <body: class="index-page listed-doc" param/>
 
     <content: param>
       <header param="content-header">
@@ -1429,8 +1429,8 @@
 
 
 <def tag="new-page" for="ListedDoc">
-  <page merge title="#{ht 'listed_docs.new.title', :default=>['New Listed Doc'] }">
-    <body: class="new-page listed doc" param/>
+  <page merge title="#{ht 'listed_docs.new.title', :default=>[' New Listed Doc'] }">
+    <body: class="new-page listed-doc" param/>
 
     <content: param>
       <section param="content-header">
@@ -1454,7 +1454,7 @@
 <def tag="show-page" for="ListedDoc">
   <page merge title="#{ht 'listed_docs.show.title', :default=>['Listed Doc'] }">
 
-    <body: class="show-page listed doc" param/>
+    <body: class="show-page listed-doc" param/>
 
     <content: param>
           <header param="content-header">
@@ -1486,7 +1486,7 @@
 <def tag="edit-page" for="ListedDoc">
   <page merge title="#{ht 'listed_docs.edit.title', :default=>['Edit Listed Doc'] }">
 
-    <body: class="edit-page listed doc" param/>
+    <body: class="edit-page listed-doc" param/>
 
     <content:>
       <section param="content-header">
@@ -1550,7 +1550,7 @@
 
 
 <def tag="new-page" for="List">
-  <page merge title="#{ht 'lists.new.title', :default=>['New List'] }">
+  <page merge title="#{ht 'lists.new.title', :default=>[' New List'] }">
     <body: class="new-page list" param/>
 
     <content: param>
@@ -1681,7 +1681,7 @@
 
 
 <def tag="new-page" for="Note">
-  <page merge title="#{ht 'notes.new.title', :default=>['New Note'] }">
+  <page merge title="#{ht 'notes.new.title', :default=>[' New Note'] }">
     <body: class="new-page note" param/>
 
     <content: param>
@@ -1806,7 +1806,7 @@
 
 
 <def tag="new-page" for="Reference">
-  <page merge title="#{ht 'references.new.title', :default=>['New Reference'] }">
+  <page merge title="#{ht 'references.new.title', :default=>[' New Reference'] }">
     <body: class="new-page reference" param/>
 
     <content: param>
@@ -1926,7 +1926,7 @@
 
 
 <def tag="new-page" for="Search">
-  <page merge title="#{ht 'searches.new.title', :default=>['New Search'] }">
+  <page merge title="#{ht 'searches.new.title', :default=>[' New Search'] }">
     <body: class="new-page search" param/>
 
     <content: param>
@@ -2046,7 +2046,7 @@
 
 
 <def tag="new-page" for="Status">
-  <page merge title="#{ht 'statuses.new.title', :default=>['New Status'] }">
+  <page merge title="#{ht 'statuses.new.title', :default=>[' New Status'] }">
     <body: class="new-page status" param/>
 
     <content: param>
@@ -2174,7 +2174,7 @@
 
 
 <def tag="new-page" for="Tag">
-  <page merge title="#{ht 'tags.new.title', :default=>['New Tag'] }">
+  <page merge title="#{ht 'tags.new.title', :default=>[' New Tag'] }">
     <body: class="new-page tag" param/>
 
     <content: param>
@@ -2293,7 +2293,7 @@
 
 
 <def tag="new-page" for="Title">
-  <page merge title="#{ht 'titles.new.title', :default=>['New Title'] }">
+  <page merge title="#{ht 'titles.new.title', :default=>[' New Title'] }">
     <body: class="new-page title" param/>
 
     <content: param>
@@ -2378,7 +2378,7 @@
 
 <def tag="index-page" for="V1Doc">
   <page merge title="#{ht 'v1_docs.index.title', :default=>['V1 Docs'] }">
-    <body: class="index-page v1 doc" param/>
+    <body: class="index-page v1-doc" param/>
 
     <content: param>
       <header param="content-header">
@@ -2414,8 +2414,8 @@
 
 
 <def tag="new-page" for="V1Doc">
-  <page merge title="#{ht 'v1_docs.new.title', :default=>['New V1 Doc'] }">
-    <body: class="new-page v1 doc" param/>
+  <page merge title="#{ht 'v1_docs.new.title', :default=>[' New V1 Doc'] }">
+    <body: class="new-page v1-doc" param/>
 
     <content: param>
       <section param="content-header">
@@ -2439,7 +2439,7 @@
 <def tag="show-page" for="V1Doc">
   <page merge title="#{ht 'v1_docs.show.title', :default=>['V1 Doc'] }">
 
-    <body: class="show-page v1 doc" param/>
+    <body: class="show-page v1-doc" param/>
 
     <content: param>
           <header param="content-header">
@@ -2480,7 +2480,7 @@
 <def tag="edit-page" for="V1Doc">
   <page merge title="#{ht 'v1_docs.edit.title', :default=>['Edit V1 Doc'] }">
 
-    <body: class="edit-page v1 doc" param/>
+    <body: class="edit-page v1-doc" param/>
 
     <content:>
       <section param="content-header">
@@ -2508,7 +2508,7 @@
 
 <def tag="index-page" for="V1ListedDoc">
   <page merge title="#{ht 'v1_listed_docs.index.title', :default=>['V1 Listed Docs'] }">
-    <body: class="index-page v1 listed doc" param/>
+    <body: class="index-page v1-listed-doc" param/>
 
     <content: param>
       <header param="content-header">
@@ -2544,8 +2544,8 @@
 
 
 <def tag="new-page" for="V1ListedDoc">
-  <page merge title="#{ht 'v1_listed_docs.new.title', :default=>['New V1 Listed Doc'] }">
-    <body: class="new-page v1 listed doc" param/>
+  <page merge title="#{ht 'v1_listed_docs.new.title', :default=>[' New V1 Listed Doc'] }">
+    <body: class="new-page v1-listed-doc" param/>
 
     <content: param>
       <section param="content-header">
@@ -2569,7 +2569,7 @@
 <def tag="show-page" for="V1ListedDoc">
   <page merge title="#{ht 'v1_listed_docs.show.title', :default=>['V1 Listed Doc'] }">
 
-    <body: class="show-page v1 listed doc" param/>
+    <body: class="show-page v1-listed-doc" param/>
 
     <content: param>
           <header param="content-header">
@@ -2600,7 +2600,7 @@
 <def tag="edit-page" for="V1ListedDoc">
   <page merge title="#{ht 'v1_listed_docs.edit.title', :default=>['Edit V1 Listed Doc'] }">
 
-    <body: class="edit-page v1 listed doc" param/>
+    <body: class="edit-page v1-listed-doc" param/>
 
     <content:>
       <section param="content-header">
@@ -2628,7 +2628,7 @@
 
 <def tag="index-page" for="V1List">
   <page merge title="#{ht 'v1_lists.index.title', :default=>['V1 Lists'] }">
-    <body: class="index-page v1 list" param/>
+    <body: class="index-page v1-list" param/>
 
     <content: param>
       <header param="content-header">
@@ -2664,8 +2664,8 @@
 
 
 <def tag="new-page" for="V1List">
-  <page merge title="#{ht 'v1_lists.new.title', :default=>['New V1 List'] }">
-    <body: class="new-page v1 list" param/>
+  <page merge title="#{ht 'v1_lists.new.title', :default=>[' New V1 List'] }">
+    <body: class="new-page v1-list" param/>
 
     <content: param>
       <section param="content-header">
@@ -2689,7 +2689,7 @@
 <def tag="show-page" for="V1List">
   <page merge title="#{ht 'v1_lists.show.title', :default=>['V1 List'] }">
 
-    <body: class="show-page v1 list" param/>
+    <body: class="show-page v1-list" param/>
 
     <content: param>
           <header param="content-header">
@@ -2730,7 +2730,7 @@
 <def tag="edit-page" for="V1List">
   <page merge title="#{ht 'v1_lists.edit.title', :default=>['Edit V1 List'] }">
 
-    <body: class="edit-page v1 list" param/>
+    <body: class="edit-page v1-list" param/>
 
     <content:>
       <section param="content-header">
@@ -2794,7 +2794,7 @@
 
 
 <def tag="new-page" for="Visibility">
-  <page merge title="#{ht 'visibilities.new.title', :default=>['New Visibility'] }">
+  <page merge title="#{ht 'visibilities.new.title', :default=>[' New Visibility'] }">
     <body: class="new-page visibility" param/>
 
     <content: param>
@@ -2922,7 +2922,7 @@
 
 
 <def tag="new-page" for="Volatility">
-  <page merge title="#{ht 'volatilities.new.title', :default=>['New Volatility'] }">
+  <page merge title="#{ht 'volatilities.new.title', :default=>[' New Volatility'] }">
     <body: class="new-page volatility" param/>
 
     <content: param>
@@ -3050,7 +3050,7 @@
 
 
 <def tag="new-page" for="Xtra">
-  <page merge title="#{ht 'xtras.new.title', :default=>['New Xtra'] }">
+  <page merge title="#{ht 'xtras.new.title', :default=>[' New Xtra'] }">
     <body: class="new-page xtra" param/>
 
     <content: param>
