@@ -140,6 +140,11 @@ class Doc < ActiveRecord::Base
       :conditions => ["#{Expiration.table_name}.expiredate < ?", date]}
   }
 
+  named_scope :expiredate_is, lambda { |date|
+    {:joins => :expirations,
+     :conditions => ["#{Expiration.table_name}.expiredate = ?", date]}
+  }
+
   named_scope :expiredate_after, lambda { |date|
     {:joins => :expirations,
       :conditions => ["#{Expiration.table_name}.expiredate > ?", date]}

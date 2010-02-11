@@ -14,7 +14,6 @@
     <nav-item with="&Domain">Domains</nav-item>
     <nav-item with="&List">Lists</nav-item>
     <nav-item with="&Search">Searches</nav-item>
-    <nav-item with="&V1Doc">V1 Docs</nav-item>
   </navigation>
 </def>
 
@@ -74,10 +73,10 @@ in my extension of <form> and customization of <show-page> for Search-->
 </extend>
 
 <!-- I want nil dates & datetimes to be nil, not today, so you don't automatically start searches with approveddate, modfieddate, and birthdate set to today
-      hobo's input for date provides today's date by default, so I'm redefining it to remove that-->
-<def attrs='order' tag='input' for='date'>
+      hobo's input for date provides today's date by default, so I'm redefining it to remove that. Passing :prompt => true to select_date for blank defaults-->
+<def tag='input' attrs='order' for='date'>
   <% order = order.nil? ? [:year, :month, :day] : comma_split(order).*.to_sym -%>
-  <%= select_date(this, attributes.merge(:prefix => param_name_for_this, :order => order)) %>
+  <%= select_date(this, attributes.merge(:prefix => param_name_for_this, :order => order, :prompt =>true)) %>
 </def>
 
 <def tag="input" for="datetime" attrs="order">
@@ -87,7 +86,7 @@ in my extension of <form> and customization of <show-page> for Search-->
     require 'ruby-debug'
     debugger
   end -%>
-  <%= select_datetime(this, attributes.merge(:prefix => param_name_for_this)) %>
+  <%= select_datetime(this, attributes.merge(:prefix => param_name_for_this, :prompt =>true)) %>
 </def>
 
 <def tag="input" for="Kbuser"><name-one merge/></def>
@@ -103,7 +102,7 @@ in my extension of <form> and customization of <show-page> for Search-->
   </h4>
 </def>
 
-<!-- add links to the title's audience & doc (and paramitize them so I can filter one or the 
+<!-- add links to the title's audience & doc (and parameterize them so I can filter one or the
 other out depending on where the card is appearing) and keep titles inline (type :html
 defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
 <def tag="card" for="Title">

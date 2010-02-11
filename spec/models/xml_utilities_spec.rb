@@ -44,9 +44,6 @@ describe XmlUtilities do
       @lists = XmlUtilities.get_all_list_ids
       @lists.should == @list_ids_array
     end
-    it "should destroy all existing cloned lists beforehand so I don't have to worry about finding and deleting old notes" do
-      pending
-    end
     it "should create new lists and set #wl1_clone for each v1 list id it retrieves" do
       XmlUtilities.stub(:fetch_url).and_return(@list_ids_string)
       List.should_receive(:new).with(:wl1_clone=>'1').and_return(@list)
