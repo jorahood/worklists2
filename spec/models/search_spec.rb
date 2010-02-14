@@ -4,7 +4,9 @@ describe Search do
   it { should have_many :lists }
   it {should have_many :docid_searches}
   it {should have_many(:docids).through(:docid_searches)}
- 
+  it {should have_many :resource_searches}
+  it {should have_many(:resources).through(:resource_searches)}
+
   it { should validate_presence_of :name }
 
   it "should invoke Doc#docid_search named scope when docids are given" do

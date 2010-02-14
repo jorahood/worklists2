@@ -117,18 +117,16 @@ CREATE TABLE `listed_docs` (
   `workstate` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tag` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `lists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `owner_id` int(11) DEFAULT NULL,
   `comment` text COLLATE utf8_unicode_ci,
   `audience_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `search_id` int(11) DEFAULT NULL,
-  `show_workstate` tinyint(1) DEFAULT '1',
   `show_approveddate` tinyint(1) DEFAULT '1',
   `show_author` tinyint(1) DEFAULT NULL,
   `show_boilers` tinyint(1) DEFAULT NULL,
@@ -152,29 +150,39 @@ CREATE TABLE `lists` (
   `show_visibility` tinyint(1) DEFAULT '1',
   `show_volatility` tinyint(1) DEFAULT NULL,
   `show_xtras` tinyint(1) DEFAULT NULL,
+  `show_workstate` tinyint(1) DEFAULT '1',
+  `show_tags` tinyint(1) DEFAULT '1',
+  `wl1_import` int(11) DEFAULT NULL,
+  `creator_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wl1_clone` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `notes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text COLLATE utf8_unicode_ci,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `owner_id` int(11) DEFAULT NULL,
   `listed_doc_id` int(11) DEFAULT NULL,
   `doc_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `creator_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `references` (
   `fromid` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `toid` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE `schema_migrations` (
-  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  UNIQUE KEY `unique_schema_migrations` (`version`)
+CREATE TABLE `resource_searches` (
+  `resource_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `search_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) NOT NULL,
+  UNIQUE KEY `unique_schema_migrations` (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `searches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -205,16 +213,26 @@ CREATE TABLE `searches` (
   `volatility_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status_is` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `status` (
   `rank` int(11) DEFAULT NULL,
   `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE `taggings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `listed_doc_id` int(11) DEFAULT NULL,
+  `tag_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tagging_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -247,7 +265,7 @@ CREATE TABLE `users` (
   `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'active',
   `key_timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `visibility` (
   `rank` int(11) DEFAULT NULL,
@@ -404,6 +422,8 @@ INSERT INTO schema_migrations (version) VALUES ('20090615195257');
 
 INSERT INTO schema_migrations (version) VALUES ('20090615203112');
 
+INSERT INTO schema_migrations (version) VALUES ('20090616021458');
+
 INSERT INTO schema_migrations (version) VALUES ('20090618145229');
 
 INSERT INTO schema_migrations (version) VALUES ('20090618150813');
@@ -416,6 +436,12 @@ INSERT INTO schema_migrations (version) VALUES ('20090623144231');
 
 INSERT INTO schema_migrations (version) VALUES ('20090624145938');
 
+INSERT INTO schema_migrations (version) VALUES ('20090624155020');
+
+INSERT INTO schema_migrations (version) VALUES ('20090624172948');
+
+INSERT INTO schema_migrations (version) VALUES ('20090630144740');
+
 INSERT INTO schema_migrations (version) VALUES ('20091103191442');
 
 INSERT INTO schema_migrations (version) VALUES ('20091105205540');
@@ -427,3 +453,15 @@ INSERT INTO schema_migrations (version) VALUES ('20091110200159');
 INSERT INTO schema_migrations (version) VALUES ('20091110200843');
 
 INSERT INTO schema_migrations (version) VALUES ('20091114194638');
+
+INSERT INTO schema_migrations (version) VALUES ('20091114200406');
+
+INSERT INTO schema_migrations (version) VALUES ('20091117180543');
+
+INSERT INTO schema_migrations (version) VALUES ('20091119205550');
+
+INSERT INTO schema_migrations (version) VALUES ('20091123164216');
+
+INSERT INTO schema_migrations (version) VALUES ('20091202182849');
+
+INSERT INTO schema_migrations (version) VALUES ('20100212144348');

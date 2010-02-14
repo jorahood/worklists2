@@ -52,6 +52,11 @@ class Search < ActiveRecord::Base
     :through => :docid_searches,
     :source => :doc,
     :accessible => true
+
+  has_many :resource_searches
+  has_many :resources,
+    :through => :resource_searches,
+    :accessible => true
   
   has_many :lists
   
@@ -118,6 +123,7 @@ class Search < ActiveRecord::Base
     # every time so that takes care of a default for comparisons,
     # so I'll clear the comparisons where their
     # associated date or keyword is nil.
+   #FIXME: EnumString should allow nil and default to a prompt so I don't have to do this
 
     dates = %w{approveddate birthdate expiredate modifieddate}
     dates.each { |date|
