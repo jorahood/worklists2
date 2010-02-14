@@ -1,4 +1,4 @@
-config/database.yml
+database.yml
 log/*
 nbproject/private/*
 tmp/*

@@ -31,5 +31,11 @@ Application deployment:
 
   13. cap craken:install to install crontab
 update deploy recipe:
+
+Updating application
   1. cap deploy
   2. cap deploy:migrate
+
+  database.yml: deprec assumes that if you are doing multistage deployment that it
+  will be able to find a database.yml file in a subdir of config with the same name as the
+   stage. I have symlinked database.yml from staging and prod subdirs to conform to this. 
