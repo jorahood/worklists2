@@ -39,3 +39,11 @@ Updating application
   database.yml: deprec assumes that if you are doing multistage deployment that it
   will be able to find a database.yml file in a subdir of config with the same name as the
    stage. I have symlinked database.yml from staging and prod subdirs to conform to this. 
+
+Collations
+   When I run a custom rake task that downloads the production data called mysql:refresh_from_production, all the tables that download have collation
+utf8_general_ci, but tables that I have created on the development machine using migrations have collation utf8_unicode_ci. Once I run the migration
+creating the new table on the production server and rerun mysql_refresh_from_production, the new table gets the utf8_general_ci collation.
+Either the refresh task is setting the collation wrong, or Rails has changed its default collation from the time when I first installed the production servers.
+FIXME: If the problem is due to Rails having changed default collations, I should run rake db:schema:load on the production machines to get them using
+the utf8_unicode_ci collation to match the development db

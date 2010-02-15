@@ -1971,7 +1971,7 @@
           </header>
 
           <section param="content-body">
-            <field-list fields="title_search, xtra_search, approveddate_is, approveddate, modifieddate_is, modifieddate, birthdate_is, birthdate, expiredate_is, expiredate, importance_is, visibility_is, volatility_is, status_is, author, boiler, hotitem, importance, owner, resource, status, visibility, volatility" param/>
+            <field-list fields="title_search, xtra_search, approveddate_is, approveddate, modifieddate_is, modifieddate, birthdate_is, birthdate, expiredate_is, expiredate, importance_is, visibility_is, volatility_is, status_is, author, boiler, hotitem, importance, owner, status, visibility, volatility" param/>
           </section>
     </content:>
 

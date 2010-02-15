@@ -36,9 +36,6 @@ class Search < ActiveRecord::Base
   belongs_to :owner,
     :class_name => 'Kbuser',
     :foreign_key => :owner_id
-  belongs_to :resource,
-    :class_name => 'Kbuser',
-    :foreign_key => :resource_id
   belongs_to :boiler
   belongs_to :hotitem
 
@@ -77,9 +74,9 @@ class Search < ActiveRecord::Base
       :"importance_#{importance_is}" => importance_id,
       :author_is => author,
       :owner_is => owner,
-      :with_resource => resource,
       :with_referenced_boiler => boiler,
       :with_hotitem => hotitem,
+      :with_resources => resources,
       :with_domains => domains
     )
   end
