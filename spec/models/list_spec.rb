@@ -57,7 +57,7 @@ describe List do
   it { should belong_to :search }
   it "should return showable metadata columns" do
     columns = List.attr_order.*.to_s.grep(/^show_/) do |method_name|
-      method_name.gsub(/^show_/,'').to_sym
+      method_name.gsub(/^show_/, '').to_sym
     end
     List.showable_columns.should_not == []
     List.showable_columns.should == columns
@@ -80,6 +80,7 @@ describe List do
       @admin = mock_model(Kbuser, :administrator? => true, :signed_up? => true)
       @other_Kbuser = mock_model(Kbuser, :administrator? => false, :signed_up? => true)
       @guest = mock_model(Guest, :signed_up? => false)
+      @editor_Kbuser = mock_model(Kbuser, :administrator? => false, :signed_up? => true)
     end
     it "should be creatable by its creator" do
       @list.stub!(:acting_user).and_return(@list_creator)
@@ -99,7 +100,11 @@ describe List do
     specify "search should not be refreshable by non-creator" do
       @list.method_callable_by?(@other_Kbuser, :refresh_search).should be_false
     end
-    
+    specify "search should be refreshable by non-creator editor" do
+      pending "need to import UserTypes information to implement is_kbeditor? method for Kbuser model" do
+        @list.method_callable_by?(@editor_Kbuser, :refresh_search).should be_true
+      end
+    end
     context "change creator" do
       before do
         @list_creator.stub!(:changed? => true)
@@ -111,7 +116,7 @@ describe List do
         @list.should be_updatable_by(@admin)
       end
     end
-    
+
     #    it "should be updatable by creator" do
     #      @list.updatable_by?(@Kbuser,nil).should be_true
     #    end
@@ -240,7 +245,7 @@ describe List do
       end
     end
   end
-  
+
   context "wl1" do
     before do
       @sample_list = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../fixtures/worklist11777.yml'))
@@ -310,8 +315,8 @@ describe List do
         @list.do_import
         @list.docs.should == @sample_docs
       end
-    end    
- 
+    end
+
     context "cloning" do
       before do
         @list.wl1_clone = 11777
