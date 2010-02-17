@@ -2,7 +2,7 @@
 
 <show-page>
   <after-field-list:>
-    <remote-method-button if="&this.search" method="refresh_search" label="Refresh search results"/>
+    <remote-method-button if="&can_call?(:refresh_search)" method="refresh_search" label="Refresh search results"/>
   </after-field-list:>
     <collection-heading: replace>
     <h3 class="collection-heading"><count:listed_docs/></h3>

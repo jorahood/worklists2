@@ -94,18 +94,28 @@ describe List do
     it "should not be creatable by guest" do
       @list.should_not be_creatable_by(@guest)
     end
-    specify "search should be refreshable by creator" do
-      @list.method_callable_by?(@list_creator, :refresh_search).should be_true
-    end
-    specify "search should not be refreshable by non-creator" do
-      @list.method_callable_by?(@other_Kbuser, :refresh_search).should be_false
-    end
-    specify "search should be refreshable by non-creator editor" do
-      pending "need to import UserTypes information to implement is_kbeditor? method for Kbuser model" do
-        @list.method_callable_by?(@editor_Kbuser, :refresh_search).should be_true
+
+    context "to refresh search" do
+      before(:each) do
+        @list.search = mock_model(Search)
+      end
+      specify "not unless search exists" do
+        @list.search = nil
+        @list.method_callable_by?(@list_creator, :refresh_search).should be_false
+      end
+      specify "for creator" do
+        @list.method_callable_by?(@list_creator, :refresh_search).should be_true
+      end
+      specify "for non-creator" do
+        @list.method_callable_by?(@other_Kbuser, :refresh_search).should be_true
+      end
+      specify "for non-creator editor" do
+        pending "need to import UserTypes information to implement is_kbeditor? method for Kbuser model"
+          #@list.method_callable_by?(@editor_Kbuser, :refresh_search).should be_true
       end
     end
-    context "change creator" do
+
+     context "to change creator" do
       before do
         @list_creator.stub!(:changed? => true)
       end

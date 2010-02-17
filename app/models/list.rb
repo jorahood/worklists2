@@ -164,7 +164,8 @@ class List < ActiveRecord::Base
   end
 
   def refresh_search_permitted?
-    creator_is? acting_user || acting_user.administrator?
+    search && acting_user.signed_up?
+    #   creator_is? acting_user || acting_user.administrator?
   end
 
 end

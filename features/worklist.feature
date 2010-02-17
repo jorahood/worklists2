@@ -29,6 +29,22 @@ Feature: Worklist
   When I view the list "Good list"
   Then I should see "Good search"
 
+  Scenario: It displays a "Refresh search results" button if you are allowed to refresh search results
+    Given I am logged in as Bob
+    And a list named "Good list" created by Bob
+    And a search named "Good search"
+    And list "Good list" belongs to search "Good search"
+    When I view the list "Good list"
+    Then I should see element "input.refresh_search-button"
+
+  Scenario: It does not display a "Refresh search results" button if you are not logged in
+    Given a kbuser named user_a
+    And a list named "Good list" created by user_a
+    And a search named "Good search"
+    And list "Good list" belongs to search "Good search"
+    When I view the list "Good list"
+    Then I should not see element "input.refresh_search-button"
+
   Scenario: It displays the docs of the search it belongs to
   Given I am logged in as Bob
   And a kbuser named user_a
