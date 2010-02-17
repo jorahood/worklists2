@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'spork'
 require 'factory_girl'
+Factory.find_definitions # this fixes 'ArgumentError: No such factory:' running specs in RubyMine
 
 ENV["RAILS_ENV"] ||= 'test'
 
