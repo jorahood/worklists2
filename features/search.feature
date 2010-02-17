@@ -3,13 +3,17 @@ Feature: Search
   As a kb editor
   I want to specify search criteria and retrieve matching documents
 
-  Scenario: It has autocompleting text inputs for author, owner, resource, boiler, hotitem
+  Scenario: It has autocompleting text inputs for author, owner, boiler, and hotitem
   Given I am on the search creation page
   Then I should see element "input.autocompleter.search-author[type='text']"
-  And I should see element "input.autocompleter.search-owner[type='text']"
-  And I should see element "input.autocompleter.search-resource[type='text']"
-  And I should see element "input.autocompleter.search-boiler[type='text']"
-  And I should see element "input.autocompleter.search-hotitem[type='text']"
+    And I should see element "input.autocompleter.search-owner[type='text']"
+    And I should see element "input.autocompleter.search-boiler[type='text']"
+    And I should see element "input.autocompleter.search-hotitem[type='text']"
+
+  Scenario: It has select-many inputs for resources and domains
+    Given I am on the search creation page
+    Then I should see element ".input.select-many.search-resources"
+    Then I should see element ".input.select-many.search-domains"
 
   Scenario: It must have a name
   Given I am on the search creation page
