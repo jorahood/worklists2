@@ -4,9 +4,10 @@ class FrontController < ApplicationController
 
   def index; end
 
+  #FIXME: this gives error Mysql::Error: Table 'worklist_dev.worklists1s' doesn't exist: SHOW FIELDS FROM `worklists1s`
   def summary
     if !current_user.administrator?
-      redirect_to user_login_path
+      redirect_to '/'
     end
   end
 
