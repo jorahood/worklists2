@@ -32,9 +32,10 @@ Application deployment:
   13. cap craken:install to install crontab
 update deploy recipe:
 
-Updating application
-  1. cap deploy
-  2. cap deploy:migrate
+  1 commit all changes to git
+  2 send your updates from git to the svn repository: git svn dcommit. This is important because the deploy scripts pull from the svn repository.
+  3 cap deploy
+  4 cap deploy:migrate (if necessary)
 
   database.yml: deprec assumes that if you are doing multistage deployment that it
   will be able to find a database.yml file in a subdir of config with the same name as the
@@ -46,4 +47,5 @@ utf8_general_ci, but tables that I have created on the development machine using
 creating the new table on the production server and rerun mysql_refresh_from_production, the new table gets the utf8_general_ci collation.
 Either the refresh task is setting the collation wrong, or Rails has changed its default collation from the time when I first installed the production servers.
 FIXME: If the problem is due to Rails having changed default collations, I should run rake db:schema:load on the production machines to get them using
-the utf8_unicode_ci collation to match the development db
+the utf8_unicode_ci collation to match the development db. Tried that and now my db has collation of latin1_swedish. I think it's best to not
+pull data from production with the mysql:refresh task.
