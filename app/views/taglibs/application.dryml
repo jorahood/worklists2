@@ -113,6 +113,15 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
   </h4>
 </def>
 
+<!-- add created_at timestamp to the card for Notes -->
+<extend tag="card" for="Note">
+  <old-card merge>
+    <append-body:>
+      <view:created_at/>
+    </append-body:>
+   </old-card>
+</extend>
+
 <extend tag="card" for="Reference">
   <old-card merge>
     <heading:>
@@ -140,3 +149,27 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
 <def tag="doc-link">
   <%= link_to this, :controller => "docs", :action => "show", :id => this %>
 </def>
+
+<def tag="view" for="datetime"><didwhen/></def>
+
+<def tag="didwhen"><%=
+    elapsed = Time.now - this
+    case elapsed
+    when 0..10
+      'just now'
+    when 10..40
+      "less than #{(elapsed * 1.5).to_i.to_s.slice(0,1)}0 seconds ago"
+    when 40..60
+      'less than a minute ago'
+    when 60..90
+      "a minute ago"
+    when 90..3000
+      "#{(elapsed / 60).to_i} minutes ago"
+    when 3000..5040
+      'an hour ago'
+    when 5040..(60  * 60 * 24 / 1.02)
+      result = "#{(elapsed / 60 / 60 * 1.02).to_i} hours ago"
+    else
+      this.strftime("%H:%M %p %B %d, %Y")
+    end
+%></def>
