@@ -29,7 +29,7 @@ Feature: Worklist
   When I view the list "Good list"
   Then I should see "Good search"
 
-  Scenario: It displays a "Refresh search results" button if you are allowed to refresh search results
+  Scenario: It displays a "Refresh search results" button if you are logged in
     Given I am logged in as Bob
     And a list named "Good list" created by Bob
     And a search named "Good search"
