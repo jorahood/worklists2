@@ -5,6 +5,18 @@
   <content:>
 
     <header class="content-header">
+      <h3>February 22, 2010</h3>
+    </header>
+    <section class="content-body">
+      <p>New features:</p>
+      <ul>
+        <li>Search finds docs with <b>any</b> of the selected resources, rather than all of them, which wasn't very useful.</li>
+      <li>Human-friendly timestamps displayed on notes in the worklist</li>
+      <li>The docid link in lists opens the doc in the workshop, the RCS link opens it in the RCSWeb tool.</li>
+      </ul>
+    </section>
+
+    <header class="content-header">
       <h3>February 15, 2010 - the "I hate KBReview" release</h3>
     </header>
     <section class="content-body">
