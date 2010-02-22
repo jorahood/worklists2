@@ -56,6 +56,19 @@ module Hobo
             { :conditions => [exists_sql, record] }
           end
 
+        # any_players(player1, player2)
+        elsif name =~ /^any_(.*)/ && (refl = reflection($1))
+
+          def_scope do |*records|
+            if records.empty?
+              { :conditions => exists_sql_condition(refl, true) }
+            else
+              records = records.flatten.compact.map {|r| find_if_named(refl, r) }
+              exists_sql = ([exists_sql_condition(refl)] * records.length).join(" OR ")
+              { :conditions => [exists_sql] + records }
+            end
+          end
+
         # without_players(player1, player2)
         elsif name =~ /^without_(.*)/ && (refl = reflection($1))
 
@@ -76,6 +89,19 @@ module Hobo
           def_scope do |record|
             record = find_if_named(refl, record)
             { :conditions => ["NOT #{exists_sql}", record] }
+          end
+
+        # none_of_players(player1, player2)
+        elsif name =~ /^none_of_(.*)/ && (refl = reflection($1))
+
+          def_scope do |*records|
+            if records.empty?
+              { :conditions => "NOT (#{exists_sql_condition(refl, true)})" }
+            else
+              records = records.flatten.compact.map {|r| find_if_named(refl, r) }
+              exists_sql = ([exists_sql_condition(refl)] * records.length).join(" OR ")
+              { :conditions => ["NOT (#{exists_sql})"] + records }
+            end
           end
 
         # team_is(a_team)

@@ -76,7 +76,7 @@ class Search < ActiveRecord::Base
       :owner_is => owner,
       :with_referenced_boiler => boiler,
       :with_hotitem => hotitem,
-      :with_resources => resources,
+      :any_resources => resources,
       :with_domains => domains
     )
   end
