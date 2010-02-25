@@ -16,6 +16,15 @@ describe Search do
     subject.filter
   end
 
+  it "should invoke Doc#with_any_resources scope when resources are given" do
+    user1 = mock_model(Kbuser)
+    user2 = mock_model(Kbuser)
+    subject.resources << user1
+    subject.resources << user2
+    Doc.should_receive(:any_of_resources).with(user1, user2)
+    subject.filter
+  end
+
   it "should create a list of the results" do
     List.should_receive(:new)
     subject.save_as_list

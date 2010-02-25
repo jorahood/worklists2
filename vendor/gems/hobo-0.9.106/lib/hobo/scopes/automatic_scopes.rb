@@ -56,8 +56,8 @@ module Hobo
             { :conditions => [exists_sql, record] }
           end
 
-        # any_players(player1, player2)
-        elsif name =~ /^any_(.*)/ && (refl = reflection($1))
+        # any_of_players(player1, player2)
+        elsif name =~ /^any_of_(.*)/ && (refl = reflection($1))
 
           def_scope do |*records|
             if records.empty?
