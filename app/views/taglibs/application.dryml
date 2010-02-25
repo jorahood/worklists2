@@ -168,7 +168,7 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
     when 3000..5040
       'an hour ago'
     when 5040..(60  * 60 * 24 / 1.02)
-      result = "#{(elapsed / 60 / 60 * 1.02).to_i} hours ago"
+      "#{(elapsed / 60 / 60 * 1.02).to_i} hours ago"
     else
       this.strftime("%H:%M %p %B %d, %Y")
     end
