@@ -5,6 +5,18 @@
   <content:>
 
     <header class="content-header">
+      <h3>March 8, 2010</h3>
+    </header>
+    <section class="content-body">
+      <p>New features:</p>
+      <ul>
+       <li>The url pointed to by the docid in listed docs is customizable. To change
+       it from the default of opening the doc in the workshop, edit the list and change the Custom Url field.</li>
+       <li>The docid and RCS links open in new windows.</li>
+      </ul>
+    </section>
+
+    <header class="content-header">
       <h3>February 22, 2010</h3>
     </header>
     <section class="content-body">
