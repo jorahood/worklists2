@@ -29,7 +29,7 @@ module XmlUtilities
   def self.config_ssl(transfer)
     transfer.use_ssl = true
     transfer.ssl_timeout = 2
-    transfer.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    transfer.verify_mode = OpenSSL::SSL::VERIFY_NONE
     transfer.verify_depth = 2
   end
 
