@@ -335,3 +335,27 @@ Feature: Worklist
   And I should see "apev" within ".collection-section"
   And I should see "avck" within ".collection-section"
   And I should see "awfj" within ".collection-section"
+
+  Scenario: It has a labelled input for the custom url to use for docid links
+  Given I am logged in as Bob
+  When I am on the list creation page
+  Then I should see "Custom URL" within "table.field-list"
+
+  Scenario: It uses the custom url to create the docid links for a list
+  Given I am logged in as Bob
+  And a doc with id arxq
+  And a list named "custom url test" created by Bob
+  And doc arxq belongs to list "custom url test"
+  When I edit the list "custom url test"
+  And I fill in "list_custom_url" with "http://test.com/%s.html"
+  And I press "Save"
+  Then I should see element "a[href='http://test.com/arxq.html']"
+
+  Scenario: The default url for docids is the workshop
+  Given I am logged in as Bob
+  And a doc with id arxq
+  And a list named "default url test" created by Bob
+  And doc arxq belongs to list "default url test"
+  When I view the list "default url test"
+  Then I should see element "a[href='https://bell.ucs.indiana.edu/workshop/workshop.cgi?id=arxq&openDoc=Open+document+ID&rm=documentDisplaySimple']"
+

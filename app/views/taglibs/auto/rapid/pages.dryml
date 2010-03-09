@@ -1597,7 +1597,7 @@
           </header>
 
           <section param="content-body">
-            <field-list fields="comment, wl1_import, wl1_clone, audience, search" param/>
+            <field-list fields="comment, wl1_import, wl1_clone, custom_url, audience, search" param/>
             <section param="collection-section">
               <h3 param="collection-heading">
                 <ht key="lists.collection.heading.other" >

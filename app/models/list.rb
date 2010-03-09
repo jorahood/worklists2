@@ -35,6 +35,7 @@ class List < ActiveRecord::Base
     show_workstate :boolean, :default => true
     wl1_import :integer
     wl1_clone :integer
+    custom_url :string
   end
 
   never_show :show_docid

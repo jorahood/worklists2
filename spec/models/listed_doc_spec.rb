@@ -8,6 +8,7 @@ describe ListedDoc do
     @list = mock_model(List, :name=>'test', :creator_is? =>@list_creator)
     @doc = mock_model(Doc, :docid=>'blah', :title=>'blahblah')
     subject.list = @list
+    subject.doc = @doc
   end
 
   it {should respond_to :workstate}
@@ -21,6 +22,11 @@ describe ListedDoc do
   it { should have_many :notes }
   it { should have_many :taggings }
   it { should have_many(:tags).through(:taggings) }
+  it { should respond_to :make_docid_link}
+  it "should create a docid_link out of the string in list#custom_url with the docid inserted for %s" do
+    subject.list.should_receive(:custom_url).and_return("http://test.com/%s.html")
+    subject.make_docid_link.should == "http://test.com/blah.html"
+  end
 
   context "Permissions" do
     it { should be_creatable_by @list_creator }

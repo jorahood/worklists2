@@ -9,10 +9,11 @@
   </collection-heading:>
   <collection: replace>
     <table-plus with='&@listed_docs' fields='&@listed_doc_fields'>
-      <docid-view:><a 
-      href="http://bell.ucs.indiana.edu/workshop/workshop.cgi?id=#{this}&openDoc=Open+document+ID&rm=documentDisplaySimple">
-        <view/></a> <a href="https://bell.ucs.indiana.edu/~jorahood/rcsweb.cgi?docid=#{this}&action=rlog&from=&to=">
-          (RCS)</a></docid-view:>
+      <docid-view:>
+        <a href="&this_parent.make_docid_link"><view/></a>
+        <a href="https://bell.ucs.indiana.edu/~jorahood/rcsweb.cgi?docid=#{this}&action=rlog&from=&to=">
+          (RCS)</a>
+      </docid-view:>
   <notes-view:>
     <set docid="&this_parent.doc.id"/>
     <collection id="#{this_parent.typed_id}-notes" part="notes">

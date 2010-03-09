@@ -135,7 +135,7 @@
 <def tag="form" for="List">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name, comment, show_titles, show_approveddate, show_modifieddate, show_birthdate, show_domains, show_owner, show_author, show_refs, show_refbys, show_boilers, show_referenced_boilers, show_expirations, show_hotitems, show_importance, show_resources, show_status, show_visibility, show_volatility, show_kbas, show_kba_bys, show_xtras, show_tags, show_notes, show_workstate, wl1_import, wl1_clone, audience, creator, search" param/>
+    <field-list fields="name, comment, show_titles, show_approveddate, show_modifieddate, show_birthdate, show_domains, show_owner, show_author, show_refs, show_refbys, show_boilers, show_referenced_boilers, show_expirations, show_hotitems, show_importance, show_resources, show_status, show_visibility, show_volatility, show_kbas, show_kba_bys, show_xtras, show_tags, show_notes, show_workstate, wl1_import, wl1_clone, custom_url, audience, creator, search" param/>
     <div param="actions">
       <submit label="#{ht 'lists.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>

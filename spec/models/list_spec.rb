@@ -15,6 +15,7 @@ describe List do
   it { should respond_to :show_tags }
   it { should respond_to :wl1_import }
   it { should respond_to :wl1_clone }
+  it { should respond_to :custom_url}  
   it "should give unnamed lists a generic name on create" do
     list = List.create!
     list.name.should_not be_blank
@@ -111,11 +112,11 @@ describe List do
       end
       specify "for non-creator editor" do
         pending "need to import UserTypes information to implement is_kbeditor? method for Kbuser model"
-          #@list.method_callable_by?(@editor_Kbuser, :refresh_search).should be_true
+        #@list.method_callable_by?(@editor_Kbuser, :refresh_search).should be_true
       end
     end
 
-     context "to change creator" do
+    context "to change creator" do
       before do
         @list_creator.stub!(:changed? => true)
       end
