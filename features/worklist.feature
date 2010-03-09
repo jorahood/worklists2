@@ -30,20 +30,20 @@ Feature: Worklist
   Then I should see "Good search"
 
   Scenario: It displays a "Refresh search results" button if you are logged in
-    Given I am logged in as Bob
-    And a list named "Good list" created by Bob
-    And a search named "Good search"
-    And list "Good list" belongs to search "Good search"
-    When I view the list "Good list"
-    Then I should see element "input.refresh_search-button"
+  Given I am logged in as Bob
+  And a list named "Good list" created by Bob
+  And a search named "Good search"
+  And list "Good list" belongs to search "Good search"
+  When I view the list "Good list"
+  Then I should see element "input.refresh_search-button"
 
   Scenario: It does not display a "Refresh search results" button if you are not logged in
-    Given a kbuser named user_a
-    And a list named "Good list" created by user_a
-    And a search named "Good search"
-    And list "Good list" belongs to search "Good search"
-    When I view the list "Good list"
-    Then I should not see element "input.refresh_search-button"
+  Given a kbuser named user_a
+  And a list named "Good list" created by user_a
+  And a search named "Good search"
+  And list "Good list" belongs to search "Good search"
+  When I view the list "Good list"
+  Then I should not see element "input.refresh_search-button"
 
   Scenario: It displays the docs of the search it belongs to
   Given I am logged in as Bob
@@ -340,22 +340,4 @@ Feature: Worklist
   Given I am logged in as Bob
   When I am on the list creation page
   Then I should see "Custom URL" within "table.field-list"
-
-  Scenario: It uses the custom url to create the docid links for a list
-  Given I am logged in as Bob
-  And a doc with id arxq
-  And a list named "custom url test" created by Bob
-  And doc arxq belongs to list "custom url test"
-  When I edit the list "custom url test"
-  And I fill in "list_custom_url" with "http://test.com/%s.html"
-  And I press "Save"
-  Then I should see element "a[href='http://test.com/arxq.html']"
-
-  Scenario: The default url for docids is the workshop
-  Given I am logged in as Bob
-  And a doc with id arxq
-  And a list named "default url test" created by Bob
-  And doc arxq belongs to list "default url test"
-  When I view the list "default url test"
-  Then I should see element "a[href='https://bell.ucs.indiana.edu/workshop/workshop.cgi?id=arxq&openDoc=Open+document+ID&rm=documentDisplaySimple']"
 
