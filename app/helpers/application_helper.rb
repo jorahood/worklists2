@@ -2,7 +2,7 @@
 module ApplicationHelper
 
   def revision_name
-    'worklists2 0.2.2.5'
+    'worklists2 0.2.2.6'
   end
 
 end

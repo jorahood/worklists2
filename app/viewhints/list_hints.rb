@@ -5,5 +5,5 @@ class ListHints < Hobo::ViewHints
     :wl1_import => "Import v1 Worklist",
     :wl1_clone => "Clone v1 Worklist"
 
-  field_help :custom_url => 'Enter the url that the docid links should go to. Insert "percent-s" for the docid'
+  field_help :custom_url => 'Enter the url for docid links, using "%k" in place of the docid; e.g., https://kb.iu.edu/data/%k.html'
 end

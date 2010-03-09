@@ -22,7 +22,7 @@ class ListedDoc < ActiveRecord::Base
     delegate method, :to => :doc
   end
 
-  DefaultDocidUrl = 'https://bell.ucs.indiana.edu/workshop/workshop.cgi?id=%s&amp;openDoc=Open+document+ID&amp;rm=documentDisplaySimple'
+  DefaultDocidUrl = 'https://bell.ucs.indiana.edu/workshop/workshop.cgi?id=%k&amp;openDoc=Open+document+ID&amp;rm=documentDisplaySimple'
 
   def do_clone(v1_listed_doc)
     clone_notes(v1_listed_doc)
@@ -56,8 +56,8 @@ class ListedDoc < ActiveRecord::Base
   end
 
   def make_docid_link
-    url = list.custom_url || DefaultDocidUrl
-    url.sub(/%s/, docid)
+    url = list.custom_url.blank? ? DefaultDocidUrl : list.custom_url
+    url.sub(/%k/, docid)
   end
 
   # --- Permissions --- #

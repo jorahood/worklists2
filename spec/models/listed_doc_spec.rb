@@ -24,7 +24,7 @@ describe ListedDoc do
   it { should have_many(:tags).through(:taggings) }
   it { should respond_to :make_docid_link}
   it "should create a docid_link out of the string in list#custom_url with the docid inserted for %s" do
-    subject.list.should_receive(:custom_url).and_return("http://test.com/%s.html")
+    subject.list.should_receive(:custom_url).twice.and_return("http://test.com/%k.html")
     subject.make_docid_link.should == "http://test.com/blah.html"
   end
 
