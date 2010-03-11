@@ -33,6 +33,7 @@ var wl2 = YUI({
             fullpath: '/javascripts/yui-2.8.0r4/datatable/assets/skins/sam/datatable.css',
             type: 'css'
         },
+        //FIXME: I do not use the separate jao-doctable anymore, get rid of this and the tests.
         'jao-doctable': {
             fullpath: '/javascripts/jao/doctable.js',
             requires: ['yui-2.8.0r4-datatable']
@@ -46,7 +47,7 @@ var wl2 = YUI({
         Y.log('Load failure: ' + result.msg, 'warn', 'Example');
 
     } else {
-        //set modeule-wide constants, making them properties so they are accessible to tests
+        //set module-wide constants, making them properties so they are accessible to tests
         Y.TOGGLER_CLASS = 'toggler';
         Y.TOGGLEE_CLASS = 'togglee';
         Y.TOGGLER_ACTIVE_CLASS = 'toggler-active';
@@ -59,7 +60,7 @@ var wl2 = YUI({
         Y.DOCTABLE_ID = 'doctable';
         Y.CONTENT_BOX_ID = 'docs';
         Y.CONTENT_BOX = 'div#' + Y.CONTENT_BOX_ID;
-        Y.SOURCE_FIELDS = 'th.doctable';
+        Y.SCHEMA_FIELDS_SELECTOR = 'th.doctable';
         Y.SOURCE_TABLE = 'table';
         Y.SOURCE_KEY = '.doctable-key';
         Y.SOURCE_PARSER = '.doctable-parser'
@@ -123,81 +124,134 @@ var wl2 = YUI({
 
         //----------------------------------------------------------
         //clone some dom nodes for running tests on
+        //before the datatable changes them
         //----------------------------------------------------------
-
+        // FIXME: I can use Node to do this rather than dropping down to DOM
+        //  API getElementById because Node provides a 
+        //  wrapper for the cloneNode method
         Y.cloneContentBox = document.getElementById(Y.CONTENT_BOX_ID) ?
           document.getElementById(Y.CONTENT_BOX_ID).cloneNode(true) : null;
 
         //----------------------------------------------------------
-        // DocTable - extends Widget
+        // DocTable - extends Widget-- This is the keystone.
+        // Wrapping the 2.X DataSource and 2.X Datatable
+        // in a YUI3 based Widget lets me make use of the
+        // YUI3 design patterns by declaring properties that
+        // Widget uses as callbacks to give the object common
+        // handles for functionality.
         //----------------------------------------------------------
 
+        // TODO: what namespace is DocTable in when I declare it here? Below
+        // I assign it to Y.DocTable, does the DocTable pollute the global namespace?
+        // Checking the DOM in Firebug it does not appear to.
         function DocTable() {
             DocTable.superclass.constructor.apply(this, arguments);
         };
 
         DocTable.NAME = 'docTable';
+        // declare our properties in ATTRS to have YUI generate getter and setter methods for them,
+        // and to have it run the validator functions on passed in arguments
         DocTable.ATTRS = {
+          // columns is the ColumnDefs object to pass to the 2.x datatable constructor
             columns: {
                 validator: function(val) {
                     return Y.Lang.isArray(val);
                 }
             },
-            sourceFields: {
+            // schemaFields is the source of the DataSource responseSchema's "fields" property,
+            // it consists of the
+            // FIXME: should have a validator function to make sure it is in the DOM
+            schemaFields: {
                 value:null
             },
+            // sourceTable is the HTML table that dataSource will pull data from
+            // FIXME: should have a validator function to make sure it is in the DOM
             sourceTable: {
                 value:null
             }
         };
 
+        // ----------------------------------------------------------------
+        // define HTML_PARSER properties
+        // http://developer.yahoo.com/yui/3/api/Widget.html#property_Widget.HTML_PARSER
+        //-----------------------------------------------------------------
         DocTable.HTML_PARSER = {
-            sourceFields : function(contentBox) {
-                var headers = contentBox.all(Y.SOURCE_FIELDS);
-                var rsFields = [];
+          //by putting DocTable's schemaFields ATTR into HTML_PARSER,
+          //we have DocTable, because it subclasses Widget, will
+          //execute the right-hand-side function on instantiation to pull data from DOM nodes that
+          //we want schemaFields to have. The RHS function is passed
+          // contentBox by Widget automatically
+            schemaFields : function(contentBox) {
+              // the contentBox serves as the place where the dataTable will be rendered,
+              //  but first it serves as the raw materials for the dataSource.
+              //  schemaFields creates the responseSchema's "fields" attribute
+                var headers = contentBox.all(Y.SCHEMA_FIELDS_SELECTOR);
+                var schemaFields = [];
                 if (headers) {
-                    headers.each(function(oNode){
-                        rsFields.push({
-                            key: oNode.one(Y.SOURCE_KEY).get('text'),
-                            parser: oNode.one(Y.SOURCE_PARSER).get('text')
+                    headers.each(function(headerNode){
+                        schemaFields.push({
+                            key: headerNode.one(Y.SOURCE_KEY).get('text'),
+                            parser: headerNode.one(Y.SOURCE_PARSER).get('text')
                         });
                     });
                 };
-                return rsFields;
+                return schemaFields;
+                //FIXME: the next line never gets returned, why is it here?
                 return headers ? headers.get('text') : null;
             },
+            // The simplist way to assign a DOM node to a property
+            // in HTML_PARSER is by making its value a string matching an ID
             sourceTable : Y.SOURCE_TABLE
         };
         //
-        //extend Widget, passing the methods to add to the prototype
+        //extend Widget, passing the methods to override on the prototype
         //
         Y.extend(DocTable, Y.Widget, {
+          // initializer will be executed when we call new DocTable
             initializer : function(cfg) {
-                this._dataSource = this._makeDataSource(this.get('sourceTable'),this.get('sourceFields'));
+                this._dataSource = this._makeDataSource(this.get('sourceTable'),this.get('schemaFields'));
                 this._dataTable = null;
             },
             renderUI : function() {
+              // creating the 2.x datatable in the call to renderUI lets the 3 DocTable
+              //  encapsulate rendering it in a YUI3 standard callback.
                 this._dataTable = this._makeDataTable(this.get('contentBox'),this.get('columns'),this._dataSource,YAHOO.widget.DataTable,{
                     caption:'Docs'
                 });
             },
-            _makeDataSource : function(oNode,aFields) {
+            //FIXME: as with the _makeDataTable function below, the only reason these are broken out
+            //into functions separate from where they are called is to make unit testing possible. Is
+            // the extra complexity worth it considering the functions are called only once?
+            _makeDataSource : function(oSourceTableNode,aFields) {
                 var ds = null;
-                if (Y.Node.getDOMNode(oNode) && aFields[0]) {
-                    ds = new YAHOO.util.DataSource(Y.Node.getDOMNode(oNode));
+                //FIXME: shouldn't the if statements below be taken care of in
+                //validator functions where sourceTable and schemaFields are
+                //declared as properties in ATTRS?
+                // No, those validators only
+                // run on arguments passed into the constructor, not on data
+                //culled from the DOM with HTML_PARSER
+                if (oSourceTableNode //the node exists to pull data from
+                  && aFields[0]) { //and an array of fields to use as the responseSchema
+                  // Using getDOMNode to get the underlying DOM node to pass to DataSource
+                  // constructor since the 2.x widget cannot handle the 3.x Node object
+                    ds = new YAHOO.util.DataSource(Y.Node.getDOMNode(oSourceTableNode));
                     ds.responseSchema = {
                         fields: aFields
                     };
                 };
                 return ds;
             },
-            _makeDataTable : function(oNode, aColumns, o26DS, fnDTConstructor,oConfig){
+            // call #new on YAHOO.widget.DataTable only if all the conditions in comments are true
+            // FIXME: move the YAHOO.widget.DataTable function into this function,
+            // passing it from renderUI just makes it harder to follow... ON THE OTHER
+            //  HAND, now I realize the reason I did this was to decouple the functions for unit testing
+            _makeDataTable : function(oContentBoxNode, aColumns, o28DS, fnDTConstructor,oConfig){
                 var dt = null;
-                if (Y.Node.getDOMNode(oNode) // we can get an HTMLNode
+                if (oContentBoxNode // the node exists to house the datatable
                     && aColumns[0] //aColumns is an array
-                    && o26DS
-                    && o26DS.parseData) { //o26DS is a DataSource
-                    dt = new fnDTConstructor(Y.Node.getDOMNode(oNode), aColumns, o26DS, oConfig);
+                    && o28DS // the datasource is not null
+                    && o28DS.parseData) { //o28DS quacks like a DataSource
+                    dt = new fnDTConstructor(Y.Node.getDOMNode(oContentBoxNode), aColumns, o28DS, oConfig);
                 };
                 return dt;
             }
@@ -208,12 +262,38 @@ var wl2 = YUI({
 
         //instantiate a DocTable
         var docs = new Y.DocTable({
+            // contentBox is a property inherited from Y.Widget that
+            // tells Widget the div the widget will attach to when rendering the ui
             contentBox: Y.CONTENT_BOX,
+            // columns is an attribute that contains
             columns : myColumnDefs
         });
+        // render it- this calls renderUI which instantiates the 2.x datatable
+        // which renders on instantiation. The datasource is created at initialization of the DocTable
                 docs.render();
+       // make it a property of the Y global so we can hold onto it
         Y.docs = docs;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //----------------------------------------------------------
+        // SET UP FOR UNIT TESTING BELOW
+        //
+        //
         //testing instance of YUI
         //----------------------------------------------------------
         YUI({
@@ -240,7 +320,7 @@ var wl2 = YUI({
                         key:'Doc'
                     }]);
                     Y.Assert.isNotUndefined(myDS.parseData,
-                        'duck-typing that _makeDataSource(oNode) produces a 2.6 DataSource');
+                        'duck-typing that _makeDataSource(oSourceTableNode) produces a 2.6 DataSource');
                     Y.Assert.areSame('Doc', myDS.responseSchema.fields[0].key, 'the fields have to be loaded into the responseSchema');
                     //cribbed the next tests from yui-2.8.0r4/tests/datasource.html
                     //FIXME: Y.Node.getDOMNode(wl2.docs.get('contentBox')) fails because the contentBox isn't really a Node but can act like
@@ -334,9 +414,9 @@ var wl2 = YUI({
                     this.testDocTable.set('columns',string);
                     Y.Assert.areNotEqual(string, this.testDocTable.get('columns'), 'should not be able to set columns to "'+string+'"');
                 },
-                testDocTableHasSourceFieldsAtt : function () {
-                    this.testDocTable.set('sourceFields',[]);
-                    Y.Assert.isNotUndefined(this.testDocTable.get('sourceFields'), '"sourceFields": an array of field names provided by the YAHOO.DataSource for the YAHOO.DataTable')
+                testDocTableHasschemaFieldsAtt : function () {
+                    this.testDocTable.set('schemaFields',[]);
+                    Y.Assert.isNotUndefined(this.testDocTable.get('schemaFields'), '"schemaFields": an array of field names provided by the YAHOO.DataSource for the YAHOO.DataTable')
                 },
                 testDocTableHasSourceTableAtt : function() {
                     this.testDocTable.set('sourceTable','');
@@ -364,13 +444,13 @@ var wl2 = YUI({
                     Y.Assert.isInstanceOf(Object, wl2.docs.get('sourceTable'), 'should be parsed during intialization');
                     Y.Assert.areSame('TABLE', wl2.docs.get('sourceTable').get('nodeName'), 'sourceTable should be a TABLE (the same table that is the contentBox, actually');
                 },
-                testSourceFieldsHTMLParser : function () {
+                testSchemaFieldsHTMLParser : function () {
                     var contentBox = Y.get(wl2.cloneContentBox);
-                    Y.Assert.isFunction(wl2.DocTable.HTML_PARSER.sourceFields, 'the sourceFields HTML_PARSER prop should be a function returning the field names from the <th>s');
-                    Y.Assert.isArray(wl2.DocTable.HTML_PARSER.sourceFields(contentBox), 'sourceFields() should return the fields in an array');
-                    Y.Assert.areSame(12, wl2.DocTable.HTML_PARSER.sourceFields(contentBox).length, 'there should be 12 fields');
-                    Y.Assert.areSame('Doc', wl2.DocTable.HTML_PARSER.sourceFields(contentBox)[0].key, '"Doc" is the label (which should be used as the key) of the first column to be parsed into the ResponseSchema');
-                    Y.Assert.areSame('string', wl2.DocTable.HTML_PARSER.sourceFields(contentBox)[0].parser, '"string" is the type embedded in the class "datatype-string" annotation (which should be used as the parser) of the first column to be parsed into the ResponseSchema');
+                    Y.Assert.isFunction(wl2.DocTable.HTML_PARSER.schemaFields, 'the schemaFields HTML_PARSER prop should be a function returning the field names from the <th>s');
+                    Y.Assert.isArray(wl2.DocTable.HTML_PARSER.schemaFields(contentBox), 'schemaFields() should return the fields in an array');
+                    Y.Assert.areSame(12, wl2.DocTable.HTML_PARSER.schemaFields(contentBox).length, 'there should be 12 fields');
+                    Y.Assert.areSame('Doc', wl2.DocTable.HTML_PARSER.schemaFields(contentBox)[0].key, '"Doc" is the label (which should be used as the key) of the first column to be parsed into the ResponseSchema');
+                    Y.Assert.areSame('string', wl2.DocTable.HTML_PARSER.schemaFields(contentBox)[0].parser, '"string" is the type embedded in the class "datatype-string" annotation (which should be used as the parser) of the first column to be parsed into the ResponseSchema');
                 }
             });
             Y.wl2Tests.FirstTestCase = new Y.Test.Case({
@@ -403,7 +483,7 @@ var wl2 = YUI({
                     Y.Assert.isString(wl2.ANIMATE_SHOW,'ANIMATE_SHOW should be a string.');
                     Y.Assert.isString(wl2.DOCTABLE_ID,'DOCTABLE_ID should be a string.');
                     Y.Assert.isString(wl2.CONTENT_BOX,'CONTENT_BOX: query string to locate our widget on the page, used when instantiating DocTable')
-                    Y.Assert.isString(wl2.SOURCE_FIELDS, 'SOURCE_FIELDS: query string to find the fields for the datasource, searched for _within the CONTENT_BOX_ on instantiating the DocTable widget');
+                    Y.Assert.isString(wl2.SCHEMA_FIELDS_SELECTOR, 'SCHEMA_FIELDS_SELECTOR: query string to find the fields for the datasource, searched for _within the CONTENT_BOX_ on instantiating the DocTable widget');
                     Y.Assert.isString(wl2.SOURCE_TABLE, 'SOURCE_TABLE: the HTML table for the DataSource to pull data from')
                 },
                 testWL2ResultDefined : function () {
@@ -427,7 +507,7 @@ var wl2 = YUI({
                 testNeededElementsAreInDOM: function() {
                     var contentBoxNode = wl2.get(wl2.cloneContentBox);
                     Y.Assert.isNotNull(contentBoxNode, 'CONTENT_BOX: the div to be the contentBox attr of the docTable instance');
-                    Y.Assert.isNotNull(contentBoxNode.all(wl2.SOURCE_FIELDS_SELECTOR), 'querying CONTENT_BOX for SOURCE_FIELDS_SELECTOR: the fields of our DataSource response schema');
+                    Y.Assert.isNotNull(contentBoxNode.all(wl2.SCHEMA_FIELDS_SELECTOR), 'querying CONTENT_BOX for SCHEMA_FIELDS_SELECTOR: the fields of our DataSource response schema');
                     Y.Assert.isNotNull(contentBoxNode.one(wl2.SOURCE_TABLE), 'querying CONTENT_BOX for SOURCE_TABLE: the DOM element for our DataSource HTML table');
                 },
                 testDocTableInstance : function() {
