@@ -320,7 +320,7 @@ var wl2 = YUI({
     });
     // render it- this calls renderUI which instantiates the 2.x datatable
     // which renders on instantiation. The datasource is created at initialization of the DocTable
-    docs.render();
+    //docs.render();
     // make it a property of the Y global so we can hold onto it
     // FIXME: it seems weird to have the class DocTable and the instance of DocTable, "docs"
     // both assigned to the Y object.

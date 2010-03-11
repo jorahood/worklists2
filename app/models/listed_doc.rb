@@ -60,6 +60,21 @@ class ListedDoc < ActiveRecord::Base
     url.sub(/%k/, docid)
   end
 
+  named_scope :sort_by_doc_metadata, lambda { |sort_by|
+    # sort_by is the result of Hobo::ModelController.parse_sort_param
+    # it looks like [@sort_field, @sort_direction], e.g., ["doc.modifieddate", "asc"]
+    if !sort_by.blank?
+      # pluralize doc to docs
+      klass=sort_by.first.split(".").first
+      # this is just a reusable way of changing the string "doc"
+      # into the name of the Doc model table, "document"
+      sort_by.first.gsub!(klass, klass.classify.constantize.table_name)
+      # now sort_by looks like "docs.modifieddate asc"
+      {:include => :doc, :order => sort_by.join(' ')}
+    else
+      nil
+    end
+  }
   # --- Permissions --- #
 
   def create_permitted?
