@@ -153,13 +153,13 @@ var wl2 = YUI({
 
         DocTable.HTML_PARSER = {
             sourceFields : function(contentBox) {
-                var headers = contentBox.queryAll(Y.SOURCE_FIELDS);
+                var headers = contentBox.all(Y.SOURCE_FIELDS);
                 var rsFields = [];
                 if (headers) {
                     headers.each(function(oNode){
                         rsFields.push({
-                            key: oNode.query(Y.SOURCE_KEY).get('text'),
-                            parser: oNode.query(Y.SOURCE_PARSER).get('text')
+                            key: oNode.one(Y.SOURCE_KEY).get('text'),
+                            parser: oNode.one(Y.SOURCE_PARSER).get('text')
                         });
                     });
                 };
@@ -427,8 +427,8 @@ var wl2 = YUI({
                 testNeededElementsAreInDOM: function() {
                     var contentBoxNode = wl2.get(wl2.cloneContentBox);
                     Y.Assert.isNotNull(contentBoxNode, 'CONTENT_BOX: the div to be the contentBox attr of the docTable instance');
-                    Y.Assert.isNotNull(contentBoxNode.queryAll(wl2.SOURCE_FIELDS), 'querying CONTENT_BOX for SOURCE_FIELDS: the fields of our DataSource response schema');
-                    Y.Assert.isNotNull(contentBoxNode.query(wl2.SOURCE_TABLE), 'querying CONTENT_BOX for SOURCE_TABLE: the DOM element for our DataSource HTML table');
+                    Y.Assert.isNotNull(contentBoxNode.all(wl2.SOURCE_FIELDS_SELECTOR), 'querying CONTENT_BOX for SOURCE_FIELDS_SELECTOR: the fields of our DataSource response schema');
+                    Y.Assert.isNotNull(contentBoxNode.one(wl2.SOURCE_TABLE), 'querying CONTENT_BOX for SOURCE_TABLE: the DOM element for our DataSource HTML table');
                 },
                 testDocTableInstance : function() {
                     Y.Assert.isInstanceOf(wl2.DocTable, wl2.docs, '"docs" should be an instance of DocTable.');
