@@ -219,7 +219,7 @@ var wl2 = YUI({
             base:"/javascripts/yui-3.0.0/",
             timeout: 1000//,
         //insertBefore: 'styleoverrides'
-        }).use("console","yuitest", "dump", function (Y) {
+        }).use("console","test", "dump", function (Y) {
 
             Y.namespace("wl2Tests");
             Y.wl2Tests.DocTableImplementation = new Y.Test.Case({
