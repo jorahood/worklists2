@@ -5,6 +5,13 @@
   <content:>
 
     <header class="content-header">
+      <h3>March 11, 2010</h3>
+    </header>
+    <section class="content-body">
+      <p>New feature: You can sort lists by approved date, birth date, and modified date. </p>
+    </section>
+
+    <header class="content-header">
       <h3>March 8, 2010</h3>
     </header>
     <section class="content-body">
