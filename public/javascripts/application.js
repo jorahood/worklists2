@@ -195,6 +195,7 @@ var wl2 = YUI({
                 var dt = null;
                 if (Y.Node.getDOMNode(oNode) // we can get an HTMLNode
                     && aColumns[0] //aColumns is an array
+                    && o26DS
                     && o26DS.parseData) { //o26DS is a DataSource
                     dt = new fnDTConstructor(Y.Node.getDOMNode(oNode), aColumns, o26DS, oConfig);
                 };
@@ -285,7 +286,7 @@ var wl2 = YUI({
             Y.wl2Tests.DocTableInterface = new Y.Test.Case({
                 name: "DocTable Interface Tests (black box testing DocTable, not referencing internal state)",
                 setUp : function () {
-                    this.testContentBox = wl2.cloneContentBox.cloneNode(true);
+                    this.testContentBox = wl2.cloneContentBox ? wl2.cloneContentBox.cloneNode(true) : null;
                     this.testDocTable = new wl2.DocTable({
                         contentBox: this.testContentBox,
                         columns : myColumnDefs
