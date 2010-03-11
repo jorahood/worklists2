@@ -186,10 +186,9 @@ var wl2 = YUI({
       dtConfig: {
         caption:'Listed Docs'
       },
-      // headers is the text in the header nodes the html table we're enhancing. They are the basis of the Datasource
+      // inputHeaders is the text in the header nodes the html table we're enhancing. They are the basis of the Datasource
       // schemafields and the DataTable output columns.
-      //FIXME: rename headers to inputHeaders
-      headers: {
+      inputHeaders: {
         value: []
       },
       // the layout of the table to build from
@@ -234,7 +233,7 @@ var wl2 = YUI({
         // as well as the columns to output in the datatable. So the only attr that I will parse from the page
         // is sourceTable, then I will set schemaFields and columns here in the initializer based on the node
         // I have for sourceTable.
-        this.set('headers', this.initHeaders());
+        this.set('inputHeaders', this.initInputHeaders());
         this.set('schemaFields', this.initSchemaFields());
         this.set('dataSource', this.initDataSource());
         this.set('outputColumns', this.initOutputColumns());
@@ -254,7 +253,7 @@ var wl2 = YUI({
         };
         return ds;
       },
-      initHeaders : function() {
+      initInputHeaders : function() {
         var headers = this.get('sourceTable').all('tr.field-heading-row > th') || [];
         return headers;
       },
@@ -282,7 +281,7 @@ var wl2 = YUI({
         var fields = [];
         //iterate over the header nodes to build the responseSchema fields
         var lookup = this.get('inputTableTemplate');
-        this.get('headers').each(function(header){
+        this.get('inputHeaders').each(function(header){
           //use the text inside the anchor in each <th> as the label for each field
           var label = header.one('a').get('text');
           fields.push({
