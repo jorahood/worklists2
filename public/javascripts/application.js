@@ -60,10 +60,10 @@ var wl2 = YUI({
         Y.ANIMATE_HIDE = 'ANIMATE_HIDE';
         Y.ANIMATE_SHOW = 'ANIMATE_SHOW';
         Y.DOCTABLE_ID = 'doctable';
-        Y.CONTENT_BOX_SELECTOR = 'div#docs'
+        Y.CONTENT_BOX_SELECTOR = 'div.table-plus'
         Y.SCHEMA_FIELDS_SELECTOR = 'tr.field-heading-row > th';
         Y.SOURCE_TABLE = 'table';
-        Y.SOURCE_KEY = '.doctable-key';
+        Y.SOURCE_KEY = 'a';
         Y.SOURCE_PARSER = '.doctable-parser'
 
         // FIXME: the columns that will be output needs to be tied to the columns input
@@ -196,7 +196,7 @@ var wl2 = YUI({
                     headers.each(function(headerNode){
                         schemaFields.push({
                             key: headerNode.one(Y.SOURCE_KEY).get('text'),
-                            parser: headerNode.one(Y.SOURCE_PARSER).get('text')
+                            parser: "string"//headerNode.one(Y.SOURCE_PARSER).get('text')
                         });
                     });
                 }
