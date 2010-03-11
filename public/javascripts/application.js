@@ -65,7 +65,7 @@ var wl2 = YUI({
         Y.SOURCE_KEY = '.doctable-key';
         Y.SOURCE_PARSER = '.doctable-parser'
 
-        var myColumnDefs = [
+        var outputTableColumns = [
         {
             key:'Doc',
             label:"Docid",
@@ -266,7 +266,7 @@ var wl2 = YUI({
             // tells Widget the div the widget will attach to when rendering the ui
             contentBox: Y.CONTENT_BOX,
             // columns is an attribute that contains
-            columns : myColumnDefs
+            columns : outputTableColumns
         });
         // render it- this calls renderUI which instantiates the 2.x datatable
         // which renders on instantiation. The datasource is created at initialization of the DocTable
@@ -369,7 +369,7 @@ var wl2 = YUI({
                     this.testContentBox = wl2.cloneContentBox ? wl2.cloneContentBox.cloneNode(true) : null;
                     this.testDocTable = new wl2.DocTable({
                         contentBox: this.testContentBox,
-                        columns : myColumnDefs
+                        columns : outputTableColumns
                     });
                 },
                 tearDown : function () {
