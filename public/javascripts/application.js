@@ -206,6 +206,8 @@ var wl2 = YUI({
             },
             // The simplist way to assign a DOM node to a property
             // in HTML_PARSER is by making its value a string matching an ID
+            // FIXME: a. don't use constants inside the object, only pass them in as args. b.
+            // derive the sourceTable from the contentBox
             sourceTable : Y.SOURCE_TABLE
         };
         //
@@ -281,7 +283,11 @@ var wl2 = YUI({
             // FIXME: all constants that give selectors should only be used here in the instantiation, not
             // plugged into functions within the widget itself. Encapsulation!
             // contentBox is a property inherited from Y.Widget that
-            // tells Widget the div the widget will attach to when rendering the ui
+            // tells Widget the div the widget will attach to when rendering the ui.
+            // In this particular widget it is doing double duty to tell us where to find the HTML table
+            // that will tell us what columns are present
+            // to be parsed by the DataSource object, and consequently what columns will be output
+            // by the DataTable.
             contentBox: Y.CONTENT_BOX_SELECTOR,
             // columns is an attribute that contains
             columns : outputTableColumns
