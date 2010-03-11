@@ -150,9 +150,6 @@ var wl2 = YUI({
         // handles for functionality.
         //----------------------------------------------------------
 
-        // TODO: what namespace is DocTable in when I declare it here? Below
-        // I assign it to Y.DocTable, does the DocTable pollute the global namespace?
-        // Checking the DOM in Firebug it does not appear to.
         function DocTable() {
             DocTable.superclass.constructor.apply(this, arguments);
         };
