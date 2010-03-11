@@ -129,9 +129,9 @@ When /^I select "([^\"]*)"$/ do |value|
   select value
 end
 
-Then /^I should see <label> in "([^\"]*)" in the following order, starting with (\d+):$/ do |sibling, offset, table|
+Then /^I should see <text> in "([^\"]*)" in the following order, starting with (\d+):$/ do |sibling, offset, table|
   table.hashes.each_with_index do |hash, i|
-    steps %Q{Then I should see "#{hash['label']}" within "#{sibling}:nth-child(#{i + offset.to_i})"}
+    steps %Q{Then I should see "#{hash['text']}" within "#{sibling}:nth-child(#{i + offset.to_i})"}
   end
 end
 
@@ -184,4 +184,17 @@ Then /^I should see "([^\"]*)" in the "([^\"]*)" cell of doc "([^\"]*)"$/ do |st
   within("//tr//span[.='#{docid}']/../../td[@class='#{cell_class}']") do |cell|
     cell.should contain string
   end
+end
+
+Given /^the following docs exist:$/ do |table|
+  table.hashes.each do |hash|
+    doc = Doc.new
+    doc.id = hash['docid']
+    doc.modifieddate = hash['modifieddate']
+    doc.save!
+  end
+end
+
+Then /^I should see "([^\"]*)" above "([^\"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
 end

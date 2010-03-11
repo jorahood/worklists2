@@ -275,8 +275,8 @@ Feature: Worklist
   Scenario: Checkboxes for showable metadata appear in the same order as worklists1
   Given I am logged in as Bob
   When I go to the list creation page
-  Then I should see <label> in "tr" in the following order, starting with 3:
-  | label |
+  Then I should see <text> in "tr" in the following order, starting with 3:
+  | text |
   | Show Titles |
   | Show Approveddate |
   | Show Modifieddate |
