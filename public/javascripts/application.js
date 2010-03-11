@@ -263,8 +263,8 @@ var wl2 = YUI({
         var lookup = this.get('inputTableTemplate');
         this.get('schemaFields').each(function(field){
           //the label ultimately comes from the contents of the <th>s in the
-          // sourceTable. I already parsed the text out with initSchemaFields
-          // so I'm leveraging that here to assign the text to the outputColumn
+          // sourceTable. I already parsed these labels as the initSchemaFields
+          // so I'm leveraging that here to assign properties to the outputColumn
           // keys
           var label = field['key'];
           cols.push({
@@ -272,7 +272,8 @@ var wl2 = YUI({
             key: label,
             //not sure how to format everything, dates are the only ones
             //with "formatter" entries, the rest will be null
-            formatter: lookup[label]['formatter']
+            formatter: lookup[label]['formatter'],
+            sortable: lookup[label]['sortable']
           })
         });
         return cols;
