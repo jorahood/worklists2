@@ -165,7 +165,7 @@ var wl2 = YUI({
             // it consists of the
             // FIXME: should have a validator function to make sure it is in the DOM
             schemaFields: {
-                value:null
+                value: []
             },
             // sourceTable is the HTML table that dataSource will pull data from
             // FIXME: should have a validator function to make sure it is in the DOM
@@ -189,7 +189,8 @@ var wl2 = YUI({
               //  but first it serves as the raw materials for the dataSource.
               //  schemaFields creates the responseSchema's "fields" attribute
               // FIXME: instead of having to embed the name of the parser in each header,
-              // I should call a function that derives the parser from the name of the key.
+              // I should have a lookup table for each column, and default to 'string' if
+              // it isn't in the lookup table
                 var headers = contentBox.all(Y.SCHEMA_FIELDS_SELECTOR);
                 var schemaFields = [];
                 if (headers) {
@@ -231,17 +232,6 @@ var wl2 = YUI({
             // the extra complexity worth it considering the functions are called only once?
             _makeDataSource : function(oSourceTableNode,aFields) {
                 var ds = null;
-                //FIXME: shouldn't the if statements below be taken care of in
-                //validator functions where sourceTable and schemaFields are
-                //declared as properties in ATTRS?
-                // No, those validators only
-                // run on arguments passed into the constructor, not on data
-                //culled from the DOM with HTML_PARSER. But if I created an attr called
-                // sourceTableSelector and passed in SOURCE_TABLE to it I could add a validator method that
-                //  checked that it existed in the DOM! And likewise create a schemaFieldsSelector attr and
-                //   passed Y.SCHEMA_FIELDS_SELECTOR as an arg to it, then had a validator function check
-                //   it exists then I would just move the "ds =" and "ds.responseSchema =" lines up into the
-                //    initializer and forget the unit tests on this thing. It's too complicated doing it this way
                 if (oSourceTableNode //the node exists to pull data from
                   && aFields[0]) { //and an array of fields to use as the responseSchema
                   // Using getDOMNode to get the underlying DOM node to pass to DataSource
@@ -253,14 +243,6 @@ var wl2 = YUI({
                 }
                 return ds;
             },
-            // call #new on YAHOO.widget.DataTable only if all the conditions in comments are true
-            // FIXME: move the YAHOO.widget.DataTable function into this function,
-            // passing it from renderUI just makes it harder to follow... ON THE OTHER
-            //  HAND, now I realize the reason I did this was to decouple the functions for unit testing
-            // FIXME: The check of contentBoxNode should be handled in a validator as I discuss in the
-            // comments on _makeDataSource near the end. The check on aColumns being an array is
-            //redundant to the validator method that is called on it when it is passed into the constructor as
-            //"columns". The check on dataSource should happen when making the dataSource
             _makeDataTable : function(oContentBoxNode, aColumns, o28DS, fnDTConstructor,oConfig){
                 var dt = null;
                 if (oContentBoxNode // the node exists to house the datatable
@@ -278,8 +260,6 @@ var wl2 = YUI({
 
         //instantiate a DocTable
         var docs = new Y.DocTable({
-            // FIXME: all constants that give selectors should only be used here in the instantiation, not
-            // plugged into functions within the widget itself. Encapsulation!
             // contentBox is a property inherited from Y.Widget that
             // tells Widget the div the widget will attach to when rendering the ui.
             // In this particular widget it is doing double duty to tell us where to find the HTML table
