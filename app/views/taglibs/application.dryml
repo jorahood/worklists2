@@ -6,15 +6,6 @@
 
 <set-theme name="clean"/>
 
-<!-- Add YUI link as custom script -->
-<extend tag="page">
-  <old-page merge>
-    <custom-scripts:>
-      <javascript name="yui-3.0.0/yui/yui.js"/>
-    </custom-scripts:>
-  </old-page>
-</extend>
-
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
