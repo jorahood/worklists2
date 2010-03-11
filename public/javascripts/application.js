@@ -222,7 +222,9 @@ var wl2 = YUI({
             },
             renderUI : function() {
               // creating the 2.x datatable in the call to renderUI lets the 3 DocTable
-              //  encapsulate rendering it in a YUI3 standard callback.
+              //  encapsulate rendering it in a YUI3 standard callback. _dataTable does
+              //  not actually get addressed again except in tests but it seemed like a good idea
+              //  to store a reference to the actual datatable in the docTable widget
                 this._dataTable = this._makeDataTable(this.get('contentBox'),this.get('columns'),this._dataSource,YAHOO.widget.DataTable,{
                     caption:'Docs'
                 });
@@ -237,7 +239,12 @@ var wl2 = YUI({
                 //declared as properties in ATTRS?
                 // No, those validators only
                 // run on arguments passed into the constructor, not on data
-                //culled from the DOM with HTML_PARSER
+                //culled from the DOM with HTML_PARSER. But if I created an attr called
+                // sourceTableSelector and passed in SOURCE_TABLE to it I could add a validator method that
+                //  checked that it existed in the DOM! And likewise create a schemaFieldsSelector attr and
+                //   passed Y.SCHEMA_FIELDS_SELECTOR as an arg to it, then had a validator function check
+                //   it exists then I would just move the "ds =" and "ds.responseSchema =" lines up into the
+                //    initializer and forget the unit tests on this thing. It's too complicated doing it this way
                 if (oSourceTableNode //the node exists to pull data from
                   && aFields[0]) { //and an array of fields to use as the responseSchema
                   // Using getDOMNode to get the underlying DOM node to pass to DataSource
@@ -253,6 +260,10 @@ var wl2 = YUI({
             // FIXME: move the YAHOO.widget.DataTable function into this function,
             // passing it from renderUI just makes it harder to follow... ON THE OTHER
             //  HAND, now I realize the reason I did this was to decouple the functions for unit testing
+            // FIXME: The check of contentBoxNode should be handled in a validator as I discuss in the
+            // comments on _makeDataSource near the end. The check on aColumns being an array is
+            //redundant to the validator method that is called on it when it is passed into the constructor as
+            //"columns". The check on dataSource should happen when making the dataSource
             _makeDataTable : function(oContentBoxNode, aColumns, o28DS, fnDTConstructor,oConfig){
                 var dt = null;
                 if (oContentBoxNode // the node exists to house the datatable
@@ -270,6 +281,8 @@ var wl2 = YUI({
 
         //instantiate a DocTable
         var docs = new Y.DocTable({
+            // FIXME: all constants that give selectors should only be used here in the instantiation, not
+            // plugged into functions within the widget itself. Encapsulation!
             // contentBox is a property inherited from Y.Widget that
             // tells Widget the div the widget will attach to when rendering the ui
             contentBox: Y.CONTENT_BOX,
