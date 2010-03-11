@@ -60,8 +60,7 @@ var wl2 = YUI({
         Y.ANIMATE_HIDE = 'ANIMATE_HIDE';
         Y.ANIMATE_SHOW = 'ANIMATE_SHOW';
         Y.DOCTABLE_ID = 'doctable';
-        Y.CONTENT_BOX_ID = 'docs';
-        Y.CONTENT_BOX = 'div#' + Y.CONTENT_BOX_ID;
+        Y.CONTENT_BOX_SELECTOR = 'div#docs'
         Y.SCHEMA_FIELDS_SELECTOR = 'tr.field-heading-row > th';
         Y.SOURCE_TABLE = 'table';
         Y.SOURCE_KEY = '.doctable-key';
@@ -135,7 +134,7 @@ var wl2 = YUI({
         //clone some dom nodes for running tests on
         //before the datatable changes them
         //----------------------------------------------------------
-        contentBox = Y.one(Y.CONTENT_BOX);
+        contentBox = Y.one(Y.CONTENT_BOX_SELECTOR);
         Y.cloneContentBox =  contentBox ?
           contentBox.cloneNode(true) : null;
 
@@ -283,7 +282,7 @@ var wl2 = YUI({
             // plugged into functions within the widget itself. Encapsulation!
             // contentBox is a property inherited from Y.Widget that
             // tells Widget the div the widget will attach to when rendering the ui
-            contentBox: Y.CONTENT_BOX,
+            contentBox: Y.CONTENT_BOX_SELECTOR,
             // columns is an attribute that contains
             columns : outputTableColumns
         });
@@ -501,7 +500,7 @@ var wl2 = YUI({
                     Y.Assert.isString(wl2.ANIMATE_HIDE,'ANIMATE_HIDE should be a string.');
                     Y.Assert.isString(wl2.ANIMATE_SHOW,'ANIMATE_SHOW should be a string.');
                     Y.Assert.isString(wl2.DOCTABLE_ID,'DOCTABLE_ID should be a string.');
-                    Y.Assert.isString(wl2.CONTENT_BOX,'CONTENT_BOX: query string to locate our widget on the page, used when instantiating DocTable')
+                    Y.Assert.isString(wl2.CONTENT_BOX_SELECTOR,'CONTENT_BOX_SELECTOR: query string to locate our widget on the page, used when instantiating DocTable')
                     Y.Assert.isString(wl2.SCHEMA_FIELDS_SELECTOR, 'SCHEMA_FIELDS_SELECTOR: query string to find the fields for the datasource, searched for _within the CONTENT_BOX_ on instantiating the DocTable widget');
                     Y.Assert.isString(wl2.SOURCE_TABLE, 'SOURCE_TABLE: the HTML table for the DataSource to pull data from')
                 },
@@ -525,9 +524,9 @@ var wl2 = YUI({
                 //
                 testNeededElementsAreInDOM: function() {
                     var contentBoxNode = wl2.get(wl2.cloneContentBox);
-                    Y.Assert.isNotNull(contentBoxNode, 'CONTENT_BOX: the div to be the contentBox attr of the docTable instance');
-                    Y.Assert.isNotNull(contentBoxNode.all(wl2.SCHEMA_FIELDS_SELECTOR), 'querying CONTENT_BOX for SCHEMA_FIELDS_SELECTOR: the fields of our DataSource response schema');
-                    Y.Assert.isNotNull(contentBoxNode.one(wl2.SOURCE_TABLE), 'querying CONTENT_BOX for SOURCE_TABLE: the DOM element for our DataSource HTML table');
+                    Y.Assert.isNotNull(contentBoxNode, 'CONTENT_BOX_SELECTOR: the div to be the contentBox attr of the docTable instance');
+                    Y.Assert.isNotNull(contentBoxNode.all(wl2.SCHEMA_FIELDS_SELECTOR), 'querying CONTENT_BOX_SELECTOR for SCHEMA_FIELDS_SELECTOR: the fields of our DataSource response schema');
+                    Y.Assert.isNotNull(contentBoxNode.one(wl2.SOURCE_TABLE), 'querying CONTENT_BOX_SELECTOR for SOURCE_TABLE: the DOM element for our DataSource HTML table');
                 },
                 testDocTableInstance : function() {
                     Y.Assert.isInstanceOf(wl2.DocTable, wl2.docs, '"docs" should be an instance of DocTable.');
