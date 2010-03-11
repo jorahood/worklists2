@@ -48,6 +48,8 @@ var wl2 = YUI({
 
     } else {
         //set module-wide constants, making them properties so they are accessible to tests
+        //FIXME: functions within the docTable widget shouldn't be using these directly,
+        // they should be passed in as arguments to the constructor.
         Y.TOGGLER_CLASS = 'toggler';
         Y.TOGGLEE_CLASS = 'togglee';
         Y.TOGGLER_ACTIVE_CLASS = 'toggler-active';
@@ -65,6 +67,13 @@ var wl2 = YUI({
         Y.SOURCE_KEY = '.doctable-key';
         Y.SOURCE_PARSER = '.doctable-parser'
 
+        // FIXME: the columns that will be output needs to be tied to the columns input
+        //  into the dataSource. So need to pull from the DOM to get both the schemaFields columns
+        //  and the outputDataTable columns. Maybe use the schemaFields to build the outputTableColumns
+        // FIXME: then all I need to hardcode is the correlation of possible header names and the parser that
+        // the data for that column will have. And sortability. And formatting. But then I would just have one
+        // object to handle all the lookups for input and output, and the number of columns would depend on the
+        // number of columns in the underlying HTML table. 
         var outputTableColumns = [
         {
             key:'Doc',
@@ -185,6 +194,8 @@ var wl2 = YUI({
               // the contentBox serves as the place where the dataTable will be rendered,
               //  but first it serves as the raw materials for the dataSource.
               //  schemaFields creates the responseSchema's "fields" attribute
+              // FIXME: instead of having to embed the name of the parser in each header,
+              // I should call a function that derives the parser from the name of the key.
                 var headers = contentBox.all(Y.SCHEMA_FIELDS_SELECTOR);
                 var schemaFields = [];
                 if (headers) {
