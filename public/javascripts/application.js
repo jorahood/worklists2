@@ -201,14 +201,12 @@ var wl2 = YUI({
                     });
                 }
                 return schemaFields;
-                //FIXME: the next line never gets returned, why is it here?
-                return headers ? headers.get('text') : null;
             },
-            // The simplist way to assign a DOM node to a property
-            // in HTML_PARSER is by making its value a string matching an ID
-            // FIXME: a. don't use constants inside the object, only pass them in as args. b.
-            // derive the sourceTable from the contentBox
-            sourceTable : Y.SOURCE_TABLE
+            // the source table is the only table inside the contentBox
+            // where the dataTable will be rendered
+            sourceTable : function(contentBox) {
+              return contentBox.one('table')
+            }
         };
         //
         //extend Widget, passing the methods to override on the prototype
