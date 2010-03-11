@@ -128,7 +128,7 @@ var wl2 = YUI({
             label:'Controls'
         }
         ];
-        Y.COLUMN_LOOKUP = {
+        Y.LISTED_DOCS_TABLE = {
         Docid: {
             sortable:true
         },
@@ -238,9 +238,6 @@ var wl2 = YUI({
         // and to have it run the validator functions on passed in arguments
         DocTable.ATTRS = {
           // columns is the ColumnDefs object to pass to the 2.x datatable constructor
-            outputColumns: {
-              value: null
-            },
             // the 2.x dataSource object will be assigned to this property
             dataSource: {
               value: null
@@ -253,11 +250,18 @@ var wl2 = YUI({
             dtConfig: {
               caption:'Listed Docs'
             },
-            // headers is the headers of the html table we're enhancing. They are the basis of the Datasource
+            // headers is the text in the header nodes the html table we're enhancing. They are the basis of the Datasource
             // schemafields and the DataTable output columns.
             //FIXME: rename headers to inputHeaders
             headers: {
               value: []
+            },
+            // the layout of the table to build from
+            inputTableTemplate: {
+              value: []
+            },
+            outputColumns: {
+              value: null
             },
             // schemaFields is the source of the DataSource responseSchema's "fields" property,
             // it consists of the
@@ -321,6 +325,7 @@ var wl2 = YUI({
             initOutputColumns: function() {
               var cols = [];
               //the schemaFields will serve as keys to lookup the columns to output
+              var lookup = this.get('inputTableTemplate');
               this.get('schemaFields').each(function(field){
                 //the label ultimately comes from the contents of the <th>s in the
                 // sourceTable. I already parsed the text out with initSchemaFields
@@ -331,8 +336,8 @@ var wl2 = YUI({
                   //outputColumn key is the same as the responseSchema field key
                   key: label,
                   //not sure how to format everything, dates are the only ones
-                  //with "formatter" entries
-                  formatter: Y.COLUMN_LOOKUP[label]['formatter'] || 'text'
+                  //with "formatter" entries, the rest will be null
+                  formatter: lookup[label]['formatter']
                 })
               });
               return cols;
@@ -340,16 +345,17 @@ var wl2 = YUI({
             initSchemaFields : function() {
               var fields = [];
               //iterate over the header nodes to build the responseSchema fields
-                this.get('headers').each(function(header){
-                  //use the text inside the anchor in each <th> as the label for each field
-                  var label = header.one('a').get('text');
-                    fields.push({
-                        key: label,
-                        //the only non-string parsers are the date columns
-                        parser: Y.COLUMN_LOOKUP[label]['parser'] || 'string'
-                    });
-                });
-                return fields;
+              var lookup = this.get('inputTableTemplate');
+              this.get('headers').each(function(header){
+                //use the text inside the anchor in each <th> as the label for each field
+                var label = header.one('a').get('text');
+                  fields.push({
+                      key: label,
+                      //the only non-string parsers are the date columns
+                      parser: lookup[label]['parser'] || 'string'
+                  });
+              });
+              return fields;
             },
             renderDataTable : function() {
               var plainOldDomContentBox = Y.Node.getDOMNode(this.get('contentBox'));
@@ -373,7 +379,8 @@ var wl2 = YUI({
             // that will tell us what columns are present
             // to be parsed by the DataSource object, and consequently what columns will be output
             // by the DataTable.
-            contentBox: Y.CONTENT_BOX_SELECTOR
+            contentBox: Y.CONTENT_BOX_SELECTOR,
+            inputTableTemplate: Y.LISTED_DOCS_TABLE
         });
         // render it- this calls renderUI which instantiates the 2.x datatable
         // which renders on instantiation. The datasource is created at initialization of the DocTable
