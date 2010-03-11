@@ -1,6 +1,7 @@
 <!-- List -->
 
 <show-page>
+  <body: class="yui-skin-sam"/>
   <after-field-list:>
     <remote-method-button if="&can_call?(:refresh_search)" method="refresh_search" label="Refresh search results"/>
   </after-field-list:>
