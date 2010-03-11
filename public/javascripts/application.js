@@ -135,11 +135,9 @@ var wl2 = YUI({
         //clone some dom nodes for running tests on
         //before the datatable changes them
         //----------------------------------------------------------
-        // FIXME: I can use Node to do this rather than dropping down to DOM
-        //  API getElementById because Node provides a 
-        //  wrapper for the cloneNode method
-        Y.cloneContentBox = document.getElementById(Y.CONTENT_BOX_ID) ?
-          document.getElementById(Y.CONTENT_BOX_ID).cloneNode(true) : null;
+        contentBoxNode = Y.one(Y.CONTENT_BOX);
+        Y.cloneContentBox =  contentBoxNode ?
+          contentBoxNode.cloneNode(true) : null;
 
         //----------------------------------------------------------
         // DocTable - extends Widget-- This is the keystone.
