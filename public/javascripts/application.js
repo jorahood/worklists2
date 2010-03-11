@@ -135,9 +135,9 @@ var wl2 = YUI({
         //clone some dom nodes for running tests on
         //before the datatable changes them
         //----------------------------------------------------------
-        contentBoxNode = Y.one(Y.CONTENT_BOX);
-        Y.cloneContentBox =  contentBoxNode ?
-          contentBoxNode.cloneNode(true) : null;
+        contentBox = Y.one(Y.CONTENT_BOX);
+        Y.cloneContentBox =  contentBox ?
+          contentBox.cloneNode(true) : null;
 
         //----------------------------------------------------------
         // DocTable - extends Widget-- This is the keystone.
