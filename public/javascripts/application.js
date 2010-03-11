@@ -152,7 +152,7 @@ var wl2 = YUI({
 
         function DocTable() {
             DocTable.superclass.constructor.apply(this, arguments);
-        };
+        }
 
         DocTable.NAME = 'docTable';
         // declare our properties in ATTRS to have YUI generate getter and setter methods for them,
@@ -202,7 +202,7 @@ var wl2 = YUI({
                             parser: headerNode.one(Y.SOURCE_PARSER).get('text')
                         });
                     });
-                };
+                }
                 return schemaFields;
                 //FIXME: the next line never gets returned, why is it here?
                 return headers ? headers.get('text') : null;
@@ -253,7 +253,7 @@ var wl2 = YUI({
                     ds.responseSchema = {
                         fields: aFields
                     };
-                };
+                }
                 return ds;
             },
             // call #new on YAHOO.widget.DataTable only if all the conditions in comments are true
@@ -271,7 +271,7 @@ var wl2 = YUI({
                     && o28DS // the datasource is not null
                     && o28DS.parseData) { //o28DS quacks like a DataSource
                     dt = new fnDTConstructor(Y.Node.getDOMNode(oContentBoxNode), aColumns, o28DS, oConfig);
-                };
+                }
                 return dt;
             }
         });
@@ -551,5 +551,5 @@ var wl2 = YUI({
             //run the tests
             Y.Test.Runner.run();
         });
-    };
+    }
 });
