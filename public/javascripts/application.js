@@ -61,7 +61,6 @@ var wl2 = YUI({
         Y.ANIMATE_SHOW = 'ANIMATE_SHOW';
         Y.DOCTABLE_ID = 'doctable';
         Y.CONTENT_BOX_SELECTOR = 'div.table-plus'
-        Y.SCHEMA_FIELDS_SELECTOR = 'tr.field-heading-row > th';
         Y.SOURCE_TABLE = 'table';
         Y.SOURCE_KEY = 'a';
         Y.SOURCE_PARSER = '.doctable-parser'
@@ -129,6 +128,89 @@ var wl2 = YUI({
             label:'Controls'
         }
         ];
+        Y.COLUMN_LOOKUP = {
+        Docid: {
+            sortable:true
+        },
+        Titles: {
+            sortable:true
+        },
+        Approveddate: {
+            parser: "date",
+            formatter:"date",
+            sortable:true
+        },
+        Modifieddate: {
+            parser: "date",
+            formatter:"date",
+            sortable:true
+        },
+        Birthdate: {
+            parser: "date",
+            formatter:"date",
+            sortable:true
+        },
+        Domains: {
+            sortable:true
+        },
+        Owner: {
+            sortable:true
+        },
+        Author: {
+            sortable:true
+        },
+        Refs: {
+            sortable:true
+        },
+        Refbys: {
+            sortable:true
+        },
+        "Boiler Name": {
+            sortable:true
+        },
+        "Referenced Boilers": {
+            sortable:true
+        },
+        Expirations: {
+            sortable:true
+        },
+        Hotitems: {
+            sortable:true
+        },
+        Importance: {
+            sortable:true
+        },
+        Resources: {
+            sortable:true
+        },
+        Status: {
+            sortable:true
+        },
+        Visibility: {
+            sortable:true
+        },
+        Volatility: {
+            sortable:true
+        },
+        Kbas: {
+            sortable:true
+        },
+        "Kba Bys": {
+            sortable:true
+        },
+        Xtras: {
+            sortable:true
+        },
+        Tags: {
+            sortable:true
+        },
+        Notes: {
+            sortable:true
+        },
+        Workstate: {
+            sortable:true
+        }
+        };
 
         //----------------------------------------------------------
         //clone some dom nodes for running tests on
@@ -156,10 +238,26 @@ var wl2 = YUI({
         // and to have it run the validator functions on passed in arguments
         DocTable.ATTRS = {
           // columns is the ColumnDefs object to pass to the 2.x datatable constructor
-            columns: {
-                validator: function(val) {
-                    return Y.Lang.isArray(val);
-                }
+            outputColumns: {
+              value: null
+            },
+            // the 2.x dataSource object will be assigned to this property
+            dataSource: {
+              value: null
+            },
+            // the 2.x dataTable object will be assigned to this property
+            dataTable: {
+              value: null
+            },
+            // dtConfig is the 2.x dataTable config object
+            dtConfig: {
+              caption:'Listed Docs'
+            },
+            // headers is the headers of the html table we're enhancing. They are the basis of the Datasource
+            // schemafields and the DataTable output columns.
+            //FIXME: rename headers to inputHeaders
+            headers: {
+              value: []
             },
             // schemaFields is the source of the DataSource responseSchema's "fields" property,
             // it consists of the
@@ -179,31 +277,7 @@ var wl2 = YUI({
         // http://developer.yahoo.com/yui/3/api/Widget.html#property_Widget.HTML_PARSER
         //-----------------------------------------------------------------
         DocTable.HTML_PARSER = {
-          //by putting DocTable's schemaFields ATTR into HTML_PARSER,
-          //we have DocTable, because it subclasses Widget, will
-          //execute the right-hand-side function on instantiation to pull data from DOM nodes that
-          //we want schemaFields to have. The RHS function is passed
-          // contentBox by Widget automatically
-            schemaFields : function(contentBox) {
-              // the contentBox serves as the place where the dataTable will be rendered,
-              //  but first it serves as the raw materials for the dataSource.
-              //  schemaFields creates the responseSchema's "fields" attribute
-              // FIXME: instead of having to embed the name of the parser in each header,
-              // I should have a lookup table for each column, and default to 'string' if
-              // it isn't in the lookup table
-                var headers = contentBox.all(Y.SCHEMA_FIELDS_SELECTOR);
-                var schemaFields = [];
-                if (headers) {
-                    headers.each(function(headerNode){
-                        schemaFields.push({
-                            key: headerNode.one(Y.SOURCE_KEY).get('text'),
-                            parser: "string"//headerNode.one(Y.SOURCE_PARSER).get('text')
-                        });
-                    });
-                }
-                return schemaFields;
-            },
-            // the source table is the only table inside the contentBox
+            // the source table is the first table element inside the contentBox
             // where the dataTable will be rendered
             sourceTable : function(contentBox) {
               return contentBox.one('table')
@@ -213,47 +287,80 @@ var wl2 = YUI({
         //extend Widget, passing the methods to override on the prototype
         //
         Y.extend(DocTable, Y.Widget, {
-          // initializer will be executed when we call new DocTable
+          // initializer will be executed when we call new on DocTable
             initializer : function(cfg) {
-                this._dataSource = this._makeDataSource(this.get('sourceTable'),this.get('schemaFields'));
-                this._dataTable = null;
+              // instead of setting sourceTable, columns, and schemaFields in the HTML_PARSER separately,
+              // I'm going to make use of the fact that the source table is also the source of the schema fields
+              // as well as the columns to output in the datatable. So the only attr that I will parse from the page
+              // is sourceTable, then I will set schemaFields and columns here in the initializer based on the node
+              // I have for sourceTable.
+                this.set('headers', this.initHeaders());
+                this.set('schemaFields', this.initSchemaFields());
+                this.set('dataSource', this.initDataSource());
+                this.set('outputColumns', this.initOutputColumns());
             },
             renderUI : function() {
               // creating the 2.x datatable in the call to renderUI lets the 3 DocTable
               //  encapsulate rendering it in a YUI3 standard callback. _dataTable does
               //  not actually get addressed again except in tests but it seemed like a good idea
               //  to store a reference to the actual datatable in the docTable widget
-                this._dataTable = this._makeDataTable(this.get('contentBox'),this.get('columns'),this._dataSource,YAHOO.widget.DataTable,{
-                    caption:'Docs'
+                this.set('dataTable', this.renderDataTable());
+            },
+            initDataSource : function() {
+              var plainOldDomSourceTable = Y.Node.getDOMNode(this.get('sourceTable'));
+              var ds = new YAHOO.util.DataSource(plainOldDomSourceTable);
+              ds.responseSchema = {
+                 fields: this.get('schemaFields')
+                 };
+              return ds;
+            },
+            initHeaders : function() {
+              var headers = this.get('sourceTable').all('tr.field-heading-row > th') || [];
+              return headers;
+            },
+            initOutputColumns: function() {
+              var cols = [];
+              //the schemaFields will serve as keys to lookup the columns to output
+              this.get('schemaFields').each(function(field){
+                //the label ultimately comes from the contents of the <th>s in the
+                // sourceTable. I already parsed the text out with initSchemaFields
+                // so I'm leveraging that here to assign the text to the outputColumn
+                // keys
+                var label = field['key'];
+                cols.push({
+                  //outputColumn key is the same as the responseSchema field key
+                  key: label,
+                  //not sure how to format everything, dates are the only ones
+                  //with "formatter" entries
+                  formatter: Y.COLUMN_LOOKUP[label]['formatter'] || 'text'
+                })
+              });
+              return cols;
+            },
+            initSchemaFields : function() {
+              var fields = [];
+              //iterate over the header nodes to build the responseSchema fields
+                this.get('headers').each(function(header){
+                  //use the text inside the anchor in each <th> as the label for each field
+                  var label = header.one('a').get('text');
+                    fields.push({
+                        key: label,
+                        //the only non-string parsers are the date columns
+                        parser: Y.COLUMN_LOOKUP[label]['parser'] || 'string'
+                    });
                 });
+                return fields;
             },
-            //FIXME: as with the _makeDataTable function below, the only reason these are broken out
-            //into functions separate from where they are called is to make unit testing possible. Is
-            // the extra complexity worth it considering the functions are called only once?
-            _makeDataSource : function(oSourceTableNode,aFields) {
-                var ds = null;
-                if (oSourceTableNode //the node exists to pull data from
-                  && aFields[0]) { //and an array of fields to use as the responseSchema
-                  // Using getDOMNode to get the underlying DOM node to pass to DataSource
-                  // constructor since the 2.x widget cannot handle the 3.x Node object
-                    ds = new YAHOO.util.DataSource(Y.Node.getDOMNode(oSourceTableNode));
-                    ds.responseSchema = {
-                        fields: aFields
-                    };
-                }
-                return ds;
-            },
-            _makeDataTable : function(oContentBoxNode, aColumns, o28DS, fnDTConstructor,oConfig){
-                var dt = null;
-                if (oContentBoxNode // the node exists to house the datatable
-                    && aColumns[0] //aColumns is an array
-                    && o28DS // the datasource is not null
-                    && o28DS.parseData) { //o28DS quacks like a DataSource
-                    dt = new fnDTConstructor(Y.Node.getDOMNode(oContentBoxNode), aColumns, o28DS, oConfig);
-                }
-                return dt;
+            renderDataTable : function() {
+              var plainOldDomContentBox = Y.Node.getDOMNode(this.get('contentBox'));
+              dt = new YAHOO.widget.DataTable(plainOldDomContentBox,
+                                                                 this.get('outputColumns'),
+                                                                 this.get('dataSource'),
+                                                                 this.get('dtConfig'));
+              return dt;
             }
         });
+        // assign my widget to my YUI instance
         Y.DocTable = DocTable;
 
         //----------------------------------------------------------
@@ -266,14 +373,14 @@ var wl2 = YUI({
             // that will tell us what columns are present
             // to be parsed by the DataSource object, and consequently what columns will be output
             // by the DataTable.
-            contentBox: Y.CONTENT_BOX_SELECTOR,
-            // columns is an attribute that contains
-            columns : outputTableColumns
+            contentBox: Y.CONTENT_BOX_SELECTOR
         });
         // render it- this calls renderUI which instantiates the 2.x datatable
         // which renders on instantiation. The datasource is created at initialization of the DocTable
                 docs.render();
        // make it a property of the Y global so we can hold onto it
+       // FIXME: it seems weird to have the class DocTable and the instance of DocTable, "docs"
+       // both assigned to the Y object.
         Y.docs = docs;
 
 
