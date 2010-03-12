@@ -9,7 +9,7 @@ Feature: Worklist cloning
   Then I should see element "input.list-wl1-clone"
   And I should see "Clone v1 Worklist" within "table.field-list"
 
-  Scenario: It clones the comments, docids, categories (ie., tags), workstates, and notes of the v1 Worklist id entered
+  Scenario: It clones all v1 Worklist data
   Given I am logged in as Bob
   And I am on the list creation page
   And a doc with id arxq
@@ -19,6 +19,10 @@ Feature: Worklist cloning
   When I fill in "list_name" with "test"
   When I fill in "list_wl1_clone" with "11777"
   And I press "Create List"
+  # Log in as a different user so the workstate field becomes text instead of a select box
+  And I am logged in as NotBob
+  # cloned lists clone the name also
+  And I view the list "Windows 7 - storage" 
   Then I should see "arxq" within ".collection-section"
   And I should see "apev" within ".collection-section"
   And I should see "avck" within ".collection-section"
