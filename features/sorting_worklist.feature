@@ -22,17 +22,23 @@ Scenario: I can sort on Workstate
   Given I am logged in as Bob
   And the following docs exist:
   |docid|
-  |arxq|
-  |abba|
-  |agoo|
+  |pend|
+  |untc|
+  |comp|
   And a list named "sorting workstate test" created by Bob
-  And doc arxq belongs to list "sorting workstate test" with workstate "pending"
-  And doc abba belongs to list "sorting workstate test" with workstate "untouched"
-  And doc agoo belongs to list "sorting workstate test" with workstate "completed"
+  And doc pend belongs to list "sorting workstate test" with workstate "pending"
+  And doc untc belongs to list "sorting workstate test" with workstate "untouched"
+  And doc comp belongs to list "sorting workstate test" with workstate "completed"
   When I view the list "sorting workstate test"
   And I follow "Workstate"
   Then I should see <text> in "tr.listed_doc" in the following order, starting with 1:
   |text|
-  |completed|
-  |pending|
-  |untouched|
+  |comp|
+  |pend|
+  |untc|
+  And I follow "Workstate"
+  Then I should see <text> in "tr.listed_doc" in the following order, starting with 1:
+  |text|
+  |untc|
+  |pend|
+  |comp|
