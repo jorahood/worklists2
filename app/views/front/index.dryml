@@ -5,6 +5,13 @@
   <content:>
 
     <header class="content-header">
+    <h3>March 12, 2010  v0.2.2.8</h3>
+    </header>
+    <section class="content-body">
+      <p>New feature: You can edit and sort lists by Workstate. </p>
+    </section>
+
+    <header class="content-header">
       <h3>March 11, 2010</h3>
     </header>
     <section class="content-body">
