@@ -78,6 +78,8 @@ describe ListedDoc do
     #
     it { should be_updatable_by @admin }
     it { should be_updatable_by @list_creator }
+    # editors are going to want to allow anyone to change e.g., workstate, so it has to be updatable by all users
+    it { should be_updatable_by @other_user }
     it { should_not be_destroyable_by @list_creator }
   end
 

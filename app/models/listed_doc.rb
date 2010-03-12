@@ -79,7 +79,7 @@ class ListedDoc < ActiveRecord::Base
   end
 
   def update_permitted?
-    acting_user.administrator? || list.creator_is?(acting_user)
+    acting_user.signed_up?
   end
 
   def destroy_permitted?

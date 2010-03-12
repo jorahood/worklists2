@@ -19,9 +19,6 @@ Feature: Worklist cloning
   When I fill in "list_name" with "test"
   When I fill in "list_wl1_clone" with "11777"
   And I press "Create List"
-  # Log in as a different user so the workstate field becomes text instead of a select box
-  And I am logged in as NotBob
-  # cloned lists clone the name also
   And I view the list "Windows 7 - storage" 
   Then I should see "arxq" within ".collection-section"
   And I should see "apev" within ".collection-section"
@@ -31,9 +28,9 @@ Feature: Worklist cloning
   And I should see "testcategory4"
   And I should see "test editor note for apev"
   And I should see "test owner note for arxq"
-  And I should see "pending"
-  And I should see "completed"
-  And I should see "untouched"
+  And I should see element "option[selected='selected'][value='pending']"
+  And I should see element "option[selected='selected'][value='completed']"
+  And I should see element "option[selected='selected'][value='untouched']"
 
   Scenario: There can be only one clone of a given v1 list
   Given I am logged in as Bob
