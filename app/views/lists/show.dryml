@@ -29,6 +29,9 @@
     </form>
     <count lowercase if-any/>
  </notes-view:>
+ <workstate-view:>
+   <editor/>
+ </workstate-view:>
     </table-plus>
   </collection:>
 </show-page>
