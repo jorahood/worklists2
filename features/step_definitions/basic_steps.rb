@@ -50,6 +50,9 @@ Given /^a note with id (\d+) with text "([^\"]*)"$/ do |note_id, text|
   note.save!
 end
 
+#FIXME: need to refactor this and the with workstate step into a common, table-accepting step
+# to create listed docs with attributes that will create the necessary docs on the fly. See if
+# FactoryGirl can help creating the associated models automatically
 Given /^doc ([a-z]{4}) has note (\d+) in list "([^\"]*)"$/ do |docid, note_id, list_name|
   doc = Doc.find(docid)
   note = Note.find(note_id)
@@ -64,6 +67,14 @@ Given /^doc ([a-z]{4}) belongs to list "([^\"]*)"$/ do |docid, list_name|
   list = List.find_by_name(list_name)
   list.docs << doc
   list.save!
+end
+
+Given /^doc ([a-z]{4}) belongs to list "([^\"]*)" with workstate "([^\"]*)"$/ do |docid, list_name, workstate|
+  doc = Doc.find(docid)
+  list = List.find_by_name(list_name)
+  doc_in_list = ListedDoc.new(:doc => doc, :list => list)
+  doc_in_list.workstate = workstate
+  doc_in_list.save!
 end
 
 Given /^I am not logged in$/ do
