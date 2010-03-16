@@ -1,3 +1,4 @@
+<include src="hobo-jquery" plugin="hobo-jquery" />
 <include src="rapid" plugin="hobo"/>
 
 <include src="taglibs/auto/rapid/cards"/>
@@ -5,6 +6,18 @@
 <include src="taglibs/auto/rapid/forms"/>
 
 <set-theme name="clean"/>
+
+<!--tag extensions -->
+<extend tag='page'>
+  <old-page merge>
+    <custom-scripts:>
+      <hjq-assets/>
+      <stylesheet name='datatables_page.css'/>
+      <stylesheet name='datatables_table.css'/>
+      <javascript name='jquery.dataTables.js'/>
+</custom-scripts>
+  </old-page>
+</extend>
 
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
@@ -27,9 +40,10 @@
 </extend>
 
 <extend tag="table-plus">
-  <old-table-plus merge without-page-nav/>
+  <old-table-plus merge without-page-nav without-search/>
 </extend>
 
+<!--since I'm using CAS for login I don't want or need all the hobo login management links-->
 <extend tag="account-nav">
   <old-account-nav merge without-account without-log-out without-log-in without-sign-up/>
 </extend>
@@ -72,11 +86,8 @@ in my extension of <form> and customization of <show-page> for Search-->
   </old-form>
 </extend>
 
-<!-- I want nil dates & datetimes to be nil, not today, so you don't automatically start searches with approveddate, modfieddate, and birthdate set to today
-      hobo's input for date provides today's date by default, so I'm redefining it to remove that. Passing :prompt => true to select_date for blank defaults-->
-<def tag='input' attrs='order' for='date'>
-  <% order = order.nil? ? [:year, :month, :day] : comma_split(order).*.to_sym -%>
-  <%= select_date(this, attributes.merge(:prefix => param_name_for_this, :order => order, :prompt =>true)) %>
+<def tag="input" for="Date">
+  <hjq-datepicker dateFormat="yy-mm-dd" merge />
 </def>
 
 <def tag="input" for="datetime" attrs="order">
@@ -173,3 +184,42 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
       this.strftime("%H:%M %p %B %d, %Y")
     end
 %></def>
+
+<!-- redefining table to remove the classes of "even" and "odd" which interfere with DataTables' even and odd classes -->
+<def tag="table" attrs="fields, field-tag, empty">
+  <if test="&!(fields || all_parameters.tr?)">
+    <%= element("table", attributes, all_parameters.default) %>
+  </if>
+  <else>
+    <% field_tag ||= "view" %>
+    <unless test="&this.empty? && !empty">
+      <% element "table", attributes - attrs_for(:with_fields) do %>
+      <thead if="&all_parameters[:thead] || fields" param>
+        <tr param="field-heading-row">
+          <with-field-names merge-attrs="&all_attributes & attrs_for(:with_fields)">
+            <th param="#{scope.field_name}-heading"><%= this.member_class.try.view_hints.try.field_name(scope.field_name) if scope %></th>
+          </with-field-names>
+          <th if="&all_parameters[:controls]" class="controls"/>
+        </tr>
+      </thead>
+      <tbody param>
+        <repeat>
+          <tr param if="&can_view?"
+              class="#{this_type.name.underscore} #{model_id_class}">
+            <if test="&fields">
+              <with-fields merge-attrs="&all_attributes & attrs_for(:with_fields)" force-all>
+                <td param="#{scope.field_name.to_s.sub('?', '').gsub('.', '-')}-view"><call-tag tag="&field_tag"/></td>
+              </with-fields>
+              <td class="controls" param="controls" if="&all_parameters[:controls]">
+                <a param="edit-link" action="edit" if="&can_edit?"><ht key="hobo.action.edit">Edit</ht></a>
+                <delete-button param/>
+              </td>
+            </if>
+          </tr>
+        </repeat>
+      </tbody>
+      <tfoot if="&all_parameters[:tfoot]" param/>
+      <% end %>
+    </unless>
+  </else>
+</def>
