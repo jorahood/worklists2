@@ -2,10 +2,8 @@
   jQuery.fn.dataTableExt.afnSortData['dom-select'] = function  ( oSettings, iColumn )
 {
 	var aData = [];
-	jQuery( 'td:eq('+iColumn+') select', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
-          var selected = jQuery(this).val()
-          var content = selected ? selected : '' //no option may be selected, so return a blank string
-          aData.push('cookie monster');
+	jQuery( 'td:not(.field-list td):eq('+iColumn+') select', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
+          aData.push(jQuery(this).val());
 	} );
 	return aData;
 }
