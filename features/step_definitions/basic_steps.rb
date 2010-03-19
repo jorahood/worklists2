@@ -150,8 +150,8 @@ end
 
 Then /^I should not see the word "([^\"]*)" within "([^\"]*)"$/ do |word, context|
   regexp = Regexp.new("\b"+word+"\b")
-  within(context) do |content|
-    content.should_not contain(regexp)
+  within(context) do
+    page.should_not have_xpath('//*', :text => regexp)
   end
 end
 
