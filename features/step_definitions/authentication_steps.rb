@@ -20,8 +20,8 @@ Then /^I should first have to log into CAS$/ do
   response.should redirect_to("https://cas.iu.edu/cas/login?cassvc=ANY&casurl=http://www.example.com/")
 end
 
-When /^I am Paprika$/ do
-  header('REMOTE_ADDR', '129.79.213.151')
+When /^I am Dolga$/ do
+  header('REMOTE_ADDR', '10.79.213.197')
 end
 
 Then /^I should not have to log into CAS first$/ do

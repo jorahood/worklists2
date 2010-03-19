@@ -27,8 +27,8 @@ class ApplicationController < ActionController::Base
     request.env['REMOTE_ADDR'] == '10.79.213.197'
   end
 
-  def i_am_bdding_or_i_am_paprika
-    i_am_bdding || i_am_paprika
+  def i_am_bdding_or_i_am_dolga
+    i_am_bdding || i_am_dolga
   end
 
   def get_cas_username
