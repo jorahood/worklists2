@@ -112,9 +112,9 @@ When /^I view the search "([^\"]*)"$/ do |search_name|
   click_link search_name
 end
 
-#When /^I view the boiler "([^\"]*)"$/ do |boiler_name|
-#  visit boiler_path(Boiler.find_by_name(boiler_name))
-#end
+When /^I view the boiler "([^\"]*)"$/ do |boiler_name|
+  visit "/boilers/#{boiler_name}"
+end
 
 When /^I remove the search assigned to list "([^\"]*)"$/ do |name|
   list = List.find_by_name(name)
