@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   before_filter CASClient::Frameworks::Rails::Filter, :unless => :i_am_working_or_i_am_dolga
-  before_filter :set_current_user_from_cas
+  before_filter :set_user_from_cas
   before_filter :clean_casticket_param
 
   protected
@@ -32,15 +32,14 @@ class ApplicationController < ActionController::Base
   end
 
   def get_cas_username
-    i_am_working ? params[:cas_user] : session[:cas_user]
+    i_am_working ? params[:backdoor_login] : session[:cas_user]
   end
 
   def clean_casticket_param
      redirect_to params if params.delete(:casticket)
   end
 
-  def set_current_user_from_cas
-#    debugger
+  def set_user_from_cas
     if my_user = Kbuser.find_by_username(get_cas_username)
       session[:user] = my_user.typed_id
     end

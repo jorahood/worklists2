@@ -1,19 +1,10 @@
-class ApplicationController
-  # faking #get_cas_username because I can't figure out how to get at the
-  # session[:cas_user] value before #set_current_user_from_cas_username runs as a
-  # before_filter in ApplicationController.
-  def get_cas_username
-    params[:username]
-  end
-end
-
 Given /^I am logged in as (\w+)$/ do |username|
   Given "a kbuser named #{username}"
   And "I am logged into CAS as #{username}"
 end
 
 Given /^I am logged into CAS as (\w+)$/ do |username|
-  visit '/?cas_user=' + username
+  visit '/?backdoor_login=' + username
 end
 
 Then /^I should first have to log into CAS$/ do
