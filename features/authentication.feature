@@ -13,9 +13,9 @@
   When I go to the homepage
   Then I should first have to log into CAS
 
-#  Scenario: CAS should be bypassed while testing
-#  When I go to the homepage
-#  Then I should not have to log into CAS first
+  Scenario: CAS should be bypassed while testing
+  When I go to the homepage
+  Then I should not have to log into CAS first
 
 #  @production_rails_env
 #  Scenario: Paprika can bypass CAS

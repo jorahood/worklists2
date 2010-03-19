@@ -8,7 +8,7 @@ Given /^I am logged into CAS as (\w+)$/ do |username|
 end
 
 Then /^I should first have to log into CAS$/ do
-  page.current_url.should == "https://cas.iu.edu/cas/login?cassvc=ANY&casurl=http://localhost:9887/"
+  page.current_url.should match Regexp.new("cas.iu.edu")
 end
 
 When /^I am Dolga$/ do
@@ -16,7 +16,7 @@ When /^I am Dolga$/ do
 end
 
 Then /^I should not have to log into CAS first$/ do
-  page.should_not be_redirect
+  page.current_url.should_not match Regexp.new("cas.iu.edu")
 end
 
 Given /^Worklists2 is in a production environment$/ do
