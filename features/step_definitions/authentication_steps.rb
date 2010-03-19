@@ -8,7 +8,7 @@ Given /^I am logged into CAS as (\w+)$/ do |username|
 end
 
 Then /^I should first have to log into CAS$/ do
-  response.should redirect_to("https://cas.iu.edu/cas/login?cassvc=ANY&casurl=http://www.example.com/")
+  page.current_url.should == "https://cas.iu.edu/cas/login?cassvc=ANY&casurl=http://localhost:9887/"
 end
 
 When /^I am Dolga$/ do
@@ -16,7 +16,7 @@ When /^I am Dolga$/ do
 end
 
 Then /^I should not have to log into CAS first$/ do
-  response.should_not be_redirect
+  page.should_not be_redirect
 end
 
 Given /^Worklists2 is in a production environment$/ do
