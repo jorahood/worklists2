@@ -13,7 +13,7 @@ Given /^I am logged in as (\w+)$/ do |username|
 end
 
 Given /^I am logged into CAS as (\w+)$/ do |username|
-  get '/', :username => username
+  visit '/'
 end
 
 Then /^I should first have to log into CAS$/ do
