@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 
-  before_filter CASClient::Frameworks::Rails::Filter, :unless => :i_am_bdding_or_i_am_paprika
+  before_filter CASClient::Frameworks::Rails::Filter, :unless => :i_am_bdding_or_i_am_dolga
   before_filter :set_current_user_from_cas
   before_filter :clean_casticket_param
 
@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
     ENV['RAILS_ENV'] == 'test' || ENV['RAILS_ENV'] == 'cucumber'
   end
 
-  def i_am_paprika
-    request.env['REMOTE_ADDR'] == '129.79.213.151'
+  def i_am_dolga
+    request.env['REMOTE_ADDR'] == '10.79.213.197'
   end
 
   def i_am_bdding_or_i_am_paprika
