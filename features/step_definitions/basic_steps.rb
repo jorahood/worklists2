@@ -136,10 +136,6 @@ When /^I view doc ([a-z]{4}) as xml$/ do |docid|
   visit formatted_doc_path(docid, 'xml')
 end
 
-When /^I select "([^\"]*)"$/ do |value|
-  select value
-end
-
 Then /^I should see <text> in "([^\"]*)" in the following order, starting with (\d+):$/ do |sibling, offset, table|
   table.hashes.each_with_index do |hash, i|
     steps %Q{Then I should see "#{hash['text']}" within "#{sibling}:nth-child(#{i + offset.to_i})"}

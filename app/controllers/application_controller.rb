@@ -13,38 +13,36 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 
-  before_filter CASClient::Frameworks::Rails::Filter, :unless => :i_am_bdding_or_i_am_dolga
+  before_filter CASClient::Frameworks::Rails::Filter, :unless => :i_am_working_or_i_am_dolga
   before_filter :set_current_user_from_cas
   before_filter :clean_casticket_param
 
   protected
 
-  def i_am_bdding
-    ENV['RAILS_ENV'] == 'test' || ENV['RAILS_ENV'] == 'cucumber'
+  def i_am_working
+    ENV['RAILS_ENV'] != 'production'
   end
 
   def i_am_dolga
     request.env['REMOTE_ADDR'] == '10.79.213.197'
   end
 
-  def i_am_bdding_or_i_am_dolga
-    i_am_bdding || i_am_dolga
+  def i_am_working_or_i_am_dolga
+    i_am_working || i_am_dolga
   end
 
   def get_cas_username
-    session[:cas_user]
+    i_am_working ? params[:cas_user] : session[:cas_user]
   end
 
   def clean_casticket_param
-    if params.keys.include?('casticket')
-      params_minus_casticket = params.delete_if{|param,value| param == 'casticket'}
-      redirect_to params_minus_casticket
-    end
+     redirect_to params if params.delete(:casticket)
   end
 
   def set_current_user_from_cas
+#    debugger
     if my_user = Kbuser.find_by_username(get_cas_username)
-      self.current_user = my_user
+      session[:user] = my_user.typed_id
     end
   end
 end
