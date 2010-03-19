@@ -106,12 +106,10 @@ Given /^list "([^\"]*)" is a clone of (\d+)$/ do |name, wl1_id|
   list.save!
 end
 
-#Then /^I view the boiler "([^\"]*)"$/ do |name|
-#  visit boiler_path(name)
-#end
-
 When /^I view the search "([^\"]*)"$/ do |search_name|
-  visit search_path(Search.find_by_name(search_name))
+  visit root_path
+  click_link "Searches"
+  click_link search_name
 end
 
 #When /^I view the boiler "([^\"]*)"$/ do |boiler_name|

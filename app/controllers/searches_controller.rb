@@ -19,12 +19,18 @@ class SearchesController < ApplicationController
     )
 
     hobo_show do |format|
-      format.xml do
-        render :xml => [@search, @unpaginated_result_docs]
-      end
       format.html do
         @result_docs = @unpaginated_result_docs.paginate(
       :page => params[:page])
+      end
+      format.xml do
+        # FIXME: the following used to work but now gives "wrong number of arguments (1 for 0)"
+        # See http://archive.patmaddox.com/blog/2007/2/22/my-rails-gotcha-custom-to_xml-in-a-hash-or-array
+        # not sure what to do.
+        # FIXME: Moved format.xml below format.html because when testing
+        # capybara and Rack.test followed the :xml path when it was first even when not
+        # requesting xml.
+        render :xml => [@search, @unpaginated_result_docs]
       end
     end
   end
