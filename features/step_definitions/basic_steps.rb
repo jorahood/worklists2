@@ -147,11 +147,11 @@ Then /^I should see <text> in "([^\"]*)" in the following order, starting with (
 end
 
 Then /^I should see element "([^\"]*)"$/ do |element|
-  response.should match_selector element
+  page.should have_css element
 end
 
 Then /^I should not see element "([^\"]*)"$/ do |element|
-  response.should_not match_selector element
+  page.should_not have_css element
 end
 
 Then /^I should not see the word "([^\"]*)" within "([^\"]*)"$/ do |word, context|
@@ -163,25 +163,25 @@ end
 
 Then /^I should see the following options checked:$/ do |table|
   table.hashes.each do |hash|
-    response.should match_selector("input#list_show_#{hash['option']}[checked]")
+    page.should have_css("input#list_show_#{hash['option']}[checked]")
   end
 end
 
 Then /^I should see the following options unchecked:$/ do |table|
   table.hashes.each do |hash|
-    response.should match_selector("input#list_show_#{hash['option']}:not([checked])")
+    page.should have_css("input#list_show_#{hash['option']}:not([checked])")
   end
 end
 
 Then /^I should see the following headings:$/ do |table|
   table.hashes.each do |hash|
-    response.should match_selector("th.#{hash[:heading]}-heading")
+    page.should have_css("th.#{hash[:heading]}-heading")
   end
   @total_headings = table.hashes.size
 end
 
 Then /^I should not see any other headings$/ do
-  response.should_not match_selector("th:nth-child(#{@total_headings+1})")
+  page.should_not have_css("th:nth-child(#{@total_headings+1})")
 end
 
 When /^I check the following boxes:$/ do |table|
