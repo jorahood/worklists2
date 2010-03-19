@@ -20,6 +20,11 @@ class Boiler < ActiveRecord::Base
     :through => :boiler_usages,
     :source => :doc 
 
+# trying to understand routing problem with boiler.feature
+#  def to_param
+#    name
+#  end
+#
   def self.import_from_bell
     true
   end

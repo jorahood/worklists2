@@ -5,6 +5,8 @@ ActionController::Routing::Routes.draw do |map|
 
   #allow boiler names with dots in them. E.g., "emacs.faq"™
   map.resources :boilers, :requirements => {:id => /[\w\.]*/}
+#  the following is a failed attempt to test routes for boilers
+#    map.connect "boilers/:name", :requirements => {:name => /[\w\.]*/}, :controller => 'boilers', :action=>'show'
   Hobo.add_routes(map)
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,7 +1,3 @@
-Given /^I am viewing search (\d+)$/ do |id|
-  visit search_path(id)
-end
-
 Given /^a kbuser named (.*)$/ do |name|
   user = Kbuser.new
   # We have to set the username after creating the new object because it is set
@@ -117,6 +113,10 @@ end
 When /^I view the search "([^\"]*)"$/ do |search_name|
   visit search_path(Search.find_by_name(search_name))
 end
+
+#When /^I view the boiler "([^\"]*)"$/ do |boiler_name|
+#  visit boiler_path(Boiler.find_by_name(boiler_name))
+#end
 
 When /^I remove the search assigned to list "([^\"]*)"$/ do |name|
   list = List.find_by_name(name)
