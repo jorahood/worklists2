@@ -11,10 +11,6 @@ Then /^I should first have to log into CAS$/ do
   page.current_url.should match Regexp.new("cas.iu.edu")
 end
 
-When /^I am Dolga$/ do
-  header('REMOTE_ADDR', '10.79.213.197')
-end
-
 Then /^I should not have to log into CAS first$/ do
   page.current_url.should_not match Regexp.new("cas.iu.edu")
 end

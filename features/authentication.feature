@@ -17,12 +17,12 @@
   When I go to the homepage
   Then I should not have to log into CAS first
 
-#  @production_rails_env
-#  Scenario: Paprika can bypass CAS
-#  Given I am Paprika
-#  And Worklists2 is in a production environment
-#  When I go to the homepage
-#  Then I should not have to log into CAS first
+  @production_rails_env
+  Scenario: Dolga can bypass CAS
+  Given I am Dolga
+  And Worklists2 is in a production environment
+  When I go to the homepage
+  Then I should not have to log into CAS first
 
 #  Scenario: New users should not be logged in automatically with their CAS username
 #  Given I am logged into CAS as bob
