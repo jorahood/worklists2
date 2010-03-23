@@ -1,4 +1,3 @@
-@js
 Feature: Sorting worklists
 
   Scenario: I can sort on modified date
