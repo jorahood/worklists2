@@ -10,7 +10,7 @@
 // load the dataTables table
 jQuery(document).ready(function() {
 
-	jQuery('table.display').dataTable( {
+	jQuery('.display > table').dataTable( {
 		'aoColumns': [
 			{sType: 'html'}, //docid
 			{sType: 'html'}, //titles
@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
                         null, //visibility
                         {sType: 'html'},//tags
 			{ sType: 'html' },//notes
-			{ "sSortDataType": "dom-select" }, //workstate
+			{ "sSortDataType": "dom-select" } //workstate
 		]
 	} );
 } );

@@ -106,13 +106,13 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables display
  */
-table.display {
+div.display > div > table {
 	margin: 0 auto;
 	width: 100%;
 	clear: both;
 }
 
-table.display thead th {
+div.display > div > table thead th {
 	padding: 3px 18px 3px 10px;
 	border-bottom: 1px solid black;
 	font-weight: bold;
@@ -120,21 +120,21 @@ table.display thead th {
 	* cursor: hand;
 }
 
-table.display tfoot th {
+div.display > div > table tfoot th {
 	padding: 3px 10px;
 	border-top: 1px solid black;
 	font-weight: bold;
 }
 
-table.display tr.heading2 td {
+div.display > div > table tr.heading2 td {
 	border-bottom: 1px solid #aaa;
 }
 
-table.display td {
+div.display > div > table td {
 	padding: 3px 10px;
 }
 
-table.display td.center {
+div.display > div > table td.center {
 	text-align: center;
 }
 
@@ -171,43 +171,43 @@ table.display td.center {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables row classes
  */
-table.display tr.odd.gradeA {
+div.display > div > table tr.odd.gradeA {
 	background-color: #ddffdd;
 }
 
-table.display tr.even.gradeA {
+div.display > div > table tr.even.gradeA {
 	background-color: #eeffee;
 }
 
-table.display tr.odd.gradeA {
+div.display > div > table tr.odd.gradeA {
 	background-color: #ddffdd;
 }
 
-table.display tr.even.gradeA {
+div.display > div > table tr.even.gradeA {
 	background-color: #eeffee;
 }
 
-table.display tr.odd.gradeC {
+div.display > div > table tr.odd.gradeC {
 	background-color: #ddddff;
 }
 
-table.display tr.even.gradeC {
+div.display > div > table tr.even.gradeC {
 	background-color: #eeeeff;
 }
 
-table.display tr.odd.gradeX {
+div.display > div > table tr.odd.gradeX {
 	background-color: #ffdddd;
 }
 
-table.display tr.even.gradeX {
+div.display > div > table tr.even.gradeX {
 	background-color: #ffeeee;
 }
 
-table.display tr.odd.gradeU {
+div.display > div > table tr.odd.gradeU {
 	background-color: #ddd;
 }
 
-table.display tr.even.gradeU {
+div.display > div > table tr.even.gradeU {
 	background-color: #eee;
 }
 
@@ -300,11 +300,11 @@ td.details {
 	background-color: #99B3FF;
 }
 
-table.display tr.even.row_selected td {
+div.display > div > table tr.even.row_selected td {
 	background-color: #B0BED9;
 }
 
-table.display tr.odd.row_selected td {
+div.display > div > table tr.odd.row_selected td {
 	background-color: #9FAFD1;
 }
 
@@ -468,19 +468,19 @@ table.KeyTable td.focus {
 	border: 3px solid #3366FF;
 }
 
-table.display tr.gradeA {
+div.display > div > table tr.gradeA {
 	background-color: #eeffee;
 }
 
-table.display tr.gradeC {
+div.display > div > table tr.gradeC {
 	background-color: #ddddff;
 }
 
-table.display tr.gradeX {
+div.display > div > table tr.gradeX {
 	background-color: #ffdddd;
 }
 
-table.display tr.gradeU {
+div.display > div > table tr.gradeU {
 	background-color: #ddd;
 }
 
