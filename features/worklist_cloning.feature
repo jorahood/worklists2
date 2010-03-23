@@ -24,7 +24,7 @@ Feature: Worklist cloning
   And I should see "apev" within ".collection-section"
   And I should see "avck" within ".collection-section"
   And I should see "awfj" within ".collection-section"
-  And I should see "test comments for 11777" within ".list-comment"
+  And I should see "test comments for 11777"
   And I should see "testcategory4"
   And I should see "test editor note for apev"
   And I should see "test owner note for arxq"

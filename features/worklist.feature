@@ -305,6 +305,8 @@ Feature: Worklist
   Scenario: It displays only the metadata I pick plus 'docid' and the boilers heading should say boiler name
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
+  And a doc with id aaaa
+  And doc aaaa belongs to list "Docs"
   When I edit the list "Docs"
   And I check "list_show_boilers"
   And I check "list_show_xtras"
