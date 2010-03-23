@@ -8,7 +8,7 @@ Feature: Worklist
   And I am on the list creation page
   When I press "Create List"
   Then I should not see "Name can't be blank"
-  And I should see element ".list-name"
+  And I should see "whatevs, can't be bothered to name my list"
 
   Scenario: It displays the total number of listed docs
   Given a kbuser named user_a
@@ -74,6 +74,8 @@ Feature: Worklist
   Scenario: Has a column to show notes for listed docs
   Given a kbuser named user_a
   And a list named "Docs w/ notes" created by user_a
+  And a doc with id aaaa
+  And doc aaaa belongs to list "Docs w/ notes"
   When I view the list "Docs w/ notes"
   Then I should see "Notes" within ".notes-heading"
 
@@ -196,6 +198,8 @@ Feature: Worklist
   Scenario: A new list displays only the default metadata columns
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
+  And a doc with id aaaa
+  And doc aaaa belongs to list "Docs"
   When I view the list "Docs"
   Then I should see the following headings:
   |heading|
@@ -215,6 +219,8 @@ Feature: Worklist
   Scenario: Showable doc metadata all correspond to actual attributes and associations of the doc
   Given I am logged in as Bob
   And a list named "Docs" created by Bob
+  And a doc with id aaaa
+  And doc aaaa belongs to list "Docs"
   When I edit the list "Docs"
   And I check the following boxes:
   |checkbox|
