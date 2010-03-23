@@ -1,137 +1,120 @@
 jQuery(document).ready(function($) {
   //put some config in my wl2 namespace
-  $.wl2 = {
-    ooColumns : {
-      Docid: {
-        sortable:true
-      },
-      Titles: {
-        sortable:true
-      },
-      Approveddate: {
-        parser: "date",
-        formatter:"date",
-        sortable:true
-      },
-      Modifieddate: {
-        parser: "date",
-        formatter:"date",
-        sortable:true
-      },
-      Birthdate: {
-        parser: "date",
-        formatter:"date",
-        sortable:true
-      },
-      Domains: {
-        sortable:true
-      },
-      Owner: {
-        sortable:true
-      },
-      Author: {
-        sortable:true
-      },
-      Refs: {
-        sortable:true
-      },
-      Refbys: {
-        sortable:true
-      },
-      "Boiler Name": {
-        sortable:true
-      },
-      "Referenced Boilers": {
-        sortable:true
-      },
-      Expirations: {
-        sortable:true
-      },
-      Hotitems: {
-        sortable:true
-      },
-      Importance: {
-        sortable:true
-      },
-      Resources: {
-        sortable:true
-      },
-      Status: {
-        sortable:true
-      },
-      Visibility: {
-        sortable:true
-      },
-      Volatility: {
-        sortable:true
-      },
-      Kbas: {
-        sortable:true
-      },
-      "Kba Bys": {
-        sortable:true
-      },
-      Xtras: {
-        sortable:true
-      },
-      Tags: {
-        sortable:true
-      },
-      Notes: {
-        sortable:true
-      },
-      Workstate: {
-        sortable:true
-      }
+
+  var ooColumns = {
+    Docid: {
+      sType: 'html'
     },
-    sTableSelector : 'table.display'
+    Titles: {
+      sType: 'html'
+    },
+    Approveddate: null,
+    Modifieddate: null,
+    Birthdate: null,
+    Domains: {
+      sType: 'html'
+    },
+    Owner: {
+      sType: 'html'
+    },
+    Author: {
+      sType: 'html'
+    },
+    Refs: {
+      sType: 'html'
+    },
+    Refbys: {
+      sType: 'html'
+    },
+    "Boiler Name": {
+      sType: 'html'
+    },
+    "Referenced Boilers": {
+      sType: 'html'
+    },
+    Expirations: {
+      sType: 'html'
+    },
+    Hotitems: {
+      sType: 'html'
+    },
+    Importance: {
+      sType: 'html'
+    },
+    Resources: {
+      sType: 'html'
+    },
+    Status: {
+      sType: 'html'
+    },
+    Visibility: {
+      sType: 'html'
+    },
+    Volatility: {
+      sType: 'html'
+    },
+    Kbas: {
+      sType: 'html'
+    },
+    "Kba Bys": {
+      sType: 'html'
+    },
+    Xtras: {
+      sType: 'html'
+    },
+    Tags: {
+      sSortDataType: 'dom-html'
+    },
+    Notes: {
+      sSortDataType: 'dom-html'
+    },
+    Workstate: {
+      sSortDataType: "dom-select" // see $.fn.dataTableExt.afnSortData['dom-select']
+    }
   };
-  $.wl2.initInputHeaders = function() {
-    var headers = jQuery(' tr.field-heading-row > th') || [];
-    return headers;
+  var sTableSelector = 'table.display';
+  var sHeadersSelector = sTableSelector + ' tr.field-heading-row > th';
+  var sUnNestedTdSelector = 'td:not(.field-list td)';
+  //* create the aoColumns array to initialize the dataTable with
+  var afnInitColumns = function() {
+    var aFields = [];
+    //iterate over the header nodes to build the responseSchema fields
+    $(sHeadersSelector).each ( function( index, el ){
+      var label = $(el).text() //use the text inside the anchor in each <th> as the label for each field
+      aFields.push(
+        ooColumns[label]
+        );
+    });
+    return aFields;
   };
-  /* For live sorting, create an array with the values of all the select options in a column read from the DOM*/
-  $.fn.dataTableExt.afnSortData['dom-select'] = function  ( oSettings, iColumn )
-  {
+  // see "Custom data source sorting" on http://www.datatables.net/plug-ins/sorting for more examples of the
+  // below custom sorting functions
+  $.fn.dataTableExt.afnSortData['dom-select'] = function  ( oSettings, iColumn ) {
     var aData = [];
-    $( 'td:not(.field-list td):eq('+iColumn+') select', oSettings.oApi._fnGetTrNodes(oSettings) ).each( function () {
-      aData.push($(this).val());
-    } );
+    $( sUnNestedTdSelector + ':eq('+iColumn+') select', oSettings.oApi._fnGetTrNodes(oSettings) ).each( 
+      function (index, el) {
+        var value = $(el).val();
+        aData.push(value);
+      } );
     return aData;
-  }
-  // insert dummy links into table headers for clicking in tests
-  $('table.display > thead > tr > th').each(function() {
-    var sAnchor = '<a href="javascript:void(null)">' + $.trim($(this).text()) + '</a>';
-    $(this).html(sAnchor);
+  };
+  $.fn.dataTableExt.afnSortData['dom-html'] = function ( oSettings, iColumn ) {
+    var aData = [];
+    $( sUnNestedTdSelector + ':eq('+iColumn+')', oSettings.oApi._fnGetTrNodes(oSettings) ).each(
+      function (index, el) {
+        var text = $(el).text();
+        aData.push(text);
+//        if (text) {console.log(text);}
+      });
+      return aData;
+  };
+  // wrap the text in headers in dummy links for clicking in tests
+  $(sHeadersSelector).each(function(index, el) {
+    var sAnchor = '<a href="javascript:void(null)">' + $.trim($(el).text()) + '</a>';
+    $(el).html(sAnchor);
   })
   // load the dataTables table
   $('table.display').dataTable( {
-    'aoColumns': [
-    {
-      sType: 'html'
-    }, //docid
-
-    {
-      sType: 'html'
-    }, //titles
-    null, //approveddate, autodetected
-    null, //modifieddate, autodetected
-    {
-      sType: 'html'
-    }, //domains
-    null, //owner
-    null, //visibility
-    {
-      sType: 'html'
-    },//tags
-
-    {
-      sType: 'html'
-    },//notes
-
-    {
-      "sSortDataType": "dom-select"
-    }, //workstate
-    ]
+    'aoColumns': afnInitColumns()
   } );
 } );
