@@ -8,9 +8,15 @@ jQuery(document).ready(function($) {
     Titles: {
       sType: 'html'
     },
-    Approveddate: null,
-    Modifieddate: null,
-    Birthdate: null,
+    Approveddate: {
+      sType: 'date'
+    },
+    Modifieddate: {
+      sType: 'date'
+    },
+    Birthdate: {
+      sType: 'date'
+    },
     Domains: {
       sType: 'html'
     },

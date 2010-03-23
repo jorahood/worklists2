@@ -86,6 +86,10 @@ in my extension of <form> and customization of <show-page> for Search-->
   </old-form>
 </extend>
 
+<extend tag="view">
+  <old-view merge no-wrapper />
+</extend>
+
 <def tag="input" for="Date">
   <hjq-datepicker dateFormat="yy-mm-dd" merge />
 </def>
