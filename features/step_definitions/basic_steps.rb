@@ -140,6 +140,19 @@ Then /^I should see <text> in "([^\"]*)" in the following order, starting with (
   end
 end
 
+Then /^I should see <text> in "([^\"]*)" in the following order:$/ do |sibling, table|
+  previous_row = {}
+  table.hashes.each_with_index do |row, i|
+    if i ==0
+      previous_row = row
+      next
+    end
+    page.should have_xpath
+    steps %Q{Then I should see /#{previous_row['text']}.*#{row['text']}/}
+    previous_row = row
+  end
+end
+
 Then /^I should see element "([^\"]*)"$/ do |element|
   page.should have_css element
 end

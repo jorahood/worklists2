@@ -7,9 +7,13 @@
 	} );
 	return aData;
 }
-// load the dataTables table
+// insert dummy links into table headers for clicking in tests
 jQuery(document).ready(function() {
-
+        jQuery('table.display > thead > tr > th').each(function() {
+          var sAnchor = '<a href="javascript:void(null)">' + jQuery.trim(jQuery(this).text()) + '</a>';
+          jQuery(this).html(sAnchor);
+        })
+// load the dataTables table
 	jQuery('table.display').dataTable( {
 		'aoColumns': [
 			{sType: 'html'}, //docid
