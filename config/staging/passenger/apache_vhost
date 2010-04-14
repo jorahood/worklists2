@@ -1,13 +1,16 @@
 # Don't cause the server to break if Passenger module not loaded
 <IfModule passenger_module>
 	<VirtualHost *:80>
-	  ServerName test-kmtools.uits.iu.edu
+	  ServerName test-worklists2.uits.iu.edu
         ServerAlias assets0.uits.iu.edu
         ServerAlias assets1.uits.iu.edu
         ServerAlias assets2.uits.iu.edu
         ServerAlias assets3.uits.iu.edu
 
 	  DocumentRoot "/opt/apps/worklists2/current/public"
+	  CustomLog /var/log/apache2/worklists2-access.log combined
+	  ErrorLog /var/log/apache2/worklists2-error.log
+	  
 	  RailsEnv production
 	  # RailsAllowModRewrite off
 	  #
