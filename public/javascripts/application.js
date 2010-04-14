@@ -78,7 +78,7 @@ jQuery(document).ready(function($) {
       sSortDataType: "dom-select" // see $.fn.dataTableExt.afnSortData['dom-select']
     }
   };
-  var sTableSelector = 'table.display';
+  var sTableSelector = 'off';//'table.display';
   var sHeadersSelector = sTableSelector + ' tr.field-heading-row > th';
   var sUnNestedTdSelector = 'td:not(.field-list td)';
   //* create the aoColumns array to initialize the dataTable with
