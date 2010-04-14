@@ -5,6 +5,15 @@
   <content:>
 
     <header class="content-header">
+    <h3>April 14, 2010  v0.2.2.9</h3>
+    </header>
+    <section class="content-body">
+      <p>New feature: Temporary workaround for lists fritziness is that you will see all notes pertaining to a given docid in a list.
+        This will become problematic when there are more notes that don't pertain to the current listing of the doc,
+        but for now it is a hack to get back the notes that were glitched.</p>
+    </section>
+
+    <header class="content-header">
     <h3>March 12, 2010  v0.2.2.8</h3>
     </header>
     <section class="content-body">
