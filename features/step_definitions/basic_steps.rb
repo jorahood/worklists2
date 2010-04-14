@@ -52,6 +52,8 @@ end
 Given /^doc ([a-z]{4}) has note (\d+) in list "([^\"]*)"$/ do |docid, note_id, list_name|
   doc = Doc.find(docid)
   note = Note.find(note_id)
+  note.doc = doc
+  note.save!
   list = List.find_by_name(list_name)
   doc_in_list = ListedDoc.new(:doc => doc, :list => list)
   doc_in_list.notes << note
