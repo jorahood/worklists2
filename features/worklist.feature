@@ -27,7 +27,7 @@ Feature: Worklist
   And a search named "Good search"
   And list "Good list" belongs to search "Good search"
   When I view the list "Good list"
-  Then I should see "Good search"
+  Then I should not see "Good search"
 
   Scenario: It displays a "Refresh search results" button if you are logged in
   Given I am logged in as Bob
