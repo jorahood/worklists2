@@ -5,6 +5,13 @@
   <content:>
 
     <header class="content-header">
+    <h3>April 14, 2010  v0.2.2.10</h3>
+    </header>
+    <section class="content-body">
+      <p>Fixed: pressing "refresh search" while worklists2 is in the middle of reloading data from bell will not cause your list to become empty.</p>
+    </section>
+
+    <header class="content-header">
     <h3>April 14, 2010  v0.2.2.9</h3>
     </header>
     <section class="content-body">
