@@ -12,9 +12,9 @@ class ListsController < ApplicationController
   def show
     @list = find_instance
     @listed_docs =
-      @list.listed_docs.apply_scopes(:search => [params[:search], :doc_id, :status, :tag],
+      @list.listed_docs.apply_scopes(
+      :search => [params[:search], :doc_id, :workstate, :tag],
       :order_by => parse_sort_param(:workstate),
-      :status_is => params[:status],
       # check if we need to sort on doc attr. parse_sort_param will set @sort_field and @sort_direction iff the "sort"
       # url param matches one of the args. 
       :sort_by_doc_attr => parse_sort_param(:approveddate, :birthdate, :modifieddate))
