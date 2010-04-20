@@ -2,7 +2,7 @@ namespace :andy do
   namespace :mysql do
 
     task :dump_tables => :environment do
-      file_path = File.join(base_dir, git_module, filename)
+      file_path = File.join(working_dir, filename)
       # select models to dump that aren't copied from bell or worklists1
       models_to_dump = Hobo::Model.all_models.reject {|m| m.import_from_bell || m.superclass == Worklists1}
       tables = models_to_dump.collect{|m| m.table_name}
@@ -11,15 +11,15 @@ namespace :andy do
     end
 
     task :add_dump do
-      `cd #{File.join(base_dir, git_module)} && git add #{filename}`
+      `cd #{working_dir} && git add #{filename}`
     end
 
     task :commit_dump do
-      `cd #{File.join(base_dir, git_module)} && git commit -m 'backup commit'`
+      `cd #{working_dir} && git commit -m 'backup commit'`
     end
 
     task :push_dump do
-      `cd #{File.join(base_dir, git_module)} && git push github`
+      `cd #{working_dir} && git push github`
     end
     
     desc "dump tables with user-entered data, add them to a hardcoded git module, commit the change, and push it to github"
@@ -30,7 +30,12 @@ namespace :andy do
     end
 
     def git_module
-      "worklists2_backup"
+      @hostname ||= `echo $HOSTNAME`.chomp
+      "#{@hostname}_worklists2_backup"
+    end
+
+    def working_dir
+      File.join(base_dir, git_module)
     end
 
     def filename

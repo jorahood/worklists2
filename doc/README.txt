@@ -49,3 +49,20 @@ Either the refresh task is setting the collation wrong, or Rails has changed its
 FIXME: If the problem is due to Rails having changed default collations, I should run rake db:schema:load on the production machines to get them using
 the utf8_unicode_ci collation to match the development db. Tried that and now my db has collation of latin1_swedish. I think it's best to not
 pull data from production with the mysql:refresh task.
+
+Backups
+  The rake task andy:mysql:back_up_to_github is set up via craken to run once a day.
+  To set it up to run for the first time on a new installation:
+1. create a git repo named <hostname>_worklists2_backup at github.com, e.g., kmtools_worklists2_backup
+2. cd /tmp; mkdir <hostname>_worklists2_backup, e.g., kmtools_worklists2_backup
+3. cd <hostname>_worklists2_backup
+4. git init
+5. git remote add --mirror github git@github.com:<username>/<hostname>_worklists2_backup.git
+6. copy github_rsa key from dev machine to ~/.ssh
+7. edit .ssh/config:
+  Host github.com
+  User git
+  Hostname github.com
+  PreferredAuthentications publickey
+  IdentityFile /home/jorahood/.ssh/github_rsa
+8. run cap craken:install to install the rake task to the server
