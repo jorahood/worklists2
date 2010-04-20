@@ -1,2 +1,2 @@
 */5 * * * * bell:load > /dev/null
-50 9 * * * andy:mysql:back_up_to_github
+0 12 * * * andy:mysql:back_up_to_github
