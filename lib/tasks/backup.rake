@@ -21,7 +21,8 @@ namespace :andy do
     task :push_dump do
       `cd #{File.join(base_dir, git_module)} && git push github`
     end
-
+    
+    desc "dump tables with user-entered data, add them to a hardcoded git module, commit the change, and push it to github"
     task :back_up_to_github => [:dump_tables, :add_dump, :commit_dump, :push_dump]
 
     def base_dir
