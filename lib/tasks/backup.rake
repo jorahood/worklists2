@@ -29,13 +29,9 @@ namespace :andy do
       '/tmp'
     end
 
-    task :git_module do
-      puts git_module
-    end
-
     def git_module
-      hostname = `echo $HOSTNAME`.chomp
-      "#{hostname}_worklists2_backup"
+      @hostname ||= `hostname`.chomp
+      "#{@hostname}_worklists2_backup"
     end
 
     def working_dir
