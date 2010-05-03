@@ -1,4 +1,4 @@
-@javascript
+#@javascript
 Feature: Sorting worklists
 
   Scenario: I can sort on modified date
@@ -50,3 +50,28 @@ Feature: Sorting worklists
       | untc |
       | pend |
       | comp |
+
+Scenario:
+    Given I am logged in as Bob
+    And the following docs exist:
+      | docid |
+      | firs  |
+      | midd |
+      | last  |
+    And a list named "sorting created at test" created by Bob
+    And doc firs belongs to list "sorting created at test" with created_at "1:00 AM February 17, 2010"
+    And doc midd belongs to list "sorting created at test" with created_at "2:00 AM February 17, 2010"
+    And doc last belongs to list "sorting created at test" with created_at "3:00 AM February 17, 2010"
+    When I view the list "sorting created at test"
+    And I follow "Created At"
+    Then I should see <text> in "tr.listed_doc" in the following order, starting with 1:
+      | text |
+      | firs |
+      | midd |
+      | last |
+    And I follow "Created At"
+    Then I should see <text> in "tr.listed_doc" in the following order, starting with 1:
+      | text |
+      | last |
+      | midd |
+      | firs |

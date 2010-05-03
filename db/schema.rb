@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100308184010) do
+ActiveRecord::Schema.define(:version => 20100416145918) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20100308184010) do
     t.string   "creator_id"
     t.integer  "wl1_clone"
     t.string   "custom_url"
+    t.boolean  "show_created_at",         :default => true
   end
 
   create_table "notes", :force => true do |t|

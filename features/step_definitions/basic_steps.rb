@@ -67,11 +67,11 @@ Given /^doc ([a-z]{4}) belongs to list "([^\"]*)"$/ do |docid, list_name|
   list.save!
 end
 
-Given /^doc ([a-z]{4}) belongs to list "([^\"]*)" with workstate "([^\"]*)"$/ do |docid, list_name, workstate|
+Given /^doc ([a-z]{4}) belongs to list "([^\"]*)" with (.*) "([^\"]*)"$/ do |docid, list_name, field, value|
   doc = Doc.find(docid)
   list = List.find_by_name(list_name)
   doc_in_list = ListedDoc.new(:doc => doc, :list => list)
-  doc_in_list.workstate = workstate
+  doc_in_list.send "#{field}=".to_sym, value
   doc_in_list.save!
 end
 

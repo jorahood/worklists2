@@ -117,6 +117,7 @@ Feature: Worklist
       | owner        |
       | tags         |
       | titles       |
+      | created_at   |
       | visibility   |
       | workstate    |
     And I should see the following options unchecked:
@@ -149,6 +150,7 @@ Feature: Worklist
       | heading      |
       | docid        |
       | approveddate |
+      | created-at   |
       | domains      |
       | modifieddate |
       | notes        |
@@ -168,7 +170,7 @@ Feature: Worklist
     And I check the following boxes:
       | checkbox           |
       | approveddate       |
-      | domains            |
+      | created_at         |
       | modifieddate       |
       | notes              |
       | owner              |
@@ -196,6 +198,7 @@ Feature: Worklist
       | heading            |
       | docid              |
       | approveddate       |
+      | created-at         |
       | domains            |
       | modifieddate       |
       | notes              |
@@ -229,6 +232,7 @@ Feature: Worklist
       | Show Approveddate       |
       | Show Modifieddate       |
       | Show Birthdate          |
+      | Show Created At         |
       | Show Domains            |
       | Show Owner              |
       | Show Author             |

@@ -17,7 +17,7 @@
       </docid-view:>
   <notes-view:>
     <set docid="&this_parent.doc.id"/>
-    <collection with="&this_parent.doc.notes" id="#{this_parent.typed_id}-notes" part="notes">
+    <collection id="#{this_parent.typed_id}-notes" part="notes">
       <empty-message:></empty-message:>
     </collection>
     <form with="&this.new" update="#{this_parent.typed_id}-notes" without-cancel reset-form>

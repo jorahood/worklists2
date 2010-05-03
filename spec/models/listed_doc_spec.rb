@@ -11,6 +11,7 @@ describe ListedDoc do
     subject.doc = @doc
   end
 
+  it {should respond_to :created_at}
   it {should respond_to :workstate}
   it "should delegate doc metadata accessors" do
     subject.should respond_to *ListedDoc.delegated_accessors

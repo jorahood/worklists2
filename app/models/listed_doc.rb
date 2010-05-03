@@ -14,7 +14,7 @@ class ListedDoc < ActiveRecord::Base
   has_many :tags,
     :through => :taggings
   
-  @@delegated_accessors = List.showable_columns - [:notes, :workstate, :tags]
+  @@delegated_accessors = List.showable_columns - [:notes, :created_at, :tags, :workstate]
 
   cattr_reader :delegated_accessors
 

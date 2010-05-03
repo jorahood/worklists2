@@ -13,6 +13,7 @@ describe List do
   it { should respond_to :comment }
   it { should respond_to :show_docid }
   it { should respond_to :show_tags }
+  it { should respond_to :show_created_at }
   it { should respond_to :wl1_import }
   it { should respond_to :wl1_clone }
   it { should respond_to :custom_url}  

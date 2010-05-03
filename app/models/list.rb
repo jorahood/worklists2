@@ -3,7 +3,8 @@ class List < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   include XmlUtilities
-  
+  # The "show_xxx" fields let the user customize which attributes of the listed docs to display
+  # when viewing the list.
   fields do
     name :string
     comment :text
@@ -13,6 +14,7 @@ class List < ActiveRecord::Base
     show_approveddate :boolean, :default => true
     show_modifieddate :boolean, :default => true
     show_birthdate :boolean
+    show_created_at :boolean
     show_domains :boolean, :default => true
     show_owner :boolean, :default => true
     show_author :boolean
@@ -38,6 +40,7 @@ class List < ActiveRecord::Base
     custom_url :string
   end
 
+  # don't let the user uncheck "show docid"; we always want to see the docid
   never_show :show_docid
   
   validates_presence_of :name
@@ -84,7 +87,7 @@ class List < ActiveRecord::Base
 
   def selected_columns
     List.showable_columns.find_all do |column|
-      self.send("show_#{column}".to_sym)
+      self.send("show_#{column}".to_sym) # boolean, tells us if it is selected for display
     end
   end
 
