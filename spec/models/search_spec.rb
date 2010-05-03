@@ -16,7 +16,7 @@ describe Search do
     subject.filter
   end
 
-  it "should invoke Doc#with_any_resources scope when resources are given" do
+  it "should invoke Doc#any_of_resources scope when resources are given" do
     user1 = mock_model(Kbuser)
     user2 = mock_model(Kbuser)
     subject.resources << user1
