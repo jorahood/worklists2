@@ -54,7 +54,7 @@ Feature: notes
     When I view the list "Docs"
     Then I should not see element "form.new.note"
 
-  Scenario: Show all notes for a doc, even from earlier appearances
+  Scenario: Don't show notes from earlier appearances of a doc in a list
     Given I am logged in as Bob
     And a list named "first" created by Bob
     And a doc with id aaaa
@@ -63,4 +63,17 @@ Feature: notes
     And a list named "second" created by Bob
     And doc aaaa belongs to list "second"
     When I view the list "second"
-    Then I should see "hoochiemama" within ".notes-view"
+    Then I should not see "hoochiemama" within ".notes-view"
+
+  Scenario: Show all notes for a doc on the doc show page
+    Given I am logged in as Bob
+    And a doc with id aaaa
+    And a list named "first" created by Bob
+    And a note with id 1 with text "hoochiemama"
+    And doc aaaa has note 1 in list "first"
+    And a list named "second" created by Bob
+    And a note with id 2 with text "woowoowoo"
+    And doc aaaa has note 2 in list "second"
+    When I view the doc aaaa
+    Then I should see "hoochiemama"
+    And I should see "woowoowoo"

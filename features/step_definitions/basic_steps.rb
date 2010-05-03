@@ -108,6 +108,10 @@ Given /^list "([^\"]*)" is a clone of (\d+)$/ do |name, wl1_id|
   list.save!
 end
 
+When /^I view the doc ([a-z]{4})$/ do |docid|
+  visit formatted_doc_path(docid, 'html')
+end
+
 When /^I view the search "([^\"]*)"$/ do |search_name|
   visit root_path
   click_link "Searches"

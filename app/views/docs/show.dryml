@@ -5,6 +5,10 @@
   <collection:><card: without-doc-link /></collection:>
   <after-collection:>
     <section>
+      <h3>Notes</h3>
+    <collection:notes/>
+    </section>
+    <section>
       <h3>Doc kbxml</h3>
       <div class="raw-xml"><%= simple_format h this.kbxml_body %></div>
     </section>
