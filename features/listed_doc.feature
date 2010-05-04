@@ -42,5 +42,6 @@ Feature: Viewing a listed doc
     And a list named "new window test" created by Bob
     And doc arxq belongs to list "new window test"
     When I view the list "new window test"
-    Then I should see element "a[target='arxq-view']"
+    Then I should see element "a[target='arxq-ws']"
     And I should see element "a[target='arxq-rcs']"
+    And I should see element "a[target='arxq-show']"
