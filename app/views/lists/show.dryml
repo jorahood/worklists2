@@ -11,9 +11,10 @@
   <collection: replace>
     <table-plus with='&@listed_docs' fields='&@listed_doc_fields' class='display'>
       <docid-view:>
-        <a href="&this_parent.make_docid_link" target="#{this}-view"><view/></a>
+        <a href="&this_parent.make_docid_link" target="#{this}-ws"><view/></a>
         <a href="https://bell.ucs.indiana.edu/~jorahood/rcsweb.cgi?docid=#{this}&action=rlog" target="#{this}-rcs">
           (RCS)</a>
+        <a href="/docs/#{this}" target="#{this}-show">(show)</a>
       </docid-view:>
   <notes-view:>
     <set docid="&this_parent.doc.id"/>

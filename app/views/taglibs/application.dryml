@@ -12,9 +12,6 @@
   <old-page merge>
     <custom-scripts:>
       <hjq-assets/>
-      <stylesheet name='datatables_page.css'/>
-      <stylesheet name='datatables_table.css'/>
-      <javascript name='jquery.dataTables.js'/>
 </custom-scripts>
   </old-page>
 </extend>
@@ -176,9 +173,9 @@ defaults to <div> wrapper but 'inline' forces it to use a <span> wrapper)-->
       "less than #{(elapsed * 1.5).to_i.to_s.slice(0,1)}0 seconds ago"
     when 40..60
       'less than a minute ago'
-    when 60..90
-      "a minute ago"
-    when 90..3000
+    when 60..120
+      "less than two minutes ago"
+    when 120..3000
       "#{(elapsed / 60).to_i} minutes ago"
     when 3000..5040
       'an hour ago'

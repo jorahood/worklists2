@@ -8,6 +8,14 @@ Feature: Viewing a listed doc
     When I view the list "rcs url test"
     Then I should see element "a[href='https://bell.ucs.indiana.edu/~jorahood/rcsweb.cgi?docid=arxq&action=rlog']"
 
+  Scenario: There is a link to the doc show page
+    Given I am logged in as Bob
+    And a doc with id arxq
+    And a list named "doc show url test" created by Bob
+    And doc arxq belongs to list "doc show url test"
+    When I view the list "doc show url test"
+    Then I should see element "a[href='/docs/arxq']"
+
   Scenario: Each listed doc uses the custom_url value to create the docid links for a list
     Given I am logged in as Bob
     And a doc with id arxq
