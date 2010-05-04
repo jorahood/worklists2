@@ -5,6 +5,17 @@
   <content:>
 
     <header class="content-header">
+      <h3>May 4, 2010  v0.2.2.11</h3>
+    </header>
+    <section class="content-body">
+      <p>Reverted: The workaround for notes in v0.2.2.9 has been removed so you will only see notes added for a doc in that list displayed in the list. To view old notes, see the next feature.</p>
+      <p>New feature: All notes for a doc are displayed on the doc show page, under the titles.</p>
+      <p>New feature: Listed docs can display a "Created At" attribute on which you can sort to put the listed docs in the order they were added to the list.</p>
+      <p>New feature: There is a link to the doc show page in the "Docid" column of lists. It looks like this: (show).</p>
+      <p>New feature: The date picker in the search editing interface is Ajaxy. This was something I did a few releases ago but forgot to mention.</p>
+    </section>
+
+    <header class="content-header">
     <h3>April 14, 2010  v0.2.2.10</h3>
     </header>
     <section class="content-body">
