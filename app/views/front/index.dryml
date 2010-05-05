@@ -5,6 +5,13 @@
   <content:>
 
     <header class="content-header">
+      <h3>May 5, 2010  v0.2.2.12</h3>
+    </header>
+    <section class="content-body">
+      <p>New feature: Delete notes in list: The creator of a note can delete it in a list by clicking the "X" button.</p>
+    </section>
+
+    <header class="content-header">
       <h3>May 4, 2010  v0.2.2.11</h3>
     </header>
     <section class="content-body">
