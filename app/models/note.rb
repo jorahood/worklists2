@@ -42,7 +42,7 @@ class Note < ActiveRecord::Base
   def destroy_permitted?
     return true if acting_user.administrator?
 
-    !creator_changed?
+    creator_is? acting_user
   end
 
   def view_permitted?(field)

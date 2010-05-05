@@ -1,7 +1,6 @@
 <!-- List -->
 
 <show-page>
-  <body: class="yui-skin-sam"/>
   <after-field-list:>
     <remote-method-button if="&can_call?(:refresh_search)" method="refresh_search" label="Refresh search results"/>
   </after-field-list:>
@@ -19,6 +18,11 @@
   <notes-view:>
     <set docid="&this_parent.doc.id"/>
     <collection id="#{this_parent.typed_id}-notes" part="notes">
+      <card:>
+        <append-body:>
+          <delete-button label="X"/>
+        </append-body:>
+      </card:>
       <empty-message:></empty-message:>
     </collection>
     <form with="&this.new" update="#{this_parent.typed_id}-notes" without-cancel reset-form>
@@ -28,7 +32,6 @@
       </after-field-list:>
       <submit: label="Add note"/>
     </form>
-    <count lowercase if-any/>
  </notes-view:>
  <workstate-view:>
    <editor name="workstate"/>

@@ -46,6 +46,12 @@ Given /^a note with id (\d+) with text "([^\"]*)"$/ do |note_id, text|
   note.save!
 end
 
+Given /^a note with id (\d+) with text "([^\"]*)" created by (.*)$/ do |note_id, text, username|
+  note = Note.new(:text => text, :creator => Kbuser.find_by_username(username))
+  note.id = note_id
+  note.save!
+end
+
 #FIXME: need to refactor this and the with workstate step into a common, table-accepting step
 # to create listed docs with attributes that will create the necessary docs on the fly. See if
 # FactoryGirl can help creating the associated models automatically
@@ -138,6 +144,12 @@ end
 
 When /^I view doc ([a-z]{4}) as xml$/ do |docid|
   visit formatted_doc_path(docid, 'xml')
+end
+
+When /^I press the delete button$/ do
+  # hack around confirmation dialog, from http://stackoverflow.com/questions/2458632/how-to-test-a-confirm-dialog-with-cucumber
+  page.evaluate_script('window.confirm = function() { return true; }')
+  page.click('X')
 end
 
 Then /^I should see <text> in "([^\"]*)" in the following order, starting with (\d+):$/ do |sibling, offset, table|

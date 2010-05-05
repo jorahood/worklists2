@@ -7,7 +7,7 @@ describe Note do
       :text => "This is a note.",
       :creator => @user
     }
-    @note = Note.new(@valid_attributes)
+    @note = Note.create!(@valid_attributes)
   end
 
   it { should belong_to :listed_doc }
@@ -45,17 +45,11 @@ describe Note do
       @guest = mock_model(Guest, :signed_up? => false)
       @updated_note_w_new_user = Note.new(:creator=>@other_user)
     end
-
-#    it "should be creatable by signed-up user" do
-#      @note.creatable_by?(@user).should be_true
-#    end
-#
-#    it "should be tied to a user as creator" do
-#      # this helps hobo know that the current user can create their own projects
-#      # only, and the creator field shouldn't be displayed on the new list form
-#      @note.creatable_by?(@other_user).should be_false
-#    end
-#
-#    it "should not be updatable by non-admin"
+    it "should be destroyable by its creator" do
+      @note.should be_destroyable_by @user
+    end
+    it "should not be destroyable by other users" do
+      @note.should_not be_destroyable_by @other_user
+    end
   end
 end

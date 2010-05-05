@@ -77,3 +77,24 @@ Feature: notes
     When I view the doc aaaa
     Then I should see "hoochiemama"
     And I should see "woowoowoo"
+
+  @javascript
+  Scenario: Users can delete their own notes
+    Given I am logged in as me
+    And a list named "Docs w/ notes" created by me
+    And a doc with id aaaa
+    And a note with id 1 with text "hoochiemama" created by me
+    And doc aaaa has note 1 in list "Docs w/ notes"
+    And I view the list "Docs w/ notes"
+    When I press the delete button
+    Then I should not see "hoochiemama"
+
+  Scenario: Users cannot delete other users' notes
+    Given I am logged in as me
+    And a kbuser named you
+    And a list named "Docs w/ notes" created by me
+    And a doc with id aaaa
+    And a note with id 1 with text "hoochiemama" created by you
+    And doc aaaa has note 1 in list "Docs w/ notes"
+    And I view the list "Docs w/ notes"
+    Then I should not see element ".delete-note-button"
