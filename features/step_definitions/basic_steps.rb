@@ -128,6 +128,10 @@ When /^I view the boiler "([^\"]*)"$/ do |boiler_name|
   visit "/boilers/#{boiler_name}"
 end
 
+When /^I view note (\d+)$/ do |note_id|
+  visit "/notes/#{note_id}"
+end
+
 When /^I remove the search assigned to list "([^\"]*)"$/ do |name|
   list = List.find_by_name(name)
   list.search = nil

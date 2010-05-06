@@ -36,7 +36,7 @@ class Note < ActiveRecord::Base
   def update_permitted?
     return true if acting_user.administrator?
 
-    acting_user.signed_up?
+    !creator_changed?
   end
 
   def destroy_permitted?

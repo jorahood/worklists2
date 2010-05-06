@@ -41,9 +41,20 @@ Feature: notes
     And a list named "Docs" created by user_a
     And a doc with id aaaa
     And doc aaaa belongs to list "Docs"
-    When I view the list "Docs"
-    And I press "Add note"
+    And I view the list "Docs"
+    When I press "Add note"
     Then I should see "aaaa" within ".doc-view"
+
+  @javascript
+  Scenario: It automatically sets the note's creator to the acting user
+    Given I am logged in as me
+    And a list named "Docs" created by me
+    And a doc with id aaaa
+    And doc aaaa belongs to list "Docs"
+    And I view the list "Docs"
+    When I fill in "note_text" with "hiya"
+    And press "Add note"
+    Then I should see "me" within ".card.note .creator-link"
 
   Scenario: For a guest user, it does not display a form for each listed doc to add a note.
     Given I am not logged in
@@ -98,3 +109,10 @@ Feature: notes
     And doc aaaa has note 1 in list "Docs w/ notes"
     And I view the list "Docs w/ notes"
     Then I should not see element ".delete-note-button"
+
+  Scenario: Users cannot change the creator of a note
+    Given I am logged in as me
+    And a note with id 1 with text "foo" created by me
+    And I view note 1
+    When I follow "Edit Note"
+    Then I should not see "Creator"

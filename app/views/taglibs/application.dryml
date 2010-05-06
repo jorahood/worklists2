@@ -95,8 +95,6 @@ in my extension of <form> and customization of <show-page> for Search-->
   <% if ! order.nil?
     order = comma_split(order).*.to_sym
     attributes.merge!(:order => order)
-    require 'ruby-debug'
-    debugger
   end -%>
   <%= select_datetime(this, attributes.merge(:prefix => param_name_for_this, :prompt =>true)) %>
 </def>
