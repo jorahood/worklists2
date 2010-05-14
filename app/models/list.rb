@@ -61,7 +61,8 @@ class List < ActiveRecord::Base
     :dependent => :destroy
   has_many :docs, 
     :through => :listed_docs
-
+  has_many :notes,
+    :through => :listed_docs
   def self.showable_columns
     attr_order.*.to_s.grep(/^show_/) do |method_name|
       method_name.gsub(/^show_/,'').to_sym

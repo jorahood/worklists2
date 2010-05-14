@@ -1710,6 +1710,7 @@
 
     <content: param>
           <header param="content-header">
+            <a:list param="parent-link">&laquo; <ht key="notes.actions.back" to="list"><name/></ht></a:list>
             <h2 param="heading">
               <ht key="notes.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>

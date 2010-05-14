@@ -116,3 +116,12 @@ Feature: notes
     And I view note 1
     When I follow "Edit Note"
     Then I should not see "Creator"
+
+  Scenario: The note show page has a link to the note's list
+    Given I am logged in as me
+    And a list named "Link to list" created by me
+    And a doc with id aaaa
+    And a note with id 1 with text "hoochiemama" created by me
+    And doc aaaa has note 1 in list "Link to list"
+    And I view note 1
+    Then I should see "Link to list" within "a.parent-link"

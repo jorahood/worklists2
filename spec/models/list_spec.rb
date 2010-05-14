@@ -56,6 +56,7 @@ describe List do
   end
   it { should have_many :listed_docs }
   it { should have_many(:docs).through :listed_docs }
+  it { should have_many(:notes).through :listed_docs }
   it { should belong_to :search }
   it "should return showable metadata columns" do
     columns = List.attr_order.*.to_s.grep(/^show_/) do |method_name|

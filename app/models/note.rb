@@ -7,6 +7,8 @@ class Note < ActiveRecord::Base
     timestamps
   end
 
+  delegate :list, :to => :listed_doc
+
   belongs_to :listed_doc
   belongs_to :doc
   belongs_to :creator,
@@ -36,7 +38,7 @@ class Note < ActiveRecord::Base
   def update_permitted?
     return true if acting_user.administrator?
 
-    !creator_changed?
+    !creator_changed? && !doc_changed? && !listed_doc_changed?
   end
 
   def destroy_permitted?

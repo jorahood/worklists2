@@ -9,7 +9,8 @@ describe Note do
     }
   end
 
-  subject {Note.new(@valid_attributes)}
+  subject {Note.create!(@valid_attributes)}
+  it { should respond_to :list }
   it { should belong_to :listed_doc }
   it { should belong_to :doc }
   it { should belong_to :creator }
@@ -45,8 +46,14 @@ describe Note do
       @guest = mock_model(Guest, :signed_up? => false)
       @updated_note_w_new_user = Note.new(:creator=>@other_user)
     end
-    it "should not allow users to change the creator attribute" do
+    it "should not allow users to change the creator assoc" do
       subject.should_not be_editable_by(@user, :creator)
+    end
+    it "should not allow users to change the doc assoc" do
+      subject.should_not be_editable_by(@user, :doc)
+    end
+    it "should not allow users to change the listed_doc assoc" do
+      subject.should_not be_editable_by(@user, :listed_doc)
     end
     it {should be_destroyable_by @user}
     it {should_not be_destroyable_by @other_user}
