@@ -5,6 +5,14 @@
   <content:>
 
     <header class="content-header">
+      <h3>May 14, 2010  v0.2.2.13</h3>
+    </header>
+    <section class="content-body">
+      <p>Fixed: Editing a note no longer unsets the creator; I fixed this by removing permissions to change the creator, doc, or listed doc assocations of a note so those fields won't appear when editing a note. Still need to determine what is wrong with those fields that they have extra whitespace prepended.</p>
+      <p>New feature: Note pages now have a link back to their containing list.</p>
+    </section>
+
+    <header class="content-header">
       <h3>May 5, 2010  v0.2.2.12</h3>
     </header>
     <section class="content-body">
