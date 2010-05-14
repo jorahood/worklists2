@@ -8,7 +8,7 @@
       <h3>May 14, 2010  v0.2.2.14</h3>
     </header>
     <section class="content-body">
-      <p>New feature: In-place ajax editing of notes in lists. In a list, click the text of your note to open a text area. When you're done editing, click outside the text area to save.</p>
+      <p>New feature: In-place ajax editing of notes in lists. In a list, click the text of your note to open a text area. When you're done editing, remove focus from the text area by pressing Tab or clicking outside it to save.</p>
     </section>
 
     <header class="content-header">
