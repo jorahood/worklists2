@@ -119,13 +119,6 @@ Feature: notes
     When I view the list "Docs w/ notes"
     Then I should see "hoochiemama" within "div.note-text.in-place-edit"
 
-  Scenario: Users cannot change the creator of a note
-    Given I am logged in as me
-    And a note with id 1 with text "foo" created by me
-    And I view note 1
-    When I follow "Edit Note"
-    Then I should not see "Creator"
-
   Scenario: The note show page has a link to the note's list
     Given I am logged in as me
     And a list named "Link to list" created by me
