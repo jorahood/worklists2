@@ -19,6 +19,7 @@
     <set docid="&this_parent.doc.id"/>
     <collection id="#{this_parent.typed_id}-notes" part="notes">
       <card:>
+        <heading:><editor:text/></heading:>
         <append-body:>
           <delete-button label="X"/>
         </append-body:>

@@ -100,7 +100,7 @@ Feature: notes
     When I press the delete button
     Then I should not see "hoochiemama"
 
-  Scenario: Users cannot delete other users' notes
+  Scenario: There is no delete button displayed for other users' notes
     Given I am logged in as me
     And a kbuser named you
     And a list named "Docs w/ notes" created by me
@@ -109,6 +109,15 @@ Feature: notes
     And doc aaaa has note 1 in list "Docs w/ notes"
     And I view the list "Docs w/ notes"
     Then I should not see element ".delete-note-button"
+
+  Scenario: There is an in-place editor for notes in lists
+    Given I am logged in as me
+    And a list named "Docs w/ notes" created by me
+    And a doc with id aaaa
+    And a note with id 1 with text "hoochiemama" created by me
+    And doc aaaa has note 1 in list "Docs w/ notes"
+    When I view the list "Docs w/ notes"
+    Then I should see "hoochiemama" within "div.note-text.in-place-edit"
 
   Scenario: Users cannot change the creator of a note
     Given I am logged in as me
