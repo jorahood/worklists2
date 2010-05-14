@@ -9,7 +9,7 @@ class ListedDoc < ActiveRecord::Base
 
   belongs_to :doc
   belongs_to :list
-  has_many :notes, :dependent => :destroy
+  has_many :notes
   has_many :taggings
   has_many :tags,
     :through => :taggings
