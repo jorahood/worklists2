@@ -38,6 +38,10 @@ class Kbuser < ActiveRecord::Base
   has_many :owned_docs,
     :class_name => 'Doc',
     :foreign_key => 'owner'
+  has_many :workshop_wfinodes,
+    :foreign_key => :owner
+  has_many :workshop_document_assets,
+    :through => :workshop_wfinodes
 
   never_show :worknumber, :homenumber, :pagernumber, :password
 

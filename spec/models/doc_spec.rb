@@ -9,7 +9,8 @@ describe Doc do
   it { should have_many(:lists).through(:listed_docs) }
   it { should have_many :docid_searches }
   it { should have_many(:searches).through(:docid_searches) }
-
+  it { should have_one :workshop_document_asset }
+  it { should have_one(:workshop_wfinode).through :workshop_document_asset }
   it "should have a named scope called docid_search" do
     Doc.should respond_to :docid_search
   end

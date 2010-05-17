@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100416145918) do
+ActiveRecord::Schema.define(:version => 20100517164814) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(:version => 20100416145918) do
   end
 
   add_index "document", ["id"], :name => "index_docs_on_id", :unique => true
+
+  create_table "documentasset", :force => true do |t|
+    t.string "document"
+    t.string "label"
+  end
 
   create_table "documentdomain", :id => false, :force => true do |t|
     t.string "id"
@@ -272,6 +277,17 @@ ActiveRecord::Schema.define(:version => 20100416145918) do
   create_table "volatility", :id => false, :force => true do |t|
     t.integer "rank"
     t.string  "volatility"
+  end
+
+  create_table "wfinode", :force => true do |t|
+    t.integer "desk"
+    t.integer "parent"
+    t.string  "creator"
+    t.string  "owner"
+    t.string  "usergroup"
+    t.date    "birthdate"
+    t.date    "lastmodified"
+    t.integer "permissions"
   end
 
   create_table "xtra", :id => false, :force => true do |t|

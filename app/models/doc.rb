@@ -87,13 +87,17 @@ class Doc < ActiveRecord::Base
     :class_name => 'Title',
     :foreign_key => 'docid',
     :conditions => ["#{Title.table_name}.audience = ?", "default"]
+  has_one :workshop_document_asset,
+    :foreign_key => 'document'
+  has_one :workshop_wfinode,
+    :through => :workshop_document_asset
 
   def self.import_from_bell
     true
   end
 
   named_scope :docid_search, lambda { |*docids|
-   { :conditions => {:id => docids} }
+    { :conditions => {:id => docids} }
   }
   
   named_scope :unarchived,
@@ -142,7 +146,7 @@ class Doc < ActiveRecord::Base
 
   named_scope :expiredate_is, lambda { |date|
     {:joins => :expirations,
-     :conditions => ["#{Expiration.table_name}.expiredate = ?", date]}
+      :conditions => ["#{Expiration.table_name}.expiredate = ?", date]}
   }
 
   named_scope :expiredate_after, lambda { |date|
