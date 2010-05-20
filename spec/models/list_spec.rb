@@ -8,15 +8,45 @@ describe List do
     @search = mock_model(Search, :execute => [@doc])
     @list = List.create!(:name=>'test', :creator=>@list_creator)
   end
+
+  subject {Factory.create(:list)}
+  # Attributes
   it { should respond_to :name }
   it { should respond_to :creator }
   it { should respond_to :comment }
   it { should respond_to :show_docid }
   it { should respond_to :show_tags }
   it { should respond_to :show_created_at }
+  it { should respond_to :show_workshop_wfinodes }
   it { should respond_to :wl1_import }
   it { should respond_to :wl1_clone }
   it { should respond_to :custom_url}  
+
+  # Validations
+  it "should validate presence of name" do
+  # get around my before_validation_on_create callback, List#create_temp_name
+    subject.name = nil
+    subject.should_not be_valid
+  end
+  it { should validate_numericality_of :wl1_import }
+  it { should validate_numericality_of :wl1_clone }
+  it "should validate uniqueness of :wl1_clone when present" do
+    list =  List.create!(:wl1_clone => 1)
+    lambda {
+      List.create!(:wl1_clone => 1)
+    }.should raise_error(/That list has already been cloned/)
+  end
+
+  # Associations
+  it { should belong_to :creator }
+  specify "creator should be a Kbuser" do
+    @list.creator.class.should == Kbuser
+  end
+  it { should have_many :listed_docs }
+  it { should have_many(:docs).through :listed_docs }
+  it { should have_many(:notes).through :listed_docs }
+  it { should belong_to :search }
+
   it "should give unnamed lists a generic name on create" do
     list = List.create!
     list.name.should_not be_blank
@@ -28,36 +58,6 @@ describe List do
       list.save!
     }.should raise_error("Validation failed: Name can't be blank")
   end
-  it "should validate presence of name" do
-    # this is a hack. The create_temp_name only fires on
-    # before_validation_on_create, so I will test that name is validated when
-    # not creating in order to not fire create_temp_name. This technique is my
-    # solution for the fact that  List.before_validation_on_create.clear
-    # interferes with later tests that depend on create_temp_name to create the
-    # name and I don't know how to restore the callbacks after calling clear
-
-    list = List.create!(:name => 'blah')
-    list.name = nil
-    lambda {
-      list.save!
-    }.should raise_error("Validation failed: Name can't be blank")
-  end
-  it { should validate_numericality_of :wl1_import }
-  it { should validate_numericality_of :wl1_clone }
-  it "should validate uniqueness of :wl1_clone when not nil" do
-    list =  List.create!(:wl1_clone => 1)
-    lambda {
-      List.create!(:wl1_clone => 1)
-    }.should raise_error(/That list has already been cloned/)
-  end
-  it { should belong_to :creator }
-  specify "creator should be a Kbuser" do
-    @list.creator.class.should == Kbuser
-  end
-  it { should have_many :listed_docs }
-  it { should have_many(:docs).through :listed_docs }
-  it { should have_many(:notes).through :listed_docs }
-  it { should belong_to :search }
   it "should return showable metadata columns" do
     columns = List.attr_order.*.to_s.grep(/^show_/) do |method_name|
       method_name.gsub(/^show_/, '').to_sym
@@ -86,7 +86,6 @@ describe List do
       @editor_Kbuser = mock_model(Kbuser, :administrator? => false, :signed_up? => true)
     end
     it "should be creatable by its creator" do
-      @list.stub!(:acting_user).and_return(@list_creator)
       @list.should be_creatable_by(@list_creator)
     end
     it "should not be creatable by non-creator" do

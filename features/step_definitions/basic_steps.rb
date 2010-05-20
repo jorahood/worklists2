@@ -1,11 +1,5 @@
 Given /^a kbuser named (.*)$/ do |name|
-  user = Kbuser.new
-  # We have to set the username after creating the new object because it is set
-  # as the primary key because Rails will autogen a sequence integer for it and
-  # drop the username if I tried to set it on create: Kbuser.create!(:username
-  # => 'blah')
-  user.username = name
-  user.save!
+  Factory.create(:kbuser, :username => name)
 end
 
 Given /^a list named "([^\"]*)" created by (.*)$/ do |list_name, username|
@@ -226,7 +220,7 @@ Then /^I should see "([^\"]*)" in the "([^\"]*)" cell of doc "([^\"]*)"$/ do |st
   end
 end
 
-Given /^the following docs exist:$/ do |table|
+Given /^the following docs:$/ do |table|
   table.hashes.each do |hash|
     doc = Doc.new
     doc.id = hash['docid']

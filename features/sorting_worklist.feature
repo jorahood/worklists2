@@ -3,7 +3,7 @@ Feature: Sorting worklists
 
   Scenario: I can sort on modified date
     Given I am logged in as Bob
-    And the following docs exist:
+    And the following docs:
       | docid | modifieddate |
       | aaaa  | 2010-01-01   |
       | cccc  | 2030-03-03   |
@@ -28,7 +28,7 @@ Feature: Sorting worklists
 
   Scenario: I can sort on Workstate
     Given I am logged in as Bob
-    And the following docs exist:
+    And the following docs:
       | docid |
       | pend  |
       | untc  |
@@ -53,7 +53,7 @@ Feature: Sorting worklists
 
 Scenario:
     Given I am logged in as Bob
-    And the following docs exist:
+    And the following docs:
       | docid |
       | firs  |
       | midd |

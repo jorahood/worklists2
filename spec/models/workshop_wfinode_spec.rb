@@ -7,5 +7,6 @@ describe WorkshopWfinode do
   it "s table is named 'wfinode'" do
     WorkshopWfinode.table_name.should == "wfinode"
   end
-
+it { should have_many :workshop_document_assets }
+it { should have_many(:docs).through :workshop_document_assets }
 end

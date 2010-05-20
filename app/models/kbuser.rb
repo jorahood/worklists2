@@ -14,8 +14,8 @@ class Kbuser < ActiveRecord::Base
     pagernumber :string
   end
 
-  has_many :lists, :foreign_key => 'creator_id', :dependent => :destroy
-  has_many :notes, :foreign_key => 'creator_id', :dependent => :destroy
+  validates_presence_of :username
+  validates_uniqueness_of :username
 
   def self.import_from_bell
     true
@@ -26,6 +26,10 @@ class Kbuser < ActiveRecord::Base
 
   set_primary_key :username
   
+  has_many :lists,
+    :foreign_key => 'creator_id'
+  has_many :notes,
+    :foreign_key => 'creator_id'
   has_many :kbresource_roles, 
     :class_name => 'Kbresource',
     :foreign_key => 'username'
@@ -38,10 +42,6 @@ class Kbuser < ActiveRecord::Base
   has_many :owned_docs,
     :class_name => 'Doc',
     :foreign_key => 'owner'
-  has_many :workshop_wfinodes,
-    :foreign_key => :owner
-  has_many :workshop_document_assets,
-    :through => :workshop_wfinodes
 
   never_show :worknumber, :homenumber, :pagernumber, :password
 

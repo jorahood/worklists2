@@ -1,6 +1,7 @@
 class ListHints < Hobo::ViewHints
   children :listed_docs
   field_names :show_boilers => "Show Boiler Name",
+    :show_workshop_wfinodes => "Show Workshop Desk",
     :custom_url => "Custom URL",
     :wl1_import => "Import v1 Worklist",
     :wl1_clone => "Clone v1 Worklist"

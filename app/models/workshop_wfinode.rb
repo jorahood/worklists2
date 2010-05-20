@@ -19,6 +19,10 @@ class WorkshopWfinode < ActiveRecord::Base
     true
   end
 
+  has_many :workshop_document_assets,
+    :foreign_key => "id"
+  has_many :docs,
+    :through => :workshop_document_assets
   # --- Permissions --- #
 
   def create_permitted?

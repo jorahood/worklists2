@@ -11,6 +11,9 @@ class Doc < ActiveRecord::Base
     approveddate :date
   end
 
+  validates_presence_of :id
+  validates_uniqueness_of :id
+
   #don't display the fks
   #  never_show :importance, :visibility, :volatility, :status, :author, :owner
   set_table_name :document
@@ -87,10 +90,10 @@ class Doc < ActiveRecord::Base
     :class_name => 'Title',
     :foreign_key => 'docid',
     :conditions => ["#{Title.table_name}.audience = ?", "default"]
-  has_one :workshop_document_asset,
+  has_many :workshop_document_assets,
     :foreign_key => 'document'
-  has_one :workshop_wfinode,
-    :through => :workshop_document_asset
+  has_many :workshop_wfinodes,
+    :through => :workshop_document_assets
 
   def self.import_from_bell
     true

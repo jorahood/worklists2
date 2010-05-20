@@ -137,7 +137,10 @@ Feature: Worklist
       | status             |
       | volatility         |
       | xtras              |
+      | workshop_wfinodes |
+
     And I should see "Show Boiler Name" within ".show-boilers-label"
+    And I should see "Show Workshop Desk" within ".show-workshop-wfinodes-label"
     And I should not see "Show Docid" within "form.new"
 
   Scenario: A new list displays only the default metadata columns
@@ -228,6 +231,7 @@ Feature: Worklist
     When I go to the list creation page
     Then I should see <text> in "tr" in the following order, starting with 3:
       | text                    |
+      | Show Workshop Desk |
       | Show Titles             |
       | Show Approveddate       |
       | Show Modifieddate       |
@@ -253,21 +257,6 @@ Feature: Worklist
       | Show Tags               |
       | Show Notes              |
       | Show Workstate          |
-
-  Scenario: It displays only the metadata I pick plus 'docid' and the boilers heading should say boiler name
-    Given I am logged in as Bob
-    And a list named "Docs" created by Bob
-    And a doc with id aaaa
-    And doc aaaa belongs to list "Docs"
-    When I edit the list "Docs"
-    And I check "list_show_boilers"
-    And I check "list_show_xtras"
-    And I uncheck "list_show_visibility"
-    And I press "Save"
-    Then I should see "Boiler Name" within "tr.field-heading-row"
-    And I should see "Xtras" within "tr.field-heading-row"
-    And I should see "Docid" within "tr.field-heading-row"
-    But I should not see "Visibility" within "tr.field-heading-row"
 
   Scenario: It has a labelled input for a Worklists1 id to import
     Given I am logged in as Bob

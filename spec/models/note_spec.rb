@@ -11,9 +11,14 @@ describe Note do
 
   subject {Note.create!(@valid_attributes)}
   it { should respond_to :list }
+
+  # Associations
   it { should belong_to :listed_doc }
   it { should belong_to :doc }
   it { should belong_to :creator }
+  specify "creator should be a Kbuser" do
+    subject.creator.class.should == Kbuser
+  end
 
 #  it "should create a new instance given valid attributes" do
 #    Note.create!(@valid_attributes)

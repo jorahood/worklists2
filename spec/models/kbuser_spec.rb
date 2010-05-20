@@ -2,21 +2,25 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Kbuser do
 
+  subject {Factory.create(:kbuser)}
+
+  it "should have 'username' as pk" do
+    Kbuser.primary_key.should == "username"
+  end
+
+  # Attributes
   it "should let you check if a user is an editor" do
     pending "need to import UserTypes" do
       should respond_to :is_kbeditor?
     end
   end
-  it { should have_many :lists }
-  it { should have_many :notes }
-  it { should have_many :workshop_wfinodes }
-  it { should have_many(:workshop_document_assets).through :workshop_wfinodes }
-  it "should have the lists and notes as creator rather than user" do
-    assoc = Kbuser.reflect_on_all_associations(:has_many).find_all { |a| a.name == :lists || a.name == :notes }
-    assoc.*.primary_key_name.should == ["creator_id", "creator_id"]
-  end
 
-  #    it "should have many notes" do
-  #      @user.should have_many(:notes)
-  #    end
+  # Associations
+  it {should have_many :lists}
+  it {should have_many :notes}
+  # Validations
+  it {should validate_presence_of :username}
+  # the Factory.create in the subject block above is because there must be an existing saved record for the
+  # validate_uniqueness_of macro to work against: http://timharvey.net/2009/09/29/rspec-cant-find-first-objectname/
+  it {should validate_uniqueness_of :username}
 end

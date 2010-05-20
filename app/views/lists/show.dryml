@@ -4,39 +4,44 @@
   <after-field-list:>
     <remote-method-button if="&can_call?(:refresh_search)" method="refresh_search" label="Refresh search results"/>
   </after-field-list:>
-    <collection-heading: replace>
-    <h3 class="collection-heading"><count:listed_docs/></h3>
+  <collection-heading: replace>
+                       <h3 class="collection-heading"><count:listed_docs/></h3>
   </collection-heading:>
   <collection: replace>
-    <table-plus with='&@listed_docs' fields='&@listed_doc_fields' class='display'>
+               <table-plus with='&@listed_docs' fields='&@listed_doc_fields' class='display'>
       <docid-view:>
         <a href="&this_parent.make_docid_link" target="#{this}-ws"><view/></a>
         <a href="https://bell.ucs.indiana.edu/~jorahood/rcsweb.cgi?docid=#{this}&action=rlog" target="#{this}-rcs">
-          (RCS)</a>
+        (RCS)</a>
         <a href="/docs/#{this}" target="#{this}-show">(show)</a>
       </docid-view:>
-  <notes-view:>
-    <set docid="&this_parent.doc.id"/>
-    <collection id="#{this_parent.typed_id}-notes" part="notes">
-      <card:>
-        <heading:><editor:text/></heading:>
-        <append-body:>
-          <delete-button label="X"/>
-        </append-body:>
-      </card:>
-      <empty-message:></empty-message:>
-    </collection>
-    <form with="&this.new" update="#{this_parent.typed_id}-notes" without-cancel reset-form>
-      <field-list: skip="listed_doc, doc" without-text-label />
-      <after-field-list:>
-        <input type="hidden" id="note_doc_id" name="note[doc_id]" value="&docid" />
-      </after-field-list:>
-      <submit: label="Add note"/>
-    </form>
- </notes-view:>
- <workstate-view:>
-   <editor name="workstate"/>
- </workstate-view:>
+      <workshop-wfinodes-view:>
+        <collection>
+          <a href="https://bell.ucs.indiana.edu/workshop/workshop.cgi?rm=userPageSimple&id=#{this.desk}" target="#{this}-wsdesk"><view/></a>
+        </collection>
+      </workshop-wfinodes-view:>
+      <notes-view:>
+        <set docid="&this_parent.doc.id"/>
+        <collection id="#{this_parent.typed_id}-notes" part="notes">
+          <card:>
+            <heading:><editor:text/></heading:>
+            <append-body:>
+              <delete-button label="X"/>
+            </append-body:>
+          </card:>
+          <empty-message:></empty-message:>
+        </collection>
+        <form with="&this.new" update="#{this_parent.typed_id}-notes" without-cancel reset-form>
+              <field-list: skip="listed_doc, doc" without-text-label />
+                       <after-field-list:>
+            <input type="hidden" id="note_doc_id" name="note[doc_id]" value="&docid" />
+          </after-field-list:>
+          <submit: label="Add note"/>
+        </form>
+      </notes-view:>
+      <workstate-view:>
+        <editor name="workstate"/>
+      </workstate-view:>
     </table-plus>
   </collection:>
 </show-page>

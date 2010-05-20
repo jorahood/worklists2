@@ -10,6 +10,7 @@ class List < ActiveRecord::Base
     comment :text
     timestamps
     show_docid :boolean, :default => true
+    show_workshop_wfinodes :boolean
     show_titles :boolean, :default => true
     show_approveddate :boolean, :default => true
     show_modifieddate :boolean, :default => true
@@ -44,9 +45,12 @@ class List < ActiveRecord::Base
   never_show :show_docid
   
   validates_presence_of :name
-  validates_numericality_of :wl1_import, :wl1_clone,
+  validates_numericality_of :wl1_import,
+    :wl1_clone,
     :allow_nil => true
-  validates_uniqueness_of :wl1_clone, :allow_blank => true, :message => "That list has already been cloned"
+  validates_uniqueness_of :wl1_clone, 
+    :allow_blank => true,
+    :message => "That list has already been cloned"
   belongs_to :audience
   belongs_to :search
   belongs_to :creator,
@@ -63,16 +67,21 @@ class List < ActiveRecord::Base
     :through => :listed_docs
   has_many :notes,
     :through => :listed_docs
+
   def self.showable_columns
     attr_order.*.to_s.grep(/^show_/) do |method_name|
       method_name.gsub(/^show_/,'').to_sym
     end
   end
 
-  before_save :populate, :if => :new_search?
-  before_save  :do_import, :if => :new_import?
-  before_save  :do_clone, :if => :wl1_clone
-  before_validation_on_create :create_temp_name, :if => "name.blank?"
+  before_save :populate,
+    :if => :new_search?
+  before_save  :do_import,
+    :if => :new_import?
+  before_save  :do_clone,
+    :if => :wl1_clone
+  before_validation_on_create :create_temp_name,
+    :if => "name.blank?"
 
   def create_temp_name
     self.name = "whatevs, can't be bothered to name my list"

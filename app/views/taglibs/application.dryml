@@ -32,12 +32,14 @@
 
 <def tag="app-release"><%= revision_name %></def>
 
+<def tag='links-for-collection'><%= this.empty? ? "" : context_map { a }.join(", ") %></def>
+
 <extend tag="page">
   <old-page merge without-live-search/>
 </extend>
 
 <extend tag="table-plus">
-  <old-table-plus merge without-page-nav without-search/>
+  <old-table-plus merge without-page-nav />
 </extend>
 
 <!--since I'm using CAS for login I don't want or need all the hobo login management links-->
