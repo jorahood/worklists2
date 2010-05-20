@@ -5,6 +5,14 @@
   <content:>
 
     <header class="content-header">
+      <h3>May 20, 2010  v0.2.2.15</h3>
+    </header>
+    <section class="content-body">
+      <p>New feature: Workshop Desk view in lists. When editing a list, select "Show Workshop Desk" and a column showing what workshop desk, if any,
+      a document is on will appear when you view the list. Click the desk name to open that desk in the Workshop in a new window.</p>
+    </section>
+
+    <header class="content-header">
       <h3>May 14, 2010  v0.2.2.14</h3>
     </header>
     <section class="content-body">
