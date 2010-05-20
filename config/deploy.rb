@@ -77,3 +77,11 @@ end
 
 after 'deprec:rails:install_stack', :install_oci8
 after 'deprec:ssh:setup_keys', :upload_poblano_hostkey
+
+# from http://stackoverflow.com/questions/312214/how-do-i-run-a-rake-task-from-capistrano
+namespace :rake do
+ desc "Run a task on a remote server: cap rake:invoke task=<taskname>"
+ task :invoke do
+  run("cd #{deploy_to}/current; /usr/bin/env rake #{ENV['task']} RAILS_ENV=#{rails_env}")
+ end
+end
