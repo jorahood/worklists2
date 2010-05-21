@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100517183918) do
+ActiveRecord::Schema.define(:version => 20100521162046) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(:version => 20100517183918) do
     t.string "label"
   end
 
+  add_index "documentasset", ["document"], :name => "index_documentasset_on_document"
+  add_index "documentasset", ["id"], :name => "index_documentasset_on_id"
+
   create_table "documentdomain", :id => false, :force => true do |t|
     t.string "id"
     t.string "domain"
@@ -73,6 +76,20 @@ ActiveRecord::Schema.define(:version => 20100517183918) do
     t.string "accessible",  :limit => 512
     t.string "audience",    :limit => 512
   end
+
+  create_table "event", :id => false, :force => true do |t|
+    t.string   "action"
+    t.string   "editor"
+    t.string   "id"
+    t.string   "fielda"
+    t.string   "fieldb"
+    t.datetime "timestamp"
+    t.string   "type"
+    t.string   "version"
+  end
+
+  add_index "event", ["editor"], :name => "index_event_on_editor"
+  add_index "event", ["id"], :name => "index_event_on_id"
 
   create_table "expire", :id => false, :force => true do |t|
     t.string "id"
