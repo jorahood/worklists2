@@ -5,6 +5,13 @@
   <content:>
 
     <header class="content-header">
+      <h3>May 25, 2010  v0.2.2.16</h3>
+    </header>
+    <section class="content-body">
+      <p>New feature: Notes display their id number to aid in referring to earlier notes in a list. For discussions and stuff.</p>
+    </section>
+
+    <header class="content-header">
       <h3>May 20, 2010  v0.2.2.15</h3>
     </header>
     <section class="content-body">
