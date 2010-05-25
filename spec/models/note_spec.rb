@@ -5,11 +5,12 @@ describe Note do
     @user = mock_model(Kbuser,:username=>'Fred',:administrator? => false, :signed_up? => true)
     @valid_attributes = {
       :text => "This is a note.",
-      :creator => @user
+      :creator => @user,
+      :id => 123
     }
   end
 
-  subject {Note.create!(@valid_attributes)}
+  subject {Factory.create(:note, @valid_attributes)}
   it { should respond_to :list }
 
   # Associations
@@ -19,7 +20,9 @@ describe Note do
   specify "creator should be a Kbuser" do
     subject.creator.class.should == Kbuser
   end
-
+it "should have its id in its name" do
+  subject.name.should match('123')
+  end
 #  it "should create a new instance given valid attributes" do
 #    Note.create!(@valid_attributes)
 #  end

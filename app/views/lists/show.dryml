@@ -26,7 +26,7 @@
           <card:>
             <heading:><editor:text/></heading:>
             <append-body:>
-              <delete-button label="X"/>
+              #<%=this.id%><delete-button label="X"/>
             </append-body:>
           </card:>
           <empty-message:></empty-message:>

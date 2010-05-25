@@ -127,3 +127,18 @@ Feature: notes
     And doc aaaa has note 1 in list "Link to list"
     And I view note 1
     Then I should see "Link to list" within "a.parent-link"
+
+  Scenario: The note show page displays the note's id
+    Given I am logged in as me
+    And a note exists with id: "123"
+    When I go to the note's page
+    Then I should see "123"
+
+  Scenario: In a listed doc, a note displays its id number
+    Given I am logged in as me
+    And a list named "blah" created by me
+    And a doc exists with id: "aaaa"
+    And a note with id 123 with text "hoochiemama" created by me
+    And doc aaaa has note 123 in list "blah"
+    When I view the list "blah"
+    Then I should see "123"

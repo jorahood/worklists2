@@ -3,7 +3,7 @@ class Note < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    text :text, :name => true
+    text :text
     timestamps
   end
 
@@ -18,7 +18,10 @@ class Note < ActiveRecord::Base
     # composite_primary_keys gem .
     :foreign_key => 'creator_id',
     :creator => true
-  
+
+  def name
+    "#{id}: #{text}"
+  end
   # --- Permissions --- #
 
   def create_permitted?
