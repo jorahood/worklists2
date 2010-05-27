@@ -12,6 +12,7 @@
   <old-page merge>
     <custom-scripts:>
       <hjq-assets/>
+      <javascript name='jquery.collapsorz' />
 </custom-scripts>
   </old-page>
 </extend>
