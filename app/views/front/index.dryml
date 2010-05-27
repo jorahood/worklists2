@@ -5,6 +5,13 @@
   <content:>
 
     <header class="content-header">
+      <h3>May 27, 2010  v0.2.2.17</h3>
+    </header>
+    <section class="content-body">
+      <p>New feature: Expandable notes: notes in a list will start out displaying only one note. Click the link that says "See all X notes" to expand them.</p>
+    </section>
+
+    <header class="content-header">
       <h3>May 25, 2010  v0.2.2.16</h3>
     </header>
     <section class="content-body">

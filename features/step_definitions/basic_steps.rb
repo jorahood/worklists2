@@ -60,6 +60,21 @@ Given /^doc ([a-z]{4}) has note (\d+) in list "([^\"]*)"$/ do |docid, note_id, l
   doc_in_list.save!
 end
 
+Given /^doc ([a-z]{4}) has the following notes in list "([^\"]*)":$/ do |docid, list_name, table|
+  doc = Doc.find(docid)
+  notes = []
+  list = List.find_by_name(list_name)
+  doc_in_list = ListedDoc.new(:doc => doc, :list => list)
+  doc_in_list.notes << note
+  doc_in_list.save!
+  table.hashes.each do |hash|
+    note = Factory.create(:text => hash[:text])
+    note.doc = doc
+    note.save!
+    notes.push note
+  end
+end
+
 Given /^doc ([a-z]{4}) belongs to list "([^\"]*)"$/ do |docid, list_name|
   doc = Doc.find(docid)
   list = List.find_by_name(list_name)

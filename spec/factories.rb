@@ -14,7 +14,7 @@ Factory.define :kbuser do |f|
 end
 
 Factory.define :list do |f|
-
+  f.association :creator, :factory => :kbuser
 end
 
 Factory.define :listed_doc do |f|
@@ -22,5 +22,5 @@ Factory.define :listed_doc do |f|
 end
 
 Factory.define :note do |f|
-
+  f.association :creator, :factory => :kbuser
 end
