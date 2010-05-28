@@ -144,7 +144,7 @@ Feature: notes
     Then I should see "123"
 
   @javascript
-  Scenario: Notes are collapsed by default
+  Scenario: Notes are collapsed by default and you click "Show" to expand
     Given a kbuser exists with username: "me"
     And I am logged into CAS as me
     And a list exists
@@ -154,18 +154,5 @@ Feature: notes
     And a note exists with text: "I'm two", listed_doc: the listed doc
     And a note exists with text: "I'm three", listed_doc: the listed doc
     When I go to the list's page
-    Then I should see "Show all 3 notes"
-
-  @javascript
-  Scenario: Click to expand notes
-    Given a kbuser exists with username: "me"
-    And I am logged into CAS as me
-    And a list exists
-    And a doc exists
-    And a listed doc "ld" exists with doc: the doc, list: the list
-    And a note exists with text: "I'm one", listed_doc: the listed doc
-    And a note exists with text: "I'm two", listed_doc: the listed doc
-    And a note exists with text: "I'm three", listed_doc: the listed doc
-    And I go to the list's page
-    When I follow "Show all 3 notes"
+    And I follow "Show all 3 notes"
     Then I should see "Collapse notes"

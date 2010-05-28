@@ -94,6 +94,8 @@ class Doc < ActiveRecord::Base
     :foreign_key => 'document'
   has_many :workshop_wfinodes,
     :through => :workshop_document_assets
+  has_many :index_items,
+    :foreign_key => :docid
 
   def self.import_from_bell
     true

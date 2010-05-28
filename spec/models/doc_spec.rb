@@ -14,6 +14,7 @@ describe Doc do
   it { should have_many(:searches).through(:docid_searches) }
   it { should have_many :workshop_document_assets }
   it { should have_many(:workshop_wfinodes).through :workshop_document_assets }
+  it { should have_many :index_items }
 
   # Validations
   it {should validate_presence_of :id}

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100521162046) do
+ActiveRecord::Schema.define(:version => 20100528140046) do
 
   create_table "boilerusage", :id => false, :force => true do |t|
     t.string "boiler"
@@ -77,6 +77,20 @@ ActiveRecord::Schema.define(:version => 20100521162046) do
     t.string "audience",    :limit => 512
   end
 
+  create_table "event", :id => false, :force => true do |t|
+    t.string   "action"
+    t.string   "editor"
+    t.string   "id"
+    t.string   "fielda"
+    t.string   "fieldb"
+    t.datetime "timestamp"
+    t.string   "type"
+    t.string   "version"
+  end
+
+  add_index "event", ["editor"], :name => "index_event_on_editor"
+  add_index "event", ["id"], :name => "index_event_on_id"
+
   create_table "expire", :id => false, :force => true do |t|
     t.string "id"
     t.date   "expiredate"
@@ -94,6 +108,15 @@ ActiveRecord::Schema.define(:version => 20100521162046) do
     t.integer "rank"
     t.string  "importance"
   end
+
+  create_table "indexitem", :id => false, :force => true do |t|
+    t.string  "docid"
+    t.string  "word"
+    t.decimal "score", :precision => 7, :scale => 4
+  end
+
+  add_index "indexitem", ["docid"], :name => "index_indexitem_on_docid"
+  add_index "indexitem", ["word"], :name => "index_indexitem_on_word"
 
   create_table "kba_by_searches", :force => true do |t|
     t.integer "search_id"
