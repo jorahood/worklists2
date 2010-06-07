@@ -17,6 +17,11 @@ namespace :bell do
     models_from_bell = (args.model == 'all') ?
       Hobo::Model.all_models.select {|m| m.import_from_bell} :
       [args.model.classify.constantize]
+    # ar_extensions' #create_temporary_table will not work because you cannot do RENAME TABLE on a temporary table in
+    # mysql and I need to use RENAME for atomicity so concurrent sessions don't see empty or nonexistent
+    # tables. So instead create a temporary model myself and derive its table name from the given model
+    class TempModel < ActiveRecord::Base
+    end
     models_from_bell.each do |model|
       table = model.table_name
       bell_table = "kbadm.#{table}"
@@ -36,12 +41,7 @@ namespace :bell do
       puts "1. Read #{total} records from 'bell:#{bell_table}'.
      Columns: #{bell_columns.to_sentence}"
       # #FIXME: check that the values we got from Oracle are good before deleting and reloading the wl2 table
-      # ar_extensions' #create_temporary_table will not work because you cannot do RENAME TABLE on a temporary table in
-      # mysql and I need to use RENAME for atomicity so concurrent sessions don't see empty or nonexistent
-      # tables. So instead create a temporary model myself and derive its table name from the given model
-      class TempModel < model
-        set_table_name "temp_#{superclass.table_name}"
-      end
+      TempModel.set_table_name "temp_#{model.table_name}"
       # mysql is picky about table names so I'm using ActiveRecord::Base#quote_table_name to sanitize them for use in SQL
       # strings:
       q_table = ActiveRecord::Base.connection.quote_table_name(table)
