@@ -40,7 +40,7 @@ namespace :deploy do
   end
 end
 
-desc "Install InstantClient libraries"
+desc "Install InstantClient libraries for Linux"
 task :install_instantclient, :roles => :db do
   run "svn export --force svn+ssh://poblano.uits.indiana.edu/srv/svn/kb-support/trunk/instantclient_10_1 /tmp/instantclient"
   run "#{sudo} mkdir /opt/oracle"

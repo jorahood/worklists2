@@ -35,9 +35,9 @@ namespace :bell do
 
       puts "1. Read #{all_records.length} records from 'bell:#{bell_table}'.
      Columns: #{bell_columns.to_sentence}"
-      #FIXME: check that the values we got from Oracle are good before truncating and reloading the wl2 table
+      #FIXME: check that the values we got from Oracle are good before deleting and reloading the wl2 table
       ActiveRecord::Base.establish_connection
-      # wrap the truncation and importing in a transaction so no client sees empty tables
+      # wrap the deleting and importing in a transaction so no client sees empty tables
       ActiveRecord::Base.transaction do
         ActiveRecord::Base.connection.execute("DELETE FROM #{ActiveRecord::Base.connection.quote_table_name(table)}")
         puts "2. Deleted all records from 'worklists2_#{RAILS_ENV}.#{table}'."
