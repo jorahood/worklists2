@@ -1,4 +1,4 @@
-class Xtra < ActiveRecord::Base
+class Xtra < Kb3
 
   hobo_model # Don't put anything above this
 

@@ -4,7 +4,7 @@ namespace :andy do
     task :dump_tables => :environment do
       file_path = File.join(working_dir, filename)
       # select models to dump that aren't copied from bell or worklists1
-      models_to_dump = Hobo::Model.all_models.reject {|m| m.import_from_bell || m.superclass == Worklists1}
+      models_to_dump = Hobo::Model.all_models.select {|m| m.superclass == ActiveRecord::Base}
       tables = models_to_dump.collect{|m| m.table_name}
       # for defs of #sh_mysqldump and #database_config, see vendor/plugins/mysql_tasks/tasks/mysql_tasks.rake
       `#{sh_mysqldump(database_config)} #{tables.join(' ')} > #{file_path}`

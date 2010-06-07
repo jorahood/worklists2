@@ -1,4 +1,4 @@
-class Visibility < ActiveRecord::Base
+class Visibility < Kb3
 
   hobo_model # Don't put anything above this
 

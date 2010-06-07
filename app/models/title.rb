@@ -1,4 +1,4 @@
-class Title < ActiveRecord::Base
+class Title < Kb3
 
   hobo_model # Don't put anything above this
 

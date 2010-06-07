@@ -1,4 +1,4 @@
-class Volatility < ActiveRecord::Base
+class Volatility < Kb3
 
   hobo_model # Don't put anything above this
 

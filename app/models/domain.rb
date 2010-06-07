@@ -1,4 +1,4 @@
-class Domain < ActiveRecord::Base
+class Domain < Kb3
 
   hobo_model # Don't put anything above this
 

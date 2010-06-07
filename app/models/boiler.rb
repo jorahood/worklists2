@@ -1,4 +1,4 @@
-class Boiler < ActiveRecord::Base
+class Boiler < Kb3
 
   hobo_model # Don't put anything above this
 

@@ -1,4 +1,4 @@
-class Expiration < ActiveRecord::Base
+class Expiration < Kb3
 
   hobo_model # Don't put anything above this
 

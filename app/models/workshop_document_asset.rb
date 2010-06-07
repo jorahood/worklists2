@@ -1,4 +1,4 @@
-class WorkshopDocumentAsset < ActiveRecord::Base
+class WorkshopDocumentAsset < Kb3
 
   hobo_model # Don't put anything above this
 

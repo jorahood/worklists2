@@ -1,4 +1,4 @@
-class Kbresource < ActiveRecord::Base
+class Kbresource < Kb3
   #FIXME: this should be named resourced_docs to mirror domained_docs
   hobo_model # Don't put anything above this
 

@@ -1,4 +1,4 @@
-class Reference < ActiveRecord::Base
+class Reference < Kb3
 
   hobo_model # Don't put anything above this
 

@@ -1,4 +1,4 @@
-class DomainedDoc < ActiveRecord::Base
+class DomainedDoc < Kb3
 
   hobo_model # Don't put anything above this
 

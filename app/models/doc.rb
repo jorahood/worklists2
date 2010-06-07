@@ -1,4 +1,4 @@
-class Doc < ActiveRecord::Base
+class Doc < Kb3
 
   hobo_model # Don't put anything above this
 

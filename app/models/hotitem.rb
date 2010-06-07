@@ -1,4 +1,4 @@
-class Hotitem < ActiveRecord::Base
+class Hotitem < Kb3
 
   hobo_model # Don't put anything above this
 

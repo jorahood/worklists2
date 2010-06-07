@@ -113,6 +113,14 @@
   </card>
 </def>
 
+<def tag="card" for="IndexItem">
+  <card class="index-item" param="default" merge>
+    <header: param>
+      <h4 param="heading"><name/></h4>
+    </header:>
+  </card>
+</def>
+
 <def tag="card" for="KbaUsage">
   <card class="kba-usage" param="default" merge>
     <header: param>

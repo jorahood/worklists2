@@ -1,4 +1,4 @@
-class Kbuser < ActiveRecord::Base
+class Kbuser < Kb3
 
   hobo_user_model # Don't put anything above this
 

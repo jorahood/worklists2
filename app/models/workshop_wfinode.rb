@@ -1,4 +1,4 @@
-class WorkshopWfinode < ActiveRecord::Base
+class WorkshopWfinode < Kb3
 
   hobo_model # Don't put anything above this
 

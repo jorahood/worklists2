@@ -1,4 +1,4 @@
-class IndexItem < ActiveRecord::Base
+class IndexItem < Kb3
 
   hobo_model # Don't put anything above this
 
@@ -8,11 +8,7 @@ class IndexItem < ActiveRecord::Base
   end
 
   set_table_name :indexitem
-
-  def self.import_from_bell
-    true
-  end
-
+  
   belongs_to :doc,
     :foreign_key => :docid
   

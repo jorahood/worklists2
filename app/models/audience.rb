@@ -1,4 +1,4 @@
-class Audience < ActiveRecord::Base
+class Audience < Kb3
 
   hobo_model # Don't put anything above this
 
