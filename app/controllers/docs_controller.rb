@@ -4,6 +4,7 @@ class DocsController < ApplicationController
 
   auto_actions :all
 
+  autocomplete :query_scope => :id_starts
   def index
     hobo_index Doc.apply_scopes(
       :order_by => parse_sort_param(:id, :birthdate, :modifieddate, :approveddate),

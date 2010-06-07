@@ -4,7 +4,7 @@ class BoilersController < ApplicationController
 
   auto_actions :all
 
-  autocomplete :limit => 20, :query_scope => :name_starts
+  autocomplete :limit => 20
 
   def show
     @boiler = find_instance # Hobo needs @boiler defined
