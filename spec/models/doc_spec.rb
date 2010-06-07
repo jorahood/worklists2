@@ -5,6 +5,12 @@ describe Doc do
   subject {Factory.create(:doc)}
   # Attributes
   it { should respond_to :docid }
+  it "should have a named scope called docid_search" do
+    Doc.should respond_to :docid_search
+  end
+  it "should have a named scope called text_search" do
+    Doc.should respond_to :text_search
+  end
 
   # Associations
   it { should have_many :titles }
@@ -20,18 +26,24 @@ describe Doc do
   it {should validate_presence_of :id}
   it {should validate_uniqueness_of :id}
 
-  it "should have a named scope called docid_search" do
-    Doc.should respond_to :docid_search
-  end
+  # Searching
 
-  specify "search by docid should return matches for given list of docids" do
-    aaaa = Doc.new
-    aaaa.id = 'aaaa'
-    aaaa.save!
-    bbbb = Doc.new
-    bbbb.id = 'bbbb'
-    bbbb.save!
-    Doc.docid_search('aaaa','bbbb').find(:all).should == [aaaa,bbbb]
+  context "Searching" do
+
+    before do
+      @doc1 = Factory.create(:doc)
+      @doc2 = Factory.create(:doc)
+    end
+
+    specify "by docids" do
+      Doc.docid_search(@doc1.id,@doc2.id).find(:all).should == [@doc1,@doc2]
+    end
+
+    specify "by text, sorted by score" do
+      Factory.create(:index_item, :docid => @doc1.id, :word => 'hippo', :score => 1.0000)
+      Factory.create(:index_item, :docid => @doc2.id, :word => 'hippo', :score => 2.0000)
+      Doc.text_search('hippo').find(:all).should == [@doc2,@doc1]
+    end
   end
 
   it "should have a method for each of ListedDoc's delegated accessors" do

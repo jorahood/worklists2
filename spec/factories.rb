@@ -9,6 +9,10 @@ Factory.define :doc do |f|
   end
 end
 
+Factory.define :index_item do |f|
+
+end
+
 Factory.define :kbuser do |f|
   f.sequence(:username){ |n| "user#{n}" }
 end

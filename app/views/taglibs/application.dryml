@@ -72,10 +72,10 @@ after all the attributes. So, doing the order manually here. Using this tag
 in my extension of <form> and customization of <show-page> for Search-->
 <def tag="field-list-for-search">
   <field-list: fields="name, approveddate_is, approveddate, birthdate_is,
-               birthdate, expiredate_is, expiredate, modifieddate_is, modifieddate, 
-               importance_is, importance, visibility_is, visibility, volatility_is, 
-               volatility, status_is, status, title_search, xtra_search, author, owner,
-               boiler, hotitem, resources, domains, lists" view-blank="&false"/>
+               birthdate, expiredate_is, expiredate, modifieddate_is, modifieddate,
+               importance_is, importance, visibility_is, visibility, volatility_is,
+               volatility, status_is, status, text_search, title_search, xtra_search, author, owner,
+               boiler, hotitem, resources, domains, lists"/>
 </def>
 
 <extend tag="form" for="Search">

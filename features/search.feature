@@ -3,6 +3,12 @@ Feature: Search
   As a kb editor
   I want to specify search criteria and retrieve matching documents
 
+  Scenario: It has text inputs for text, title, and xtra searches
+    Given I am on the search creation page
+    Then I should see element "input.search-text-search[type='text']"
+    Then I should see element "input.search-title-search[type='text']"
+    Then I should see element "input.search-xtra-search[type='text']"
+
   Scenario: It has autocompleting text inputs for author, owner, boiler, and hotitem
     Given I am on the search creation page
     Then I should see element "input.autocompleter.search-author[type='text']"
@@ -22,10 +28,6 @@ Feature: Search
     Then I should see "Name can't be blank"
     And I should not see "The search was created successfully"
 
-  #  Scenario: I can select a docid to search on
-  #  Given a doc with id aaaa
-  #  And I am on the search creation page
-  #  Then I should see "aaaa" within ".search-docids"
   Scenario: It will only return docs matching a docid search
     Given a doc with id aaaa
     And a doc with id bbbb

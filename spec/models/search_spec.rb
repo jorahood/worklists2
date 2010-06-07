@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Search do
+  it {should respond_to :text_search}
   it { should have_many :lists }
   it {should have_many :docid_searches}
   it {should have_many(:docids).through(:docid_searches)}
@@ -13,6 +14,13 @@ describe Search do
     doc = mock_model(Doc, :id => 'aaaa')
     subject.docids << doc
     Doc.should_receive(:docid_search).with(doc)
+    subject.filter
+  end
+
+  it "should invoke Doc#text_search named scope when a text search term is given" do
+    term = "boloney"
+    subject.text_search = term
+    Doc.should_receive(:text_search).with(term)
     subject.filter
   end
 

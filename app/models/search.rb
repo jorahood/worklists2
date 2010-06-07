@@ -9,6 +9,7 @@ class Search < ActiveRecord::Base
 
   fields do
     name :string
+    text_search :string
     title_search :string
     xtra_search :string
     approveddate_is DateComparison
@@ -62,6 +63,7 @@ class Search < ActiveRecord::Base
   def filter
     Doc.apply_scopes(
       :docid_search => docids,
+      :text_search => text_search,
       :title_search => title_search,
       :xtra_search => xtra_search,
       :"approveddate_#{approveddate_is}" => approveddate,

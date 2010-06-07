@@ -108,6 +108,14 @@ class Doc < Kb3
   named_scope :unarchived,
     :conditions => "#{Doc.table_name}.visibility > 3"
 
+  named_scope :text_search, lambda { |term|
+    {:joins => :index_items,
+      :select => "#{Doc.table_name}.*",
+      :conditions => ["#{IndexItem.table_name}.word = ?", term],
+      :order => "score desc"
+      }
+  }
+
   named_scope :title_search, lambda { |search|
     {:joins => :titles,
       :select => "DISTINCT #{Doc.table_name}.*",
