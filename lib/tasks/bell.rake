@@ -41,7 +41,7 @@ namespace :bell do
       puts "1. Read #{total} records from 'bell:#{bell_table}'.
      Columns: #{bell_columns.to_sentence}"
       # #FIXME: check that the values we got from Oracle are good before deleting and reloading the wl2 table
-      TempModel.set_table_name "temp_#{model.table_name}"
+      TempModel.set_table_name "temp_#{table}"
       # mysql is picky about table names so I'm using ActiveRecord::Base#quote_table_name to sanitize them for use in SQL
       # strings:
       q_table = ActiveRecord::Base.connection.quote_table_name(table)
